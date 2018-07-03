@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #container {
+      width: 600px;
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <canvas id="container" width="600" height="600"></canvas>
+  </div>
+  <script src="/js/spritejs.js"></script>
+  <script src="/js/sprite-extend-shapes.js"></script>
+  <script>
+    const context = document.getElementById('container').getContext('2d')
+    const {Layer} = spritejs
+    const {Polyline} = spritejs.shapes
+    
+    const layer = new Layer({context})
+    const s = new Polyline()
+    s.attr({
+      pos: [300, 300],
+      color: {
+        vector: [0, 0, 150, 150],
+        colors: [
+          {offset: 0, color: 'red'},
+          {offset: 1, color: 'green'},
+        ],
+      },
+      lineWidth: 10,
+      points: [[0, 0], [100, 100], [200, -50]],
+      bgcolor: '#eee',
+    })
+    layer.append(s)
+  </script>
+</body>
+</html>
