@@ -58,6 +58,9 @@ class Polyline extends Shape {
     return [bounds[2] - bounds[0] + lw,
       bounds[3] - bounds[1] + lw]
   }
+  get isVirtual() {
+    return true
+  }
   render(t, drawingContext) {
     super.render(t, drawingContext)
     if(this.points) {
