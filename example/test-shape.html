@@ -21,12 +21,12 @@
   <script>
     const context = document.getElementById('container').getContext('2d')
     const {Layer} = spritejs
-    const {Polyline} = spritejs.shapes
+    const {Polygon, Polyline} = spritejs.shapes
     
     const layer = new Layer({context})
-    const s = new Polyline()
-    s.attr({
-      pos: [300, 300],
+    const polyline = new Polyline()
+    polyline.attr({
+      pos: [100, 100],
       color: {
         vector: [0, 0, 150, 150],
         colors: [
@@ -38,7 +38,29 @@
       points: [[0, 0], [100, 100], [200, -50]],
       bgcolor: '#eee',
     })
-    layer.append(s)
+    layer.append(polyline)
+
+    const polygon = new Polygon();
+    polygon.attr({
+      pos: [400, 100],
+      color: {
+        vector: [0, 0, 150, 150],
+        colors: [
+          {offset: 0, color: 'red'},
+          {offset: 1, color: 'green'},
+        ],
+      },
+      fillColor: 'yellow',
+      lineWidth: 10,
+      points: [
+        [0, 0], 
+        [100, 100], 
+        [200, -50],
+      ],
+      bgcolor: '#eee',
+    })
+    layer.append(polygon)
+
   </script>
 </body>
 </html>
