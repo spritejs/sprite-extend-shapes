@@ -1,5 +1,5 @@
 import Shape from './shape';
-import Polygon from './polyline';
+import Polygon from './polygon';
 import {utils} from 'sprite-core';
 
 const {attr, parseColorString, findColor} = utils
@@ -8,46 +8,33 @@ class PolygonAttr extends Shape.Attr {
   constructor(subject) {
     super(subject);
     this.setDefault({
-      type: 'equilateral'
+      angle: '60',
+      sides: [10, 10]
     })
   }
 
-//   默认使用等边三角形（equilateral），其他options：等腰三角形（）
   @attr
-  set type(val) {
-    this.set('type', val);
+  set angle(val) {
+    this.set('angle', val)
+  }
+
+  @attr
+  set sides(val) {
+    this.set('sides', val)
   }
 }
 
 
 class Triangle extends Polygon {
   static Attr = PolygonAttr
-  render(t, drawingContext) {
-    if(this.points) {
-      const bounds = this.lineBoundings,
-        lw = this.attr('lineWidth');
-      drawingContext.translate(-bounds[0] + lw / 2, -bounds[1] + lw / 2)
-      drawingContext.strokeStyle = findColor(drawingContext, this, 'color')
-      drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor')
-      drawingContext.lineJoin = 'round'
-      drawingContext.lineCap = 'round'
-      drawingContext.lineWidth = this.attr('lineWidth')
-      drawingContext.beginPath()
-
-
-      this.points.forEach((point, i) => {
-        if(i === 0) {
-          drawingContext.moveTo(...point)
-        } else {
-          drawingContext.lineTo(...point)
-        }
-      })
-      drawingContext.closePath()
-      drawingContext.stroke()
-      drawingContext.fill()
-    }
-    return drawingContext
+  get points() {
+    const [s1, s2] = this.attr('sides');
+    const angle = Math.PI / 180 * this.attr('angle');
+    const p0 = [0, 0];
+    const p1 = [s1, 0];
+    const p2 = [s2 * Math.cos(angle), s2 * Math.sin(angle)];
+    return [p0, p1, p2];
   }
 }
 
-export default Polygon
+export default Triangle

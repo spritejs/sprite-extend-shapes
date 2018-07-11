@@ -21,7 +21,7 @@
   <script>
     const context = document.getElementById('container').getContext('2d')
     const {Layer} = spritejs
-    const {Polygon, Polyline} = spritejs.shapes
+    const {Polygon, Polyline, Triangle} = spritejs.shapes
     
     const layer = new Layer({context})
     const polyline = new Polyline()
@@ -59,7 +59,20 @@
       ],
       bgcolor: '#eee',
     })
-    layer.append(polygon)
+    // layer.append(polygon)
+
+
+    const triangle = new Triangle();
+    triangle.attr({
+      pos: [400, 100],
+      color: 'red',
+      sides: [80, 100],
+      angle: '90',
+      fillColor: 'yellow',
+      lineWidth: 20,
+      bgcolor: '#eee',
+    })
+    layer.append(triangle)
 
   </script>
 </body>

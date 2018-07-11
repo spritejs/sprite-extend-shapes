@@ -5,11 +5,28 @@ const {attr, parseColorString, findColor} = utils
 
 class PolygonAttr extends Shape.Attr {
   constructor(subject) {
-    super(subject);
+    super(subject)
     this.setDefault({
-      fillColor: 'rgba(0, 0, 0, 1)'
+      points: null,
+      color: 'rgba(0,0,0,1)',
+      fillColor: 'rgba(0, 0, 0, 1)',
+      lineWidth: 1,
     })
   }
+  @attr
+  set points(val) {
+    this.set('points', val)
+  }
+  @attr
+  set color(val) {
+    val = parseColorString(val)
+    this.set('color', val)
+  }
+  @attr
+  set lineWidth(val) {
+    this.set('lineWidth', val)
+  }
+
   @attr
   set fillColor(val) {
     val = parseColorString(val);
@@ -61,8 +78,6 @@ class Polygon extends Shape {
       drawingContext.lineCap = 'round'
       drawingContext.lineWidth = this.attr('lineWidth')
       drawingContext.beginPath()
-
-
       this.points.forEach((point, i) => {
         if(i === 0) {
           drawingContext.moveTo(...point)
