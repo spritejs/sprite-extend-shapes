@@ -7,20 +7,20 @@
   <title>Document</title>
   <style>
     #container {
-      width: 600px;
+      width: 1200px;
       height: 600px;
     }
   </style>
 </head>
 <body>
   <div>
-    <canvas id="container" width="600" height="600"></canvas>
+    <canvas id="container" width="1200" height="600"></canvas>
   </div>
   <script src="/js/spritejs.js"></script>
   <script src="/js/sprite-extend-shapes.js"></script>
   <script>
     const context = document.getElementById('container').getContext('2d')
-    const {Layer} = spritejs
+    const {Layer, Sprite} = spritejs
     const {Polygon, Polyline} = spritejs.shapes
     
     const layer = new Layer({context})
@@ -60,6 +60,15 @@
       bgcolor: '#eee',
     })
     layer.append(polygon)
+
+    const s = new Sprite()
+    s.attr({
+      anchor: 0.5,
+      size: [5, 5],
+      pos: [400, 100],
+      bgcolor: 'black',
+    })
+    layer.append(s)
 
   </script>
 </body>

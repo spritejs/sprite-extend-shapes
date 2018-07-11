@@ -34,31 +34,47 @@ class Polygon extends Shape {
     })
     return bounds
   }
-  get originalRect() {
-    const rect = super.originalRect
-    const bounds = this.lineBoundings,
-      lw = this.attr('lineWidth')
-    rect[0] -= -bounds[0] + lw / 2
-    rect[1] -= -bounds[1] + lw / 2
-    return rect
-  }
+
   get contentSize() {
     const bounds = this.lineBoundings,
       lw = this.attr('lineWidth')
+    let [width, height] = this.attr('size')
 
-    return [bounds[2] - bounds[0] + lw,
-      bounds[3] - bounds[1] + lw]
+    if(width === '') {
+      width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw
+    }
+    if(height === '') {
+      height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw
+    }
+
+    return [width, height].map(Math.ceil)
   }
+
+  get originalRect() {
+    const bounds = this.lineBoundings,
+      lw = this.attr('lineWidth')
+    const [width, height] = this.offsetSize,
+      [anchorX, anchorY] = this.attr('anchor')
+
+    const rect = [0, 0, width, height],
+      offsetX = Math.min(0, bounds[0]),
+      offsetY = Math.min(0, bounds[1])
+
+    rect[0] = offsetX - lw - anchorX * (width + offsetX - 2 * lw)
+    rect[1] = offsetY - lw - anchorY * (height + offsetY - 2 * lw)
+    return rect
+  }
+
   render(t, drawingContext) {
     super.render(t, drawingContext);
     if(this.points) {
       const bounds = this.lineBoundings,
         lw = this.attr('lineWidth');
-      drawingContext.translate(-bounds[0] + lw / 2, -bounds[1] + lw / 2)
+      drawingContext.translate(-Math.min(0, bounds[0]) + lw, -Math.min(0, bounds[1]) + lw)
       drawingContext.strokeStyle = findColor(drawingContext, this, 'color')
       drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor')
-      drawingContext.lineJoin = 'round'
-      drawingContext.lineCap = 'round'
+      // drawingContext.lineJoin = 'round'
+      // drawingContext.lineCap = 'round'
       drawingContext.lineWidth = this.attr('lineWidth')
       drawingContext.beginPath()
 
