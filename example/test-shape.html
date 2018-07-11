@@ -20,7 +20,7 @@
   <script src="/js/sprite-extend-shapes.js"></script>
   <script>
     const context = document.getElementById('container').getContext('2d')
-    const {Layer} = spritejs
+    const {Layer, Path} = spritejs
     const {Polyline} = spritejs.shapes
     
     const layer = new Layer({context})
@@ -39,6 +39,14 @@
       bgcolor: '#eee',
     })
     layer.append(s)
+
+    const c = new Path('M0,0H20M10,-10V10')
+    c.attr({
+      pos: [300, 300],
+      anchor: 0.5,
+      lineWidth: 4,
+    })
+    layer.append(c)
   </script>
 </body>
 </html>
