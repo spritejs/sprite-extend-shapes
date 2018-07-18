@@ -22,11 +22,16 @@ class PolygonAttr extends Shape.Attr {
     // 圆半径
     this.set('radius', val)
   }
+
+  @attr
+  set innerRadius(val) {
+    this.set('innerRadius', val)
+  }
 }
 
 function calculateStarN(sides) {
-  return function(x, y, radius) {
-    let sideIndentRadius = radius * 0.5
+  return function(x, y, radius, innerRadius) {
+    let sideIndentRadius = innerRadius
     let radAngle = -Math.PI / 2
     let radAlpha = (Math.PI * 2) / sides / 2
 
@@ -51,8 +56,9 @@ class Star extends Polygon {
   get points() {
     const [x, y] = this.attr('pos')
     const radius = this.attr('radius')
+    const innerRadius = this.attr('innerRadius') || 0.4 * radius
 
-    return calculateStarN(this.attr('angles'))(x, y, radius)
+    return calculateStarN(this.attr('angles'))(x, y, radius, innerRadius)
   }
 }
 
