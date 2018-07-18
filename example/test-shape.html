@@ -7,21 +7,23 @@
   <title>Document</title>
   <style>
     #container {
-      width: 600px;
+      width: 1200px;
       height: 600px;
+      background: #aaa;
     }
+    
   </style>
 </head>
 <body>
   <div>
-    <canvas id="container" width="600" height="600"></canvas>
+    <canvas id="container" width="1200" height="600"></canvas>
   </div>
   <script src="/js/spritejs.js"></script>
   <script src="/js/sprite-extend-shapes.js"></script>
   <script>
     const context = document.getElementById('container').getContext('2d')
     const {Layer} = spritejs
-    const {Polygon, Polyline, Triangle} = spritejs.shapes
+    const {Polygon, Polyline, Triangle, Rect} = spritejs.shapes
     
     const layer = new Layer({context})
     const polyline = new Polyline()
@@ -59,20 +61,34 @@
       ],
       bgcolor: '#eee',
     })
-    // layer.append(polygon)
+    layer.append(polygon)
 
 
     const triangle = new Triangle();
     triangle.attr({
-      pos: [400, 100],
+      pos: [700, 100],
       color: 'red',
-      sides: [80, 100],
-      angle: '90',
+      sides: [60, 80],
+      angle: '40',
+      fillColor: 'yellow',
+      lineWidth: 2,
+      bgcolor: '#eee',
+    })
+    layer.append(triangle)
+
+
+    const rect = new Rect();
+    rect.attr({
+      pos: [1000, 100],
+      color: 'red',
+      sides: [60, 80],
       fillColor: 'yellow',
       lineWidth: 20,
       bgcolor: '#eee',
     })
-    layer.append(triangle)
+
+    layer.append(rect);
+
 
   </script>
 </body>
