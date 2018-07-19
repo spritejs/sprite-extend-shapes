@@ -9,9 +9,8 @@ SpriteJS 几何图形类
     - Rectangle
     - Star
   - Arc
-  - Sector
-  - Circle
-  - Ellipse
-  - Ring
+    - Sector
+      - Ellipse
+        - Circle
+          - Ring
   - PolyCurve
-

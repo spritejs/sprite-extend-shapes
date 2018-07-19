@@ -24,7 +24,7 @@
   <script>
     const context = document.getElementById('container').getContext('2d')
     const { Layer } = spritejs
-    const { Polygon, Polyline, Triangle, Rect, Star } = spritejs.shapes
+    const { Polygon, Polyline, Triangle, Rect, Star, Arc, Sector, Circle, Ring, Ellipse } = spritejs.shapes
 
     const layer = new Layer({ context })
     const polyline = new Polyline()
@@ -90,14 +90,71 @@
 
     const star = new Star()
     star.attr({
-      pos: [100, 200],
-      radius: 80,
+      pos: [100, 400],
+      radius: 30,
       color: 'red',
       angles: 5,
       bgcolor: '#eee',
       fillColor: 'yellow',
     })
     layer.append(star)
+
+
+    const arc = new Arc()
+    arc.attr({
+      pos: [200, 400],
+      points: [[260, 430], [210, 410]],
+      radius: 30,
+      lineWidth: 5,
+      // anticlockwise: true
+    })
+    layer.append(arc)
+
+    const sector = new Sector()
+    sector.attr({
+      pos: [280, 400],
+      radius: 30,
+      startAngle: 0,
+      endAngle: 140,
+      lineWidth: 5
+    })
+    layer.append(sector)
+
+    const circle = new Circle()
+    circle.attr({
+      pos: [360, 400],
+      radius: 30,
+      lineWidth: 5,
+    })
+    layer.append(circle)
+
+
+    const ring = new Ring()
+    ring.attr({
+      pos: [440, 400],
+      innerRadius: 15,
+      outerRadius: 30,
+      fillColor: {
+        vector: [0, 0, 150, 150],
+        colors: [
+          { offset: 0, color: 'red' },
+          { offset: 1, color: 'green' },
+        ],
+      },
+      lineWidth: 5
+    })
+    layer.append(ring)
+
+    const ellipse = new Ellipse()
+    ellipse.attr({
+      pos: [520, 400],
+      radiusX: 15,
+      radiusY: 30,
+      fillColor: 'red',
+      lineWidth: 5,
+      vertical: true
+    })
+    layer.append(ellipse)
   </script>
 </body>
 
