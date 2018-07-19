@@ -4,7 +4,7 @@ import { utils } from 'sprite-core'
 
 const { attr, parseColorString, findColor } = utils
 
-class PolygonAttr extends Shape.Attr {
+class PolygonAttr extends Polygon.Attr {
   constructor(subject) {
     super(subject)
     this.setDefault({
@@ -29,19 +29,20 @@ class PolygonAttr extends Shape.Attr {
   }
 }
 
-function calculateStarN(sides) {
-  return function(x, y, radius, innerRadius) {
-    let sideIndentRadius = innerRadius
+function getStarPolygonPoints(angles) {
+  const points = []
+  const pointsLength = angles * 2
+
+  return function(outerRadius, innerRadius) {
+    const offsetX = Math.floor(outerRadius / 2)
     let radAngle = -Math.PI / 2
-    let radAlpha = (Math.PI * 2) / sides / 2
+    let radAlpha = (Math.PI * 2) / angles / 2
 
-    const points = []
-
-    for (let i = 1; i <= sides * 2; i++) {
+    for (let i = 1; i <= pointsLength; i++) {
       let rad = radAlpha * i + radAngle
-      let len = i % 2 ? sideIndentRadius : radius
-      let xPos = x + Math.cos(rad) * len
-      let yPos = y + Math.sin(rad) * len
+      let len = i % 2 ? innerRadius : outerRadius
+      let xPos = offsetX + Math.cos(rad) * len
+      let yPos = Math.sin(rad) * len
 
       points.push([xPos, yPos])
     }
@@ -58,7 +59,7 @@ class Star extends Polygon {
     const radius = this.attr('radius')
     const innerRadius = this.attr('innerRadius') || 0.4 * radius
 
-    return calculateStarN(this.attr('angles'))(x, y, radius, innerRadius)
+    return getStarPolygonPoints(this.attr('angles'))(radius, innerRadius)
   }
 }
 
