@@ -58,10 +58,10 @@ class Polygon extends Shape {
     let [width, height] = this.attr('size')
 
     if(width === '') {
-      width = bounds[2] - Math.min(0, bounds[0]) + 3 * lw
+      width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw
     }
     if(height === '') {
-      height = bounds[3] - Math.min(0, bounds[1]) + 3 * lw
+      height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw
     }
 
     return [width, height].map(Math.ceil)
@@ -77,8 +77,8 @@ class Polygon extends Shape {
       offsetX = Math.min(0, bounds[0]),
       offsetY = Math.min(0, bounds[1])
 
-    rect[0] = offsetX - lw - anchorX * (width + offsetX - 3 * lw)
-    rect[1] = offsetY - lw - anchorY * (height + offsetY - 3 * lw)
+    rect[0] = offsetX - lw - anchorX * (width + offsetX - 2 * lw)
+    rect[1] = offsetY - lw - anchorY * (height + offsetY - 2 * lw)
     return rect
   }
 
@@ -87,7 +87,7 @@ class Polygon extends Shape {
     if(this.points) {
       const bounds = this.lineBoundings,
         lw = this.attr('lineWidth');
-      drawingContext.translate(-Math.min(0, bounds[0]) + 1.5 * lw, -Math.min(0, bounds[1]) + 1.5 * lw)
+      drawingContext.translate(-Math.min(0, bounds[0]) +  lw, -Math.min(0, bounds[1]) +  lw)
       drawingContext.strokeStyle = findColor(drawingContext, this, 'color')
       drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor')
       drawingContext.miterLimit = 3;
