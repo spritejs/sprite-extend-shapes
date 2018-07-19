@@ -4,14 +4,15 @@ import {utils} from 'sprite-core';
 
 const {attr} = utils
 
-class rectAttr extends Shape.Attr {
+class rectAttr extends Polygon.Attr {
   constructor(subject) {
     super(subject);
     this.setDefault({
       angle: '90',
-      sides: [10, 10]
+      sides: [10, 10],
     })
   }
+
 
   @attr
   set angle(val) {
