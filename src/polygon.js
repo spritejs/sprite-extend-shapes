@@ -1,7 +1,7 @@
 import Shape from './shape'
-import {utils} from 'sprite-core'
+import { utils } from 'sprite-core'
 
-const {attr, parseColorString, findColor} = utils
+const { attr, parseColorString, findColor } = utils
 
 class PolygonAttr extends Shape.Attr {
   constructor(subject) {
@@ -10,7 +10,7 @@ class PolygonAttr extends Shape.Attr {
       points: null,
       color: 'rgba(0,0,0,1)',
       fillColor: 'rgba(0, 0, 0, 1)',
-      lineWidth: 1,
+      lineWidth: 1
     })
   }
   @attr
@@ -29,11 +29,10 @@ class PolygonAttr extends Shape.Attr {
 
   @attr
   set fillColor(val) {
-    val = parseColorString(val);
-    this.set('fillColor', val);
+    val = parseColorString(val)
+    this.set('fillColor', val)
   }
 }
-
 
 class Polygon extends Shape {
   static Attr = PolygonAttr
@@ -57,10 +56,10 @@ class Polygon extends Shape {
       lw = this.attr('lineWidth')
     let [width, height] = this.attr('size')
 
-    if(width === '') {
+    if (width === '') {
       width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw
     }
-    if(height === '') {
+    if (height === '') {
       height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw
     }
 
@@ -83,18 +82,21 @@ class Polygon extends Shape {
   }
 
   render(t, drawingContext) {
-    super.render(t, drawingContext);
-    if(this.points) {
+    super.render(t, drawingContext)
+    if (this.points) {
       const bounds = this.lineBoundings,
-        lw = this.attr('lineWidth');
-      drawingContext.translate(-Math.min(0, bounds[0]) +  lw, -Math.min(0, bounds[1]) +  lw)
+        lw = this.attr('lineWidth')
+      drawingContext.translate(
+        -Math.min(0, bounds[0]) + lw,
+        -Math.min(0, bounds[1]) + lw
+      )
       drawingContext.strokeStyle = findColor(drawingContext, this, 'color')
       drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor')
-      drawingContext.miterLimit = 3;
+      drawingContext.miterLimit = 3
       drawingContext.lineWidth = this.attr('lineWidth')
       drawingContext.beginPath()
       this.points.forEach((point, i) => {
-        if(i === 0) {
+        if (i === 0) {
           drawingContext.moveTo(...point)
         } else {
           drawingContext.lineTo(...point)

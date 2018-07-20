@@ -34,7 +34,7 @@ function getStarPolygonPoints(angles) {
   const pointsLength = angles * 2
 
   return function(outerRadius, innerRadius) {
-    const offsetX = Math.floor(outerRadius / 2)
+    const offsetX = outerRadius
     let radAngle = -Math.PI / 2
     let radAlpha = (Math.PI * 2) / angles / 2
 
