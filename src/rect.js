@@ -35,7 +35,6 @@ class Rect extends Polygon {
     const p1 = [s1, 0];
     const p2 = [s1 + s2 * Math.cos(angle), s2 * Math.sin(angle)];
     const p3 = [s2 * Math.cos(angle), s2 * Math.sin(angle)];
-    console.log(p1, p2, p3)
     return [p0, p1, p2, p3]
   }
 }
