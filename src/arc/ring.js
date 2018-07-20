@@ -52,6 +52,7 @@ class Ring extends Shape {
     drawingContext.moveTo(offsetX + outerRadius - innerRadius, offsetY) // 重新落笔
     drawingContext.arc(offsetX, offsetY, innerRadius, startAngle, endAngle)
 
+    drawingContext.closePath()
     drawingContext.fill('evenodd') // 奇偶环绕原则剪切
     drawingContext.stroke()
 

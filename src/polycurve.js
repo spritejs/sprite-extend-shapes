@@ -8,6 +8,7 @@ class PolycurveAttr extends Shape.Attr {
     super(subject)
     this.setDefault({
       points: [],
+      startPoint: [0, 0],
       color: 'rgba(0,0,0,1)',
       lineWidth: 1,
       lineCap: 'round',
@@ -18,6 +19,11 @@ class PolycurveAttr extends Shape.Attr {
   @attr
   set points(val) {
     this.set('points', val)
+  }
+
+  @attr
+  set startPoint(val) {
+    this.set('startPoint', val)
   }
 
   @attr
@@ -56,32 +62,23 @@ class Polycurve extends Shape {
   render(t, drawingContext) {
     super.render(t, drawingContext)
 
-    const points = this.points
+    const startPoint = this.attr('startPoint')
+    let points = this.points
 
-    if (!points.length || points.length < 3) {
-      throw new Error(
-        'Polycurve needs 3 points to draw which should be like [[cp1x, cp1y], [cp2x, cp2y], [x, y]]'
-      )
-      return
+    if (points.length == 6) {
+      points = [[...points]]
     }
-
-    const [posX, posY] = this.attr('pos')
-    let [[cp1x, cp1y], [cp2x, cp2y], [x, y]] = points
-    cp1x -= posX
-    cp1y -= posY
-    cp2x -= posX
-    cp2y -= posY
-    x -= posX
-    y -= posY
 
     drawingContext.strokeStyle = findColor(drawingContext, this, 'color')
     drawingContext.lineJoin = this.attr('lineJoin')
     drawingContext.lineCap = this.attr('lineCap')
     drawingContext.lineWidth = this.attr('lineWidth')
 
-    drawingContext.beginPath()
-    drawingContext.moveTo(0, 0)
-    drawingContext.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+    drawingContext.moveTo(...startPoint)
+    points.forEach(point => {
+      const [cp1x, cp1y, cp2x, cp2y, x, y] = point
+      drawingContext.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+    })
     drawingContext.stroke()
 
     return drawingContext

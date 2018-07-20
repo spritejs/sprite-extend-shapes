@@ -35,6 +35,8 @@
       Circle,
       Ring,
       Ellipse,
+      EllipseSector,
+      EllipseArc,
       Polycurve
     } = spritejs.shapes
 
@@ -114,9 +116,9 @@
 
     const arc = new Arc()
     arc.attr({
-      pos: [200, 400],
-      point: [260, 430],
-      angle: 140,
+      pos: [240, 400],
+      startPoint: [-10, -30],
+      angle: 170,
       radius: 30,
       lineWidth: 5,
       // anticlockwise: true
@@ -126,7 +128,8 @@
     const sector = new Sector()
     sector.attr({
       pos: [280, 400],
-      point: [340, 430],
+      startAngle: 0,
+      endAngle: 130,
       radius: 30,
       angle: 140,
       lineWidth: 5
@@ -160,7 +163,7 @@
 
     const ellipse = new Ellipse()
     ellipse.attr({
-      pos: [520, 400],
+      pos: [540, 400],
       radiusX: 15,
       radiusY: 30,
       fillColor: 'red',
@@ -168,10 +171,35 @@
     })
     layer.append(ellipse)
 
+    const ellipseSector = new EllipseSector()
+    ellipseSector.attr({
+      pos: [620, 400],
+      radiusX: 15,
+      radiusY: 30,
+      startAngle: 30,
+      endAngle: 270,
+      lineWidth: 5
+    })
+    layer.append(ellipseSector)
+
+    const ellipseArc = new EllipseArc()
+    ellipseArc.attr({
+      pos: [680, 400],
+      radiusX: 15,
+      radiusY: 30,
+      startAngle: 30,
+      endAngle: 270,
+      lineWidth: 5
+    })
+    layer.append(ellipseArc)
+
     const polycurve = new Polycurve()
     polycurve.attr({
-      pos: [600, 380],
-      points: [[620, 370], [710, 430], [580, 420]],
+      pos: [740, 380],
+      points: [
+        [20, -10, 110, 50, -20, 40],
+        [10, -10, 20, 50, 0, 0]
+      ],
       lineWidth: 5
     })
     layer.append(polycurve)

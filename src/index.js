@@ -11,6 +11,8 @@ import Star from './polygon/star'
 import Arc from './arc/arc'
 import Sector from './arc/sector'
 import Ellipse from './arc/ellipse'
+import EllipseSector from './arc/ellipseSector'
+import EllipseArc from './arc/ellipseArc'
 import Circle from './arc/circle'
 import Ring from './arc/ring'
 
@@ -25,6 +27,8 @@ export {
   Arc,
   Sector,
   Ellipse,
+  EllipseSector,
+  EllipseArc,
   Circle,
   Ring
 }

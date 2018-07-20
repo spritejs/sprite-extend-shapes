@@ -21,8 +21,8 @@ class Circle extends Shape {
     super.render(t, drawingContext)
 
     const radius = this.attr('radius')
-    const offsetX = radius
-    const offsetY = 0
+    const x = radius
+    const y = 0
     const startAngle = 0
     const endAngle = 2 * Math.PI
 
@@ -31,7 +31,8 @@ class Circle extends Shape {
     drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor')
 
     drawingContext.beginPath()
-    drawingContext.arc(offsetX, offsetY, radius, startAngle, endAngle)
+    drawingContext.arc(x, y, radius, startAngle, endAngle)
+    drawingContext.closePath()
     drawingContext.fill()
     drawingContext.stroke()
 
