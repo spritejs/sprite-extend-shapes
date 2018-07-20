@@ -1,9 +1,10 @@
 import Shape from '../shape'
+import Arc from './arc'
 import { utils } from 'sprite-core'
 
 const { attr, parseColorString, findColor } = utils
 
-class EllipseAttr extends Shape.Attr {
+class EllipseAttr extends Arc.Attr {
   constructor(subject) {
     super(subject)
     this.setDefault({
