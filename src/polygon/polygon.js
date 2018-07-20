@@ -1,4 +1,4 @@
-import Shape from './shape'
+import Shape from '../shape'
 import { utils } from 'sprite-core'
 
 const { attr, parseColorString, findColor } = utils
@@ -13,15 +13,18 @@ class PolygonAttr extends Shape.Attr {
       lineWidth: 1
     })
   }
+
   @attr
   set points(val) {
     this.set('points', val)
   }
+
   @attr
   set color(val) {
     val = parseColorString(val)
     this.set('color', val)
   }
+
   @attr
   set lineWidth(val) {
     this.set('lineWidth', val)

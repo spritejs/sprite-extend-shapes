@@ -1,7 +1,7 @@
 import Shape from './shape'
-import {utils} from 'sprite-core'
+import { utils } from 'sprite-core'
 
-const {attr, parseColorString, findColor} = utils
+const { attr, parseColorString, findColor } = utils
 
 class PolylineAttr extends Shape.Attr {
   constructor(subject) {
@@ -10,20 +10,35 @@ class PolylineAttr extends Shape.Attr {
       points: null,
       color: 'rgba(0,0,0,1)',
       lineWidth: 1,
+      lineCap: 'round',
+      lineJoin: 'round'
     })
   }
+
   @attr
   set points(val) {
     this.set('points', val)
   }
+
   @attr
   set color(val) {
     val = parseColorString(val)
     this.set('color', val)
   }
+
   @attr
   set lineWidth(val) {
     this.set('lineWidth', val)
+  }
+
+  @attr
+  set lineCap(val) {
+    this.set('lineCap', val)
+  }
+
+  @attr
+  set lineJoin(val) {
+    this.set('lineJoin', val)
   }
 }
 
@@ -37,15 +52,15 @@ class Polyline extends Shape {
   }
   render(t, drawingContext) {
     super.render(t, drawingContext)
-    if(this.points) {
+    if (this.points) {
       drawingContext.strokeStyle = findColor(drawingContext, this, 'color')
-      drawingContext.lineJoin = 'round'
-      drawingContext.lineCap = 'round'
+      drawingContext.lineJoin = this.attr('lineJoin')
+      drawingContext.lineCap = this.attr('lineCap')
       drawingContext.lineWidth = this.attr('lineWidth')
       drawingContext.beginPath()
 
       this.points.forEach((point, i) => {
-        if(i === 0) {
+        if (i === 0) {
           drawingContext.moveTo(...point)
         } else {
           drawingContext.lineTo(...point)

@@ -1,4 +1,3 @@
-import Shape from './shape'
 import Polygon from './polygon'
 import { utils } from 'sprite-core'
 

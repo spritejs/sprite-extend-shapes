@@ -1,4 +1,4 @@
-import Shape from './shape'
+import Shape from '../shape'
 import Sector from './sector'
 import { utils } from 'sprite-core'
 
@@ -7,9 +7,6 @@ const { attr, parseColorString, findColor } = utils
 class EllipseAttr extends Sector.Attr {
   constructor(subject) {
     super(subject)
-    this.setDefault({
-      vertical: false
-    })
   }
 
   @attr
@@ -20,11 +17,6 @@ class EllipseAttr extends Sector.Attr {
   @attr
   set radiusY(radius) {
     this.set('radiusY', radius)
-  }
-
-  @attr
-  set vertical(val) {
-    this.set('vertical', val)
   }
 }
 
@@ -40,7 +32,9 @@ class Ellipse extends Shape {
 
     const radiusX = this.attr('radiusX')
     const radiusY = this.attr('radiusY')
-    const radius = Math.max(radiusX, radiusY)
+    const step = radiusX > radiusY ? 1 / radiusX : 1 / radiusY // 分割份数
+    const rotate = (45 / 180) * Math.PI
+    const radius = Math.min(radiusX, radiusY)
     const offsetX = radius
     const offsetY = 0
 
@@ -48,14 +42,16 @@ class Ellipse extends Shape {
     drawingContext.strokeStyle = findColor(drawingContext, this, 'color')
     drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor')
 
-    if (this.attr('vertical')) {
-      drawingContext.scale(radiusY / radius, radiusX / radius)
-    } else {
-      drawingContext.scale(radiusX / radius, radiusY / radius)
-    }
-
+    drawingContext.moveTo(offsetX + radiusX, offsetY)
     drawingContext.beginPath()
-    drawingContext.arc(offsetX, offsetY, radius, 0, 2 * Math.PI)
+    // 循环等分绘制
+    for (let i = 0; i <= 2 * Math.PI; i += step) {
+      drawingContext.lineTo(
+        offsetX + radiusX * Math.cos(i),
+        offsetY + radiusY * Math.sin(i)
+      )
+    }
+    drawingContext.closePath()
     drawingContext.fill()
     drawingContext.stroke()
 

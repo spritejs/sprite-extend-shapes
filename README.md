@@ -11,6 +11,6 @@ SpriteJS 几何图形类
   - Arc
     - Sector
       - Ellipse
-        - Circle
-          - Ring
+      - Circle
+        - Ring
   - PolyCurve

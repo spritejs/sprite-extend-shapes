@@ -24,7 +24,19 @@
   <script>
     const context = document.getElementById('container').getContext('2d')
     const { Layer } = spritejs
-    const { Polygon, Polyline, Triangle, Rect, Star, Arc, Sector, Circle, Ring, Ellipse } = spritejs.shapes
+    const {
+      Polygon,
+      Polyline,
+      Triangle,
+      Rect,
+      Star,
+      Arc,
+      Sector,
+      Circle,
+      Ring,
+      Ellipse,
+      Polycurve
+    } = spritejs.shapes
 
     const layer = new Layer({ context })
     const polyline = new Polyline()
@@ -103,7 +115,8 @@
     const arc = new Arc()
     arc.attr({
       pos: [200, 400],
-      points: [[260, 430], [210, 410]],
+      point: [260, 430],
+      angle: 140,
       radius: 30,
       lineWidth: 5,
       // anticlockwise: true
@@ -113,9 +126,9 @@
     const sector = new Sector()
     sector.attr({
       pos: [280, 400],
+      point: [340, 430],
       radius: 30,
-      startAngle: 0,
-      endAngle: 140,
+      angle: 140,
       lineWidth: 5
     })
     layer.append(sector)
@@ -151,10 +164,17 @@
       radiusX: 15,
       radiusY: 30,
       fillColor: 'red',
-      lineWidth: 5,
-      vertical: true
+      lineWidth: 5
     })
     layer.append(ellipse)
+
+    const polycurve = new Polycurve()
+    polycurve.attr({
+      pos: [600, 380],
+      points: [[620, 370], [710, 430], [580, 420]],
+      lineWidth: 5
+    })
+    layer.append(polycurve)
   </script>
 </body>
 
