@@ -1,4 +1,4 @@
-import Shape from './shape'
+import Shape from '../shape'
 import Circle from './circle'
 import { utils } from 'sprite-core'
 
@@ -44,32 +44,16 @@ class Ring extends Shape {
 
     drawingContext.lineWidth = this.attr('lineWidth')
     drawingContext.strokeStyle = findColor(drawingContext, this, 'color')
+    drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor')
 
     drawingContext.beginPath()
+
     drawingContext.arc(offsetX, offsetY, outerRadius, startAngle, endAngle)
     drawingContext.moveTo(offsetX + outerRadius - innerRadius, offsetY) // 重新落笔
-
-    // const colors = ['red', 'blue', 'green', 'pink']
-    // for (let i = 1; i <= 4; i++) {
-    //   drawingContext.moveTo(
-    //     offsetX + Math.cos(endAngle * (i / 4)) * outerRadius,
-    //     offsetY
-    //   ) // 重新落笔
-
-    //   drawingContext.arc(
-    //     offsetX,
-    //     offsetY,
-    //     outerRadius,
-    //     startAngle,
-    //     endAngle * (i / 4)
-    //   )
-    //   drawingContext.fillStyle = colors[i - 1]
-    //   drawingContext.fill('evenodd')
-    // }
-
     drawingContext.arc(offsetX, offsetY, innerRadius, startAngle, endAngle)
-    drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor')
-    drawingContext.fill('evenodd')
+
+    drawingContext.closePath()
+    drawingContext.fill('evenodd') // 奇偶环绕原则剪切
     drawingContext.stroke()
 
     return drawingContext

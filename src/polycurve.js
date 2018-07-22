@@ -3,11 +3,12 @@ import { utils } from 'sprite-core'
 
 const { attr, parseColorString, findColor } = utils
 
-class PolylineAttr extends Shape.Attr {
+class PolycurveAttr extends Shape.Attr {
   constructor(subject) {
     super(subject)
     this.setDefault({
-      points: null,
+      points: [],
+      startPoint: [0, 0],
       color: 'rgba(0,0,0,1)',
       lineWidth: 1,
       lineCap: 'round',
@@ -18,6 +19,11 @@ class PolylineAttr extends Shape.Attr {
   @attr
   set points(val) {
     this.set('points', val)
+  }
+
+  @attr
+  set startPoint(val) {
+    this.set('startPoint', val)
   }
 
   @attr
@@ -42,34 +48,41 @@ class PolylineAttr extends Shape.Attr {
   }
 }
 
-class Polyline extends Shape {
-  static Attr = PolylineAttr
+class Polycurve extends Shape {
+  static Attr = PolycurveAttr
+
   get points() {
     return this.attr('points')
   }
+
   get isVirtual() {
     return true
   }
+
   render(t, drawingContext) {
     super.render(t, drawingContext)
-    if (this.points) {
-      drawingContext.strokeStyle = findColor(drawingContext, this, 'color')
-      drawingContext.lineJoin = this.attr('lineJoin')
-      drawingContext.lineCap = this.attr('lineCap')
-      drawingContext.lineWidth = this.attr('lineWidth')
-      drawingContext.beginPath()
 
-      this.points.forEach((point, i) => {
-        if (i === 0) {
-          drawingContext.moveTo(...point)
-        } else {
-          drawingContext.lineTo(...point)
-        }
-      })
-      drawingContext.stroke()
+    const startPoint = this.attr('startPoint')
+    let points = this.points
+
+    if (points.length == 6) {
+      points = [[...points]]
     }
+
+    drawingContext.strokeStyle = findColor(drawingContext, this, 'color')
+    drawingContext.lineJoin = this.attr('lineJoin')
+    drawingContext.lineCap = this.attr('lineCap')
+    drawingContext.lineWidth = this.attr('lineWidth')
+
+    drawingContext.moveTo(...startPoint)
+    points.forEach(point => {
+      const [cp1x, cp1y, cp2x, cp2y, x, y] = point
+      drawingContext.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+    })
+    drawingContext.stroke()
+
     return drawingContext
   }
 }
 
-export default Polyline
+export default Polycurve
