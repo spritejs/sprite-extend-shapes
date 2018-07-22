@@ -23,7 +23,7 @@
   <script src="/js/sprite-extend-shapes.js"></script>
   <script>
     const context = document.getElementById('container').getContext('2d')
-    const { Layer } = spritejs
+    const { Layer, Sprite } = spritejs
     const {
       Polygon,
       Polyline,
@@ -36,7 +36,6 @@
       Ring,
       Ellipse,
       EllipseSector,
-      EllipseArc,
       Polycurve
     } = spritejs.shapes
 
@@ -114,42 +113,71 @@
     layer.append(star)
 
 
+
+    // 画弧线
     const arc = new Arc()
     arc.attr({
       pos: [240, 400],
-      startPoint: [-10, -30],
-      angle: 170,
-      radius: 30,
-      lineWidth: 5,
-      // anticlockwise: true
+      center: [20, 0],
+      angle: Math.PI / 2,
     })
     layer.append(arc)
+
+    const posHelper = new Sprite();
+    posHelper.attr({
+      pos: arc.attr('pos'),
+      anchor: 0.5,
+      size: [3, 3],
+      bgcolor: 'red'
+    })
+    layer.append(posHelper);
+    
+    const getAbsCenter = (p, c) => {
+      return [p[0] + c[0], p[1] + c[1]]
+    }
+
+    const centerHelper = new Sprite();
+    centerHelper.attr({
+      pos: getAbsCenter(arc.attr('pos'), arc.attr('center')),
+      anchor: 0.5,
+      size: [3, 3],
+      bgcolor: 'yellow'
+    })
+    layer.append(centerHelper);
+
+
+
 
     const sector = new Sector()
     sector.attr({
       pos: [280, 400],
       startAngle: 0,
-      endAngle: 130,
+      endAngle: Math.PI,
       radius: 30,
-      angle: 140,
-      lineWidth: 5
+      lineWidth: 5,
+      bgcolor: 'yellow',
+      color: 'red'
     })
     layer.append(sector)
+
+
 
     const circle = new Circle()
     circle.attr({
       pos: [360, 400],
       radius: 30,
       lineWidth: 5,
+      color: 'red',
+      bgcolor: '#eee',
     })
     layer.append(circle)
 
 
     const ring = new Ring()
     ring.attr({
-      pos: [440, 400],
+      pos: [800, 400],
       innerRadius: 15,
-      outerRadius: 30,
+      outterRadius: 50,
       fillColor: {
         vector: [0, 0, 150, 150],
         colors: [
@@ -157,7 +185,10 @@
           { offset: 1, color: 'green' },
         ],
       },
-      lineWidth: 5
+      lineWidth: 4,
+      startAngle: Math.PI * 0.5,
+      endAngle: Math.PI * 2.6,
+      bgcolor: '#eee',
     })
     layer.append(ring)
 
@@ -167,42 +198,46 @@
       radiusX: 15,
       radiusY: 30,
       fillColor: 'red',
-      lineWidth: 5
+      lineWidth: 5,
+      bgcolor: '#eee'
     })
     layer.append(ellipse)
 
+
+    // 椭圆扇形
     const ellipseSector = new EllipseSector()
     ellipseSector.attr({
       pos: [620, 400],
       radiusX: 15,
       radiusY: 30,
-      startAngle: 30,
-      endAngle: 270,
-      lineWidth: 5
+      startAngle: 0,
+      endAngle: Math.PI,
+      lineWidth: 5,
+      color: 'red',
+      bgcolor: '#eee'
     })
-    layer.append(ellipseSector)
+    layer.append(ellipseSector);
 
-    const ellipseArc = new EllipseArc()
-    ellipseArc.attr({
-      pos: [680, 400],
-      radiusX: 15,
-      radiusY: 30,
-      startAngle: 30,
-      endAngle: 270,
-      lineWidth: 5
+    const ellipseSectorHelper = new Sprite();
+    ellipseSectorHelper.attr({
+      pos: ellipseSector.attr('pos'),
+      anchor: 0.5,
+      size: [3, 3],
+      bgcolor: 'green'
     })
-    layer.append(ellipseArc)
+    layer.append(ellipseSectorHelper);
 
-    const polycurve = new Polycurve()
-    polycurve.attr({
-      pos: [740, 380],
-      points: [
-        [20, -10, 110, 50, -20, 40],
-        [10, -10, 20, 50, 0, 0]
-      ],
-      lineWidth: 5
-    })
-    layer.append(polycurve)
+
+    // const polycurve = new Polycurve()
+    // polycurve.attr({
+    //   pos: [740, 380],
+    //   points: [
+    //     [20, -10, 110, 50, -20, 40],
+    //     [10, -10, 20, 50, 0, 0]
+    //   ],
+    //   lineWidth: 5
+    // })
+    // layer.append(polycurve)
   </script>
 </body>
 

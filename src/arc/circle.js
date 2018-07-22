@@ -1,42 +1,29 @@
-import Shape from '../shape'
-import Sector from './sector'
+import Ellipse from './ellipse'
+
 import { utils } from 'sprite-core'
 
-const { attr, parseColorString, findColor } = utils
+const { attr } = utils
 
-class CircleAttr extends Sector.Attr {
+class CircleAttr extends Ellipse.Attr {
   constructor(subject) {
     super(subject)
+    this.setDefault({
+      radius: 10,
+    })
+  }
+
+  @attr
+  set radius(val) {
+    this.set('radius', val)
   }
 }
 
-class Circle extends Shape {
+class Circle extends Ellipse {
   static Attr = CircleAttr
 
-  get isVirtual() {
-    return true
-  }
-
-  render(t, drawingContext) {
-    super.render(t, drawingContext)
-
+  get radiuses() {
     const radius = this.attr('radius')
-    const x = radius
-    const y = 0
-    const startAngle = 0
-    const endAngle = 2 * Math.PI
-
-    drawingContext.lineWidth = this.attr('lineWidth')
-    drawingContext.strokeStyle = findColor(drawingContext, this, 'color')
-    drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor')
-
-    drawingContext.beginPath()
-    drawingContext.arc(x, y, radius, startAngle, endAngle)
-    drawingContext.closePath()
-    drawingContext.fill()
-    drawingContext.stroke()
-
-    return drawingContext
+    return [radius, radius]
   }
 }
 

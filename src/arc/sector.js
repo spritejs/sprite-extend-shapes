@@ -1,63 +1,27 @@
-import Shape from '../shape'
-import Ellipse from './ellipse'
+import EllipseSector from './ellipseSector'
 import { utils } from 'sprite-core'
+const { attr } = utils
 
-const { attr, parseColorString, findColor } = utils
-
-class SectorAttr extends Ellipse.Attr {
+class SectorAttr extends EllipseSector.Attr {
   constructor(subject) {
     super(subject)
     this.setDefault({
-      fillColor: 'transparent'
+      radius: 10,
     })
   }
 
   @attr
-  set fillColor(val) {
-    val = parseColorString(val)
-    this.set('fillColor', val)
-  }
-
-  @attr
-  set startAngle(angle) {
-    this.set('startAngle', angle)
-  }
-
-  @attr
-  set endAngle(angle) {
-    this.set('endAngle', angle)
+  set radius(val) {
+    this.set('radius', val)
   }
 }
 
-class Sector extends Shape {
+class Sector extends EllipseSector {
   static Attr = SectorAttr
 
-  get isVirtual() {
-    return true
-  }
-
-  render(t, drawingContext) {
-    super.render(t, drawingContext)
-
+  get radiuses() {
     const radius = this.attr('radius')
-    const startAngle = (this.attr('startAngle') / 180) * Math.PI
-    const endAngle = (this.attr('endAngle') / 180) * Math.PI
-    const x = radius // 圆心 x 坐标
-    const y = 0 // 圆心 y 坐标
-    const anticlockwise = this.attr('anticlockwise') // true: 逆时针绘制；false：顺时针绘制；default: false
-
-    drawingContext.lineWidth = this.attr('lineWidth')
-    drawingContext.strokeStyle = findColor(drawingContext, this, 'color')
-    drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor')
-
-    drawingContext.beginPath()
-    drawingContext.moveTo(x, y)
-    drawingContext.arc(x, y, radius, startAngle, endAngle, anticlockwise)
-    drawingContext.closePath()
-    drawingContext.fill()
-    drawingContext.stroke()
-
-    return drawingContext
+    return [radius, radius]
   }
 }
 
