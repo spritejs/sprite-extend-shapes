@@ -8,13 +8,13 @@ import Triangle from './polygon/triangle'
 import Rect from './polygon/rect'
 import Star from './polygon/star'
 
-import Arc from './arc/arc'
-import Sector from './arc/sector'
-import Ellipse from './arc/ellipse'
-import EllipseSector from './arc/ellipseSector'
-import EllipseArc from './arc/ellipseArc'
-import Circle from './arc/circle'
-import Ring from './arc/ring'
+import Arc from './arc'
+import Sector from './ellipseShape/sector'
+import Ellipse from './ellipseShape/ellipse'
+import EllipseSector from './ellipseShape/ellipseSector'
+import EllipseArc from './ellipseShape/ellipseArc'
+import Circle from './ellipseShape/circle'
+import Ring from './ring'
 
 export {
   Shape,

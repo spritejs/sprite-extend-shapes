@@ -3,16 +3,17 @@
 SpriteJS 几何图形类
 
 - shape
+  // virtual shapes
   - Polyline
+  - Arc
+  - PolyCurve
+  // unvirtual shapes
   - Polygon
     - Triangle
     - Rectangle
     - Star
-  - Arc
+  - EllipseSector
     - Ellipse
-      - EllipseArc
-      - EllipseSector
-      - Sector
-        - Circle
-          - Ring
-  - PolyCurve
+      - Circle
+    - Sector
+  - Ring
