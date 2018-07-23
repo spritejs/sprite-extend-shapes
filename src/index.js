@@ -31,4 +31,4 @@ export {
   EllipseArc,
   Circle,
   Ring,
-}
+};
