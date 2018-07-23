@@ -59,14 +59,8 @@ class Polycurve extends Shape {
   }
 
   render(t, drawingContext) {
-    super.render(t, drawingContext);
-
     const startPoint = this.attr('startPoint');
     let points = this.points;
-
-    if(points.length === 6) {
-      points = [[...points]];
-    }
 
     drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
     drawingContext.lineJoin = this.attr('lineJoin');

@@ -50,7 +50,6 @@ class Polyline extends Shape {
     return true;
   }
   render(t, drawingContext) {
-    super.render(t, drawingContext);
     if(this.points) {
       drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
       drawingContext.lineJoin = this.attr('lineJoin');

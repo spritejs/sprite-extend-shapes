@@ -75,7 +75,6 @@ class Arc extends Shape {
   }
 
   render(t, ctx) {
-    super.render(t, ctx);
     if(this.attr('center')) {
       const [cx, cy] = this.attr('center');
       const [sx, sy] = this.attr('startPoint');
@@ -91,7 +90,7 @@ class Arc extends Shape {
       ctx.arc(cx, cy, radius, startAngle, endAngle, anticlockwise);
       ctx.stroke();
     } else {
-      throw new Error('center must be given when drawing an arc!');
+      console.error('center must be given when drawing an arc!');
     }
     return ctx;
   }

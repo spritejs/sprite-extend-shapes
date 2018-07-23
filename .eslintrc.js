@@ -3,8 +3,4 @@ module.exports = {
     spritejs: true,
   },  
   extends:  'eslint-config-sprite',
-  rules: {
-    'semi-style': 0,
-    'semi': ['error', 'always']
-  } 
 }
