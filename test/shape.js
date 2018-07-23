@@ -33,6 +33,8 @@ test('draw polyline', async (t) => {
     ],
     lineWidth: 3,
     color: 'red',
+    lineCap: 'round',
+    lineJoin: 'round',
   });
   layer.append(polyline);
 

@@ -13,7 +13,7 @@
     "standalone": "babel src -d lib && webpack --env.standalone",
     "start": "webpack-dev-server --watch-poll",
     "prepublishOnly": "npm run build && node ./script/qcdn",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nyc ava --serial && rm -rf ./coverage && mkdir ./coverage && nyc report --reporter=html > ./coverage/lcov.info",
     "lint": "eslint"
   },
   "author": "akira-cn",
@@ -30,11 +30,13 @@
     "babel-preset-env": "^1.7.0",
     "canvas": "^2.0.0-alpha.12",
     "colors": "^1.3.1",
+    "coveralls": "^3.0.2",
     "eslint": "^5.0.1",
     "eslint-config-sprite": "^1.0.2",
     "eslint-plugin-html": "^4.0.5",
     "hamming-distance": "^1.0.0",
     "imghash": "^0.0.3",
+    "nyc": "^12.0.2",
     "pixelmatch": "^4.0.2",
     "spritejs": "^2.4.4",
     "webpack": "^4.12.2",
@@ -49,6 +51,11 @@
       "babel-register"
     ],
     "babel": "inherit"
+  },
+  "nyc": {
+    "exclude": [
+      "**/test/**/*.js"
+    ]
   },
   "dependencies": {
     "babel-decorators-runtime": "^0.2.0",
