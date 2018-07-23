@@ -1,25 +1,25 @@
-import Polygon from './polygon'
-import { utils } from 'sprite-core'
+import Polygon from './polygon';
+import {utils} from 'sprite-core';
 
-const { attr } = utils
+const {attr} = utils;
 
 class rectAttr extends Polygon.Attr {
   constructor(subject) {
-    super(subject)
+    super(subject);
     this.setDefault({
       angle: '90',
-      sides: [10, 10]
-    })
+      sides: [10, 10],
+    });
   }
 
   @attr
   set angle(val) {
-    this.set('angle', val)
+    this.set('angle', val);
   }
 
   @attr
   set sides(val) {
-    this.set('sides', val)
+    this.set('sides', val);
   }
 }
 
@@ -32,8 +32,8 @@ class Rect extends Polygon {
     const p1 = [s1, 0];
     const p2 = [s1 + s2 * Math.cos(angle), s2 * Math.sin(angle)];
     const p3 = [s2 * Math.cos(angle), s2 * Math.sin(angle)];
-    return [p0, p1, p2, p3]
+    return [p0, p1, p2, p3];
   }
 }
 
-export default Rect
+export default Rect;

@@ -1,7 +1,5 @@
-import {BaseSprite} from 'sprite-core'
+import {BaseSprite} from 'sprite-core';
 
-class Shape extends BaseSprite {
+class Shape extends BaseSprite {}
 
-}
-
-export default Shape
+export default Shape;

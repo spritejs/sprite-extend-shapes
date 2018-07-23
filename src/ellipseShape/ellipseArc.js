@@ -1,4 +1,4 @@
-import Shape from '../shape'
+import Shape from '../shape';
 import Ellipse from './sector'
 import { utils } from 'sprite-core'
 

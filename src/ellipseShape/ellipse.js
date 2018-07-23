@@ -1,15 +1,6 @@
-import EllipseSector from './ellipseSector'
-
-
-class EllipseAttr extends EllipseSector.Attr {
-  constructor(subject) {
-    super(subject)
-  }
-}
+import EllipseSector from './ellipseSector';
 
 class Ellipse extends EllipseSector {
-  static Attr = EllipseAttr
-
   get startAngle() {
     return 0;
   }
@@ -18,4 +9,4 @@ class Ellipse extends EllipseSector {
   }
 }
 
-export default Ellipse
+export default Ellipse;
