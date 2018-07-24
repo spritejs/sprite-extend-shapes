@@ -1,7 +1,7 @@
-import Shape from '../shape';
-import {utils} from 'sprite-core';
+import Shape from "../shape";
+import { utils } from "sprite-core";
 
-const {attr, parseColorString, findColor} = utils;
+const { attr, parseColorString, findColor } = utils;
 
 class EllipseSectorAttr extends Shape.Attr {
   constructor(subject) {
@@ -11,59 +11,58 @@ class EllipseSectorAttr extends Shape.Attr {
       radiusY: 20,
       startAngle: 0,
       endAngle: 360,
-      color: 'rgba(0,0,0,1)',
-      fillColor: 'rgba(0, 0, 0, 1)',
+      color: "rgba(0,0,0,1)",
+      fillColor: "rgba(0, 0, 0, 1)",
       lineWidth: 1,
-      anticlockwise: false,
+      anticlockwise: false
     });
   }
 
   // 短轴半径
   @attr
   set radiusX(val) {
-    this.set('radiusX', val);
+    this.set("radiusX", val);
   }
   // 长轴半径
   @attr
   set radiusY(val) {
-    this.set('radiusY', val);
+    this.set("radiusY", val);
   }
 
   @attr
   set startAngle(val) {
-    this.set('startAngle', val);
+    this.set("startAngle", val);
   }
 
   @attr
   set endAngle(val) {
-    this.set('endAngle', val);
+    this.set("endAngle", val);
   }
   @attr
   set color(val) {
     val = parseColorString(val);
-    this.set('color', val);
+    this.set("color", val);
   }
 
   @attr
   set lineWidth(val) {
-    this.set('lineWidth', val);
+    this.set("lineWidth", val);
   }
 
   @attr
   set fillColor(val) {
     val = parseColorString(val);
-    this.set('fillColor', val);
+    this.set("fillColor", val);
   }
   @attr
   set anticlockwise(val) {
-    this.set('anticlockwise', val);
+    this.set("anticlockwise", val);
   }
 }
 
-
 function BezierEllipse2(ctx, x, y, a, b) {
   const k = 0.5522848;
-  const ox = a * k;// 水平控制点偏移量
+  const ox = a * k; // 水平控制点偏移量
   const oy = b * k; // 垂直控制点偏移量</p> <p> ctx.beginPath();
   // 从椭圆的左端点开始顺时针绘制四条三次贝塞尔曲线
   ctx.moveTo(x - a, y);
@@ -74,18 +73,18 @@ function BezierEllipse2(ctx, x, y, a, b) {
 }
 
 class EllipseSector extends Shape {
-  static Attr = EllipseSectorAttr
+  static Attr = EllipseSectorAttr;
 
   get radiuses() {
-    return [this.attr('radiusX'), this.attr('radiusY')];
+    return [this.attr("radiusX"), this.attr("radiusY")];
   }
 
   get startAngle() {
-    return this.attr('startAngle');
+    return this.attr("startAngle");
   }
 
   get endAngle() {
-    return this.attr('endAngle');
+    return this.attr("endAngle");
   }
 
   get lineBoundings() {
@@ -94,13 +93,13 @@ class EllipseSector extends Shape {
 
   get contentSize() {
     const bounds = this.lineBoundings;
-    const lw = this.attr('lineWidth');
-    let [width, height] = this.attr('size');
+    const lw = this.attr("lineWidth");
+    let [width, height] = this.attr("size");
 
-    if(width === '') {
+    if (width === "") {
       width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
     }
-    if(height === '') {
+    if (height === "") {
       height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
     }
 
@@ -109,9 +108,9 @@ class EllipseSector extends Shape {
 
   get originalRect() {
     const bounds = this.lineBoundings;
-    const lw = this.attr('lineWidth');
+    const lw = this.attr("lineWidth");
     const [width, height] = this.offsetSize;
-    const [anchorX, anchorY] = this.attr('anchor');
+    const [anchorX, anchorY] = this.attr("anchor");
 
     const rect = [0, 0, width, height];
     const offsetX = Math.min(0, bounds[0]);
@@ -126,31 +125,38 @@ class EllipseSector extends Shape {
     super.render(t, ctx);
     const [rx, ry] = this.radiuses;
     const bounds = this.lineBoundings;
-    const lw = this.attr('lineWidth');
-    ctx.translate(
-      -Math.min(0, bounds[0]) + lw,
-      -Math.min(0, bounds[1]) + lw
-    );
+    const lw = this.attr("lineWidth");
+    ctx.translate(-Math.min(0, bounds[0]) + lw, -Math.min(0, bounds[1]) + lw);
 
-    ctx.strokeStyle = findColor(ctx, this, 'color');
-    ctx.fillStyle = findColor(ctx, this, 'fillColor');
+    ctx.strokeStyle = findColor(ctx, this, "color");
+    ctx.fillStyle = findColor(ctx, this, "fillColor");
     ctx.miterLimit = 3;
-    ctx.lineWidth = this.attr('lineWidth');
+    ctx.lineWidth = this.attr("lineWidth");
     ctx.beginPath();
 
     // 绘制椭圆扇形
-    if(this.endAngle - this.startAngle < Math.PI * 2) {
+    if (this.endAngle - this.startAngle < Math.PI * 2) {
       ctx.moveTo(rx, ry);
     }
     // 当可以直接使用ellipse接口的时候
-    if(ctx.ellipse) {
-      ctx.ellipse(rx, ry, rx, ry, 0, this.startAngle, this.endAngle, this.attr('anticlockwise'));
-    } else if(this.endAngle - this.startAngle >= Math.PI * 2) {
+    if (ctx.ellipse) {
+      ctx.ellipse(
+        rx,
+        ry,
+        rx,
+        ry,
+        0,
+        this.startAngle,
+        this.endAngle,
+        this.attr("anticlockwise")
+      );
+    } else if (this.endAngle - this.startAngle >= Math.PI * 2) {
       BezierEllipse2(ctx, rx, ry, rx, ry);
     } else {
-      throw new Error("you can't draw a ellipseSector when ctx.ellipse is not available!");
+      throw new Error(
+        "you can't draw a ellipseSector when ctx.ellipse is not available!"
+      );
     }
-
 
     ctx.closePath();
     ctx.stroke();

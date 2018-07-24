@@ -1,46 +1,46 @@
-import Shape from '../shape';
-import {utils} from 'sprite-core';
+import Shape from "../shape";
+import { utils } from "sprite-core";
 
-const {attr, parseColorString, findColor} = utils;
+const { attr, parseColorString, findColor } = utils;
 
 class PolygonAttr extends Shape.Attr {
   constructor(subject) {
     super(subject);
     this.setDefault({
-      points: null,
-      color: 'rgba(0,0,0,1)',
-      fillColor: 'rgba(0, 0, 0, 1)',
-      lineWidth: 1,
+      points: [],
+      color: "rgba(0,0,0,1)",
+      fillColor: "rgba(0, 0, 0, 1)",
+      lineWidth: 1
     });
   }
 
   @attr
   set points(val) {
-    this.set('points', val);
+    this.set("points", val);
   }
 
   @attr
   set color(val) {
     val = parseColorString(val);
-    this.set('color', val);
+    this.set("color", val);
   }
 
   @attr
   set lineWidth(val) {
-    this.set('lineWidth', val);
+    this.set("lineWidth", val);
   }
 
   @attr
   set fillColor(val) {
     val = parseColorString(val);
-    this.set('fillColor', val);
+    this.set("fillColor", val);
   }
 }
 
 class Polygon extends Shape {
-  static Attr = PolygonAttr
+  static Attr = PolygonAttr;
   get points() {
-    return this.attr('points');
+    return this.attr("points");
   }
   get lineBoundings() {
     const bounds = [0, 0, 0, 0];
@@ -56,13 +56,13 @@ class Polygon extends Shape {
 
   get contentSize() {
     const bounds = this.lineBoundings;
-    const lw = this.attr('lineWidth');
-    let [width, height] = this.attr('size');
+    const lw = this.attr("lineWidth");
+    let [width, height] = this.attr("size");
 
-    if(width === '') {
+    if (width === "") {
       width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
     }
-    if(height === '') {
+    if (height === "") {
       height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
     }
 
@@ -71,9 +71,9 @@ class Polygon extends Shape {
 
   get originalRect() {
     const bounds = this.lineBoundings;
-    const lw = this.attr('lineWidth');
+    const lw = this.attr("lineWidth");
     const [width, height] = this.offsetSize;
-    const [anchorX, anchorY] = this.attr('anchor');
+    const [anchorX, anchorY] = this.attr("anchor");
 
     const rect = [0, 0, width, height];
     const offsetX = Math.min(0, bounds[0]);
@@ -86,20 +86,21 @@ class Polygon extends Shape {
 
   render(t, drawingContext) {
     super.render(t, drawingContext);
-    if(this.points) {
+
+    if (this.points.length) {
       const bounds = this.lineBoundings;
-      const lw = this.attr('lineWidth');
+      const lw = this.attr("lineWidth");
       drawingContext.translate(
         -Math.min(0, bounds[0]) + lw,
         -Math.min(0, bounds[1]) + lw
       );
-      drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
-      drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
+      drawingContext.strokeStyle = findColor(drawingContext, this, "color");
+      drawingContext.fillStyle = findColor(drawingContext, this, "fillColor");
       drawingContext.miterLimit = 3;
-      drawingContext.lineWidth = this.attr('lineWidth');
+      drawingContext.lineWidth = this.attr("lineWidth");
       drawingContext.beginPath();
       this.points.forEach((point, i) => {
-        if(i === 0) {
+        if (i === 0) {
           drawingContext.moveTo(...point);
         } else {
           drawingContext.lineTo(...point);
