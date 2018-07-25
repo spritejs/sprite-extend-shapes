@@ -21,7 +21,7 @@
 
 ## Shape
 
-`Shape` 类继承至 `sprite-core` 的 `BaseSprite`，是该图形扩展库所有图形的基类。
+`Shape` 类继承自 `sprite-core` 的 `BaseSprite`，是该图形扩展库所有图形的基类。
 
 ### Polyline
 
@@ -134,7 +134,7 @@ polygon.attr({
 
 #### Triangle
 
-`Triangle` 继承至 `Polygon`，用于绘制三角形，其大部分属性与 `Polygon` 一致。在 `Polygon` 的基础上，`Triangle` 需要设置“两边的长度”和“两边的夹角”即可完成绘制。
+`Triangle` 继承自 `Polygon`，用于绘制三角形，其大部分属性与 `Polygon` 一致。在 `Polygon` 的基础上，`Triangle` 需要设置“两边的长度”和“两边的夹角”即可完成绘制。
 
 | 属性  |   说明   |   默认值   |
 | :---: | :------: | :--------: |
@@ -157,7 +157,7 @@ triangle.attr({
 
 #### Rectangle
 
-`Rectangle` 继承至 `Polygon`，用于绘制矩阵。同 `Triangle`，`Rectangle` 需要设置“两边的长度”和“两边的夹角”即可完成绘制。
+`Rectangle` 继承自 `Polygon`，用于绘制矩阵。同 `Triangle`，`Rectangle` 需要设置“两边的长度”和“两边的夹角”即可完成绘制。
 
 | 属性  |   说明   |   默认值   |
 | :---: | :------: | :--------: |
@@ -180,7 +180,7 @@ rect.attr({
 
 #### Star
 
-`Star` 继承至 `Polygon` 用于绘制规则的多角形。`Star` 将多角形的绘制分为`内接圆`和`外接圆`之上点的连接，默认`内接圆`的半径为`0.4 * 外接圆的半径`，也可手动设置。
+`Star` 继承自 `Polygon` 用于绘制规则的多角形。`Star` 将多角形的绘制分为`内接圆`和`外接圆`之上点的连接，默认`内接圆`的半径为`0.4 * 外接圆的半径`，也可手动设置。
 
 |    属性     |    说明    |     默认值     |
 | :---------: | :--------: | :------------: |
@@ -205,7 +205,7 @@ star.attr({
 
 ### EllipseSector
 
-`EllipseSector` 继承至 `Shape`，用于绘制椭圆扇形。
+`EllipseSector` 继承自 `Shape`，用于绘制椭圆扇形。
 
 |    属性    |       说明       |       默认值       |
 | :--------: | :--------------: | :----------------: |
@@ -237,7 +237,7 @@ ellipseSector.attr({
 
 #### Ellipse
 
-`Ellipse` 继承至 `EllipseSector`，用于绘制椭圆。
+`Ellipse` 继承自 `EllipseSector`，用于绘制椭圆。
 不难发现，只需将 EllipseSector 的 `startAngle` 始终设为 `0`，`endAngle` 始终设为 `360` 即可。
 
 示例：
@@ -256,7 +256,7 @@ ellipse.attr({
 
 ##### EllipseArc
 
-`EllipseArc` 继承至 `Ellipse`，用于绘制椭圆弧线（与 `Arc` 的区别）。
+`EllipseArc` 继承自 `Ellipse`，用于绘制椭圆弧线（与 `Arc` 的区别）。
 `EllipseArc` 放开了 `startAngle` 和 `endAngle` 的限制。
 
 示例：
@@ -276,7 +276,7 @@ ellipseArc.attr({
 
 ##### Circle
 
-`Circle` 继承至 `Ellipse`。当`Ellipse`的“长半径”和“短半径”相等时，椭圆就成了圆。
+`Circle` 继承自 `Ellipse`。当`Ellipse`的“长半径”和“短半径”相等时，椭圆就成了圆。
 
 |  属性  | 说明 | 默认值 |
 | :----: | :--: | :----: |
@@ -297,7 +297,7 @@ circle.attr({
 
 #### Sector
 
-`Sector` 继承至 `EllipseSector`，用于绘制规则的扇形。当`EllipseSector`的“长半径”和“短半径”相等时，即可绘制规则的扇形。
+`Sector` 继承自 `EllipseSector`，用于绘制规则的扇形。当`EllipseSector`的“长半径”和“短半径”相等时，即可绘制规则的扇形。
 
 |  属性  | 说明 | 默认值 |
 | :----: | :--: | :----: |
@@ -320,7 +320,7 @@ sector.attr({
 
 ### Ring
 
-`Ring` 继承至 `Shape`，用于绘制圆环。
+`Ring` 继承自 `Shape`，用于绘制圆环。
 
 |    属性     |     说明     |       默认值       |
 | :---------: | :----------: | :----------------: |
