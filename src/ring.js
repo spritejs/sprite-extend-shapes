@@ -8,7 +8,7 @@ class RingAttr extends Shape.Attr {
     super(subject);
     this.setDefault({
       innerRaius: 10,
-      outterRadius: 20,
+      outerRadius: 20,
       startAngle: 0,
       endAngle: 360,
       color: "rgba(0,0,0,1)",
@@ -23,8 +23,8 @@ class RingAttr extends Shape.Attr {
   }
   // 外圆半径
   @attr
-  set outterRadius(val) {
-    this.set("outterRadius", val);
+  set outerRadius(val) {
+    this.set("outerRadius", val);
   }
 
   @attr
@@ -59,10 +59,7 @@ class Ring extends Shape {
 
   // 边界依赖于最大圆
   get lineBoundings() {
-    const radius = Math.max(
-      this.attr("innerRadius"),
-      this.attr("outterRadius")
-    );
+    const radius = Math.max(this.attr("innerRadius"), this.attr("outerRadius"));
     return [0, 0, 2 * radius, 2 * radius];
   }
 
@@ -108,11 +105,11 @@ class Ring extends Shape {
     super.render(t, ctx);
     const innerRadius = Math.min(
       this.attr("innerRadius"),
-      this.attr("outterRadius")
+      this.attr("outerRadius")
     );
-    const outterRadius = Math.max(
+    const outerRadius = Math.max(
       this.attr("innerRadius"),
-      this.attr("outterRadius")
+      this.attr("outerRadius")
     );
 
     const bounds = this.lineBoundings;
@@ -129,25 +126,11 @@ class Ring extends Shape {
     ctx.lineWidth = this.attr("lineWidth");
     ctx.beginPath();
 
-    ctx.arc(
-      outterRadius,
-      outterRadius,
-      outterRadius,
-      startAngle,
-      endAngle,
-      false
-    );
+    ctx.arc(outerRadius, outerRadius, outerRadius, startAngle, endAngle, false);
     if (endAngle - startAngle === Math.PI * 2) {
-      ctx.moveTo(outterRadius + innerRadius, outterRadius);
+      ctx.moveTo(outerRadius + innerRadius, outerRadius);
     }
-    ctx.arc(
-      outterRadius,
-      outterRadius,
-      innerRadius,
-      endAngle,
-      startAngle,
-      true
-    );
+    ctx.arc(outerRadius, outerRadius, innerRadius, endAngle, startAngle, true);
     ctx.closePath();
     ctx.stroke();
     ctx.fill();
