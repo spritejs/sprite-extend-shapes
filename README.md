@@ -4,20 +4,20 @@
 
 `sprite-extend-shapes` 是基于`SpriteJS`的常用几何图形扩展库。当前支持的图形：
 
-- [Shape](#Shape)
-  - [Polyline](#Polyline)
-  - [Arc](#Arc)
-  - [PolyCurve](#PolyCurve)
-  - [Polygon](#Polygon)
-    - [Triangle](#Triangle)
-    - [Rectangle](#Rectangle)
-    - [Star](#Star)
-  - [EllipseSector](#EllipseSector)
-    - [Ellipse](#Ellipse)
-      - [EllipseArc](#EllipseArc)
-      - [Circle](#Circle)
-    - [Sector](#Sector)
-  - [Ring](#Ring)
+- [Shape](#shape)
+  - [Polyline](#polyline)
+  - [Arc](#arc)
+  - [PolyCurve](#polyCurve)
+  - [Polygon](#polygon)
+    - [Triangle](#triangle)
+    - [Rectangle](#rectangle)
+    - [Star](#star)
+  - [EllipseSector](#ellipseSector)
+    - [Ellipse](#ellipse)
+      - [EllipseArc](#ellipseArc)
+      - [Circle](#circle)
+    - [Sector](#sector)
+  - [Ring](#ring)
 
 ## Shape
 
@@ -25,7 +25,7 @@
 
 ### Polyline
 
-`Ployline` 用于绘制线条。支持的属性：
+`Ployline` 用于绘制线条。
 
 |   属性    |         说明         |       默认值       |
 | :-------: | :------------------: | :----------------: |
@@ -36,6 +36,7 @@
 | lineJoin  |   两线条交汇处样式   |      `round`       |
 
 示例：
+
 ![polyline](./pictures/polyline.png)
 
 ```javascript
@@ -53,7 +54,7 @@ polyline.attr({
 
 ### Arc
 
-`Arc` 用于绘制弧线。支持的属性：
+`Arc` 用于绘制弧线。
 
 |     属性      |              说明              |  默认值  |
 | :-----------: | :----------------------------: | :------: |
@@ -65,6 +66,7 @@ polyline.attr({
 | anticlockwise | 当该值为`true`时，将逆时针绘制 | `false`  |
 
 示例：
+
 ![arc](./pictures/arc.png)
 
 ```javascript
@@ -79,7 +81,7 @@ arc.attr({
 
 ### Polycurve
 
-`Polycurve` 用于绘制多重曲线，其底层使用的是 `canvas.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)` API（因此也可以理解为“绘制多个贝塞尔曲线”）。支持的属性：
+`Polycurve` 用于绘制多重曲线，其底层使用的是 `canvas.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)` API（因此也可以理解为“绘制多个贝塞尔曲线”）。
 
 |    属性    |                             说明                             |  默认值  |
 | :--------: | :----------------------------------------------------------: | :------: |
@@ -103,7 +105,7 @@ polycurve.attr({
 
 ### Polygon
 
-`Polygon` 用于绘制多边形。支持的属性：
+`Polygon` 用于绘制多边形。
 
 |   属性    |      说明      |       默认值       |
 | :-------: | :------------: | :----------------: |
