@@ -81,8 +81,8 @@
     triangle.attr({
       pos: [700, 100],
       color: 'red',
-      sides: [40, 80],
-      angle: '40',
+      sides: [80, 80],
+      angle: 60,
       fillColor: 'yellow',
       bgcolor: '#eee',
     })
@@ -94,8 +94,9 @@
       pos: [1000, 100],
       color: 'red',
       sides: [60, 80],
+      angle: 60,
       fillColor: 'yellow',
-      bgcolor: '#eee',
+      // bgcolor: '#eee',
     })
 
     layer.append(rect);
@@ -131,7 +132,7 @@
       bgcolor: 'red'
     })
     layer.append(posHelper);
-    
+
     const getAbsCenter = (p, c) => {
       return [p[0] + c[0], p[1] + c[1]]
     }
@@ -169,6 +170,7 @@
       lineWidth: 5,
       color: 'red',
       bgcolor: '#eee',
+      anticlockwise: true
     })
     layer.append(circle)
 
@@ -177,7 +179,7 @@
     ring.attr({
       pos: [800, 400],
       innerRadius: 15,
-      outterRadius: 50,
+      outerRadius: 50,
       fillColor: {
         vector: [0, 0, 150, 150],
         colors: [
