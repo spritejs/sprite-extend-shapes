@@ -10,7 +10,7 @@
   - [Polycurve](#polycurve)
   - [Polygon](#polygon)
     - [Triangle](#triangle)
-    - [Rectangle](#rectangle)
+    - [Rect](#rect)
     - [Star](#star)
   - [EllipseSector](#ellipsesector)
     - [Ellipse](#ellipse)
@@ -23,7 +23,7 @@
 
 `Shape` 类继承自 `sprite-core` 的 `BaseSprite`，是该图形扩展库所有图形的基类。
 
-### Polyline
+### Polyline 折线
 
 `Ployline` 用于绘制线条。
 
@@ -52,7 +52,7 @@ polyline.attr({
 });
 ```
 
-### Arc
+### Arc 弧线
 
 `Arc` 用于绘制弧线。
 
@@ -79,7 +79,7 @@ arc.attr({
 });
 ```
 
-### Polycurve
+### Polycurve 多重曲线
 
 `Polycurve` 用于绘制多重曲线，其底层使用的是 `canvas.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)` API（因此也可以理解为“绘制多个贝塞尔曲线”）。
 
@@ -103,7 +103,7 @@ polycurve.attr({
 });
 ```
 
-### Polygon
+### Polygon 多边形
 
 `Polygon` 用于绘制多边形。
 
@@ -132,7 +132,7 @@ polygon.attr({
 });
 ```
 
-#### Triangle
+#### Triangle 三角形
 
 `Triangle` 继承自 `Polygon`，用于绘制三角形，其大部分属性与 `Polygon` 一致。在 `Polygon` 的基础上，`Triangle` 需要设置“两边的长度”和“两边的夹角”即可完成绘制。
 
@@ -155,14 +155,14 @@ triangle.attr({
 });
 ```
 
-#### Rectangle
+#### Rect 正方形
 
-`Rectangle` 继承自 `Polygon`，用于绘制矩阵。同 `Triangle`，`Rectangle` 需要设置“两边的长度”和“两边的夹角”即可完成绘制。
+`Rect` 继承自 `Polygon`，用于绘制矩阵。在 `Polygon` 的基础上，`Rect` 需要额外设置“两边的长度”，如果想要绘制平行四边形，可以改变`angle`属性的数值即可。
 
 | 属性  |   说明   |   默认值   |
 | :---: | :------: | :--------: |
 | sides | 两边边长 | `[10, 10]` |
-| angle | 两边夹角 |    `60`    |
+| angle | 两边夹角 |    `90`    |
 
 示例：
 
@@ -178,7 +178,7 @@ rect.attr({
 });
 ```
 
-#### Star
+#### Star 星形
 
 `Star` 继承自 `Polygon` 用于绘制规则的多角形。`Star` 将多角形的绘制分为`内接圆`和`外接圆`之上点的连接，默认`内接圆`的半径为`0.4 * 外接圆的半径`，也可手动设置。
 
@@ -203,7 +203,7 @@ star.attr({
 });
 ```
 
-### EllipseSector
+### EllipseSector 椭圆扇形
 
 `EllipseSector` 继承自 `Shape`，用于绘制椭圆扇形。
 
@@ -235,10 +235,9 @@ ellipseSector.attr({
 });
 ```
 
-#### Ellipse
+#### Ellipse 椭圆形
 
-`Ellipse` 继承自 `EllipseSector`，用于绘制椭圆。
-不难发现，只需将 EllipseSector 的 `startAngle` 始终设为 `0`，`endAngle` 始终设为 `360` 即可。
+`Ellipse` 继承自 `EllipseSector`，用于绘制椭圆。 与`EllipseSector`相比， `Ellipse` 不需指定`startAngle`和`endAngle`。
 
 示例：
 
@@ -254,7 +253,7 @@ ellipse.attr({
 });
 ```
 
-##### EllipseArc
+##### EllipseArc 椭圆弧
 
 `EllipseArc` 继承自 `Ellipse`，用于绘制椭圆弧线（与 `Arc` 的区别）。
 `EllipseArc` 放开了 `startAngle` 和 `endAngle` 的限制。
@@ -274,9 +273,9 @@ ellipseArc.attr({
 });
 ```
 
-##### Circle
+##### Circle 圆
 
-`Circle` 继承自 `Ellipse`。当`Ellipse`的“长半径”和“短半径”相等时，椭圆就成了圆。
+`Circle` 继承自 `Ellipse`。与`Ellipse`相比， `Circle` 只需指定一个半径，即`radius`，而无需指定`radiusX`和`radiusY`。
 
 |  属性  | 说明 | 默认值 |
 | :----: | :--: | :----: |
@@ -295,9 +294,9 @@ circle.attr({
 });
 ```
 
-#### Sector
+#### Sector 圆扇形
 
-`Sector` 继承自 `EllipseSector`，用于绘制规则的扇形。当`EllipseSector`的“长半径”和“短半径”相等时，即可绘制规则的扇形。
+`Sector` 继承自 `EllipseSector`，用于绘制圆扇形。与`EllipseSector`相比， `Sector`  只需指定一个半径，即`radius`，而无需指定`radiusX`和`radiusY`。
 
 |  属性  | 说明 | 默认值 |
 | :----: | :--: | :----: |
@@ -318,7 +317,7 @@ sector.attr({
 });
 ```
 
-### Ring
+### Ring 圆环
 
 `Ring` 继承自 `Shape`，用于绘制圆环。
 
