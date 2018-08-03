@@ -99,13 +99,9 @@ class Polygon extends Shape {
       drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
       drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
       drawingContext.miterLimit = 3;
-<<<<<<< HEAD
-      drawingContext.lineWidth = this.attr('lineWidth');
-=======
       drawingContext.lineWidth = this.attr("lineWidth");
       drawingContext.setLineDash(this.attr("lineDash"));
       drawingContext.lineDashOffset = this.attr("lineDashOffset");
->>>>>>> d9218a8b1dd868b1638e8e98360cc4d4c87d7dcc
       drawingContext.beginPath();
       this.points.forEach((point, i) => {
         if(i === 0) {

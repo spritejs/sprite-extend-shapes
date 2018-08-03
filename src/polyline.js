@@ -48,12 +48,7 @@ class PolylineAttr extends Shape.Attr {
 }
 
 class Polyline extends Shape {
-<<<<<<< HEAD
-  static Attr = PolylineAttr
-
-=======
   static Attr = PolylineAttr;
->>>>>>> d9218a8b1dd868b1638e8e98360cc4d4c87d7dcc
   get points() {
     return this.attr("points");
   }
@@ -63,13 +58,6 @@ class Polyline extends Shape {
   }
   
   render(t, drawingContext) {
-<<<<<<< HEAD
-    if(this.points) {
-      drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
-      drawingContext.lineJoin = this.attr('lineJoin');
-      drawingContext.lineCap = this.attr('lineCap');
-      drawingContext.lineWidth = this.attr('lineWidth');
-=======
     super.render(t, drawingContext);
     if (this.points) {
       drawingContext.strokeStyle = findColor(drawingContext, this, "color");
@@ -78,7 +66,6 @@ class Polyline extends Shape {
       drawingContext.lineWidth = this.attr("lineWidth");
       drawingContext.setLineDash(this.attr("lineDash"));
       drawingContext.lineDashOffset = this.attr("lineDashOffset");
->>>>>>> d9218a8b1dd868b1638e8e98360cc4d4c87d7dcc
       drawingContext.beginPath();
 
       this.points.forEach((point, i) => {

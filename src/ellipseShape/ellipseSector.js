@@ -142,14 +142,10 @@ class EllipseSector extends Shape {
       ctx.moveTo(rx, ry);
     }
     // 当可以直接使用ellipse接口的时候
-<<<<<<< HEAD
-    if(ctx.ellipse) {
-=======
     if (ctx.ellipse) {
       ctx.setLineDash(this.attr("lineDash"));
       ctx.lineDashOffset = this.attr("lineDashOffset");
 
->>>>>>> d9218a8b1dd868b1638e8e98360cc4d4c87d7dcc
       ctx.ellipse(
         rx,
         ry,

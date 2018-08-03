@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import {BaseSprite} from 'sprite-core';
-class Shape extends BaseSprite {}
-=======
 import { BaseSprite } from "sprite-core";
 import { utils } from "sprite-core";
 
@@ -30,6 +26,5 @@ class ShapeAttr extends BaseSprite.Attr {
 class Shape extends BaseSprite {
   static Attr = ShapeAttr;
 }
->>>>>>> d9218a8b1dd868b1638e8e98360cc4d4c87d7dcc
 
 export default Shape;
