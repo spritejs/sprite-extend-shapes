@@ -1,21 +1,8 @@
 import {Layer} from 'sprite-core';
-import {
-  Polygon,
-  Polyline,
-  Triangle,
-  Rect,
-  Star,
-  Arc,
-  Sector,
-  Circle,
-  Ring,
-  Ellipse,
-  EllipseSector,
-  Polycurve,
-} from '../src/index';
+import {createCanvas} from 'canvas';
+import {Polyline, Arc, Polycurve} from '../src/index';
 
 import {compare} from './helpers';
-import {createCanvas} from 'canvas';
 
 const test = require('ava');
 
@@ -37,13 +24,8 @@ test('draw polyline', async (t) => {
   let isEqual = await compare(canvas, 'polyline-without-points');
   t.truthy(isEqual);
 
-
   polyline.attr({
-    points: [
-      [0, 0],
-      [100, 100],
-      [150, -50],
-    ],
+    points: [[0, 0], [100, 100], [150, -50]],
   });
   await layer.prepareRender();
   isEqual = await compare(canvas, 'polyline');
@@ -91,10 +73,7 @@ test('draw polycurve', async (t) => {
   polycurve.attr({
     pos: [100, 100],
     startPoint: [10, 10],
-    points: [
-      [20, -10, 110, 50, -20, 40],
-      [10, -10, 20, 50, 0, 0],
-    ],
+    points: [[20, -10, 110, 50, -20, 40], [10, -10, 20, 50, 0, 0]],
     lineWidth: 5,
     color: 'red',
     lineCap: 'round',
@@ -102,6 +81,6 @@ test('draw polycurve', async (t) => {
   });
   layer.append(polycurve);
   await layer.prepareRender();
-  cosnt isEqual = await compare(canvas, 'polycurve');
+  const isEqual = await compare(canvas, 'polycurve');
   t.truthy(isEqual);
 });

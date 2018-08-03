@@ -17,7 +17,7 @@ class SectorAttr extends EllipseSector.Attr {
 }
 
 class Sector extends EllipseSector {
-  static Attr = SectorAttr
+  static Attr = SectorAttr;
 
   get radiuses() {
     const radius = this.attr('radius');

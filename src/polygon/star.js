@@ -51,7 +51,7 @@ function getStarPolygonPoints(angles) {
 }
 
 class Star extends Polygon {
-  static Attr = PolygonAttr
+  static Attr = PolygonAttr;
 
   get points() {
     const radius = this.attr('radius');

@@ -14,7 +14,7 @@
     "start": "webpack-dev-server --watch-poll",
     "prepublishOnly": "npm run build && node ./script/qcdn",
     "test": "nyc ava --serial && rimraf ./coverage && mkdir coverage && nyc report --reporter=html > ./coverage/lcov.info",
-    "lint": "eslint"
+    "lint": "eslint ./ --fix"
   },
   "author": "akira-cn",
   "license": "MIT",

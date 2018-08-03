@@ -7,8 +7,8 @@ module.exports = {
       startAngle: 0,
       endAngle: Math.PI * 0.7,
       lineWidth: 1,
-      color: "red",
-      bgcolor: "#eee"
-    }
-  }
+      color: 'red',
+      bgcolor: '#eee',
+    },
+  },
 };

@@ -1,5 +1,5 @@
-import Ellipse from './ellipse';
 import {utils} from 'sprite-core';
+import Ellipse from './ellipse';
 const {attr} = utils;
 
 class CircleAttr extends Ellipse.Attr {
@@ -17,7 +17,7 @@ class CircleAttr extends Ellipse.Attr {
 }
 
 class Circle extends Ellipse {
-  static Attr = CircleAttr
+  static Attr = CircleAttr;
 
   get radiuses() {
     const radius = this.attr('radius');

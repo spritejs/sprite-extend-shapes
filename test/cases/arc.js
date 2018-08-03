@@ -7,7 +7,7 @@ module.exports = {
       angle: Math.PI / 2,
       lineWidth: 5,
       anticlockwise: true,
-      color: "red"
-    }
-  }
+      color: 'red',
+    },
+  },
 };

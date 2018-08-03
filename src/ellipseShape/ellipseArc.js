@@ -1,40 +1,41 @@
+import {utils} from 'sprite-core';
 import Shape from '../shape';
-import Ellipse from './sector'
-import { utils } from 'sprite-core'
+import Ellipse from './sector';
 
-const { attr, parseColorString, findColor } = utils
+const {findColor} = utils;
 
 class EllipseArcAttr extends Ellipse.Attr {
+  /* eslint-disable no-useless-constructor */
   constructor(subject) {
-    super(subject)
+    super(subject);
   }
 }
 
 class EllipseArc extends Shape {
-  static Attr = EllipseArcAttr
+  static Attr = EllipseArcAttr;
 
   get isVirtual() {
-    return true
+    return true;
   }
 
   render(t, drawingContext) {
-    super.render(t, drawingContext)
+    super.render(t, drawingContext);
 
-    const radiusX = this.attr('radiusX')
-    const radiusY = this.attr('radiusY')
-    const x = 0
-    const y = 0
-    const rotate = (this.attr('rotate') / 180) * Math.PI
-    const startAngle = (this.attr('startAngle') / 180) * Math.PI
-    const endAngle = (this.attr('endAngle') / 180) * Math.PI
-    const anticlockwise = this.attr('anticlockwise')
+    const radiusX = this.attr('radiusX');
+    const radiusY = this.attr('radiusY');
+    const x = 0;
+    const y = 0;
+    const rotate = (this.attr('rotate') / 180) * Math.PI;
+    const startAngle = (this.attr('startAngle') / 180) * Math.PI;
+    const endAngle = (this.attr('endAngle') / 180) * Math.PI;
+    const anticlockwise = this.attr('anticlockwise');
 
-    drawingContext.lineWidth = this.attr('lineWidth')
-    drawingContext.strokeStyle = findColor(drawingContext, this, 'color')
-    drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor')
+    drawingContext.lineWidth = this.attr('lineWidth');
+    drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
+    drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
 
-    if (drawingContext.ellipse) {
-      drawingContext.beginPath()
+    if(drawingContext.ellipse) {
+      drawingContext.beginPath();
       drawingContext.ellipse(
         x,
         y,
@@ -44,15 +45,15 @@ class EllipseArc extends Shape {
         startAngle,
         endAngle,
         anticlockwise
-      )
-      drawingContext.fill()
-      drawingContext.stroke()
+      );
+      drawingContext.fill();
+      drawingContext.stroke();
     } else {
-      throw new Error("Your browser does'n support canvas ellipse")
+      throw new Error("Your browser does'n support canvas ellipse");
     }
 
-    return drawingContext
+    return drawingContext;
   }
 }
 
-export default EllipseArc
+export default EllipseArc;

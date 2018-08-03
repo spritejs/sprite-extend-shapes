@@ -1,25 +1,29 @@
-import { BaseSprite } from "sprite-core";
-import { utils } from "sprite-core";
-
-const { attr, parseColorString, findColor } = utils;
+import {BaseSprite, utils} from 'sprite-core';
+const {attr} = utils;
 
 class ShapeAttr extends BaseSprite.Attr {
   constructor(subject) {
     super(subject);
     this.setDefault({
+      lineWidth: 1,
       lineDash: [0, 0],
-      lineDashOffset: 2
+      lineDashOffset: 2,
     });
   }
 
   @attr
+  set lineWidth(val) {
+    this.set('lineWidth', val);
+  }
+
+  @attr
   set lineDash(val) {
-    this.attr("lineDash", val);
+    this.attr('lineDash', val);
   }
 
   @attr
   set lineDashOffset(val) {
-    this.attr("lineDashOffset", val);
+    this.attr('lineDashOffset', val);
   }
 }
 

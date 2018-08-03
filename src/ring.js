@@ -11,22 +11,9 @@ class RingAttr extends Shape.Attr {
       outerRadius: 20,
       startAngle: 0,
       endAngle: 360,
-      color: "rgba(0,0,0,1)",
-      fillColor: "rgba(0, 0, 0, 1)",
-      lineWidth: 1,
-      lineDash: [4, 16],
-      lineDashOffset: 2
+      color: 'rgba(0,0,0,1)',
+      fillColor: 'rgba(0, 0, 0, 1)',
     });
-  }
-
-  @attr
-  set lineDash(val) {
-    this.attr("lineDash", val);
-  }
-
-  @attr
-  set lineDashOffset(val) {
-    this.attr("lineDashOffset", val);
   }
 
   // 内圆半径
@@ -55,11 +42,6 @@ class RingAttr extends Shape.Attr {
   set color(val) {
     val = parseColorString(val);
     this.set('color', val);
-  }
-
-  @attr
-  set lineWidth(val) {
-    this.set('lineWidth', val);
   }
 
   @attr
@@ -138,13 +120,9 @@ class Ring extends Shape {
     ctx.strokeStyle = findColor(ctx, this, 'color');
     ctx.fillStyle = findColor(ctx, this, 'fillColor');
     ctx.miterLimit = 3;
-<<<<<<< HEAD
     ctx.lineWidth = this.attr('lineWidth');
-=======
-    ctx.lineWidth = this.attr("lineWidth");
-    ctx.setLineDash(this.attr("lineDash"));
-    ctx.lineDashOffset = this.attr("lineDashOffset");
->>>>>>> d9218a8b1dd868b1638e8e98360cc4d4c87d7dcc
+    ctx.setLineDash(this.attr('lineDash'));
+    ctx.lineDashOffset = this.attr('lineDashOffset');
     ctx.beginPath();
 
     ctx.arc(outerRadius, outerRadius, outerRadius, startAngle, endAngle, false);

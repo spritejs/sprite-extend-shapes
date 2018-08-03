@@ -1,5 +1,5 @@
 module.exports = {
   ellipse: {
-    default: {}
-  }
+    default: {},
+  },
 };

@@ -11,7 +11,7 @@ const {
   Sector,
   Ring,
   Polycurve,
-  Arc
+  Arc,
 } = require('../../lib/index.js');
 
 const drawCase = require('./drawcase');
@@ -23,7 +23,7 @@ drawCase('polyline', [300, 300], (layer) => {
     pos: [100, 100],
     points: [[0, 0], [100, 100], [150, -50]],
     lineWidth: 3,
-    color: 'red'
+    color: 'red',
   });
   layer.append(polyline);
   return layer.prepareRender();
@@ -37,7 +37,7 @@ drawCase('triangle', [300, 300], (layer) => {
     sides: [20, 40],
     angle: '40',
     fillColor: 'yellow',
-    bgcolor: '#eee'
+    bgcolor: '#eee',
   });
   layer.append(triangle);
   return layer.prepareRender();
@@ -106,7 +106,7 @@ drawCase('defaultEllipseSector', [300, 300], (layer) => {
   return layer.prepareRender();
 });
 
-drawCase('ellipseSector', [300, 300], layer => {
+drawCase('ellipseSector', [300, 300], (layer) => {
   const ellipseSector = new EllipseSector();
   ellipseSector.attr({
     pos: [100, 100],
@@ -116,7 +116,7 @@ drawCase('ellipseSector', [300, 300], layer => {
     endAngle: Math.PI * 1.3,
     lineWidth: 1,
     color: 'red',
-    bgcolor: '#eee'
+    bgcolor: '#eee',
   });
   layer.append(ellipseSector);
   return layer.prepareRender();
@@ -125,7 +125,7 @@ drawCase('ellipseSector', [300, 300], layer => {
 drawCase(
   'ellipseUsingBezier',
   [300, 300],
-  layer => {
+  (layer) => {
     const ellipseSector = new EllipseSector();
     ellipseSector.attr({
       pos: [100, 100],
@@ -135,7 +135,7 @@ drawCase(
       endAngle: Math.PI * 2,
       lineWidth: 1,
       color: 'red',
-      bgcolor: '#eee'
+      bgcolor: '#eee',
     });
     layer.append(ellipseSector);
     return layer.prepareRender();
@@ -146,7 +146,7 @@ drawCase(
 drawCase(
   'anticlockwiseEllipseUsingBezier',
   [300, 300],
-  layer => {
+  (layer) => {
     const ellipseSector = new EllipseSector();
     ellipseSector.attr({
       pos: [100, 100],
@@ -157,7 +157,7 @@ drawCase(
       lineWidth: 1,
       color: 'red',
       bgcolor: '#eee',
-      anticlockwise: true
+      anticlockwise: true,
     });
     layer.append(ellipseSector);
     return layer.prepareRender();
@@ -165,7 +165,7 @@ drawCase(
   true
 );
 
-drawCase('circle', [300, 300], layer => {
+drawCase('circle', [300, 300], (layer) => {
   const circle = new Circle();
   circle.attr({
     pos: [100, 100],
@@ -173,7 +173,7 @@ drawCase('circle', [300, 300], layer => {
     lineWidth: 5,
     color: 'red',
     bgcolor: '#eee',
-    anticlockwise: true
+    anticlockwise: true,
   });
   layer.append(circle);
   return layer.prepareRender();
@@ -182,7 +182,7 @@ drawCase('circle', [300, 300], layer => {
 drawCase(
   'BezierCircle',
   [300, 300],
-  layer => {
+  (layer) => {
     const circle = new Circle();
     circle.attr({
       pos: [100, 100],
@@ -190,7 +190,7 @@ drawCase(
       lineWidth: 5,
       color: 'red',
       bgcolor: '#eee',
-      anticlockwise: true
+      anticlockwise: true,
     });
     layer.append(circle);
     return layer.prepareRender();
@@ -198,13 +198,13 @@ drawCase(
   true
 );
 
-drawCase('defaultSector', [300, 300], layer => {
+drawCase('defaultSector', [300, 300], (layer) => {
   const sector = new Sector();
   layer.append(sector);
   return layer.prepareRender();
 });
 
-drawCase('sector', [300, 300], layer => {
+drawCase('sector', [300, 300], (layer) => {
   const sector = new Sector();
   sector.attr({
     pos: [100, 100],
@@ -213,13 +213,13 @@ drawCase('sector', [300, 300], layer => {
     radius: 30,
     lineWidth: 5,
     bgcolor: 'yellow',
-    color: 'red'
+    color: 'red',
   });
   layer.append(sector);
   return layer.prepareRender();
 });
 
-drawCase('ellipseArc', [300, 300], layer => {
+drawCase('ellipseArc', [300, 300], (layer) => {
   const ellipseArc = new EllipseArc();
   ellipseArc.attr({
     pos: [100, 100],
@@ -229,13 +229,13 @@ drawCase('ellipseArc', [300, 300], layer => {
     endAngle: Math.PI * 0.7,
     lineWidth: 1,
     color: 'red',
-    bgcolor: '#eee'
+    bgcolor: '#eee',
   });
   layer.append(ellipseArc);
   return layer.prepareRender();
 });
 
-drawCase('ring', [300, 300], layer => {
+drawCase('ring', [300, 300], (layer) => {
   const ring = new Ring();
   ring.attr({
     pos: [100, 100],
@@ -243,18 +243,18 @@ drawCase('ring', [300, 300], layer => {
     outterRadius: 50,
     fillColor: {
       vector: [0, 0, 150, 150],
-      colors: [{ offset: 0, color: 'red' }, { offset: 1, color: 'green' }]
+      colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}],
     },
     lineWidth: 4,
     startAngle: Math.PI * 0.5,
     endAngle: Math.PI * 2.6,
-    bgcolor: '#eee'
+    bgcolor: '#eee',
   });
   layer.append(ring);
   return layer.prepareRender();
 });
 
-drawCase('ringSector', [300, 300], layer => {
+drawCase('ringSector', [300, 300], (layer) => {
   const ring = new Ring();
   ring.attr({
     pos: [100, 100],
@@ -262,19 +262,19 @@ drawCase('ringSector', [300, 300], layer => {
     outterRadius: 50,
     fillColor: {
       vector: [0, 0, 150, 150],
-      colors: [{ offset: 0, color: 'red' }, { offset: 1, color: 'green' }]
+      colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}],
     },
     lineWidth: 4,
     startAngle: Math.PI * 0.5,
     endAngle: Math.PI * 1.6,
     bgcolor: '#eee',
-    color: 'red'
+    color: 'red',
   });
   layer.append(ring);
   return layer.prepareRender();
 });
 
-drawCase('polycurve', [300, 300], layer => {
+drawCase('polycurve', [300, 300], (layer) => {
   const polycurve = new Polycurve();
   polycurve.attr({
     pos: [100, 100],
@@ -283,13 +283,13 @@ drawCase('polycurve', [300, 300], layer => {
     color: 'red',
     lineCap: 'round',
     lineJoin: 'round',
-    lineWidth: 5
+    lineWidth: 5,
   });
   layer.append(polycurve);
   return layer.prepareRender();
 });
 
-drawCase('arc', [300, 300], layer => {
+drawCase('arc', [300, 300], (layer) => {
   const arc = new Arc();
   arc.attr({
     pos: [100, 100],
@@ -298,40 +298,40 @@ drawCase('arc', [300, 300], layer => {
     angle: Math.PI / 2,
     lineWidth: 5,
     anticlockwise: true,
-    color: 'red'
+    color: 'red',
   });
   layer.append(arc);
   return layer.prepareRender();
 });
 
-drawCase('polygon', [300, 300], layer => {
+drawCase('polygon', [300, 300], (layer) => {
   const polygon = new Polygon();
   polygon.attr({
     pos: [100, 100],
     color: {
       vector: [0, 0, 150, 150],
-      colors: [{ offset: 0, color: 'red' }, { offset: 1, color: 'green' }]
+      colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}],
     },
     fillColor: 'yellow',
     points: [[0, 0], [100, 100], [200, -50]],
     bgcolor: '#eee',
-    lineWidth: 5
+    lineWidth: 5,
   });
   layer.append(polygon);
   return layer.prepareRender();
 });
 
-drawCase('NoPointsPolygon', [300, 300], layer => {
+drawCase('NoPointsPolygon', [300, 300], (layer) => {
   const polygon = new Polygon();
   polygon.attr({
     pos: [100, 100],
     color: {
       vector: [0, 0, 150, 150],
-      colors: [{ offset: 0, color: 'red' }, { offset: 1, color: 'green' }]
+      colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}],
     },
     fillColor: 'yellow',
     bgcolor: '#eee',
-    lineWidth: 5
+    lineWidth: 5,
   });
   layer.append(polygon);
   return layer.prepareRender();

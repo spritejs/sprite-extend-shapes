@@ -3,19 +3,19 @@ module.exports = {
     default: {
       pos: [100, 100],
       radius: 30,
-      color: "red",
+      color: 'red',
       angles: 5,
-      bgcolor: "#eee",
-      fillColor: "yellow"
+      bgcolor: '#eee',
+      fillColor: 'yellow',
     },
     innerRadius: {
       pos: [100, 100],
       radius: 30,
       innerRadius: 15,
-      color: "red",
+      color: 'red',
       angles: 5,
-      bgcolor: "#eee",
-      fillColor: "yellow"
-    }
-  }
+      bgcolor: '#eee',
+      fillColor: 'yellow',
+    },
+  },
 };

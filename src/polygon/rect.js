@@ -24,11 +24,11 @@ class rectAttr extends Polygon.Attr {
 }
 
 class Rect extends Polygon {
-  static Attr = rectAttr
+  static Attr = rectAttr;
 
   get points() {
     const [s1, s2] = this.attr('sides');
-    const angle = Math.PI / 180 * this.attr('angle');
+    const angle = (Math.PI / 180) * this.attr('angle');
     const p0 = [0, 0];
     const p1 = [s1, 0];
     const p2 = [s1 + s2 * Math.cos(angle), s2 * Math.sin(angle)];
