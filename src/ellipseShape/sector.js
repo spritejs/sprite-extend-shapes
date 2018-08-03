@@ -1,5 +1,5 @@
-import EllipseSector from './ellipseSector';
 import {utils} from 'sprite-core';
+import EllipseSector from './ellipseSector';
 const {attr} = utils;
 
 class SectorAttr extends EllipseSector.Attr {

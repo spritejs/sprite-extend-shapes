@@ -1,5 +1,5 @@
-import Shape from './shape';
 import {utils} from 'sprite-core';
+import Shape from './shape';
 
 const {attr, parseColorString, findColor} = utils;
 

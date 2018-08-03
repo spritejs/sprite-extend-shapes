@@ -1,5 +1,5 @@
-import Shape from './shape';
 import {utils} from 'sprite-core';
+import Shape from './shape';
 const {attr, parseColorString, findColor} = utils;
 
 class PolylineAttr extends Shape.Attr {
@@ -43,12 +43,15 @@ class PolylineAttr extends Shape.Attr {
 
 class Polyline extends Shape {
   static Attr = PolylineAttr
+
   get points() {
     return this.attr('points');
   }
+
   get isVirtual() {
     return true;
   }
+  
   render(t, drawingContext) {
     if(this.points) {
       drawingContext.strokeStyle = findColor(drawingContext, this, 'color');

@@ -1,5 +1,5 @@
-import Polygon from './polygon';
 import {utils} from 'sprite-core';
+import Polygon from './polygon';
 
 const {attr} = utils;
 
@@ -25,6 +25,7 @@ class rectAttr extends Polygon.Attr {
 
 class Rect extends Polygon {
   static Attr = rectAttr
+
   get points() {
     const [s1, s2] = this.attr('sides');
     const angle = Math.PI / 180 * this.attr('angle');

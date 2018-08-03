@@ -1,5 +1,5 @@
-import Polygon from './polygon';
 import {utils} from 'sprite-core';
+import Polygon from './polygon';
 
 const {attr} = utils;
 
