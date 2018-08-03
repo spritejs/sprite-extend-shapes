@@ -68,6 +68,8 @@ class Polycurve extends Shape {
     drawingContext.lineJoin = this.attr("lineJoin");
     drawingContext.lineCap = this.attr("lineCap");
     drawingContext.lineWidth = this.attr("lineWidth");
+    drawingContext.setLineDash(this.attr("lineDash"));
+    drawingContext.lineDashOffset = this.attr("lineDashOffset");
 
     drawingContext.moveTo(...startPoint);
     points.forEach(point => {

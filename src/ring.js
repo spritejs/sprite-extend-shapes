@@ -1,6 +1,8 @@
 import Shape from "./shape";
 import { utils } from "sprite-core";
 
+console.log(utils);
+
 const { attr, parseColorString, findColor } = utils;
 
 class RingAttr extends Shape.Attr {
@@ -13,9 +15,22 @@ class RingAttr extends Shape.Attr {
       endAngle: 360,
       color: "rgba(0,0,0,1)",
       fillColor: "rgba(0, 0, 0, 1)",
-      lineWidth: 1
+      lineWidth: 1,
+      lineDash: [4, 16],
+      lineDashOffset: 2
     });
   }
+
+  @attr
+  set lineDash(val) {
+    this.attr("lineDash", val);
+  }
+
+  @attr
+  set lineDashOffset(val) {
+    this.attr("lineDashOffset", val);
+  }
+
   // 内圆半径
   @attr
   set innerRadius(val) {
@@ -124,6 +139,8 @@ class Ring extends Shape {
     ctx.fillStyle = findColor(ctx, this, "fillColor");
     ctx.miterLimit = 3;
     ctx.lineWidth = this.attr("lineWidth");
+    ctx.setLineDash(this.attr("lineDash"));
+    ctx.lineDashOffset = this.attr("lineDashOffset");
     ctx.beginPath();
 
     ctx.arc(outerRadius, outerRadius, outerRadius, startAngle, endAngle, false);
