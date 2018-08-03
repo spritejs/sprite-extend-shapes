@@ -63,10 +63,22 @@ class Polycurve extends Shape {
     const startPoint = this.attr('startPoint');
     const points = this.points;
 
+<<<<<<< HEAD
     drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
     drawingContext.lineJoin = this.attr('lineJoin');
     drawingContext.lineCap = this.attr('lineCap');
     drawingContext.lineWidth = this.attr('lineWidth');
+=======
+    const startPoint = this.attr("startPoint");
+    let points = this.points;
+
+    drawingContext.strokeStyle = findColor(drawingContext, this, "color");
+    drawingContext.lineJoin = this.attr("lineJoin");
+    drawingContext.lineCap = this.attr("lineCap");
+    drawingContext.lineWidth = this.attr("lineWidth");
+    drawingContext.setLineDash(this.attr("lineDash"));
+    drawingContext.lineDashOffset = this.attr("lineDashOffset");
+>>>>>>> d9218a8b1dd868b1638e8e98360cc4d4c87d7dcc
 
     drawingContext.moveTo(...startPoint);
     points.forEach((point) => {

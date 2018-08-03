@@ -1,7 +1,13 @@
 import {utils} from 'sprite-core';
 import Shape from './shape';
 
+<<<<<<< HEAD
 const {attr, parseColorString, findColor} = utils;
+=======
+console.log(utils);
+
+const { attr, parseColorString, findColor } = utils;
+>>>>>>> d9218a8b1dd868b1638e8e98360cc4d4c87d7dcc
 
 class RingAttr extends Shape.Attr {
   constructor(subject) {
@@ -11,12 +17,33 @@ class RingAttr extends Shape.Attr {
       outerRadius: 20,
       startAngle: 0,
       endAngle: 360,
+<<<<<<< HEAD
       color: 'rgba(0,0,0,1)',
       fillColor: 'rgba(0, 0, 0, 1)',
       lineWidth: 1,
     });
   }
 
+=======
+      color: "rgba(0,0,0,1)",
+      fillColor: "rgba(0, 0, 0, 1)",
+      lineWidth: 1,
+      lineDash: [4, 16],
+      lineDashOffset: 2
+    });
+  }
+
+  @attr
+  set lineDash(val) {
+    this.attr("lineDash", val);
+  }
+
+  @attr
+  set lineDashOffset(val) {
+    this.attr("lineDashOffset", val);
+  }
+
+>>>>>>> d9218a8b1dd868b1638e8e98360cc4d4c87d7dcc
   // 内圆半径
   @attr
   set innerRadius(val) {
@@ -126,7 +153,13 @@ class Ring extends Shape {
     ctx.strokeStyle = findColor(ctx, this, 'color');
     ctx.fillStyle = findColor(ctx, this, 'fillColor');
     ctx.miterLimit = 3;
+<<<<<<< HEAD
     ctx.lineWidth = this.attr('lineWidth');
+=======
+    ctx.lineWidth = this.attr("lineWidth");
+    ctx.setLineDash(this.attr("lineDash"));
+    ctx.lineDashOffset = this.attr("lineDashOffset");
+>>>>>>> d9218a8b1dd868b1638e8e98360cc4d4c87d7dcc
     ctx.beginPath();
 
     ctx.arc(outerRadius, outerRadius, outerRadius, startAngle, endAngle, false);
