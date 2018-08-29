@@ -24,7 +24,7 @@ class ArcAttr extends Shape.Attr {
       angel: 0,
       anticlockwise: false,
       color: '#000',
-      lineWidth: 1,
+      lineWidth: 1
     });
   }
 
@@ -74,7 +74,7 @@ class Arc extends Shape {
   }
 
   render(t, ctx) {
-    if(this.attr('center')) {
+    if (this.attr('center')) {
       const [cx, cy] = this.attr('center');
       const [sx, sy] = this.attr('startPoint');
       const radius = getDist([cx, cy], [sx, sy]);

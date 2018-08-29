@@ -1,7 +1,7 @@
 import {utils} from 'sprite-core';
 import Shape from '../shape';
 
-const {attr, parseColorString, findColor} = utils;
+const {attr, flow, parseColorString, findColor} = utils;
 
 class EllipseSectorAttr extends Shape.Attr {
   constructor(subject) {
@@ -14,7 +14,7 @@ class EllipseSectorAttr extends Shape.Attr {
       color: 'rgba(0,0,0,1)',
       fillColor: 'rgba(0, 0, 0, 1)',
       lineWidth: 1,
-      anticlockwise: false,
+      anticlockwise: false
     });
   }
 
@@ -94,21 +94,23 @@ class EllipseSector extends Shape {
     return [0, 0, 2 * this.radiuses[0], 2 * this.radiuses[1]];
   }
 
+  @flow
   get contentSize() {
     const bounds = this.lineBoundings;
     const lw = this.attr('lineWidth');
     let [width, height] = this.attr('size');
 
-    if(width === '') {
+    if (width === '') {
       width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
     }
-    if(height === '') {
+    if (height === '') {
       height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
     }
 
     return [width, height].map(Math.ceil);
   }
 
+  @flow
   get originalRect() {
     const bounds = this.lineBoundings;
     const lw = this.attr('lineWidth');
@@ -138,11 +140,11 @@ class EllipseSector extends Shape {
     ctx.beginPath();
 
     // 绘制椭圆扇形
-    if(this.endAngle - this.startAngle < Math.PI * 2) {
+    if (this.endAngle - this.startAngle < Math.PI * 2) {
       ctx.moveTo(rx, ry);
     }
     // 当可以直接使用ellipse接口的时候
-    if(ctx.ellipse) {
+    if (ctx.ellipse) {
       ctx.setLineDash(this.attr('lineDash'));
       ctx.lineDashOffset = this.attr('lineDashOffset');
 
@@ -156,7 +158,7 @@ class EllipseSector extends Shape {
         this.endAngle,
         this.attr('anticlockwise')
       );
-    } else if(this.endAngle - this.startAngle >= Math.PI * 2) {
+    } else if (this.endAngle - this.startAngle >= Math.PI * 2) {
       BezierEllipse2(ctx, rx, ry, rx, ry);
     } else {
       throw new Error(

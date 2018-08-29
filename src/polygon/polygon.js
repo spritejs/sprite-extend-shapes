@@ -1,7 +1,7 @@
 import {utils} from 'sprite-core';
 import Shape from '../shape';
 
-const {attr, parseColorString, findColor} = utils;
+const {attr, flow, parseColorString, findColor} = utils;
 
 class PolygonAttr extends Shape.Attr {
   constructor(subject) {
@@ -10,7 +10,7 @@ class PolygonAttr extends Shape.Attr {
       points: [],
       color: 'rgba(0,0,0,1)',
       fillColor: 'rgba(0, 0, 0, 1)',
-      lineWidth: 1,
+      lineWidth: 1
     });
   }
 
@@ -56,21 +56,23 @@ class Polygon extends Shape {
     return bounds;
   }
 
+  @flow
   get contentSize() {
     const bounds = this.lineBoundings;
     const lw = this.attr('lineWidth');
     let [width, height] = this.attr('size');
 
-    if(width === '') {
+    if (width === '') {
       width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
     }
-    if(height === '') {
+    if (height === '') {
       height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
     }
 
     return [width, height].map(Math.ceil);
   }
 
+  @flow
   get originalRect() {
     const bounds = this.lineBoundings;
     const lw = this.attr('lineWidth');
@@ -89,7 +91,7 @@ class Polygon extends Shape {
   render(t, drawingContext) {
     super.render(t, drawingContext);
 
-    if(this.points.length) {
+    if (this.points.length) {
       const bounds = this.lineBoundings;
       const lw = this.attr('lineWidth');
       drawingContext.translate(
@@ -104,7 +106,7 @@ class Polygon extends Shape {
       drawingContext.lineDashOffset = this.attr('lineDashOffset');
       drawingContext.beginPath();
       this.points.forEach((point, i) => {
-        if(i === 0) {
+        if (i === 0) {
           drawingContext.moveTo(...point);
         } else {
           drawingContext.lineTo(...point);

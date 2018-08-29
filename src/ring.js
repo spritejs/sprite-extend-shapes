@@ -1,7 +1,7 @@
 import {utils} from 'sprite-core';
 import Shape from './shape';
 
-const {attr, parseColorString, findColor} = utils;
+const {attr, flow, parseColorString, findColor} = utils;
 
 class RingAttr extends Shape.Attr {
   constructor(subject) {
@@ -12,7 +12,7 @@ class RingAttr extends Shape.Attr {
       startAngle: 0,
       endAngle: 360,
       color: 'rgba(0,0,0,1)',
-      fillColor: 'rgba(0, 0, 0, 1)',
+      fillColor: 'rgba(0, 0, 0, 1)'
     });
   }
 
@@ -68,21 +68,23 @@ class Ring extends Shape {
     return this.attr('endAngle');
   }
 
+  @flow
   get contentSize() {
     const bounds = this.lineBoundings;
     const lw = this.attr('lineWidth');
     let [width, height] = this.attr('size');
 
-    if(width === '') {
+    if (width === '') {
       width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
     }
-    if(height === '') {
+    if (height === '') {
       height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
     }
 
     return [width, height].map(Math.ceil);
   }
 
+  @flow
   get originalRect() {
     const bounds = this.lineBoundings;
     const lw = this.attr('lineWidth');
@@ -126,7 +128,7 @@ class Ring extends Shape {
     ctx.beginPath();
 
     ctx.arc(outerRadius, outerRadius, outerRadius, startAngle, endAngle, false);
-    if(endAngle - startAngle === Math.PI * 2) {
+    if (endAngle - startAngle === Math.PI * 2) {
       ctx.moveTo(outerRadius + innerRadius, outerRadius);
     }
     ctx.arc(outerRadius, outerRadius, innerRadius, endAngle, startAngle, true);
