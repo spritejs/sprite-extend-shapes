@@ -57,6 +57,6 @@ export default function install({use, utils, registerNodeType}) {
       return drawingContext;
     }
   }
-
+  registerNodeType('ellipsearc', EllipseArc, false);
   return {EllipseArc};
 }
