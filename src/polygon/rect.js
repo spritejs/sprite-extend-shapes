@@ -9,17 +9,21 @@ export default function install({use, utils, registerNodeType}) {
       super(subject);
       this.setDefault({
         angle: '90',
-        sides: [10, 10],
+        sides: [10, 10]
       });
     }
 
     @attr
     set angle(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('angle', val);
     }
 
     @attr
     set sides(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('sides', val);
     }
   }

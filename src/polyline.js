@@ -12,33 +12,39 @@ export default function install({use, utils, registerNodeType}) {
         color: 'rgba(0,0,0,1)',
         lineWidth: 1,
         lineCap: 'round',
-        lineJoin: 'round',
+        lineJoin: 'round'
       });
     }
 
     @attr
     set points(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('points', val);
     }
 
     @attr
     set color(val) {
       val = parseColorString(val);
+      this.clearCache();
       this.set('color', val);
     }
 
     @attr
     set lineWidth(val) {
+      this.clearCache();
       this.set('lineWidth', val);
     }
 
     @attr
     set lineCap(val) {
+      this.clearCache();
       this.set('lineCap', val);
     }
 
     @attr
     set lineJoin(val) {
+      this.clearCache();
       this.set('lineJoin', val);
     }
   }
@@ -56,7 +62,7 @@ export default function install({use, utils, registerNodeType}) {
 
     render(t, drawingContext) {
       super.render(t, drawingContext);
-      if(this.points) {
+      if (this.points) {
         drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
         drawingContext.lineJoin = this.attr('lineJoin');
         drawingContext.lineCap = this.attr('lineCap');
@@ -66,7 +72,7 @@ export default function install({use, utils, registerNodeType}) {
         drawingContext.beginPath();
 
         this.points.forEach((point, i) => {
-          if(i === 0) {
+          if (i === 0) {
             drawingContext.moveTo(...point);
           } else {
             drawingContext.lineTo(...point);

@@ -13,38 +13,46 @@ export default function install({use, utils, registerNodeType}) {
         color: 'rgba(0,0,0,1)',
         lineWidth: 1,
         lineCap: 'round',
-        lineJoin: 'round',
+        lineJoin: 'round'
       });
     }
 
     @attr
     set points(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('points', val);
     }
 
     @attr
     set startPoint(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('startPoint', val);
     }
 
     @attr
     set color(val) {
       val = parseColorString(val);
+      this.clearCache();
       this.set('color', val);
     }
 
     @attr
     set lineWidth(val) {
+      this.clearCache();
       this.set('lineWidth', val);
     }
 
     @attr
     set lineCap(val) {
+      this.clearCache();
       this.set('lineCap', val);
     }
 
     @attr
     set lineJoin(val) {
+      this.clearCache();
       this.set('lineJoin', val);
     }
   }
@@ -73,7 +81,7 @@ export default function install({use, utils, registerNodeType}) {
       drawingContext.lineDashOffset = this.attr('lineDashOffset');
 
       drawingContext.moveTo(...startPoint);
-      points.forEach((point) => {
+      points.forEach(point => {
         const [cp1x, cp1y, cp2x, cp2y, x, y] = point;
         drawingContext.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
       });

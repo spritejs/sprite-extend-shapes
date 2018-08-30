@@ -13,41 +13,51 @@ export default function install({use, utils, registerNodeType}) {
         startAngle: 0,
         endAngle: 360,
         color: 'rgba(0,0,0,1)',
-        fillColor: 'rgba(0, 0, 0, 1)',
+        fillColor: 'rgba(0, 0, 0, 1)'
       });
     }
 
     // 内圆半径
     @attr
     set innerRadius(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('innerRadius', val);
     }
 
     // 外圆半径
     @attr
     set outerRadius(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('outerRadius', val);
     }
 
     @attr
     set startAngle(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('startAngle', val);
     }
 
     @attr
     set endAngle(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('endAngle', val);
     }
 
     @attr
     set color(val) {
       val = parseColorString(val);
+      this.clearCache();
       this.set('color', val);
     }
 
     @attr
     set fillColor(val) {
       val = parseColorString(val);
+      this.clearCache();
       this.set('fillColor', val);
     }
   }
@@ -57,7 +67,10 @@ export default function install({use, utils, registerNodeType}) {
 
     // 边界依赖于最大圆
     get lineBoundings() {
-      const radius = Math.max(this.attr('innerRadius'), this.attr('outerRadius'));
+      const radius = Math.max(
+        this.attr('innerRadius'),
+        this.attr('outerRadius')
+      );
       return [0, 0, 2 * radius, 2 * radius];
     }
 
@@ -75,10 +88,10 @@ export default function install({use, utils, registerNodeType}) {
       const lw = this.attr('lineWidth');
       let [width, height] = this.attr('size');
 
-      if(width === '') {
+      if (width === '') {
         width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
       }
-      if(height === '') {
+      if (height === '') {
         height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
       }
 
@@ -128,11 +141,25 @@ export default function install({use, utils, registerNodeType}) {
       ctx.lineDashOffset = this.attr('lineDashOffset');
       ctx.beginPath();
 
-      ctx.arc(outerRadius, outerRadius, outerRadius, startAngle, endAngle, false);
-      if(endAngle - startAngle === Math.PI * 2) {
+      ctx.arc(
+        outerRadius,
+        outerRadius,
+        outerRadius,
+        startAngle,
+        endAngle,
+        false
+      );
+      if (endAngle - startAngle === Math.PI * 2) {
         ctx.moveTo(outerRadius + innerRadius, outerRadius);
       }
-      ctx.arc(outerRadius, outerRadius, innerRadius, endAngle, startAngle, true);
+      ctx.arc(
+        outerRadius,
+        outerRadius,
+        innerRadius,
+        endAngle,
+        startAngle,
+        true
+      );
       ctx.closePath();
       ctx.stroke();
       ctx.fill();

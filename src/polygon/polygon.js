@@ -11,29 +11,34 @@ export default function install({use, utils, registerNodeType}) {
         points: [],
         color: 'rgba(0,0,0,1)',
         fillColor: 'rgba(0, 0, 0, 1)',
-        lineWidth: 1,
+        lineWidth: 1
       });
     }
 
     @attr
     set points(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('points', val);
     }
 
     @attr
     set color(val) {
       val = parseColorString(val);
+      this.clearCache();
       this.set('color', val);
     }
 
     @attr
     set lineWidth(val) {
+      this.clearCache();
       this.set('lineWidth', val);
     }
 
     @attr
     set fillColor(val) {
       val = parseColorString(val);
+      this.clearCache();
       this.set('fillColor', val);
     }
   }
@@ -63,10 +68,10 @@ export default function install({use, utils, registerNodeType}) {
       const lw = this.attr('lineWidth');
       let [width, height] = this.attr('size');
 
-      if(width === '') {
+      if (width === '') {
         width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
       }
-      if(height === '') {
+      if (height === '') {
         height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
       }
 
@@ -92,7 +97,7 @@ export default function install({use, utils, registerNodeType}) {
     render(t, drawingContext) {
       super.render(t, drawingContext);
 
-      if(this.points.length) {
+      if (this.points.length) {
         const bounds = this.lineBoundings;
         const lw = this.attr('lineWidth');
         drawingContext.translate(
@@ -107,7 +112,7 @@ export default function install({use, utils, registerNodeType}) {
         drawingContext.lineDashOffset = this.attr('lineDashOffset');
         drawingContext.beginPath();
         this.points.forEach((point, i) => {
-          if(i === 0) {
+          if (i === 0) {
             drawingContext.moveTo(...point);
           } else {
             drawingContext.lineTo(...point);

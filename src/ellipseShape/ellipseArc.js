@@ -36,7 +36,7 @@ export default function install({use, utils, registerNodeType}) {
       drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
       drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
 
-      if(drawingContext.ellipse) {
+      if (drawingContext.ellipse) {
         drawingContext.beginPath();
         drawingContext.ellipse(
           x,

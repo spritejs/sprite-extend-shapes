@@ -8,12 +8,14 @@ export default function install({use, utils, registerNodeType}) {
     constructor(subject) {
       super(subject);
       this.setDefault({
-        radius: 10,
+        radius: 10
       });
     }
 
     @attr
     set radius(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('radius', val);
     }
   }

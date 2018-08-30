@@ -25,31 +25,39 @@ export default function install({use, utils, registerNodeType}) {
         angel: 0,
         anticlockwise: false,
         color: '#000',
-        lineWidth: 1,
+        lineWidth: 1
       });
     }
 
     // 圆弧的圆心
     @attr
     set center(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('center', val);
     }
 
     // 圆弧起始点
     @attr
     set startPoint(point) {
+      this.clearCache();
+      this.clearFlow();
       this.set('startPoint', point);
     }
 
     // 旋转角度
     @attr
     set angle(angle) {
+      this.clearCache();
+      this.clearFlow();
       this.set('angle', angle);
     }
 
     // 旋转方向
     @attr
     set anticlockwise(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('anticlockwise', val);
     }
 
@@ -57,12 +65,14 @@ export default function install({use, utils, registerNodeType}) {
     @attr
     set color(val) {
       val = parseColorString(val);
+      this.clearCache();
       this.set('color', val);
     }
 
     // 线宽
     @attr
     set lineWidth(val) {
+      this.clearCache();
       this.set('lineWidth', val);
     }
   }
@@ -75,14 +85,16 @@ export default function install({use, utils, registerNodeType}) {
     }
 
     render(t, ctx) {
-      if(this.attr('center')) {
+      if (this.attr('center')) {
         const [cx, cy] = this.attr('center');
         const [sx, sy] = this.attr('startPoint');
         const radius = getDist([cx, cy], [sx, sy]);
         const anticlockwise = this.attr('anticlockwise');
         const angle = this.attr('angle');
         const startAngle = getRotationAngle([cx, cy], [sx, sy]);
-        const endAngle = anticlockwise ? startAngle - angle : startAngle + angle;
+        const endAngle = anticlockwise
+          ? startAngle - angle
+          : startAngle + angle;
 
         ctx.lineWidth = this.attr('lineWidth');
         ctx.strokeStyle = findColor(ctx, this, 'color');

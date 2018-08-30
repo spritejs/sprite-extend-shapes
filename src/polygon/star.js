@@ -8,23 +8,29 @@ export default function install({use, utils, registerNodeType}) {
     constructor(subject) {
       super(subject);
       this.setDefault({
-        angles: 5,
+        angles: 5
       });
     }
 
     @attr
     set angles(num) {
+      this.clearCache();
+      this.clearFlow();
       this.set('angles', num);
     }
 
     @attr
     set radius(val) {
       // 圆半径
+      this.clearCache();
+      this.clearFlow();
       this.set('radius', val);
     }
 
     @attr
     set innerRadius(val) {
+      this.clearCache();
+      this.clearFlow();
       this.set('innerRadius', val);
     }
   }
@@ -33,12 +39,12 @@ export default function install({use, utils, registerNodeType}) {
     const points = [];
     const pointsLength = angles * 2;
 
-    return function (outerRadius, innerRadius) {
+    return function(outerRadius, innerRadius) {
       const offsetX = outerRadius;
       const radAngle = -Math.PI / 2;
       const radAlpha = (Math.PI * 2) / angles / 2;
 
-      for(let i = 1; i <= pointsLength; i++) {
+      for (let i = 1; i <= pointsLength; i++) {
         const rad = radAlpha * i + radAngle;
         const len = i % 2 ? innerRadius : outerRadius;
         const xPos = offsetX + Math.cos(rad) * len;
