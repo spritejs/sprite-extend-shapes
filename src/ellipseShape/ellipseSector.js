@@ -11,11 +11,11 @@ export default function install({use, utils, registerNodeType}) {
         radiusX: 10,
         radiusY: 20,
         startAngle: 0,
-        endAngle: 360,
+        endAngle: 0,
         color: 'rgba(0,0,0,1)',
         fillColor: 'rgba(0, 0, 0, 1)',
         lineWidth: 1,
-        anticlockwise: false,
+        anticlockwise: false
       });
     }
 
@@ -101,10 +101,10 @@ export default function install({use, utils, registerNodeType}) {
       const lw = this.attr('lineWidth');
       let [width, height] = this.attr('size');
 
-      if(width === '') {
+      if (width === '') {
         width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
       }
-      if(height === '') {
+      if (height === '') {
         height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
       }
 
@@ -141,11 +141,11 @@ export default function install({use, utils, registerNodeType}) {
       ctx.beginPath();
 
       // 绘制椭圆扇形
-      if(this.endAngle - this.startAngle < Math.PI * 2) {
+      if (this.endAngle - this.startAngle < Math.PI * 2) {
         ctx.moveTo(rx, ry);
       }
       // 当可以直接使用ellipse接口的时候
-      if(ctx.ellipse) {
+      if (ctx.ellipse) {
         ctx.setLineDash(this.attr('lineDash'));
         ctx.lineDashOffset = this.attr('lineDashOffset');
 
@@ -159,10 +159,12 @@ export default function install({use, utils, registerNodeType}) {
           this.endAngle,
           this.attr('anticlockwise')
         );
-      } else if(this.endAngle - this.startAngle >= Math.PI * 2) {
+      } else if (this.endAngle - this.startAngle >= Math.PI * 2) {
         BezierEllipse2(ctx, rx, ry, rx, ry);
       } else {
-        throw new Error('you can not draw a ellipseSector when ctx.ellipse is not available!');
+        throw new Error(
+          'you can not draw a ellipseSector when ctx.ellipse is not available!'
+        );
       }
 
       ctx.closePath();
