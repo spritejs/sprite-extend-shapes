@@ -22,22 +22,26 @@ export default function install({use, utils, registerNodeType}) {
     // 短轴半径
     @attr
     set radiusX(val) {
+      this.clearFlow();
       this.set('radiusX', val);
     }
 
     // 长轴半径
     @attr
     set radiusY(val) {
+      this.clearFlow();
       this.set('radiusY', val);
     }
 
     @attr
     set startAngle(val) {
+      this.clearFlow();
       this.set('startAngle', val);
     }
 
     @attr
     set endAngle(val) {
+      this.clearFlow();
       this.set('endAngle', val);
     }
 
@@ -49,6 +53,7 @@ export default function install({use, utils, registerNodeType}) {
 
     @attr
     set lineWidth(val) {
+      this.clearFlow();
       this.set('lineWidth', val);
     }
 
@@ -129,6 +134,7 @@ export default function install({use, utils, registerNodeType}) {
 
     render(t, ctx) {
       super.render(t, ctx);
+
       const [rx, ry] = this.radiuses;
       const bounds = this.lineBoundings;
       const lw = this.attr('lineWidth');
