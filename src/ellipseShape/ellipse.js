@@ -1,13 +1,17 @@
-import EllipseSector from './ellipseSector';
+import EllipseSectorPlugin from './ellipseSector';
 
-class Ellipse extends EllipseSector {
-  get startAngle() {
-    return 0;
+export default function install({use, utils, registerNodeType}) {
+  const {EllipseSector} = use(EllipseSectorPlugin, null, false);
+  class Ellipse extends EllipseSector {
+    get startAngle() {
+      return 0;
+    }
+
+    get endAngle() {
+      return 2 * Math.PI;
+    }
   }
 
-  get endAngle() {
-    return 2 * Math.PI;
-  }
+  registerNodeType('ellipse', Ellipse, false);
+  return {Ellipse};
 }
-
-export default Ellipse;

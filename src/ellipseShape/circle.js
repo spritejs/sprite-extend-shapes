@@ -1,28 +1,32 @@
-import {utils} from 'sprite-core';
-import Ellipse from './ellipse';
-const {attr} = utils;
+import EllipsePlugin from './ellipse';
 
-class CircleAttr extends Ellipse.Attr {
-  constructor(subject) {
-    super(subject);
-    this.setDefault({
-      radius: 10,
-    });
+export default function install({use, utils, registerNodeType}) {
+  const {attr} = utils;
+  const {Ellipse} = use(EllipsePlugin, null, false);
+
+  class CircleAttr extends Ellipse.Attr {
+    constructor(subject) {
+      super(subject);
+      this.setDefault({
+        radius: 10,
+      });
+    }
+
+    @attr
+    set radius(val) {
+      this.set('radius', val);
+    }
   }
 
-  @attr
-  set radius(val) {
-    this.set('radius', val);
+  class Circle extends Ellipse {
+    static Attr = CircleAttr;
+
+    get radiuses() {
+      const radius = this.attr('radius');
+      return [radius, radius];
+    }
   }
+
+  registerNodeType('circle', Circle, false);
+  return {Circle};
 }
-
-class Circle extends Ellipse {
-  static Attr = CircleAttr;
-
-  get radiuses() {
-    const radius = this.attr('radius');
-    return [radius, radius];
-  }
-}
-
-export default Circle;

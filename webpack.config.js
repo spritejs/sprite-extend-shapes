@@ -22,7 +22,7 @@ module.exports = function (env = {}) {
       path: path.resolve(__dirname, 'dist'),
       filename,
       publicPath: '/js/',
-      library: ['spritejs', 'shapes'],
+      library: ['spriteShapes'],
       libraryTarget: 'umd',
     },
     // resolve: {

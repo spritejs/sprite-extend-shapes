@@ -1,34 +1,35 @@
-import {BaseSprite, utils} from 'sprite-core';
-const {attr} = utils;
+export default function install({BaseSprite, utils}) {
+  const {attr} = utils;
 
-class ShapeAttr extends BaseSprite.Attr {
-  constructor(subject) {
-    super(subject);
-    this.setDefault({
-      lineWidth: 1,
-      lineDash: [0, 0],
-      lineDashOffset: 2,
-    });
+  class ShapeAttr extends BaseSprite.Attr {
+    constructor(subject) {
+      super(subject);
+      this.setDefault({
+        lineWidth: 1,
+        lineDash: [0, 0],
+        lineDashOffset: 2,
+      });
+    }
+
+    @attr
+    set lineWidth(val) {
+      this.set('lineWidth', val);
+    }
+
+    @attr
+    set lineDash(val) {
+      this.attr('lineDash', val);
+    }
+
+    @attr
+    set lineDashOffset(val) {
+      this.attr('lineDashOffset', val);
+    }
   }
 
-  @attr
-  set lineWidth(val) {
-    this.set('lineWidth', val);
+  class Shape extends BaseSprite {
+    static Attr = ShapeAttr;
   }
 
-  @attr
-  set lineDash(val) {
-    this.attr('lineDash', val);
-  }
-
-  @attr
-  set lineDashOffset(val) {
-    this.attr('lineDashOffset', val);
-  }
+  return {Shape};
 }
-
-class Shape extends BaseSprite {
-  static Attr = ShapeAttr;
-}
-
-export default Shape;

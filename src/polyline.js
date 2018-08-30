@@ -1,79 +1,82 @@
-import {utils} from 'sprite-core';
-import Shape from './shape';
-const {attr, parseColorString, findColor} = utils;
+import ShapePlugin from './shape';
 
-class PolylineAttr extends Shape.Attr {
-  constructor(subject) {
-    super(subject);
-    this.setDefault({
-      points: null,
-      color: 'rgba(0,0,0,1)',
-      lineWidth: 1,
-      lineCap: 'round',
-      lineJoin: 'round',
-    });
-  }
+export default function install({use, utils, registerNodeType}) {
+  const {attr, parseColorString, findColor} = utils;
+  const {Shape} = use(ShapePlugin, null, false);
 
-  @attr
-  set points(val) {
-    this.set('points', val);
-  }
-
-  @attr
-  set color(val) {
-    val = parseColorString(val);
-    this.set('color', val);
-  }
-
-  @attr
-  set lineWidth(val) {
-    this.set('lineWidth', val);
-  }
-
-  @attr
-  set lineCap(val) {
-    this.set('lineCap', val);
-  }
-
-  @attr
-  set lineJoin(val) {
-    this.set('lineJoin', val);
-  }
-}
-
-class Polyline extends Shape {
-  static Attr = PolylineAttr;
-
-  get points() {
-    return this.attr('points');
-  }
-
-  get isVirtual() {
-    return true;
-  }
-
-  render(t, drawingContext) {
-    super.render(t, drawingContext);
-    if(this.points) {
-      drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
-      drawingContext.lineJoin = this.attr('lineJoin');
-      drawingContext.lineCap = this.attr('lineCap');
-      drawingContext.lineWidth = this.attr('lineWidth');
-      drawingContext.setLineDash(this.attr('lineDash'));
-      drawingContext.lineDashOffset = this.attr('lineDashOffset');
-      drawingContext.beginPath();
-
-      this.points.forEach((point, i) => {
-        if(i === 0) {
-          drawingContext.moveTo(...point);
-        } else {
-          drawingContext.lineTo(...point);
-        }
+  class PolylineAttr extends Shape.Attr {
+    constructor(subject) {
+      super(subject);
+      this.setDefault({
+        points: null,
+        color: 'rgba(0,0,0,1)',
+        lineWidth: 1,
+        lineCap: 'round',
+        lineJoin: 'round',
       });
-      drawingContext.stroke();
     }
-    return drawingContext;
-  }
-}
 
-export default Polyline;
+    @attr
+    set points(val) {
+      this.set('points', val);
+    }
+
+    @attr
+    set color(val) {
+      val = parseColorString(val);
+      this.set('color', val);
+    }
+
+    @attr
+    set lineWidth(val) {
+      this.set('lineWidth', val);
+    }
+
+    @attr
+    set lineCap(val) {
+      this.set('lineCap', val);
+    }
+
+    @attr
+    set lineJoin(val) {
+      this.set('lineJoin', val);
+    }
+  }
+
+  class Polyline extends Shape {
+    static Attr = PolylineAttr;
+
+    get points() {
+      return this.attr('points');
+    }
+
+    get isVirtual() {
+      return true;
+    }
+
+    render(t, drawingContext) {
+      super.render(t, drawingContext);
+      if(this.points) {
+        drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
+        drawingContext.lineJoin = this.attr('lineJoin');
+        drawingContext.lineCap = this.attr('lineCap');
+        drawingContext.lineWidth = this.attr('lineWidth');
+        drawingContext.setLineDash(this.attr('lineDash'));
+        drawingContext.lineDashOffset = this.attr('lineDashOffset');
+        drawingContext.beginPath();
+
+        this.points.forEach((point, i) => {
+          if(i === 0) {
+            drawingContext.moveTo(...point);
+          } else {
+            drawingContext.lineTo(...point);
+          }
+        });
+        drawingContext.stroke();
+      }
+      return drawingContext;
+    }
+  }
+  registerNodeType('ployline', Polyline, false);
+  return {Polyline};
+}
