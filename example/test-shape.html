@@ -41,15 +41,15 @@
       Polycurve,
     } = spritejs;
 
-    const layer = new Layer({context});
+    const layer = new Layer({ context });
     const polyline = new Polyline();
     polyline.attr({
       pos: [100, 100],
       color: {
         vector: [0, 0, 150, 150],
         colors: [
-          {offset: 0, color: 'red'},
-          {offset: 1, color: 'green'},
+          { offset: 0, color: 'red' },
+          { offset: 1, color: 'green' },
         ],
       },
       lineWidth: 10,
@@ -64,8 +64,8 @@
       color: {
         vector: [0, 0, 150, 150],
         colors: [
-          {offset: 0, color: 'red'},
-          {offset: 1, color: 'green'},
+          { offset: 0, color: 'red' },
+          { offset: 1, color: 'green' },
         ],
       },
       fillColor: 'yellow',
@@ -149,20 +149,74 @@
     const sector = new Sector();
     sector.attr({
       pos: [280, 400],
+      center: [0, 0],
       startAngle: 0,
-      endAngle: Math.PI,
+      endAngle: Math.PI * .3,
       radius: 30,
-      lineWidth: 5,
+      lineWidth: 1,
       bgcolor: 'yellow',
       color: 'red',
     });
     layer.append(sector);
-    
+
+    const sector2 = new Sector();
+    sector2.attr({
+      pos: [280, 400],
+      center: [0, 0],
+      startAngle: Math.PI * 0.3,
+      endAngle: Math.PI * 0.9,
+      radius: 50,
+      lineWidth: 1,
+      // bgcolor: 'green',
+      color: 'red',
+    });
+    layer.append(sector2);
+
+    const sector3 = new Sector();
+    sector3.attr({
+      pos: [280, 400],
+      center: [0, 0],
+      startAngle: Math.PI * 0.9,
+      endAngle: Math.PI * 1.3,
+      radius: 60,
+      lineWidth: 1,
+      // bgcolor: 'green',
+      color: 'red',
+    });
+    layer.append(sector3);
+
+
+    const sector4 = new Sector();
+    sector4.attr({
+      pos: [280, 400],
+      center: [0, 0],
+      startAngle: Math.PI * 1.3,
+      endAngle: Math.PI * 1.6,
+      radius: 70,
+      lineWidth: 1,
+      // bgcolor: 'green',
+      color: 'red',
+    });
+    layer.append(sector4);
+
+    const sector5 = new Sector();
+    sector5.attr({
+      pos: [280, 400],
+      center: [0, 0],
+      startAngle: Math.PI * 1.6,
+      endAngle: Math.PI * 2,
+      radius: 70,
+      lineWidth: 1,
+      // bgcolor: 'green',
+      color: 'red',
+    });
+    layer.append(sector5);
+
     const circle = new Circle();
     circle.attr({
       pos: [360, 400],
       radius: 30,
-      lineWidth: 5,
+      lineWidth: 1,
       color: 'red',
       bgcolor: '#eee',
       anticlockwise: true,
@@ -178,8 +232,8 @@
       fillColor: {
         vector: [0, 0, 150, 150],
         colors: [
-          {offset: 0, color: 'red'},
-          {offset: 1, color: 'green'},
+          { offset: 0, color: 'red' },
+          { offset: 1, color: 'green' },
         ],
       },
       lineWidth: 4,

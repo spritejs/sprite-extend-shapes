@@ -74,6 +74,12 @@ export default function install({use, utils, registerNodeType}) {
       this.clearCache();
       this.set('anticlockwise', val);
     }
+
+    @attr
+    set center(val) {
+      this.clearCache();
+      this.set('center', val);
+    }
   }
 
   function BezierEllipse2(ctx, x, y, a, b) {
@@ -101,6 +107,10 @@ export default function install({use, utils, registerNodeType}) {
 
     get endAngle() {
       return this.attr('endAngle');
+    }
+
+    get center() {
+      return this.attr('center');
     }
 
     get lineBoundings() {
@@ -142,7 +152,16 @@ export default function install({use, utils, registerNodeType}) {
     render(t, ctx) {
       super.render(t, ctx);
 
+      let x, y;
       const [rx, ry] = this.radiuses;
+
+      if (this.center && this.center.length > 0) {
+        [x, y] = this.center;
+      } else {
+        x = rx;
+        y = ry;
+      }
+
       const bounds = this.lineBoundings;
       const lw = this.attr('lineWidth');
       ctx.translate(-Math.min(0, bounds[0]) + lw, -Math.min(0, bounds[1]) + lw);
@@ -155,7 +174,7 @@ export default function install({use, utils, registerNodeType}) {
 
       // 绘制椭圆扇形
       if (this.endAngle - this.startAngle < Math.PI * 2) {
-        ctx.moveTo(rx, ry);
+        ctx.moveTo(x, y);
       }
       // 当可以直接使用ellipse接口的时候
       if (ctx.ellipse) {
@@ -163,8 +182,8 @@ export default function install({use, utils, registerNodeType}) {
         ctx.lineDashOffset = this.attr('lineDashOffset');
 
         ctx.ellipse(
-          rx,
-          ry,
+          x,
+          y,
           rx,
           ry,
           0,
