@@ -17,7 +17,7 @@ import Circle from './ellipseShape/circle';
 import Ring from './ring';
 
 // auto use
-if(typeof window !== 'undefined' && window.spritejs) {
+if (typeof window !== 'undefined' && window.spritejs) {
   window.spritejs.use(install);
 }
 
@@ -36,8 +36,25 @@ export function install(spritejs) {
     EllipseSector,
     EllipseArc,
     Circle,
-    Ring,
+    Ring
   ].reduce((pkg, Node) => {
     return Object.assign(pkg, spritejs.use(Node, null, false));
   }, {});
 }
+
+export const shapes = [
+  Shape,
+  Polyline,
+  Polycurve,
+  Polygon,
+  Triangle,
+  Rect,
+  Star,
+  Arc,
+  Sector,
+  Ellipse,
+  EllipseSector,
+  EllipseArc,
+  Circle,
+  Ring
+];

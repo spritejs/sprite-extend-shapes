@@ -30,5 +30,6 @@ export default function install({use, utils, registerNodeType}) {
   }
 
   registerNodeType('circle', Circle, false);
+
   return {Circle};
 }

@@ -13,7 +13,7 @@ export default function install({use, utils, registerNodeType}) {
         startAngle: 0,
         endAngle: 0,
         color: 'rgba(0,0,0,1)',
-        fillColor: 'rgba(0, 0, 0, 1)',
+        fillColor: null,
         lineWidth: 1,
         anticlockwise: false
       });
@@ -82,18 +82,6 @@ export default function install({use, utils, registerNodeType}) {
     }
   }
 
-  function BezierEllipse2(ctx, x, y, a, b) {
-    const k = 0.5522848;
-    const ox = a * k; // 水平控制点偏移量
-    const oy = b * k; // 垂直控制点偏移量</p> <p> ctx.beginPath();
-    // 从椭圆的左端点开始顺时针绘制四条三次贝塞尔曲线
-    ctx.moveTo(x - a, y);
-    ctx.bezierCurveTo(x - a, y - oy, x - ox, y - b, x, y - b);
-    ctx.bezierCurveTo(x + ox, y - b, x + a, y - oy, x + a, y);
-    ctx.bezierCurveTo(x + a, y + oy, x + ox, y + b, x, y + b);
-    ctx.bezierCurveTo(x - ox, y + b, x - a, y + oy, x - a, y);
-  }
-
   class EllipseSector extends Shape {
     static Attr = EllipseSectorAttr;
 
@@ -121,7 +109,7 @@ export default function install({use, utils, registerNodeType}) {
     get contentSize() {
       const bounds = this.lineBoundings;
       const lw = this.attr('lineWidth');
-      let [width, height] = this.attr('size');
+      let [width, height] = [...this.attr('size')];
 
       if (width === '') {
         width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
@@ -135,22 +123,22 @@ export default function install({use, utils, registerNodeType}) {
 
     @flow
     get originalRect() {
-      const bounds = this.lineBoundings;
-      const lw = this.attr('lineWidth');
-      const [width, height] = this.offsetSize;
-      const [anchorX, anchorY] = this.attr('anchor');
-
-      const rect = [0, 0, width, height];
-      const offsetX = Math.min(0, bounds[0]);
-      const offsetY = Math.min(0, bounds[1]);
-
-      rect[0] = offsetX - lw - anchorX * (width + offsetX - 2 * lw);
-      rect[1] = offsetY - lw - anchorY * (height + offsetY - 2 * lw);
+      const radius = this.attr('radius');
+      const [x, y, w, h] = super.originalRect;
+      const rect = [x - radius, y - radius, w, h];
       return rect;
     }
 
+    pointCollision(evt) {
+      if (super.pointCollision(evt)) {
+        const {offsetX, offsetY} = evt;
+        return this.context.isPointInPath(this.path, offsetX, offsetY);
+      }
+    }
+
     render(t, ctx) {
-      super.render(t, ctx);
+      const bounds = this.lineBoundings;
+      const lw = this.attr('lineWidth');
 
       let x, y;
       const [rx, ry] = this.radiuses;
@@ -162,49 +150,42 @@ export default function install({use, utils, registerNodeType}) {
         y = ry;
       }
 
-      const bounds = this.lineBoundings;
-      const lw = this.attr('lineWidth');
-      ctx.translate(-Math.min(0, bounds[0]) + lw, -Math.min(0, bounds[1]) + lw);
+      const radius = this.attr('radius');
+      ctx.translate(radius, radius);
 
-      ctx.strokeStyle = findColor(ctx, this, 'color');
-      ctx.fillStyle = findColor(ctx, this, 'fillColor');
       ctx.miterLimit = 3;
       ctx.lineWidth = this.attr('lineWidth');
-      ctx.beginPath();
+      ctx.strokeStyle = findColor(ctx, this, 'color');
+      ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
-      // 绘制椭圆扇形
+      const path = new Path2D();
       if (this.endAngle - this.startAngle < Math.PI * 2) {
-        ctx.moveTo(x, y);
+        path.moveTo(x, y);
       }
-      // 当可以直接使用ellipse接口的时候
-      if (ctx.ellipse) {
-        ctx.setLineDash(this.attr('lineDash'));
-        ctx.lineDashOffset = this.attr('lineDashOffset');
+      path.ellipse(
+        x,
+        y,
+        rx,
+        ry,
+        0,
+        this.startAngle,
+        this.endAngle,
+        this.attr('anticlockwise')
+      );
+      path.closePath();
 
-        ctx.ellipse(
-          x,
-          y,
-          rx,
-          ry,
-          0,
-          this.startAngle,
-          this.endAngle,
-          this.attr('anticlockwise')
-        );
-      } else if (this.endAngle - this.startAngle >= Math.PI * 2) {
-        BezierEllipse2(ctx, rx, ry, rx, ry);
+      if (this.attr('fillColor')) {
+        ctx.fill(path);
       } else {
-        throw new Error(
-          'you can not draw a ellipseSector when ctx.ellipse is not available!'
-        );
+        ctx.stroke(path);
       }
 
-      ctx.closePath();
-      ctx.stroke();
-      ctx.fill();
+      this.path = path;
+
       return ctx;
     }
   }
+
   registerNodeType('ellipsesector', EllipseSector, false);
   return {EllipseSector};
 }
