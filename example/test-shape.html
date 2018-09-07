@@ -269,11 +269,14 @@
     })
 
     sector5.on('mouseenter', evt => {
+      // sector5.attr('radiusX', 120);
+      sector5.attr('radius', 120);
       sector5.attr('fillColor', 'yellow');
       evt.stopDispatch();
     });
 
     sector5.on('mouseleave', evt => {
+      sector5.attr('radius', 90);
       sector5.attr('fillColor', null);
       evt.stopDispatch();
     });
