@@ -167,7 +167,7 @@ export default function install({use, utils, registerNodeType}) {
         endAngle,
         false
       );
-      if (endAngle - startAngle === Math.PI * 2) {
+      if(endAngle - startAngle === Math.PI * 2) {
         ctx.moveTo(outerRadius + innerRadius, outerRadius);
       }
       ctx.arc(
@@ -185,6 +185,7 @@ export default function install({use, utils, registerNodeType}) {
     }
   }
 
+  registerNodeType('ring', Ring);
   return {Ring};
 }
 

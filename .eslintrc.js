@@ -6,4 +6,7 @@ module.exports = {
     'html',
   ],
   extends:  'eslint-config-sprite',
+  rules: {
+    'linebreak-style': 0
+  }
 }

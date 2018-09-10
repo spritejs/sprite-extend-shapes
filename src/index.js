@@ -36,7 +36,7 @@ export function install(spritejs) {
     EllipseSector,
     EllipseArc,
     Circle,
-    Ring
+    Ring,
   ].reduce((pkg, Node) => {
     return Object.assign(pkg, spritejs.use(Node, null, false));
   }, {});
@@ -56,5 +56,5 @@ export const shapes = [
   EllipseSector,
   EllipseArc,
   Circle,
-  Ring
+  Ring,
 ];

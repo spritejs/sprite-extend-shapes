@@ -1,9 +1,9 @@
+/* eslint-disable */
+import * as spritejs from 'spritejs';
 import {createCanvas} from 'canvas';
 import {Layer} from 'sprite-core';
 import * as sprite from '../src/index';
 import {compare} from './helpers';
-
-import * as spritejs from 'spritejs';
 
 const fs = require('fs');
 const path = require('path');
@@ -12,12 +12,10 @@ const drawCase = require('./helpers/drawcase');
 
 const casesDir = './cases';
 
-console.log(
-  fs
-    .readdirSync(path.resolve(__dirname, casesDir))
-    .map(file => require(`${casesDir}/${file}`).default(spritejs))
-);
-// .forEach(runTest);
+fs
+  .readdirSync(path.resolve(__dirname, casesDir))
+  .map(file => require(`${casesDir}/${file}`).default(spritejs))
+  .forEach(runTest);
 
 function runTest(obj) {
   const namespace = Object.keys(obj)[0];
