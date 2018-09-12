@@ -7,7 +7,7 @@ export default function install({BaseSprite, utils}) {
       this.setDefault({
         lineWidth: 1,
         lineDash: [0, 0],
-        lineDashOffset: 2
+        lineDashOffset: 2,
       });
     }
 

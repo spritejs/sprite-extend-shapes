@@ -62,7 +62,7 @@ export default function install({use, utils, registerNodeType}) {
 
     render(t, drawingContext) {
       super.render(t, drawingContext);
-      if (this.points) {
+      if(this.points) {
         drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
         drawingContext.lineJoin = this.attr('lineJoin');
         drawingContext.lineCap = this.attr('lineCap');
@@ -71,14 +71,18 @@ export default function install({use, utils, registerNodeType}) {
         drawingContext.lineDashOffset = this.attr('lineDashOffset');
         drawingContext.beginPath();
 
+        const path = new Path2D();
+
         this.points.forEach((point, i) => {
-          if (i === 0) {
-            drawingContext.moveTo(...point);
+          if(i === 0) {
+            path.moveTo(...point);
           } else {
-            drawingContext.lineTo(...point);
+            path.lineTo(...point);
           }
         });
-        drawingContext.stroke();
+        drawingContext.stroke(path);
+
+        this.path = path;
       }
       return drawingContext;
     }

@@ -1,36 +1,10 @@
 import PolygonPlugin from './polygon';
 
 export default function install({use, utils, registerNodeType}) {
-  const {attr} = utils;
+  const {attr, flow, parseColorString, findColor} = utils;
   const {Polygon} = use(PolygonPlugin, null, false);
 
-  class PolygonAttr extends Polygon.Attr {
-    constructor(subject) {
-      super(subject);
-      this.setDefault({
-        angle: '60',
-        sides: [10, 10]
-      });
-    }
-
-    @attr
-    set angle(val) {
-      this.clearCache();
-      this.clearFlow();
-      this.set('angle', val);
-    }
-
-    @attr
-    set sides(val) {
-      this.clearCache();
-      this.clearFlow();
-      this.set('sides', val);
-    }
-  }
-
   class Triangle extends Polygon {
-    static Attr = PolygonAttr;
-
     get points() {
       const [s1, s2] = this.attr('sides');
       const angle = (Math.PI / 180) * this.attr('angle');

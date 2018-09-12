@@ -13,5 +13,6 @@ export default function install({use, utils, registerNodeType}) {
   }
 
   registerNodeType('ellipse', Ellipse, false);
+
   return {Ellipse};
 }

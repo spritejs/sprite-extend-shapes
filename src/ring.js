@@ -62,6 +62,17 @@ export default function install({use, utils, registerNodeType}) {
     }
   }
 
+  function isPointCollision(ring, x, y) {
+    const [r1, r2] = [ring.attr('outerRadius'), ring.attr('innerRadius')],
+      width = ring.contentSize[0];
+
+    const bounds = ring.boundingRect,
+      [cx, cy] = [bounds[0] + bounds[2] / 2, bounds[1] + bounds[3] / 2];
+
+    const distance = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
+    return distance >= width / 2 && distance <= width / 2 + r1 - r2;
+  }
+
   class Ring extends Shape {
     static Attr = RingAttr;
 
@@ -114,6 +125,13 @@ export default function install({use, utils, registerNodeType}) {
       return rect;
     }
 
+    // pointCollision(evt) {
+    //   if (super.pointCollision(evt)) {
+    //     const {offsetX, offsetY} = evt;
+    //     return isPointCollision(this, offsetX, offsetY);
+    //   }
+    // }
+
     render(t, ctx) {
       super.render(t, ctx);
       const innerRadius = Math.min(
@@ -149,7 +167,7 @@ export default function install({use, utils, registerNodeType}) {
         endAngle,
         false
       );
-      if (endAngle - startAngle === Math.PI * 2) {
+      if(endAngle - startAngle === Math.PI * 2) {
         ctx.moveTo(outerRadius + innerRadius, outerRadius);
       }
       ctx.arc(
@@ -167,5 +185,72 @@ export default function install({use, utils, registerNodeType}) {
     }
   }
 
+  registerNodeType('ring', Ring);
   return {Ring};
 }
+
+// export default function install({Sprite, utils, registerNodeType}) {
+//   function isPointCollision(circle, x, y) {
+//     const [r1, r2] = circle.attr('radius'),
+//       width = circle.contentSize[0];
+
+//     const bounds = circle.boundingRect,
+//       [cx, cy] = [bounds[0] + bounds[2] / 2, bounds[1] + bounds[3] / 2];
+
+//     const distance = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
+//     return distance >= width / 2 && distance <= width / 2 + r1 - r2;
+//   }
+//   class Ring extends Sprite {
+//     pointCollision(evt) {
+//       if (super.pointCollision(evt)) {
+//         const {offsetX, offsetY} = evt;
+//         return isPointCollision(this, offsetX, offsetY);
+//       }
+//     }
+//   }
+
+//   Ring.defineAttributes({
+//     init(attr) {
+//       attr.setDefault(
+//         {
+//           radius: [0, 0],
+//           color: 'black'
+//         },
+//         {
+//           borderRadius() {
+//             const [r1, r2] = this.radius;
+//             return (r1 + r2) / 2;
+//           },
+//           width() {
+//             const r2 = this.radius[1];
+//             return 2 * r2;
+//           },
+//           height() {
+//             const r2 = this.radius[1];
+//             return 2 * r2;
+//           },
+//           border() {
+//             const [r1, r2] = this.radius;
+//             return {width: r1 - r2, color: this.color, style: 'solid'};
+//           }
+//         }
+//       );
+//     },
+//     radius(attr, val) {
+//       // 定义半径属性 [外环，内环]
+//       attr.clearCache();
+//       if (!Array.isArray(val)) {
+//         val = [val, 0];
+//       }
+//       attr.set('radius', val);
+//     },
+//     color(attr, val) {
+//       attr.clearCache();
+//       attr.set('color', val);
+//     }
+//   });
+
+//   registerNodeType('ring', Ring);
+
+//   return {Ring};
+// }

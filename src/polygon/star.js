@@ -63,7 +63,6 @@ export default function install({use, utils, registerNodeType}) {
     get points() {
       const radius = this.attr('radius');
       const innerRadius = this.attr('innerRadius') || 0.4 * radius;
-
       return getStarPolygonPoints(this.attr('angles'))(radius, innerRadius);
     }
   }
