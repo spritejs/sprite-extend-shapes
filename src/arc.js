@@ -25,7 +25,7 @@ export default function install({use, utils, registerNodeType}) {
         angel: 0,
         anticlockwise: false,
         color: '#000',
-        lineWidth: 1
+        lineWidth: 1,
       });
     }
 
@@ -85,7 +85,7 @@ export default function install({use, utils, registerNodeType}) {
     }
 
     render(t, ctx) {
-      if (this.attr('center')) {
+      if(this.attr('center')) {
         const [cx, cy] = this.attr('center');
         const [sx, sy] = this.attr('startPoint');
         const radius = getDist([cx, cy], [sx, sy]);
