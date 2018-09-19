@@ -125,12 +125,24 @@ export default function install({use, utils, registerNodeType}) {
       return rect;
     }
 
-    // pointCollision(evt) {
-    //   if (super.pointCollision(evt)) {
-    //     const {offsetX, offsetY} = evt;
-    //     return isPointCollision(this, offsetX, offsetY);
-    //   }
-    // }
+    pointCollision(evt) {
+      if (super.pointCollision(evt)) {
+        const {offsetX, offsetY} = evt;
+
+        const r = this.attr('outerRadius');
+        const r0 = this.attr('innerRadius');
+        const startAngle = this.attr('startAngle');
+        const endAngle = this.attr('endAngle');
+
+        const d = Math.sqrt((offsetX - r)**2 + (offsetY - r) ** 2);
+        let angle = Math.atan2(offsetY - r, offsetX - r);
+        if (angle < 0) {
+          angle = Math.PI * 2 + angle;
+        }
+
+        return (d >= r0 && d <= r && angle >= startAngle && angle <= endAngle);
+      }
+    }
 
     render(t, ctx) {
       super.render(t, ctx);
