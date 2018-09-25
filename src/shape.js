@@ -5,9 +5,9 @@ export default function install({BaseSprite, utils}) {
     constructor(subject) {
       super(subject);
       this.setDefault({
-        lineWidth: 1,
+        lineWidth: 0,
         lineDash: [0, 0],
-        lineDashOffset: 2,
+        lineDashOffset: 2
       });
     }
 

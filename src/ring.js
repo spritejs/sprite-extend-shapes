@@ -4,6 +4,8 @@ export default function install({use, utils, registerNodeType}) {
   const {attr, flow, parseColorString, findColor} = utils;
   const {Shape} = use(ShapePlugin, null, false);
 
+  // const Shape = BaseSprite
+
   class RingAttr extends Shape.Attr {
     constructor(subject) {
       super(subject);
@@ -12,8 +14,9 @@ export default function install({use, utils, registerNodeType}) {
         outerRadius: 20,
         startAngle: 0,
         endAngle: 360,
-        color: 'rgba(0,0,0,1)',
-        fillColor: 'rgba(0, 0, 0, 1)'
+        color: 'rgba(255,0,0,1)',
+        fillColor: 'rgba(255, 0, 0, 1)',
+        boxSizing: 'border-box'
       });
     }
 
@@ -60,17 +63,6 @@ export default function install({use, utils, registerNodeType}) {
       this.clearCache();
       this.set('fillColor', val);
     }
-  }
-
-  function isPointCollision(ring, x, y) {
-    const [r1, r2] = [ring.attr('outerRadius'), ring.attr('innerRadius')],
-      width = ring.contentSize[0];
-
-    const bounds = ring.boundingRect,
-      [cx, cy] = [bounds[0] + bounds[2] / 2, bounds[1] + bounds[3] / 2];
-
-    const distance = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
-    return distance >= width / 2 && distance <= width / 2 + r1 - r2;
   }
 
   class Ring extends Shape {
@@ -122,6 +114,7 @@ export default function install({use, utils, registerNodeType}) {
 
       rect[0] = offsetX - lw - anchorX * (width + offsetX - 2 * lw);
       rect[1] = offsetY - lw - anchorY * (height + offsetY - 2 * lw);
+
       return rect;
     }
 
@@ -134,13 +127,14 @@ export default function install({use, utils, registerNodeType}) {
         const startAngle = this.attr('startAngle');
         const endAngle = this.attr('endAngle');
 
-        const d = Math.sqrt((offsetX - r)**2 + (offsetY - r) ** 2);
+        const d = Math.sqrt((offsetX - r) ** 2 + (offsetY - r) ** 2);
         let angle = Math.atan2(offsetY - r, offsetX - r);
         if (angle < 0) {
           angle = Math.PI * 2 + angle;
         }
 
-        return (d >= r0 && d <= r && angle >= startAngle && angle <= endAngle);
+        return d >= r0 && d <= r && angle >= startAngle && angle <= endAngle;
+        // return this.context.isPointInPath(this.path, offsetX, offsetY);
       }
     }
 
@@ -163,23 +157,44 @@ export default function install({use, utils, registerNodeType}) {
       const endAngle = isCircle ? Math.PI * 2 : this.endAngle;
       ctx.translate(-Math.min(0, bounds[0]) + lw, -Math.min(0, bounds[1]) + lw);
 
-      ctx.strokeStyle = findColor(ctx, this, 'color');
-      ctx.fillStyle = findColor(ctx, this, 'fillColor');
-      ctx.miterLimit = 3;
-      ctx.lineWidth = this.attr('lineWidth');
+      ctx.miterLimit = 0;
+      ctx.lineWidth = 0;
       ctx.setLineDash(this.attr('lineDash'));
       ctx.lineDashOffset = this.attr('lineDashOffset');
-      ctx.beginPath();
+      ctx.strokeStyle = findColor(ctx, this, 'color');
+      ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
+      // const x = outerRadius;
+      // const y = outerRadius;
+      // const r0 = outerRadius;
+      // const r = innerRadius;
+      // const unitX = Math.cos(startAngle);
+      // const unitY = Math.sin(startAngle);
+
+      // const path = new Path2D();
+
+      // path.moveTo(unitX * r0 + x, unitY * r0 + y);
+      // path.lineTo(unitX * r + x, unitY * r + y);
+      // path.arc(x, y, r, startAngle, endAngle, false);
+      // path.lineTo(Math.cos(endAngle) * r0 + x, Math.sin(endAngle) * r0 + y);
+
+      // if (r0 !== 0) {
+      //   path.arc(x, y, r0, endAngle, startAngle, true);
+      // }
+
+      // this.path = path;
+      // ctx.fill(path);
+
+      ctx.beginPath();
       ctx.arc(
         outerRadius,
         outerRadius,
         outerRadius,
         startAngle,
         endAngle,
-        false
+        true
       );
-      if(endAngle - startAngle === Math.PI * 2) {
+      if (endAngle - startAngle === Math.PI * 2) {
         ctx.moveTo(outerRadius + innerRadius, outerRadius);
       }
       ctx.arc(
@@ -188,7 +203,7 @@ export default function install({use, utils, registerNodeType}) {
         innerRadius,
         endAngle,
         startAngle,
-        true
+        false
       );
       ctx.closePath();
       ctx.stroke();
@@ -200,69 +215,3 @@ export default function install({use, utils, registerNodeType}) {
   registerNodeType('ring', Ring);
   return {Ring};
 }
-
-// export default function install({Sprite, utils, registerNodeType}) {
-//   function isPointCollision(circle, x, y) {
-//     const [r1, r2] = circle.attr('radius'),
-//       width = circle.contentSize[0];
-
-//     const bounds = circle.boundingRect,
-//       [cx, cy] = [bounds[0] + bounds[2] / 2, bounds[1] + bounds[3] / 2];
-
-//     const distance = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
-//     return distance >= width / 2 && distance <= width / 2 + r1 - r2;
-//   }
-//   class Ring extends Sprite {
-//     pointCollision(evt) {
-//       if (super.pointCollision(evt)) {
-//         const {offsetX, offsetY} = evt;
-//         return isPointCollision(this, offsetX, offsetY);
-//       }
-//     }
-//   }
-
-//   Ring.defineAttributes({
-//     init(attr) {
-//       attr.setDefault(
-//         {
-//           radius: [0, 0],
-//           color: 'black'
-//         },
-//         {
-//           borderRadius() {
-//             const [r1, r2] = this.radius;
-//             return (r1 + r2) / 2;
-//           },
-//           width() {
-//             const r2 = this.radius[1];
-//             return 2 * r2;
-//           },
-//           height() {
-//             const r2 = this.radius[1];
-//             return 2 * r2;
-//           },
-//           border() {
-//             const [r1, r2] = this.radius;
-//             return {width: r1 - r2, color: this.color, style: 'solid'};
-//           }
-//         }
-//       );
-//     },
-//     radius(attr, val) {
-//       // 定义半径属性 [外环，内环]
-//       attr.clearCache();
-//       if (!Array.isArray(val)) {
-//         val = [val, 0];
-//       }
-//       attr.set('radius', val);
-//     },
-//     color(attr, val) {
-//       attr.clearCache();
-//       attr.set('color', val);
-//     }
-//   });
-
-//   registerNodeType('ring', Ring);
-
-//   return {Ring};
-// }

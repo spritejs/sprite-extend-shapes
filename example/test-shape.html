@@ -267,6 +267,7 @@
       // fillColor: 'yellow',
       bgcolor: '#eee',
       color: 'red',
+      lineWidth: 6,
     });
 
 
@@ -331,18 +332,21 @@
       },
       lineWidth: 0,
       bgcolor: '#eee',
+      border: [0, 'yellow']
     });
-    window.ring = ring
-    ring.on('mouseenter', evt => {
-      ring.attr('fillColor', 'yellow');
-      evt.stopDispatch();
-    });
+    // window.ring = ring
+    // ring.on('mouseenter', evt => {
+    //   ring.attr('fillColor', 'yellow');
+    //   evt.stopDispatch();
+    // });
 
-    ring.on('mouseleave', evt => {
-      ring.attr('fillColor', null);
-      evt.stopDispatch();
-    });
+    // ring.on('mouseleave', evt => {
+    //   ring.attr('fillColor', 'red');
+    //   evt.stopDispatch();
+    // });
     layer.append(ring);
+
+    window.ring = ring
 
     const ellipse = new Ellipse();
     ellipse.attr({
