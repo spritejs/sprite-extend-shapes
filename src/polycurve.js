@@ -90,6 +90,6 @@ export default function install({use, utils, registerNodeType}) {
       return drawingContext;
     }
   }
-  registerNodeType('ploycurve', Polycurve, false);
+  registerNodeType('polycurve', Polycurve, false);
   return {Polycurve};
 }

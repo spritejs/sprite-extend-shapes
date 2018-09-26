@@ -87,6 +87,6 @@ export default function install({use, utils, registerNodeType}) {
       return drawingContext;
     }
   }
-  registerNodeType('ployline', Polyline, false);
+  registerNodeType('polyline', Polyline, false);
   return {Polyline};
 }
