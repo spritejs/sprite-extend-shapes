@@ -81,7 +81,7 @@ export default function install({use, utils, registerNodeType}) {
       drawingContext.lineDashOffset = this.attr('lineDashOffset');
 
       drawingContext.moveTo(...startPoint);
-      points.forEach((point) => {
+      points.forEach(point => {
         const [cp1x, cp1y, cp2x, cp2y, x, y] = point;
         drawingContext.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
       });

@@ -178,6 +178,6 @@ export default function install({BaseSprite, utils, registerNodeType}) {
       return drawingContext;
     }
   }
-  registerNodeType('ploycurve', Polygon, false);
+  registerNodeType('ploygon', Polygon, false);
   return {Polygon};
 }

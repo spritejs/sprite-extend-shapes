@@ -62,7 +62,7 @@ export default function install({use, utils, registerNodeType}) {
 
     render(t, drawingContext) {
       super.render(t, drawingContext);
-      if(this.points) {
+      if (this.points) {
         drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
         drawingContext.lineJoin = this.attr('lineJoin');
         drawingContext.lineCap = this.attr('lineCap');
@@ -74,7 +74,7 @@ export default function install({use, utils, registerNodeType}) {
         const path = new Path2D();
 
         this.points.forEach((point, i) => {
-          if(i === 0) {
+          if (i === 0) {
             path.moveTo(...point);
           } else {
             path.lineTo(...point);
