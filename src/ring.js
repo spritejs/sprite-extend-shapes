@@ -154,16 +154,20 @@ export default function install({use, utils, registerNodeType}) {
 
       const isCircle = this.endAngle - this.startAngle >= Math.PI * 2;
       const startAngle = isCircle ? 0 : this.startAngle;
-      const endAngle = isCircle ? Math.PI * 2 : this.endAngle;
+      let endAngle = isCircle ? Math.PI * 2 : this.endAngle;
+      if (endAngle > Math.PI * 2) {
+        endAngle = Math.PI * 2;
+      }
       ctx.translate(-Math.min(0, bounds[0]) + lw, -Math.min(0, bounds[1]) + lw);
 
       ctx.miterLimit = 0;
-      ctx.lineWidth = 0;
+      ctx.lineWidth = lw;
       ctx.setLineDash(this.attr('lineDash'));
       ctx.lineDashOffset = this.attr('lineDashOffset');
       ctx.strokeStyle = findColor(ctx, this, 'color');
       ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
+      // 下方代码为 Path2D 模拟画扇形（暂时不用）
       // const x = outerRadius;
       // const y = outerRadius;
       // const r0 = outerRadius;
@@ -192,7 +196,7 @@ export default function install({use, utils, registerNodeType}) {
         outerRadius,
         startAngle,
         endAngle,
-        true
+        false
       );
       if (endAngle - startAngle === Math.PI * 2) {
         ctx.moveTo(outerRadius + innerRadius, outerRadius);
@@ -203,10 +207,14 @@ export default function install({use, utils, registerNodeType}) {
         innerRadius,
         endAngle,
         startAngle,
-        false
+        true
       );
       ctx.closePath();
-      ctx.stroke();
+
+      if (lw > 0) {
+        ctx.stroke();
+      }
+
       ctx.fill();
       return ctx;
     }

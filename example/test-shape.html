@@ -323,30 +323,50 @@
       pos: [800, 400],
       innerRadius: 15,
       outerRadius: 50,
-      fillColor: {
-        vector: [0, 0, 150, 150],
-        colors: [
-          { offset: 0, color: 'red' },
-          { offset: 1, color: 'green' },
-        ],
-      },
+      fillColor: 'red',
+      startAngle: 0,
+      endAngle: Math.PI * 0.8,
       lineWidth: 0,
-      bgcolor: '#eee',
-      border: [0, 'yellow']
     });
-    // window.ring = ring
-    // ring.on('mouseenter', evt => {
-    //   ring.attr('fillColor', 'yellow');
-    //   evt.stopDispatch();
-    // });
+    window.ring = ring
+    ring.on('mouseenter', evt => {
+      ring.attr('fillColor', 'yellow');
+      evt.stopDispatch();
+    });
 
-    // ring.on('mouseleave', evt => {
-    //   ring.attr('fillColor', 'red');
-    //   evt.stopDispatch();
-    // });
+    ring.on('mouseleave', evt => {
+      ring.attr('fillColor', 'red');
+      evt.stopDispatch();
+    });
     layer.append(ring);
 
-    window.ring = ring
+    const ring2 = new Ring();
+    ring2.attr({
+      pos: [800, 400],
+      innerRadius: 15,
+      outerRadius: 50,
+      fillColor: 'blue',
+      startAngle: Math.PI * 0.8,
+      endAngle: Math.PI * 1.4,
+      lineWidth: 0,
+    });
+    const ring3 = new Ring();
+    ring3.attr({
+      pos: [800, 400],
+      innerRadius: 15,
+      outerRadius: 50,
+      fillColor: 'orange',
+      startAngle: Math.PI * 1.4,
+      endAngle: Math.PI * 2.0,
+      lineWidth: 0,
+      // bgcolor: '#eee',
+      border: [0, 'yellow']
+    });
+
+    layer.append(ring2);
+    layer.append(ring3);
+
+    // window.ring = ring
 
     const ellipse = new Ellipse();
     ellipse.attr({
