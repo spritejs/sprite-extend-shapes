@@ -5,19 +5,19 @@
 `sprite-extend-shapes` 是基于`SpriteJS`的常用几何图形扩展库。当前支持的图形：
 
 - [Shape](#shape)
-  - [Polyline](#polyline)
-  - [Arc](#arc)
-  - [Polycurve](#polycurve)
-  - [Polygon](#polygon)
-    - [Triangle](#triangle)
-    - [Rect](#rect)
-    - [Star](#star)
-  - [EllipseSector](#ellipsesector)
-    - [Ellipse](#ellipse)
-      - [EllipseArc](#ellipsearc)
-      - [Circle](#circle)
-    - [Sector](#sector)
-  - [Ring](#ring)
+  - [Polyline](#polyline-折线)
+  - [Arc](#arc-弧线)
+  - [Polycurve](#polycurve-多重曲线)
+  - [Polygon](#polygon-多边形)
+    - [Triangle](#triangle-三角形)
+    - [Rect](#rect-正方形)
+    - [Star](#star-星形)
+  - [EllipseSector](#ellipsesector-椭圆扇形)
+    - [Ellipse](#ellipse-椭圆形)
+      - [EllipseArc](#ellipsearc-椭圆弧)
+      - [Circle](#circle-圆)
+    - [Sector](#sector-圆扇形)
+  - [Ring](#ring-圆环)
 
 ## Shape
 
@@ -44,11 +44,11 @@ const polyline = new Polyline();
 polyline.attr({
   color: {
     vector: [0, 0, 150, 150],
-    colors: [{ offset: 0, color: "red" }, { offset: 1, color: "green" }]
+    colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}]
   },
   lineWidth: 10,
   points: [[0, 0], [0, 100], [200, -50]],
-  bgcolor: "#eee"
+  bgcolor: '#eee'
 });
 ```
 
@@ -125,9 +125,9 @@ const polygon = new Polygon();
 polygon.attr({
   color: {
     vector: [0, 0, 150, 150],
-    colors: [{ offset: 0, color: "red" }, { offset: 1, color: "green" }]
+    colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}]
   },
-  fillColor: "yellow",
+  fillColor: 'yellow',
   points: [[0, 0], [100, 100], [200, -50]]
 });
 ```
@@ -148,10 +148,10 @@ polygon.attr({
 ```javascript
 const triangle = new Triangle();
 triangle.attr({
-  color: "red",
+  color: 'red',
   sides: [80, 80],
-  angle: "60",
-  fillColor: "yellow"
+  angle: '60',
+  fillColor: 'yellow'
 });
 ```
 
@@ -171,10 +171,10 @@ triangle.attr({
 ```javascript
 const rect = new Rect();
 rect.attr({
-  color: "red",
+  color: 'red',
   sides: [60, 80],
   angle: 60,
-  fillColor: "yellow"
+  fillColor: 'yellow'
 });
 ```
 
@@ -197,9 +197,9 @@ const star = new Star();
 star.attr({
   radius: 40,
   innerRadius: 30,
-  color: "red",
+  color: 'red',
   angles: 5,
-  fillColor: "yellow"
+  fillColor: 'yellow'
 });
 ```
 
@@ -231,7 +231,7 @@ ellipseSector.attr({
   startAngle: 0,
   endAngle: Math.PI * 1.3,
   lineWidth: 1,
-  color: "red"
+  color: 'red'
 });
 ```
 
@@ -248,7 +248,7 @@ const ellipse = new Ellipse();
 ellipse.attr({
   radiusX: 30,
   radiusY: 80,
-  fillColor: "red",
+  fillColor: 'red',
   lineWidth: 5
 });
 ```
@@ -268,7 +268,7 @@ ellipseArc.attr({
   radiusX: 30,
   endAngle: 120,
   radiusY: 80,
-  fillColor: "red",
+  fillColor: 'red',
   lineWidth: 5
 });
 ```
@@ -290,13 +290,13 @@ const circle = new Circle();
 circle.attr({
   radius: 30,
   lineWidth: 5,
-  color: "red"
+  color: 'red'
 });
 ```
 
 #### Sector 圆扇形
 
-`Sector` 继承自 `EllipseSector`，用于绘制圆扇形。与`EllipseSector`相比， `Sector`  只需指定一个半径，即`radius`，而无需指定`radiusX`和`radiusY`。
+`Sector` 继承自 `EllipseSector`，用于绘制圆扇形。与`EllipseSector`相比， `Sector` 只需指定一个半径，即`radius`，而无需指定`radiusX`和`radiusY`。
 
 |  属性  | 说明 | 默认值 |
 | :----: | :--: | :----: |
@@ -313,7 +313,7 @@ sector.attr({
   endAngle: Math.PI * 0.7,
   radius: 50,
   lineWidth: 5,
-  color: "red"
+  color: 'red'
 });
 ```
 
@@ -341,7 +341,7 @@ ring.attr({
   outerRadius: 50,
   fillColor: {
     vector: [0, 0, 150, 150],
-    colors: [{ offset: 0, color: "red" }, { offset: 1, color: "green" }]
+    colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}]
   },
   lineWidth: 4,
   startAngle: Math.PI * 0.5,
