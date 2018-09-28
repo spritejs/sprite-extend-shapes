@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   circle: {
     default: {
       pos: [100, 100],
@@ -6,7 +6,7 @@ module.exports = {
       lineWidth: 5,
       color: 'red',
       bgcolor: '#eee',
-      anticlockwise: true,
+      anticlockwise: true
     },
     noellipse: {
       pos: [100, 100],
@@ -14,7 +14,7 @@ module.exports = {
       lineWidth: 5,
       color: 'red',
       bgcolor: '#eee',
-      anticlockwise: true,
-    },
-  },
+      anticlockwise: true
+    }
+  }
 };

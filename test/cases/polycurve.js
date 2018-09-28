@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   polycurve: {
     default: {
       pos: [100, 100],
@@ -7,7 +7,7 @@ module.exports = {
       color: 'red',
       lineCap: 'round',
       lineJoin: 'round',
-      lineWidth: 5,
-    },
-  },
+      lineWidth: 5
+    }
+  }
 };

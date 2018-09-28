@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   star: {
     default: {
       pos: [100, 100],
@@ -6,7 +6,7 @@ module.exports = {
       color: 'red',
       angles: 5,
       bgcolor: '#eee',
-      fillColor: 'yellow',
+      fillColor: 'yellow'
     },
     innerRadius: {
       pos: [100, 100],
@@ -15,7 +15,7 @@ module.exports = {
       color: 'red',
       angles: 5,
       bgcolor: '#eee',
-      fillColor: 'yellow',
-    },
-  },
+      fillColor: 'yellow'
+    }
+  }
 };

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   rect: {
     default: {
       pos: [100, 100],
@@ -6,7 +6,7 @@ module.exports = {
       angle: 30,
       sides: [30, 40],
       fillColor: 'yellow',
-      bgcolor: '#eee',
-    },
-  },
+      bgcolor: '#eee'
+    }
+  }
 };

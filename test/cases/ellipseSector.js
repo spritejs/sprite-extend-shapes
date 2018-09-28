@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   ellipseSector: {
     default: {
       pos: [100, 100],
@@ -9,7 +9,9 @@ module.exports = {
       lineWidth: 1,
       color: 'red',
       bgcolor: '#eee',
-      anticlockwise: true,
+      fillColor: 'red',
+      center: [0, 0],
+      anticlockwise: true
     },
     noellipse: {
       pos: [100, 100],
@@ -20,7 +22,7 @@ module.exports = {
       lineWidth: 1,
       color: 'red',
       bgcolor: '#eee',
-      noellipse: true,
-    },
-  },
+      noellipse: true
+    }
+  }
 };

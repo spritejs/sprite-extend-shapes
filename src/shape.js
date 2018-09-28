@@ -20,13 +20,13 @@ export default function install({BaseSprite, utils}) {
     @attr
     set lineDash(val) {
       this.clearCache();
-      this.attr('lineDash', val);
+      this.set('lineDash', val);
     }
 
     @attr
     set lineDashOffset(val) {
       this.clearCache();
-      this.attr('lineDashOffset', val);
+      this.set('lineDashOffset', val);
     }
   }
 

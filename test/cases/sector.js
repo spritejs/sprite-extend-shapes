@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   sector: {
     default: {
       pos: [100, 100],
@@ -7,7 +7,7 @@ module.exports = {
       radius: 30,
       lineWidth: 5,
       bgcolor: 'yellow',
-      color: 'red',
-    },
-  },
+      color: 'red'
+    }
+  }
 };

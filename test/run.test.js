@@ -2,8 +2,13 @@
 import * as spritejs from 'spritejs';
 import {createCanvas} from 'canvas';
 import {Layer} from 'sprite-core';
-import * as sprite from '../src/index';
+import * as shapes from '../src/index';
 import {compare} from './helpers';
+
+require('canvas-5-polyfill'); // Path2D polyfill
+
+// const {Layer} = spritejs;
+spritejs.use(shapes);
 
 const fs = require('fs');
 const path = require('path');
@@ -12,14 +17,13 @@ const drawCase = require('./helpers/drawcase');
 
 const casesDir = './cases';
 
-fs
-  .readdirSync(path.resolve(__dirname, casesDir))
-  .map(file => require(`${casesDir}/${file}`).default(spritejs))
+fs.readdirSync(path.resolve(__dirname, casesDir))
+  .map(file => require(`${casesDir}/${file}`).default)
   .forEach(runTest);
 
 function runTest(obj) {
   const namespace = Object.keys(obj)[0];
-  const Shape = sprite[namespace.replace(/\b\w/g, m => m.toUpperCase())];
+  const Shape = spritejs[namespace.replace(/\b\w/g, m => m.toUpperCase())];
 
   Object.entries(obj[namespace]).forEach(([key, value]) => {
     test(`draw ${namespace}: ${key}`, async t => {

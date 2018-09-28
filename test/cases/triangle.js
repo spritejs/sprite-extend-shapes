@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   triangle: {
     default: {
       pos: [100, 100],
@@ -6,7 +6,7 @@ module.exports = {
       sides: [20, 40],
       angle: '40',
       fillColor: 'yellow',
-      bgcolor: '#eee',
-    },
-  },
+      bgcolor: '#eee'
+    }
+  }
 };
