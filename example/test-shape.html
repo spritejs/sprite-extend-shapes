@@ -42,8 +42,8 @@
     } = spritejs;
 
     const scene = new Scene('#container', {
-      resolution: [1200, 600]
-    })
+      resolution: [1200, 600],
+    });
     const layer = scene.layer();
 
     const polyline = new Polyline();
@@ -52,16 +52,17 @@
       color: {
         vector: [0, 0, 150, 150],
         colors: [
-          { offset: 0, color: 'red' },
-          { offset: 1, color: 'green' },
+          {offset: 0, color: 'red'},
+          {offset: 1, color: 'green'},
         ],
       },
       lineWidth: 10,
       points: [[0, 0], [100, 100], [200, -50]],
+      tolerance: 7,
       bgcolor: '#eee',
     });
-    polyline.on('click', () => alert('click'))
-    polyline.on('mousemove', evt => console.log('move: ', evt))
+    polyline.on('click', () => alert('click'));
+    polyline.on('mousemove', evt => console.log('move: ', evt));
 
     layer.append(polyline);
 
@@ -77,18 +78,18 @@
       bgcolor: '#eee',
     });
 
-    polygon.on('mouseenter', evt => {
+    polygon.on('mouseenter', (evt) => {
       polygon.attr('color', {
         vector: [0, 0, 150, 150],
         colors: [
-          { offset: 0, color: 'red' },
-          { offset: 1, color: 'green' },
+          {offset: 0, color: 'red'},
+          {offset: 1, color: 'green'},
         ],
       });
       evt.stopDispatch();
     });
 
-    polygon.on('mouseleave', evt => {
+    polygon.on('mouseleave', (evt) => {
       polygon.attr('color', null);
       evt.stopDispatch();
     });
@@ -107,12 +108,12 @@
       bgcolor: '#eee',
     });
 
-    triangle.on('mouseenter', evt => {
+    triangle.on('mouseenter', (evt) => {
       triangle.attr('color', 'yellow');
       evt.stopDispatch();
     });
 
-    triangle.on('mouseleave', evt => {
+    triangle.on('mouseleave', (evt) => {
       triangle.attr('color', 'red');
       evt.stopDispatch();
     });
@@ -130,12 +131,12 @@
       bgcolor: '#eee',
     });
 
-    rect.on('mouseenter', evt => {
+    rect.on('mouseenter', (evt) => {
       rect.attr('color', 'yellow');
       evt.stopDispatch();
     });
 
-    rect.on('mouseleave', evt => {
+    rect.on('mouseleave', (evt) => {
       rect.attr('color', null);
       evt.stopDispatch();
     });
@@ -153,12 +154,12 @@
       fillColor: 'yellow',
     });
 
-    star.on('mouseenter', evt => {
+    star.on('mouseenter', (evt) => {
       star.attr('color', 'yellow');
       evt.stopDispatch();
     });
 
-    star.on('mouseleave', evt => {
+    star.on('mouseleave', (evt) => {
       star.attr('color', null);
       evt.stopDispatch();
     });
@@ -172,7 +173,7 @@
       pos: [180, 400],
       center: [20, 0],
       angle: Math.PI / 2,
-      bgcolor: 'green'
+      bgcolor: 'green',
     });
     layer.append(arc);
 
@@ -271,18 +272,18 @@
     });
 
 
-    sector5.on('click', evt => {
-      console.log('enter: ', evt)
-    })
+    sector5.on('click', (evt) => {
+      console.log('enter: ', evt);
+    });
 
-    sector5.on('mouseenter', evt => {
+    sector5.on('mouseenter', (evt) => {
       // sector5.attr('radiusX', 120);
       sector5.attr('radius', 120);
       sector5.attr('fillColor', 'yellow');
       evt.stopDispatch();
     });
 
-    sector5.on('mouseleave', evt => {
+    sector5.on('mouseleave', (evt) => {
       sector5.attr('radius', 90);
       sector5.attr('fillColor', null);
       evt.stopDispatch();
@@ -290,7 +291,6 @@
 
 
     layer.append(sector5);
-
 
 
     const circle = new Circle();
@@ -303,14 +303,14 @@
       anticlockwise: true,
     });
 
-    window.circle = circle
+    window.circle = circle;
 
-    circle.on('mouseenter', evt => {
+    circle.on('mouseenter', (evt) => {
       circle.attr('fillColor', 'yellow');
       evt.stopDispatch();
     });
 
-    circle.on('mouseleave', evt => {
+    circle.on('mouseleave', (evt) => {
       circle.attr('fillColor', null);
       evt.stopDispatch();
     });
@@ -328,13 +328,13 @@
       endAngle: Math.PI * 0.8,
       lineWidth: 0,
     });
-    window.ring = ring
-    ring.on('mouseenter', evt => {
+    window.ring = ring;
+    ring.on('mouseenter', (evt) => {
       ring.attr('fillColor', 'yellow');
       evt.stopDispatch();
     });
 
-    ring.on('mouseleave', evt => {
+    ring.on('mouseleave', (evt) => {
       ring.attr('fillColor', 'red');
       evt.stopDispatch();
     });
@@ -360,7 +360,7 @@
       endAngle: Math.PI * 2.0,
       lineWidth: 0,
       // bgcolor: '#eee',
-      border: [0, 'yellow']
+      border: [0, 'yellow'],
     });
 
     layer.append(ring2);
