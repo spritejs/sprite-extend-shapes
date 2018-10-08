@@ -14,6 +14,7 @@ export default function install({use, utils, registerNodeType}) {
         outerRadius: 20,
         startAngle: 0,
         endAngle: 360,
+        center: [0, 0],
         color: 'rgba(255,0,0,1)',
         fillColor: 'rgba(255, 0, 0, 1)',
         boxSizing: 'border-box'
@@ -62,6 +63,13 @@ export default function install({use, utils, registerNodeType}) {
       val = parseColorString(val);
       this.clearCache();
       this.set('fillColor', val);
+    }
+
+    @attr
+    set center(val) {
+      this.clearFlow();
+      this.clearCache();
+      this.set('center', val);
     }
   }
 
@@ -189,26 +197,14 @@ export default function install({use, utils, registerNodeType}) {
       // this.path = path;
       // ctx.fill(path);
 
+      const [cX, cY] = this.attr('center');
+
       ctx.beginPath();
-      ctx.arc(
-        outerRadius,
-        outerRadius,
-        outerRadius,
-        startAngle,
-        endAngle,
-        false
-      );
+      ctx.arc(cX, cY, outerRadius, startAngle, endAngle, false);
       if (endAngle - startAngle === Math.PI * 2) {
         ctx.moveTo(outerRadius + innerRadius, outerRadius);
       }
-      ctx.arc(
-        outerRadius,
-        outerRadius,
-        innerRadius,
-        endAngle,
-        startAngle,
-        true
-      );
+      ctx.arc(cX, cY, innerRadius, endAngle, startAngle, true);
       ctx.closePath();
 
       if (lw > 0) {
