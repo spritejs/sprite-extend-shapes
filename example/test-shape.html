@@ -199,49 +199,49 @@
     // });
     // layer.append(centerHelper);
 
-    // const sector = new Sector();
-    // sector.attr({
-    //   pos: [280, 400],
-    //   center: [0, 0],
-    //   startAngle: 0,
-    //   endAngle: Math.PI * .3,
-    //   radius: 90,
-    //   lineWidth: 1,
-    //   fillColor: 'orange',
-    //   bgcolor: '#eee',
-    //   color: 'red',
-    // });
+    const sector = new Sector();
+    sector.attr({
+      pos: [280, 400],
+      center: [0, 0],
+      startAngle: 0,
+      endAngle: Math.PI * .3,
+      radius: 90,
+      lineWidth: 1,
+      fillColor: 'orange',
+      bgcolor: '#eee',
+      color: 'red',
+    });
 
 
-    // layer.append(sector);
+    layer.append(sector);
 
-    // const sector2 = new Sector();
-    // sector2.attr({
-    //   pos: [280, 400],
-    //   center: [0, 0],
-    //   startAngle: Math.PI * 0.3,
-    //   endAngle: Math.PI * 0.9,
-    //   radius: 90,
-    //   lineWidth: 1,
-    //   // bgcolor: 'green',
-    //   bgcolor: '#eee',
-    //   color: 'red',
-    // });
-    // layer.append(sector2);
+    const sector2 = new Sector();
+    sector2.attr({
+      pos: [280, 400],
+      center: [0, 0],
+      startAngle: Math.PI * 0.3,
+      endAngle: Math.PI * 0.9,
+      radius: 90,
+      lineWidth: 1,
+      // bgcolor: 'green',
+      bgcolor: '#eee',
+      color: 'red',
+    });
+    layer.append(sector2);
 
-    // const sector3 = new Sector();
-    // sector3.attr({
-    //   pos: [280, 400],
-    //   center: [0, 0],
-    //   startAngle: Math.PI * 0.9,
-    //   endAngle: Math.PI * 1.3,
-    //   radius: 90,
-    //   lineWidth: 1,
-    //   // bgcolor: 'green',
-    //   bgcolor: '#eee',
-    //   color: 'red',
-    // });
-    // layer.append(sector3);
+    const sector3 = new Sector();
+    sector3.attr({
+      pos: [280, 400],
+      center: [0, 0],
+      startAngle: Math.PI * 0.9,
+      endAngle: Math.PI * 1.3,
+      radius: 90,
+      lineWidth: 1,
+      // bgcolor: 'green',
+      bgcolor: '#eee',
+      color: 'red',
+    });
+    layer.append(sector3);
 
 
     const sector4 = new Sector();
@@ -263,12 +263,12 @@
       pos: [280, 400],
       startAngle: Math.PI * 1.6,
       endAngle: Math.PI * 2,
-      radius: 90,
+      radius: 80,
       lineWidth: 1,
       // fillColor: 'yellow',
       bgcolor: '#eee',
       color: 'red',
-      lineWidth: 6,
+      lineWidth: 1,
     });
 
 
@@ -284,7 +284,7 @@
     });
 
     sector5.on('mouseleave', (evt) => {
-      sector5.attr('radius', 90);
+      sector5.attr('radius', 80);
       sector5.attr('fillColor', null);
       evt.stopDispatch();
     });
@@ -293,42 +293,43 @@
     layer.append(sector5);
 
 
-    const circle = new Circle();
-    circle.attr({
-      pos: [400, 400],
-      radius: 30,
-      lineWidth: 1,
-      color: 'red',
-      bgcolor: '#eee',
-      anticlockwise: true,
-    });
+    // const circle = new Circle();
+    // circle.attr({
+    //   pos: [400, 400],
+    //   radius: 30,
+    //   lineWidth: 1,
+    //   color: 'red',
+    //   bgcolor: '#eee',
+    //   anticlockwise: true,
+    // });
 
-    window.circle = circle;
+    // window.circle = circle;
 
-    circle.on('mouseenter', (evt) => {
-      circle.attr('fillColor', 'yellow');
-      evt.stopDispatch();
-    });
+    // circle.on('mouseenter', (evt) => {
+    //   circle.attr('fillColor', 'yellow');
+    //   evt.stopDispatch();
+    // });
 
-    circle.on('mouseleave', (evt) => {
-      circle.attr('fillColor', null);
-      evt.stopDispatch();
-    });
+    // circle.on('mouseleave', (evt) => {
+    //   circle.attr('fillColor', null);
+    //   evt.stopDispatch();
+    // });
 
-    layer.append(circle);
+    // layer.append(circle);
 
 
     const ring = new Ring();
     ring.attr({
       pos: [800, 400],
+
       innerRadius: 15,
       outerRadius: 50,
       fillColor: 'red',
       startAngle: 0,
       endAngle: Math.PI * 0.8,
       lineWidth: 0,
+      bgcolor: '#eee',
     });
-    window.ring = ring;
     ring.on('mouseenter', (evt) => {
       ring.attr('fillColor', 'yellow');
       evt.stopDispatch();
@@ -338,28 +339,55 @@
       ring.attr('fillColor', 'red');
       evt.stopDispatch();
     });
+    window.ring = ring
     layer.append(ring);
+
+
+    const ring4 = new Ring();
+    ring4.attr({
+      pos: [600, 400],
+
+      innerRadius: 15,
+      outerRadius: 50,
+      fillColor: 'green',
+      startAngle: Math.PI * 0.8,
+      endAngle: Math.PI * 1.4,
+      lineWidth: 0,
+      bgcolor: '#eee',
+    });
+    layer.append(ring4);
 
     const ring2 = new Ring();
     ring2.attr({
-      pos: [800, 400],
+      pos: [600, 400],
+      // bgcolor: '#eee',
       innerRadius: 15,
       outerRadius: 40,
+      maxRadius: 50,
       fillColor: 'blue',
       startAngle: Math.PI * 0.8,
       endAngle: Math.PI * 1.4,
       lineWidth: 0,
     });
+    ring2.on('mouseenter', (evt) => {
+      ring2.attr('fillColor', 'yellow');
+      evt.stopDispatch();
+    });
+
+    ring2.on('mouseleave', (evt) => {
+      ring2.attr('fillColor', 'blue');
+      evt.stopDispatch();
+    });
     const ring3 = new Ring();
     ring3.attr({
-      pos: [800, 400],
+      pos: [1000, 400],
+      bgcolor: '#eee',
       innerRadius: 15,
       outerRadius: 50,
       fillColor: 'orange',
       startAngle: Math.PI * 1.4,
       endAngle: Math.PI * 2.0,
       lineWidth: 0,
-      // bgcolor: '#eee',
       border: [0, 'yellow'],
     });
 
@@ -368,31 +396,31 @@
 
     // window.ring = ring
 
-    const ellipse = new Ellipse();
-    ellipse.attr({
-      pos: [540, 400],
-      radiusX: 15,
-      radiusY: 30,
-      fillColor: 'red',
-      lineWidth: 5,
-      bgcolor: '#eee',
-    });
-    layer.append(ellipse);
+    // const ellipse = new Ellipse();
+    // ellipse.attr({
+    //   pos: [540, 400],
+    //   radiusX: 15,
+    //   radiusY: 30,
+    //   fillColor: 'red',
+    //   lineWidth: 5,
+    //   bgcolor: '#eee',
+    // });
+    // layer.append(ellipse);
 
 
-    // 椭圆扇形
-    const ellipseSector = new EllipseSector();
-    ellipseSector.attr({
-      pos: [620, 400],
-      radiusX: 15,
-      radiusY: 40,
-      startAngle: 0,
-      endAngle: Math.PI * 1.3,
-      lineWidth: 1,
-      color: 'red',
-      bgcolor: '#eee',
-    });
-    layer.append(ellipseSector);
+    // // 椭圆扇形
+    // const ellipseSector = new EllipseSector();
+    // ellipseSector.attr({
+    //   pos: [620, 400],
+    //   radiusX: 15,
+    //   radiusY: 40,
+    //   startAngle: 0,
+    //   endAngle: Math.PI * 1.3,
+    //   lineWidth: 1,
+    //   color: 'red',
+    //   bgcolor: '#eee',
+    // });
+    // layer.append(ellipseSector);
 
     // const ellipseSectorHelper = new Sprite();
     // ellipseSectorHelper.attr({
@@ -404,16 +432,16 @@
     // layer.append(ellipseSectorHelper);
 
 
-    const polycurve = new Polycurve();
-    polycurve.attr({
-      pos: [900, 380],
-      points: [
-        [20, -10, 110, 50, -20, 40],
-        [10, -10, 20, 50, 0, 0],
-      ],
-      lineWidth: 5,
-    });
-    layer.append(polycurve);
+    // const polycurve = new Polycurve();
+    // polycurve.attr({
+    //   pos: [900, 380],
+    //   points: [
+    //     [20, -10, 110, 50, -20, 40],
+    //     [10, -10, 20, 50, 0, 0],
+    //   ],
+    //   lineWidth: 5,
+    // });
+    // layer.append(polycurve);
   </script>
 </body>
 

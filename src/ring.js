@@ -17,7 +17,8 @@ export default function install({use, utils, registerNodeType}) {
         center: [0, 0],
         color: 'rgba(255,0,0,1)',
         fillColor: 'rgba(255, 0, 0, 1)',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        maxRadius: 0 // 当需要绘制多个环且环的半径不一致,为了统一圆心,所设属性
       });
     }
 
@@ -35,6 +36,13 @@ export default function install({use, utils, registerNodeType}) {
       this.clearCache();
       this.clearFlow();
       this.set('outerRadius', val);
+    }
+
+    @attr
+    set maxRadius(val) {
+      this.clearCache();
+      this.clearFlow();
+      this.set('maxRadius', val);
     }
 
     @attr
@@ -67,8 +75,8 @@ export default function install({use, utils, registerNodeType}) {
 
     @attr
     set center(val) {
-      this.clearFlow();
       this.clearCache();
+      this.clearFlow();
       this.set('center', val);
     }
   }
@@ -78,11 +86,17 @@ export default function install({use, utils, registerNodeType}) {
 
     // 边界依赖于最大圆
     get lineBoundings() {
-      const radius = Math.max(
-        this.attr('innerRadius'),
-        this.attr('outerRadius')
-      );
-      return [0, 0, 2 * radius, 2 * radius];
+      let maxRadius = this.attr('maxRadius');
+
+      if (maxRadius <= 0) {
+        const radius = Math.max(
+          this.attr('innerRadius'),
+          this.attr('outerRadius')
+        );
+        maxRadius = radius;
+      }
+
+      return [0, 0, 2 * maxRadius, 2 * maxRadius];
     }
 
     get startAngle() {
@@ -129,8 +143,14 @@ export default function install({use, utils, registerNodeType}) {
     pointCollision(evt) {
       if (super.pointCollision(evt)) {
         const {offsetX, offsetY} = evt;
+        let r = this.attr('maxRadius');
+        let offset = this.attr('outerRadius'); // 偏移量
 
-        const r = this.attr('outerRadius');
+        if (r <= 0) {
+          r = offset;
+        }
+
+        offset = r - offset; // 如果未设置　maxRadius， 偏移量应当为　０
         const r0 = this.attr('innerRadius');
         const startAngle = this.attr('startAngle');
         const endAngle = this.attr('endAngle');
@@ -141,8 +161,9 @@ export default function install({use, utils, registerNodeType}) {
           angle = Math.PI * 2 + angle;
         }
 
-        return d >= r0 && d <= r && angle >= startAngle && angle <= endAngle;
-        // return this.context.isPointInPath(this.path, offsetX, offsetY);
+        return (
+          d >= r0 && d <= r - offset && angle >= startAngle && angle <= endAngle
+        );
       }
     }
 
@@ -157,7 +178,6 @@ export default function install({use, utils, registerNodeType}) {
         this.attr('outerRadius')
       );
 
-      const bounds = this.lineBoundings;
       const lw = this.attr('lineWidth');
 
       const isCircle = this.endAngle - this.startAngle >= Math.PI * 2;
@@ -166,7 +186,6 @@ export default function install({use, utils, registerNodeType}) {
       if (endAngle > Math.PI * 2) {
         endAngle = Math.PI * 2;
       }
-      ctx.translate(-Math.min(0, bounds[0]) + lw, -Math.min(0, bounds[1]) + lw);
 
       ctx.miterLimit = 0;
       ctx.lineWidth = lw;
@@ -175,11 +194,24 @@ export default function install({use, utils, registerNodeType}) {
       ctx.strokeStyle = findColor(ctx, this, 'color');
       ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
+      let [x, y] = this.attr('center');
+      let maxRadius = this.attr('maxRadius');
+
+      if (maxRadius <= 0) {
+        maxRadius = outerRadius;
+      }
+
+      const lineBoundings = this.lineBoundings;
+      ctx.translate(
+        lineBoundings[2] / 2 - x + lw,
+        lineBoundings[3] / 2 - y + lw
+      );
+
+      // ctx.translate(maxRadius - x + lw, maxRadius - y + lw); // 将绘制图形 移动到 lineBounds ,以免图形消失
+
       // 下方代码为 Path2D 模拟画扇形（暂时不用）
-      // const x = outerRadius;
-      // const y = outerRadius;
-      // const r0 = outerRadius;
-      // const r = innerRadius;
+      // const r = outerRadius;
+      // const r0 = innerRadius;
       // const unitX = Math.cos(startAngle);
       // const unitY = Math.sin(startAngle);
 
@@ -194,17 +226,17 @@ export default function install({use, utils, registerNodeType}) {
       //   path.arc(x, y, r0, endAngle, startAngle, true);
       // }
 
-      // this.path = path;
+      // // this.path = path;
       // ctx.fill(path);
 
-      const [cX, cY] = this.attr('center');
+      // this.path = path;
 
       ctx.beginPath();
-      ctx.arc(cX, cY, outerRadius, startAngle, endAngle, false);
+      ctx.arc(x, y, outerRadius, startAngle, endAngle, false);
       if (endAngle - startAngle === Math.PI * 2) {
         ctx.moveTo(outerRadius + innerRadius, outerRadius);
       }
-      ctx.arc(cX, cY, innerRadius, endAngle, startAngle, true);
+      ctx.arc(x, y, innerRadius, endAngle, startAngle, true);
       ctx.closePath();
 
       if (lw > 0) {
