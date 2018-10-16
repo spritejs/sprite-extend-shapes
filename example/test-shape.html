@@ -56,10 +56,11 @@
           { offset: 1, color: 'green' },
         ],
       },
-      lineWidth: 10,
-      points: [[0, 0], [100, 100], [200, -50]],
+      lineWidth: 5,
+      points: [[0, 0], [30, 10], [80, 20], [140, 10], [180, 30], [240, 50]],
       tolerance: 7,
       bgcolor: '#eee',
+      smooth: true
     });
     polyline.on('click', () => alert('click'));
     polyline.on('mousemove', evt => console.log('move: ', evt));
@@ -432,16 +433,16 @@
     // layer.append(ellipseSectorHelper);
 
 
-    // const polycurve = new Polycurve();
-    // polycurve.attr({
-    //   pos: [900, 380],
-    //   points: [
-    //     [20, -10, 110, 50, -20, 40],
-    //     [10, -10, 20, 50, 0, 0],
-    //   ],
-    //   lineWidth: 5,
-    // });
-    // layer.append(polycurve);
+    const polycurve = new Polycurve();
+    polycurve.attr({
+      pos: [900, 300],
+      points: [
+        [0, -10, 110, 50, -20, 40],
+        [10, -10, 20, 50, 0, 0],
+      ],
+      lineWidth: 5,
+    });
+    layer.append(polycurve);
   </script>
 </body>
 
