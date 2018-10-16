@@ -169,9 +169,11 @@ export default function install({BaseSprite, utils, registerNodeType}) {
 
         path.closePath();
 
-        // drawingContext.closePath();
-        drawingContext.stroke(path);
-        // drawingContext.fill();
+        if (this.attr('fillColor')) {
+          drawingContext.fill(path);
+        } else {
+          drawingContext.stroke(path);
+        }
 
         this.path = path;
       }

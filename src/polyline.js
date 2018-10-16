@@ -1,22 +1,54 @@
 import ShapePlugin from './shape';
 
-function drawSmoothCurve(ctx, points) {
-  ctx.moveTo(...points[0]);
+/**
+ * 使用 贝塞尔曲线 模拟绘制平滑曲线
+ * @param {*} ctx 绘制上下文,如:Context2D
+ * @param {*} points 绘制点
+ */
+function drawSmoothCurveLine(ctx, points) {
+  /**
+   * 获取 模拟贝塞尔曲线关键控制点
+   * @param {*} points
+   * @param {*} i
+   * @param {*} a
+   * @param {*} b
+   */
+  function getCtrlPoint(points, i, a = 0.1, b = 0.1) {
+    let x0;
+    let y0;
+    let x1;
+    let y1;
 
-  for (let i = 1; i < points.length - 2; i++) {
-    const x = (points[i][0] + points[i + 1][0]) / 2;
-    const y = (points[i][1] + points[i + 1][1]) / 2;
-    ctx.quadraticCurveTo(points[i][0], points[i][1], x, y);
+    if (i < 1) {
+      x0 = points[0].x + (points[1].x - points[0].x) * a;
+      y0 = points[0].y + (points[1].y - points[0].y) * a;
+    } else {
+      x0 = points[i].x + (points[i + 1].x - points[i - 1].x) * a;
+      y0 = points[i].y + (points[i + 1].y - points[i - 1].y) * a;
+    }
+
+    if (i > points.length - 3) {
+      const last = points.length - 1;
+      x1 = points[last].x - (points[last].x - points[last - 1].x) * b;
+      y1 = points[last].y - (points[last].y - points[last - 1].y) * b;
+    } else {
+      x1 = points[i + 1].x - (points[i + 2].x - points[i].x) * b;
+      y1 = points[i + 1].y - (points[i + 2].y - points[i].y) * b;
+    }
+
+    return [{x: x0, y: y0}, {x: x1, y: y1}];
   }
 
-  // curve through the last two points
-  const i = points.length - 3;
-  ctx.quadraticCurveTo(
-    points[i][0],
-    points[i][1],
-    points[i + 1][0],
-    points[i + 1][1]
-  );
+  points = points.map(([x, y]) => ({x, y}));
+
+  points.forEach((point, i) => {
+    if (i == 0) {
+      ctx.moveTo(point.x, point.y);
+    } else {
+      const [A, B] = getCtrlPoint(points, i - 1);
+      ctx.bezierCurveTo(A.x, A.y, B.x, B.y, point.x, point.y);
+    }
+  });
 }
 
 export default function install({use, utils, registerNodeType}) {
@@ -96,6 +128,9 @@ export default function install({use, utils, registerNodeType}) {
       const {offsetX, offsetY} = evt;
       const pos = this.attr('points');
       const tolerance = this.attr('tolerance');
+
+      // return this.context.isPointInPath(this.path, offsetX, offsetY);
+
       return pCollision([offsetX, offsetY], pos, tolerance);
 
       function pCollision(point, points, dx = 6) {
@@ -147,7 +182,7 @@ export default function install({use, utils, registerNodeType}) {
         const path = new Path2D();
 
         if (smooth) {
-          drawSmoothCurve(path, this.points);
+          drawSmoothCurveLine(path, this.points);
         } else {
           this.points.forEach((point, i) => {
             if (i === 0) {
@@ -166,5 +201,6 @@ export default function install({use, utils, registerNodeType}) {
     }
   }
   registerNodeType('polyline', Polyline, false);
+
   return {Polyline};
 }
