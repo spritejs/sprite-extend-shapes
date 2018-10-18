@@ -166,28 +166,29 @@
     // layer.append(rect);
 
 
-    // const star = new Star();
-    // star.attr({
-    //   pos: [100, 400],
-    //   radius: 30,
-    //   color: 'red',
-    //   angles: 5,
-    //   bgcolor: '#eee',
-    //   fillColor: 'yellow',
-    // });
+    const star = new Star();
+    star.attr({
+      pos: [100, 400],
+      radius: 80,
+      innerRadius: 80,
+      color: 'red',
+      angles: 5,
+      bgcolor: '#eee',
+      fillColor: 'red',
+    });
 
-    // star.on('mouseenter', (evt) => {
-    //   star.attr('color', 'yellow');
-    //   evt.stopDispatch();
-    // });
+    star.on('mouseenter', (evt) => {
+      star.attr('fillColor', 'green');
+      evt.stopDispatch();
+    });
 
-    // star.on('mouseleave', (evt) => {
-    //   star.attr('color', null);
-    //   evt.stopDispatch();
-    // });
+    star.on('mouseleave', (evt) => {
+      star.attr('fillColor', 'red');
+      evt.stopDispatch();
+    });
 
 
-    // layer.append(star);
+    layer.append(star);
 
     // // 画弧线
     // const arc = new Arc();
@@ -315,29 +316,29 @@
     // layer.append(sector5);
 
 
-    // // const circle = new Circle();
-    // // circle.attr({
-    // //   pos: [400, 400],
-    // //   radius: 30,
-    // //   lineWidth: 1,
-    // //   color: 'red',
-    // //   bgcolor: '#eee',
-    // //   anticlockwise: true,
-    // // });
+    const circle = new Circle();
+    circle.attr({
+      pos: [400, 400],
+      radius: 30,
+      lineWidth: 1,
+      color: 'red',
+      bgcolor: '#eee',
+      anticlockwise: true,
+    });
 
-    // // window.circle = circle;
+    window.circle = circle;
 
-    // // circle.on('mouseenter', (evt) => {
-    // //   circle.attr('fillColor', 'yellow');
-    // //   evt.stopDispatch();
-    // // });
+    circle.on('mousemove', (evt) => {
+      circle.attr('radius', 60);
+      evt.stopDispatch();
+    });
 
-    // // circle.on('mouseleave', (evt) => {
-    // //   circle.attr('fillColor', null);
-    // //   evt.stopDispatch();
-    // // });
+    circle.on('mouseleave', (evt) => {
+      circle.attr('radius', 30);
+      evt.stopDispatch();
+    });
 
-    // // layer.append(circle);
+    layer.append(circle);
 
 
     // const ring = new Ring();
