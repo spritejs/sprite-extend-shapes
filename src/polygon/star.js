@@ -42,7 +42,7 @@ export default function install({use, utils, registerNodeType}) {
     return function(outerRadius, innerRadius) {
       const offsetX = outerRadius;
       const radAngle = -Math.PI / 2;
-      const radAlpha = (Math.PI * 2) / angles / 2;
+      const radAlpha = (Math.PI * 2) / angles;
 
       for (let i = 1; i <= pointsLength; i++) {
         const rad = radAlpha * i + radAngle;
