@@ -19,7 +19,7 @@ function drawSmoothCurveLine(ctx, points) {
     let x1;
     let y1;
 
-    if (i < 1) {
+    if(i < 1) {
       x0 = points[0].x + (points[1].x - points[0].x) * a;
       y0 = points[0].y + (points[1].y - points[0].y) * a;
     } else {
@@ -27,7 +27,7 @@ function drawSmoothCurveLine(ctx, points) {
       y0 = points[i].y + (points[i + 1].y - points[i - 1].y) * a;
     }
 
-    if (i > points.length - 3) {
+    if(i > points.length - 3) {
       const last = points.length - 1;
       x1 = points[last].x - (points[last].x - points[last - 1].x) * b;
       y1 = points[last].y - (points[last].y - points[last - 1].y) * b;
@@ -42,7 +42,7 @@ function drawSmoothCurveLine(ctx, points) {
   points = points.map(([x, y]) => ({x, y}));
 
   points.forEach((point, i) => {
-    if (i == 0) {
+    if(i === 0) {
       ctx.moveTo(point.x, point.y);
     } else {
       const [A, B] = getCtrlPoint(points, i - 1);
@@ -65,7 +65,7 @@ export default function install({use, utils, registerNodeType}) {
         lineCap: 'round',
         lineJoin: 'round',
         smooth: false,
-        tolerance: 6
+        tolerance: 6,
       });
     }
 
@@ -126,50 +126,20 @@ export default function install({use, utils, registerNodeType}) {
     pointCollision(evt) {
       super.pointCollision(evt);
       const {offsetX, offsetY} = evt;
-      const pos = this.attr('points');
-      const tolerance = this.attr('tolerance');
-
-      // return this.context.isPointInPath(this.path, offsetX, offsetY);
-
-      return pCollision([offsetX, offsetY], pos, tolerance);
-
-      function pCollision(point, points, dx = 6) {
-        // point:[x,y];  points:[[x1,y1],[x2,y2],[x3,y3]]; 表示点 与线points是否重叠
-        const [x, y] = point;
-        const resP = points.reduce((res, item, ind, arr) => {
-          // 两个点放到一起表示一根线，方便后续计算点到该线段距离
-          if (ind > 0) {
-            res.push([arr[ind - 1], arr[ind]]);
-          }
-          return res;
-        }, []);
-        let isPoint = false;
-        for (let i = 0; i < resP.length; i += 1) {
-          let [[x1, y1], [x2, y2]] = resP[i];
-          const [x0, y0] = [x - x1, y - y1];
-          [x1, y1] = [x2 - x1, y2 - y1];
-          [x2, y2] = [x - x2, y - y2];
-          /* eslint-disable no-mixed-operators */
-          let dis = Math.abs(x0 * y1 - y0 * x1) / Math.sqrt(x1 ** 2 + y1 ** 2);
-          const projection = (x0 * x1 + y0 * y1) * (x1 * x2 + y1 * y2);
-          if (projection > 0) {
-            dis = Math.min(
-              Math.sqrt(x0 ** 2 + y0 ** 2),
-              Math.sqrt(x2 ** 2 + y2 ** 2)
-            );
-          }
-          if (dis < dx) {
-            isPoint = true;
-            break;
-          }
-        }
-        return isPoint;
+      const cecheLineWidth = this.context.lineWidth; // 获取当前画布的lineWidth宽度
+      const tolerance = this.attr('tolerance'); // 线条点击的容差像素值，默认6px
+      this.context.lineWidth = this.attr('lineWidth') + tolerance; // 点击范围为线条加上容差值，方便碰撞检测
+      let res = false;
+      if(this.context && this.path && this.context.isPointInStroke(this.path, offsetX, offsetY)) {
+        res = true;
       }
+      this.context.lineWidth = cecheLineWidth; // 还原当前画布的lineWidth宽度
+      return res;
     }
 
     render(t, drawingContext) {
       super.render(t, drawingContext);
-      if (this.points) {
+      if(this.points) {
         drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
         drawingContext.lineJoin = this.attr('lineJoin');
         drawingContext.lineCap = this.attr('lineCap');
@@ -178,23 +148,19 @@ export default function install({use, utils, registerNodeType}) {
         drawingContext.lineDashOffset = this.attr('lineDashOffset');
         drawingContext.beginPath();
         const smooth = this.attr('smooth');
-
         const path = new Path2D();
-
-        if (smooth) {
+        if(smooth) {
           drawSmoothCurveLine(path, this.points);
         } else {
           this.points.forEach((point, i) => {
-            if (i === 0) {
+            if(i === 0) {
               path.moveTo(...point);
             } else {
               path.lineTo(...point);
             }
           });
         }
-
         drawingContext.stroke(path);
-
         this.path = path;
       }
       return drawingContext;
