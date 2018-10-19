@@ -19,7 +19,7 @@ function drawSmoothCurveLine(ctx, points) {
     let x1;
     let y1;
 
-    if (i < 1) {
+    if(i < 1) {
       x0 = points[0].x + (points[1].x - points[0].x) * a;
       y0 = points[0].y + (points[1].y - points[0].y) * a;
     } else {
@@ -27,7 +27,7 @@ function drawSmoothCurveLine(ctx, points) {
       y0 = points[i].y + (points[i + 1].y - points[i - 1].y) * a;
     }
 
-    if (i > points.length - 3) {
+    if(i > points.length - 3) {
       const last = points.length - 1;
       x1 = points[last].x - (points[last].x - points[last - 1].x) * b;
       y1 = points[last].y - (points[last].y - points[last - 1].y) * b;
@@ -42,7 +42,7 @@ function drawSmoothCurveLine(ctx, points) {
   points = points.map(([x, y]) => ({x, y}));
 
   points.forEach((point, i) => {
-    if (i === 0) {
+    if(i === 0) {
       ctx.moveTo(point.x, point.y);
     } else {
       const [A, B] = getCtrlPoint(points, i - 1);
@@ -62,7 +62,7 @@ export default function install({use, utils, registerNodeType}) {
         points: null,
         close: false,
         smooth: false,
-        tolerance: 6
+        tolerance: 6,
       });
     }
 
@@ -107,20 +107,23 @@ export default function install({use, utils, registerNodeType}) {
       const tolerance = this.attr('tolerance'); // 线条点击的容差像素值，默认6px
       this.context.lineWidth = this.attr('lineWidth') + tolerance; // 点击范围为线条加上容差值，方便碰撞检测
       let res = false;
-      if (
-        this.context &&
-        this.path &&
-        this.context.isPointInStroke(this.path, offsetX, offsetY)
+      if(
+        this.context
+        && this.path
+        && (this.context.isPointInStroke(this.path, offsetX, offsetY) || this.context.isPointInPath(this.path, offsetX, offsetY)) // 如果是闭合曲线，判断是否点击到闭合曲线内部
       ) {
         res = true;
       }
+      // if(this.attr('close')) {
+      //   console.log('close');
+      // }
       this.context.lineWidth = cecheLineWidth; // 还原当前画布的lineWidth宽度
       return res;
     }
 
     render(t, drawingContext) {
       super.render(t, drawingContext);
-      if (this.points) {
+      if(this.points) {
         drawingContext.fillStyle = this.attr('fillColor');
         drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
         drawingContext.lineJoin = this.attr('lineJoin');
@@ -131,11 +134,11 @@ export default function install({use, utils, registerNodeType}) {
 
         const smooth = this.attr('smooth');
         const path = new Path2D();
-        if (smooth) {
+        if(smooth) {
           drawSmoothCurveLine(path, this.points);
         } else {
           this.points.forEach((point, i) => {
-            if (i === 0) {
+            if(i === 0) {
               path.moveTo(...point);
             } else {
               path.lineTo(...point);
@@ -143,7 +146,7 @@ export default function install({use, utils, registerNodeType}) {
           });
         }
 
-        if (this.attr('close')) {
+        if(this.attr('close')) {
           path.closePath();
         }
 
