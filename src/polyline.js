@@ -52,7 +52,7 @@ function drawSmoothCurveLine(ctx, points) {
 }
 
 export default function install({use, utils, registerNodeType}) {
-  const {attr, parseColorString, findColor} = utils;
+  const {attr, findColor} = utils;
   const {Shape} = use(ShapePlugin, null, false);
 
   class PolylineAttr extends Shape.Attr {
@@ -108,9 +108,10 @@ export default function install({use, utils, registerNodeType}) {
       this.context.lineWidth = this.attr('lineWidth') + tolerance; // 点击范围为线条加上容差值，方便碰撞检测
       let res = false;
       if(
-        this.context
-        && this.path
-        && (this.context.isPointInStroke(this.path, offsetX, offsetY) || this.context.isPointInPath(this.path, offsetX, offsetY)) // 如果是闭合曲线，判断是否点击到闭合曲线内部
+        this.path
+        && (this.context.isPointInStroke(this.path, offsetX, offsetY)
+          || (this.attr('close') && this.context.isPointInPath(this.path, offsetX, offsetY))
+        ) // 如果是闭合曲线，判断是否点击到闭合曲线内部
       ) {
         res = true;
       }
