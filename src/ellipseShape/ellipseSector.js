@@ -14,7 +14,7 @@ export default function install({use, utils, registerNodeType}) {
         startAngle: 0,
         endAngle: 0,
         color: 'rgba(0,0,0,1)',
-        fillColor: null,
+        fillColor: 'transparent',
         lineWidth: 1,
         anticlockwise: false
       });
@@ -134,7 +134,10 @@ export default function install({use, utils, registerNodeType}) {
     pointCollision(evt) {
       if (super.pointCollision(evt)) {
         const {offsetX, offsetY} = evt;
-        return this.context.isPointInPath(this.path, offsetX, offsetY);
+        return (
+          this.context.isPointInPath(this.path, offsetX, offsetY) ||
+          this.context.isPointInStroke(this.path, offsetX, offsetY)
+        );
       }
     }
 
@@ -173,11 +176,8 @@ export default function install({use, utils, registerNodeType}) {
       );
       path.closePath();
 
-      if (this.attr('fillColor')) {
-        ctx.fill(path);
-      } else {
-        ctx.stroke(path);
-      }
+      ctx.fill(path);
+      ctx.stroke(path);
 
       this.path = path;
 

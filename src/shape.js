@@ -1,13 +1,17 @@
 export default function install({BaseSprite, utils}) {
-  const {attr} = utils;
+  const {attr, parseColorString} = utils;
 
   class ShapeAttr extends BaseSprite.Attr {
     constructor(subject) {
       super(subject);
       this.setDefault({
+        color: '#000',
+        fillColor: 'transparent',
         lineWidth: 0,
+        lineCap: 'round',
+        lineJoin: 'round',
         lineDash: [0, 0],
-        lineDashOffset: 2
+        lineDashOffset: 0
       });
     }
 
@@ -15,6 +19,18 @@ export default function install({BaseSprite, utils}) {
     set lineWidth(val) {
       this.clearCache();
       this.set('lineWidth', val);
+    }
+
+    @attr
+    set lineCap(val) {
+      this.clearCache();
+      this.set('lineCap', val);
+    }
+
+    @attr
+    set lineJoin(val) {
+      this.clearCache();
+      this.set('lineJoin', val);
     }
 
     @attr
@@ -27,6 +43,13 @@ export default function install({BaseSprite, utils}) {
     set lineDashOffset(val) {
       this.clearCache();
       this.set('lineDashOffset', val);
+    }
+
+    @attr
+    set fillColor(val) {
+      val = parseColorString(val);
+      this.clearCache();
+      this.set('fillColor', val);
     }
   }
 

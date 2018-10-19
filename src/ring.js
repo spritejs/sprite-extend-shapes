@@ -1,7 +1,7 @@
 import ShapePlugin from './shape';
 
 export default function install({use, utils, registerNodeType}) {
-  const {attr, flow, parseColorString, findColor} = utils;
+  const {attr, flow, findColor} = utils;
   const {Shape} = use(ShapePlugin, null, false);
 
   // const Shape = BaseSprite
@@ -15,9 +15,7 @@ export default function install({use, utils, registerNodeType}) {
         startAngle: 0,
         endAngle: 360,
         center: [0, 0],
-        color: 'rgba(255,0,0,1)',
-        fillColor: 'rgba(255, 0, 0, 1)',
-        boxSizing: 'border-box',
+        lineWidth: 1,
         maxRadius: 0 // 当需要绘制多个环且环的半径不一致,为了统一圆心,所设属性
       });
     }
@@ -57,20 +55,6 @@ export default function install({use, utils, registerNodeType}) {
       this.clearCache();
       this.clearFlow();
       this.set('endAngle', val);
-    }
-
-    @attr
-    set color(val) {
-      val = parseColorString(val);
-      this.clearCache();
-      this.set('color', val);
-    }
-
-    @attr
-    set fillColor(val) {
-      val = parseColorString(val);
-      this.clearCache();
-      this.set('fillColor', val);
     }
 
     @attr

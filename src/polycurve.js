@@ -1,7 +1,7 @@
 import ShapePlugin from './shape';
 
 export default function install({use, utils, registerNodeType}) {
-  const {attr, parseColorString, findColor} = utils;
+  const {attr, findColor} = utils;
   const {Shape} = use(ShapePlugin, null, false);
 
   class PolycurveAttr extends Shape.Attr {
@@ -9,11 +9,7 @@ export default function install({use, utils, registerNodeType}) {
       super(subject);
       this.setDefault({
         points: [],
-        startPoint: [0, 0],
-        color: 'rgba(0,0,0,1)',
-        lineWidth: 1,
-        lineCap: 'round',
-        lineJoin: 'round'
+        startPoint: [0, 0]
       });
     }
 
@@ -30,31 +26,6 @@ export default function install({use, utils, registerNodeType}) {
       this.clearFlow();
       this.set('startPoint', val);
     }
-
-    @attr
-    set color(val) {
-      val = parseColorString(val);
-      this.clearCache();
-      this.set('color', val);
-    }
-
-    @attr
-    set lineWidth(val) {
-      this.clearCache();
-      this.set('lineWidth', val);
-    }
-
-    @attr
-    set lineCap(val) {
-      this.clearCache();
-      this.set('lineCap', val);
-    }
-
-    @attr
-    set lineJoin(val) {
-      this.clearCache();
-      this.set('lineJoin', val);
-    }
   }
 
   class Polycurve extends Shape {
@@ -68,28 +39,45 @@ export default function install({use, utils, registerNodeType}) {
       return true;
     }
 
-    render(t, drawingContext) {
-      super.render(t, drawingContext);
+    // FIXME: 碰撞检测
+    pointCollision(evt) {
+      if (super.pointCollision(evt)) {
+        const {offsetX, offsetY} = evt;
+        return (
+          this.context.isPointInPath(this.path, offsetX, offsetY) ||
+          this.context.isPointInStroke(this.path, offsetX, offsetY)
+        );
+      }
+    }
+
+    render(t, ctx) {
+      super.render(t, ctx);
       const startPoint = this.attr('startPoint');
       const points = this.points;
 
-      drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
-      drawingContext.lineJoin = this.attr('lineJoin');
-      drawingContext.lineCap = this.attr('lineCap');
-      drawingContext.lineWidth = this.attr('lineWidth');
-      drawingContext.setLineDash(this.attr('lineDash'));
-      drawingContext.lineDashOffset = this.attr('lineDashOffset');
+      ctx.fillStyle = this.attr('fillColor');
+      ctx.strokeStyle = findColor(ctx, this, 'color');
+      ctx.lineJoin = this.attr('lineJoin');
+      ctx.lineCap = this.attr('lineCap');
+      ctx.lineWidth = this.attr('lineWidth');
+      ctx.setLineDash(this.attr('lineDash'));
+      ctx.lineDashOffset = this.attr('lineDashOffset');
 
-      drawingContext.moveTo(...startPoint);
+      const path = new Path2D();
+      path.moveTo(...startPoint);
 
+      /* eslint-disable arrow-parens */
       points.forEach(point => {
         const [cp1x, cp1y, cp2x, cp2y, x, y] = point;
-        drawingContext.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+        path.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
       });
 
-      drawingContext.stroke();
+      ctx.fill(path);
+      ctx.stroke(path);
 
-      return drawingContext;
+      this.path = path;
+
+      return ctx;
     }
   }
   registerNodeType('polycurve', Polycurve, false);

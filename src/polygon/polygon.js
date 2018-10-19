@@ -1,10 +1,10 @@
 import ShapePlugin from '../shape';
 
-export default function install({BaseSprite, utils, registerNodeType}) {
+export default function install({use, utils, registerNodeType}) {
   const {attr, flow, parseColorString, findColor} = utils;
-  // const {Shape} = use(ShapePlugin, null, false);
+  const {Shape} = use(ShapePlugin, null, false);
 
-  class PolygonAttr extends BaseSprite.Attr {
+  class PolygonAttr extends Shape.Attr {
     constructor(subject) {
       super(subject);
       this.setDefault({
@@ -43,7 +43,7 @@ export default function install({BaseSprite, utils, registerNodeType}) {
     }
   }
 
-  class Polygon extends BaseSprite {
+  class Polygon extends Shape {
     static Attr = PolygonAttr;
 
     // get lineBoundings() {
@@ -135,7 +135,10 @@ export default function install({BaseSprite, utils, registerNodeType}) {
     pointCollision(evt) {
       if (super.pointCollision(evt)) {
         const {offsetX, offsetY} = evt;
-        return this.context.isPointInPath(this.path, offsetX, offsetY);
+        return (
+          this.context.isPointInPath(this.path, offsetX, offsetY) ||
+          this.context.isPointInStroke(this.path, offsetX, offsetY)
+        );
       }
     }
 
@@ -153,8 +156,8 @@ export default function install({BaseSprite, utils, registerNodeType}) {
         drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
         drawingContext.miterLimit = 3;
         drawingContext.lineWidth = this.attr('lineWidth');
-        // drawingContext.setLineDash(this.attr('lineDash'));
-        // drawingContext.lineDashOffset = this.attr('lineDashOffset');
+        drawingContext.setLineDash(this.attr('lineDash'));
+        drawingContext.lineDashOffset = this.attr('lineDashOffset');
 
         // drawingContext.beginPath();
         const path = new Path2D();
@@ -169,11 +172,8 @@ export default function install({BaseSprite, utils, registerNodeType}) {
 
         path.closePath();
 
-        if (this.attr('fillColor')) {
-          drawingContext.fill(path);
-        } else {
-          drawingContext.stroke(path);
-        }
+        drawingContext.fill(path);
+        drawingContext.stroke(path);
 
         this.path = path;
       }

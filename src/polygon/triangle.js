@@ -1,7 +1,6 @@
 import PolygonPlugin from './polygon';
 
 export default function install({use, utils, registerNodeType}) {
-  const {attr, flow, parseColorString, findColor} = utils;
   const {Polygon} = use(PolygonPlugin, null, false);
 
   class Triangle extends Polygon {

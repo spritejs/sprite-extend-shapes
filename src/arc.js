@@ -1,7 +1,7 @@
 import ShapePlugin from './shape';
 
 export default function install({use, utils, registerNodeType}) {
-  const {attr, parseColorString, findColor} = utils;
+  const {attr, findColor} = utils;
   const {Shape} = use(ShapePlugin, null, false);
 
   const getDist = (p1, p2) => {
@@ -20,12 +20,10 @@ export default function install({use, utils, registerNodeType}) {
     constructor(subject) {
       super(subject);
       this.setDefault({
-        center: null,
+        center: [0, 0],
         startPoint: [0, 0],
         angel: 0,
-        anticlockwise: false,
-        color: '#000',
-        lineWidth: 1,
+        anticlockwise: false
       });
     }
 
@@ -60,21 +58,6 @@ export default function install({use, utils, registerNodeType}) {
       this.clearFlow();
       this.set('anticlockwise', val);
     }
-
-    // 线条颜色
-    @attr
-    set color(val) {
-      val = parseColorString(val);
-      this.clearCache();
-      this.set('color', val);
-    }
-
-    // 线宽
-    @attr
-    set lineWidth(val) {
-      this.clearCache();
-      this.set('lineWidth', val);
-    }
   }
 
   class Arc extends Shape {
@@ -85,7 +68,7 @@ export default function install({use, utils, registerNodeType}) {
     }
 
     render(t, ctx) {
-      if(this.attr('center')) {
+      if (this.attr('center')) {
         const [cx, cy] = this.attr('center');
         const [sx, sy] = this.attr('startPoint');
         const radius = getDist([cx, cy], [sx, sy]);
@@ -101,9 +84,10 @@ export default function install({use, utils, registerNodeType}) {
         ctx.setLineDash(this.attr('lineDash'));
         ctx.lineDashOffset = this.attr('lineDashOffset');
 
-        ctx.beginPath();
-        ctx.arc(cx, cy, radius, startAngle, endAngle, anticlockwise);
-        ctx.stroke();
+        const path = new Path2D();
+        path.arc(cx, cy, radius, startAngle, endAngle, anticlockwise);
+        ctx.stroke(path);
+        this.path = path;
       } else {
         console.error('center must be given when drawing an arc!');
       }
