@@ -18,7 +18,6 @@ function drawSmoothCurveLine(ctx, points) {
     let y0;
     let x1;
     let y1;
-
     if(i < 1) {
       x0 = points[0].x + (points[1].x - points[0].x) * a;
       y0 = points[0].y + (points[1].y - points[0].y) * a;
@@ -26,7 +25,6 @@ function drawSmoothCurveLine(ctx, points) {
       x0 = points[i].x + (points[i + 1].x - points[i - 1].x) * a;
       y0 = points[i].y + (points[i + 1].y - points[i - 1].y) * a;
     }
-
     if(i > points.length - 3) {
       const last = points.length - 1;
       x1 = points[last].x - (points[last].x - points[last - 1].x) * b;
@@ -35,12 +33,9 @@ function drawSmoothCurveLine(ctx, points) {
       x1 = points[i + 1].x - (points[i + 2].x - points[i].x) * b;
       y1 = points[i + 1].y - (points[i + 2].y - points[i].y) * b;
     }
-
     return [{x: x0, y: y0}, {x: x1, y: y1}];
   }
-
   points = points.map(([x, y]) => ({x, y}));
-
   points.forEach((point, i) => {
     if(i === 0) {
       ctx.moveTo(point.x, point.y);
@@ -50,7 +45,6 @@ function drawSmoothCurveLine(ctx, points) {
     }
   });
 }
-
 export default function install({use, utils, registerNodeType}) {
   const {attr, findColor} = utils;
   const {Shape} = use(ShapePlugin, null, false);
@@ -156,6 +150,5 @@ export default function install({use, utils, registerNodeType}) {
     }
   }
   registerNodeType('polyline', Polyline, false);
-
   return {Polyline};
 }
