@@ -114,9 +114,6 @@ export default function install({use, utils, registerNodeType}) {
       ) {
         res = true;
       }
-      // if(this.attr('close')) {
-      //   console.log('close');
-      // }
       this.context.lineWidth = cecheLineWidth; // 还原当前画布的lineWidth宽度
       return res;
     }
