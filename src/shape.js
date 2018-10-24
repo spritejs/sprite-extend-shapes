@@ -5,13 +5,13 @@ export default function install({BaseSprite, utils}) {
     constructor(subject) {
       super(subject);
       this.setDefault({
-        color: '#000',
+        color: 'transparent',
         fillColor: 'transparent',
         lineWidth: 0,
         lineCap: 'round',
         lineJoin: 'round',
         lineDash: [0, 0],
-        lineDashOffset: 0
+        lineDashOffset: 0,
       });
     }
 

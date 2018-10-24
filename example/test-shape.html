@@ -52,8 +52,8 @@
       color: {
         vector: [0, 0, 150, 150],
         colors: [
-          { offset: 0, color: 'red' },
-          { offset: 1, color: 'green' },
+          {offset: 0, color: 'red'},
+          {offset: 1, color: 'green'},
         ],
       },
       lineWidth: 1,
@@ -73,8 +73,8 @@
       color: {
         vector: [0, 0, 150, 150],
         colors: [
-          { offset: 0, color: 'red' },
-          { offset: 1, color: 'blue' },
+          {offset: 0, color: 'red'},
+          {offset: 1, color: 'blue'},
         ],
       },
       lineWidth: 1,
@@ -104,8 +104,8 @@
       polygon.attr('color', {
         vector: [0, 0, 150, 150],
         colors: [
-          { offset: 0, color: 'red' },
-          { offset: 1, color: 'green' },
+          {offset: 0, color: 'red'},
+          {offset: 1, color: 'green'},
         ],
       });
       evt.stopDispatch();
@@ -195,7 +195,7 @@
       angle: Math.PI / 2,
       bgcolor: 'green',
     });
-    arc.on('click', () => alert('click arc'))
+    arc.on('click', () => alert('click arc'));
     layer.append(arc);
 
 
@@ -204,7 +204,7 @@
       pos: [280, 400],
       center: [0, 0],
       startAngle: 0,
-      endAngle: Math.PI * .3,
+      endAngle: Math.PI * 0.3,
       radius: 90,
       lineWidth: 1,
       fillColor: 'orange',
@@ -360,16 +360,16 @@
         [10, -10, 20, 50, 0, 0],
       ],
       lineWidth: 5,
-      fillColor: 'red'
+      fillColor: 'red',
     });
 
     polycurve.on('mouseenter', () => {
-      polycurve.attr('fillColor', 'yellow')
-    })
+      polycurve.attr('fillColor', 'yellow');
+    });
 
     polycurve.on('mouseleave', () => {
-      polycurve.attr('fillColor', 'red')
-    })
+      polycurve.attr('fillColor', 'red');
+    });
 
     layer.append(polycurve);
   </script>
