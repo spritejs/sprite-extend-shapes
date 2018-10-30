@@ -9,7 +9,7 @@ export default function install({use, utils, registerNodeType}) {
       super(subject);
       this.setDefault({
         angle: '90',
-        sides: [10, 10]
+        sides: [10, 10],
       });
     }
 

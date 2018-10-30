@@ -9,9 +9,9 @@ export default function install({use, utils, registerNodeType}) {
       super(subject);
       this.setDefault({
         points: [],
-        color: 'rgba(0,0,0,1)',
-        fillColor: null,
-        lineWidth: 1
+        color: 'transparent',
+        fillColor: 'transparent',
+        lineWidth: 1,
       });
     }
 
@@ -102,10 +102,10 @@ export default function install({use, utils, registerNodeType}) {
       const lw = this.attr('lineWidth');
       let [width, height] = this.attrSize;
 
-      if (width === '') {
+      if(width === '') {
         width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
       }
-      if (height === '') {
+      if(height === '') {
         height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
       }
 
@@ -133,11 +133,11 @@ export default function install({use, utils, registerNodeType}) {
     }
 
     pointCollision(evt) {
-      if (super.pointCollision(evt)) {
+      if(super.pointCollision(evt)) {
         const {offsetX, offsetY} = evt;
         return (
-          this.context.isPointInPath(this.path, offsetX, offsetY) ||
-          this.context.isPointInStroke(this.path, offsetX, offsetY)
+          this.context.isPointInPath(this.path, offsetX, offsetY)
+          || this.context.isPointInStroke(this.path, offsetX, offsetY)
         );
       }
     }
@@ -145,7 +145,7 @@ export default function install({use, utils, registerNodeType}) {
     render(t, drawingContext) {
       super.render(t, drawingContext);
 
-      if (this.points.length) {
+      if(this.points.length) {
         const bounds = this.lineBoundings;
         const lw = this.attr('lineWidth');
         drawingContext.translate(
@@ -163,7 +163,7 @@ export default function install({use, utils, registerNodeType}) {
         const path = new Path2D();
 
         this.points.forEach((point, i) => {
-          if (i === 0) {
+          if(i === 0) {
             path.moveTo(...point);
           } else {
             path.lineTo(...point);
