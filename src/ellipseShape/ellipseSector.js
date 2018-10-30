@@ -13,7 +13,7 @@ export default function install({use, utils, registerNodeType}) {
         center: [0, 0],
         startAngle: 0,
         endAngle: 0,
-        color: 'rgba(0,0,0,1)',
+        color: 'transparent',
         fillColor: 'transparent',
         lineWidth: 1,
         anticlockwise: false,
