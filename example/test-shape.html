@@ -52,8 +52,8 @@
       color: {
         vector: [0, 0, 150, 150],
         colors: [
-          {offset: 0, color: 'red'},
-          {offset: 1, color: 'green'},
+          { offset: 0, color: 'red' },
+          { offset: 1, color: 'green' },
         ],
       },
       lineWidth: 1,
@@ -73,8 +73,8 @@
       color: {
         vector: [0, 0, 150, 150],
         colors: [
-          {offset: 0, color: 'red'},
-          {offset: 1, color: 'blue'},
+          { offset: 0, color: 'red' },
+          { offset: 1, color: 'blue' },
         ],
       },
       lineWidth: 1,
@@ -104,8 +104,8 @@
       polygon.attr('color', {
         vector: [0, 0, 150, 150],
         colors: [
-          {offset: 0, color: 'red'},
-          {offset: 1, color: 'green'},
+          { offset: 0, color: 'red' },
+          { offset: 1, color: 'green' },
         ],
       });
       evt.stopDispatch();
@@ -192,7 +192,10 @@
     arc.attr({
       pos: [420, 400],
       center: [20, 0],
-      angle: Math.PI / 2,
+      radius: 20,
+      lineWidth: 5,
+      startAngle: Math.PI * 0.8,
+      endAngle: Math.PI * 2.2,
       bgcolor: 'green',
     });
     arc.on('click', () => alert('click arc'));

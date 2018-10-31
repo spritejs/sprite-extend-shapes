@@ -23,6 +23,9 @@ export default function install({use, utils, registerNodeType}) {
         center: [0, 0],
         startPoint: [0, 0],
         angel: 0,
+        radius: 0,
+        startAngle: 0,
+        endAngle: Math.PI * 2,
         anticlockwise: false
       });
     }
@@ -51,6 +54,27 @@ export default function install({use, utils, registerNodeType}) {
       this.set('angle', angle);
     }
 
+    @attr
+    set radius(val) {
+      this.clearCache();
+      this.clearFlow();
+      this.set('radius', val);
+    }
+
+    @attr
+    set startAngle(val) {
+      this.clearCache();
+      this.clearFlow();
+      this.set('startAngle', val);
+    }
+
+    @attr
+    set endAngle(val) {
+      this.clearCache();
+      this.clearFlow();
+      this.set('endAngle', val);
+    }
+
     // 旋转方向
     @attr
     set anticlockwise(val) {
@@ -67,18 +91,33 @@ export default function install({use, utils, registerNodeType}) {
       return true;
     }
 
+    get startAngle() {
+      return this.attr('startAngle');
+    }
+
+    get endAngle() {
+      return this.attr('endAngle');
+    }
+
     render(t, ctx) {
       if (this.attr('center')) {
         const [cx, cy] = this.attr('center');
-        const [sx, sy] = this.attr('startPoint');
-        const radius = getDist([cx, cy], [sx, sy]);
-        const anticlockwise = this.attr('anticlockwise');
-        const angle = this.attr('angle');
-        const startAngle = getRotationAngle([cx, cy], [sx, sy]);
-        const endAngle = anticlockwise
-          ? startAngle - angle
-          : startAngle + angle;
 
+        const startAngle = this.startAngle;
+        const endAngle = this.endAngle;
+        const radius = this.attr('radius');
+
+        // const [sx, sy] = this.attr('startPoint');
+        // const radius = getDist([cx, cy], [sx, sy]);
+        const anticlockwise = this.attr('anticlockwise');
+        // const angle = this.attr('angle');
+        // const startAngle = getRotationAngle([cx, cy], [sx, sy]);
+        // const endAngle = anticlockwise
+        //   ? startAngle - angle
+        //   : startAngle + angle;
+
+        ctx.lineCap = this.attr('lineCap');
+        ctx.lineJoin = this.attr('lineJoin');
         ctx.lineWidth = this.attr('lineWidth');
         ctx.strokeStyle = findColor(ctx, this, 'color');
         ctx.setLineDash(this.attr('lineDash'));
