@@ -6,7 +6,7 @@ export default {
       sides: [20, 40],
       angle: '40',
       fillColor: 'yellow',
-      bgcolor: '#eee'
-    }
-  }
+      bgcolor: '#eee',
+    },
+  },
 };

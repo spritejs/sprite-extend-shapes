@@ -7,7 +7,7 @@ export default {
       radius: 30,
       lineWidth: 5,
       bgcolor: 'yellow',
-      color: 'red'
-    }
-  }
+      color: 'red',
+    },
+  },
 };

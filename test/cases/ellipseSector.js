@@ -11,7 +11,7 @@ export default {
       bgcolor: '#eee',
       fillColor: 'red',
       center: [0, 0],
-      anticlockwise: true
+      anticlockwise: true,
     },
     noellipse: {
       pos: [100, 100],
@@ -22,7 +22,7 @@ export default {
       lineWidth: 1,
       color: 'red',
       bgcolor: '#eee',
-      noellipse: true
-    }
-  }
+      noellipse: true,
+    },
+  },
 };

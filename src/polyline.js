@@ -57,7 +57,7 @@ export default function install({use, utils, registerNodeType}) {
         points: null,
         close: false,
         smooth: false,
-        tolerance: 6
+        tolerance: 6,
       });
     }
 
@@ -103,10 +103,10 @@ export default function install({use, utils, registerNodeType}) {
       this.context.lineWidth = this.attr('lineWidth') + tolerance; // 点击范围为线条加上容差值，方便碰撞检测
       let res = false;
       if (
-        this.path &&
-        (this.context.isPointInStroke(this.path, offsetX, offsetY) ||
-          (this.attr('close') &&
-            this.context.isPointInPath(this.path, offsetX, offsetY))) // 如果是闭合曲线，判断是否点击到闭合曲线内部
+        this.path
+        && (this.context.isPointInStroke(this.path, offsetX, offsetY)
+          || (this.attr('close')
+            && this.context.isPointInPath(this.path, offsetX, offsetY))) // 如果是闭合曲线，判断是否点击到闭合曲线内部
       ) {
         res = true;
       }

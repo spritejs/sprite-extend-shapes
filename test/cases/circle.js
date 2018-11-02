@@ -6,7 +6,7 @@ export default {
       lineWidth: 5,
       color: 'red',
       bgcolor: '#eee',
-      anticlockwise: true
+      anticlockwise: true,
     },
     noellipse: {
       pos: [100, 100],
@@ -14,7 +14,7 @@ export default {
       lineWidth: 5,
       color: 'red',
       bgcolor: '#eee',
-      anticlockwise: true
-    }
-  }
+      anticlockwise: true,
+    },
+  },
 };

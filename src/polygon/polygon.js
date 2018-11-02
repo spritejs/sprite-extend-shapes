@@ -9,9 +9,6 @@ export default function install({use, utils, registerNodeType}) {
       super(subject);
       this.setDefault({
         points: [],
-        color: 'transparent',
-        fillColor: 'transparent',
-        lineWidth: 1
       });
     }
 
@@ -136,8 +133,8 @@ export default function install({use, utils, registerNodeType}) {
       if (super.pointCollision(evt)) {
         const {offsetX, offsetY} = evt;
         return (
-          this.context.isPointInPath(this.path, offsetX, offsetY) ||
-          this.context.isPointInStroke(this.path, offsetX, offsetY)
+          this.context.isPointInPath(this.path, offsetX, offsetY)
+          || this.context.isPointInStroke(this.path, offsetX, offsetY)
         );
       }
     }

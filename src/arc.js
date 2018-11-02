@@ -26,7 +26,7 @@ export default function install({use, utils, registerNodeType}) {
         radius: 0,
         startAngle: 0,
         endAngle: Math.PI * 2,
-        anticlockwise: false
+        anticlockwise: false,
       });
     }
 

@@ -16,7 +16,7 @@ export default function install({use, utils, registerNodeType}) {
         endAngle: 360,
         center: [0, 0],
         lineWidth: 1,
-        maxRadius: 0 // 当需要绘制多个环且环的半径不一致,为了统一圆心,所设属性
+        maxRadius: 0, // 当需要绘制多个环且环的半径不一致,为了统一圆心,所设属性
       });
     }
 
@@ -178,7 +178,7 @@ export default function install({use, utils, registerNodeType}) {
       ctx.strokeStyle = findColor(ctx, this, 'color');
       ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
-      let [x, y] = this.attr('center');
+      const [x, y] = this.attr('center');
       let maxRadius = this.attr('maxRadius');
 
       if (maxRadius <= 0) {
