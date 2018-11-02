@@ -12,6 +12,7 @@ export default function install({BaseSprite, utils}) {
         lineJoin: 'round',
         lineDash: [0, 0],
         lineDashOffset: 0,
+        enableCache: false,
       });
     }
 
