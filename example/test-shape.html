@@ -122,6 +122,7 @@
       color: 'red',
       sides: [80, 80],
       angle: 60,
+      anchor: [0, 1],
       fillColor: 'yellow',
       bgcolor: '#eee',
     });
@@ -267,6 +268,7 @@
       endAngle: Math.PI * 2,
       radius: 80,
       lineWidth: 1,
+      anchor: [-.5, 0],
       // fillColor: 'yellow',
       bgcolor: '#eee',
       color: 'red',
@@ -280,13 +282,13 @@
 
     sector5.on('mouseenter', (evt) => {
       // sector5.attr('radiusX', 120);
-      sector5.attr('radius', 120);
+      // sector5.attr('radius', 120);
       sector5.attr('fillColor', 'yellow');
       evt.stopDispatch();
     });
 
     sector5.on('mouseleave', (evt) => {
-      sector5.attr('radius', 80);
+      // sector5.attr('radius', 80);
       sector5.attr('fillColor', null);
       evt.stopDispatch();
     });
@@ -301,6 +303,7 @@
       radius: 30,
       lineWidth: 1,
       color: 'red',
+      anchor: [-.5, 0],
       bgcolor: '#eee',
       anticlockwise: true,
     });

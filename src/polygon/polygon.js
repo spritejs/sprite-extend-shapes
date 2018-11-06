@@ -8,7 +8,7 @@ export default function install({use, utils, registerNodeType}) {
     constructor(subject) {
       super(subject);
       this.setDefault({
-        points: [],
+        points: []
       });
     }
 
@@ -131,10 +131,16 @@ export default function install({use, utils, registerNodeType}) {
 
     pointCollision(evt) {
       if (super.pointCollision(evt)) {
-        const {offsetX, offsetY} = evt;
+        let {offsetX, offsetY} = evt;
+        const [anchorX, anchorY] = this.attr('anchor');
+        const [width, height] = this.contentSize;
+
+        offsetX += width * anchorX;
+        offsetY += height * anchorY;
+
         return (
-          this.context.isPointInPath(this.path, offsetX, offsetY)
-          || this.context.isPointInStroke(this.path, offsetX, offsetY)
+          this.context.isPointInPath(this.path, offsetX, offsetY) ||
+          this.context.isPointInStroke(this.path, offsetX, offsetY)
         );
       }
     }

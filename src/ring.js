@@ -16,7 +16,7 @@ export default function install({use, utils, registerNodeType}) {
         endAngle: 360,
         center: [0, 0],
         lineWidth: 1,
-        maxRadius: 0, // 当需要绘制多个环且环的半径不一致,为了统一圆心,所设属性
+        maxRadius: 0 // 当需要绘制多个环且环的半径不一致,为了统一圆心,所设属性
       });
     }
 
@@ -126,7 +126,13 @@ export default function install({use, utils, registerNodeType}) {
 
     pointCollision(evt) {
       if (super.pointCollision(evt)) {
-        const {offsetX, offsetY} = evt;
+        let {offsetX, offsetY} = evt;
+        const [anchorX, anchorY] = this.attr('anchor');
+        const [width, height] = this.contentSize;
+
+        offsetX += width * anchorX;
+        offsetY += height * anchorY;
+
         let r = this.attr('maxRadius');
         let offset = this.attr('outerRadius'); // 偏移量
 
@@ -134,7 +140,7 @@ export default function install({use, utils, registerNodeType}) {
           r = offset;
         }
 
-        offset = r - offset; // 如果未设置　maxRadius， 偏移量应当为　０
+        offset = r - offset; // 如果未设置maxRadius，偏移量应当０
         const r0 = this.attr('innerRadius');
         const startAngle = this.attr('startAngle');
         const endAngle = this.attr('endAngle');
