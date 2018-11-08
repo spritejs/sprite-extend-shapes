@@ -14,7 +14,7 @@ export default function install({use, utils, registerNodeType}) {
       attr.clearCache();
       attr.clearFlow();
       attr.set('radius', val);
-    }
+    },
   });
 
   registerNodeType('sector', Sector, false);

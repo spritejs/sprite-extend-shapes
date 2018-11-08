@@ -6,7 +6,7 @@ export default {
       lineWidth: 3,
       color: 'red',
       lineCap: 'round',
-      lineJoin: 'round'
-    }
-  }
+      lineJoin: 'round',
+    },
+  },
 };

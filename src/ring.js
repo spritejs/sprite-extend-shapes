@@ -126,7 +126,13 @@ export default function install({use, utils, registerNodeType}) {
 
     pointCollision(evt) {
       if (super.pointCollision(evt)) {
-        const {offsetX, offsetY} = evt;
+        let {offsetX, offsetY} = evt;
+        const [anchorX, anchorY] = this.attr('anchor');
+        const [width, height] = this.contentSize;
+
+        offsetX += width * anchorX;
+        offsetY += height * anchorY;
+
         let r = this.attr('maxRadius');
         let offset = this.attr('outerRadius'); // 偏移量
 
@@ -134,7 +140,7 @@ export default function install({use, utils, registerNodeType}) {
           r = offset;
         }
 
-        offset = r - offset; // 如果未设置　maxRadius， 偏移量应当为　０
+        offset = r - offset; // 如果未设置maxRadius，偏移量应当０
         const r0 = this.attr('innerRadius');
         const startAngle = this.attr('startAngle');
         const endAngle = this.attr('endAngle');
@@ -178,7 +184,7 @@ export default function install({use, utils, registerNodeType}) {
       ctx.strokeStyle = findColor(ctx, this, 'color');
       ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
-      let [x, y] = this.attr('center');
+      const [x, y] = this.attr('center');
       let maxRadius = this.attr('maxRadius');
 
       if (maxRadius <= 0) {

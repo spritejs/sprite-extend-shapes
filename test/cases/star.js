@@ -6,7 +6,7 @@ export default {
       color: 'red',
       angles: 5,
       bgcolor: '#eee',
-      fillColor: 'yellow'
+      fillColor: 'yellow',
     },
     innerRadius: {
       pos: [100, 100],
@@ -15,7 +15,7 @@ export default {
       color: 'red',
       angles: 5,
       bgcolor: '#eee',
-      fillColor: 'yellow'
-    }
-  }
+      fillColor: 'yellow',
+    },
+  },
 };

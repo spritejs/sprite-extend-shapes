@@ -8,7 +8,7 @@ export default {
       endAngle: Math.PI * 0.7,
       lineWidth: 1,
       color: 'red',
-      bgcolor: '#eee'
-    }
-  }
+      bgcolor: '#eee',
+    },
+  },
 };

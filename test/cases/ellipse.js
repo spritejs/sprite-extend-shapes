@@ -1,5 +1,5 @@
 export default {
   ellipse: {
-    default: {}
-  }
+    default: {},
+  },
 };

@@ -8,7 +8,7 @@ export default function install({use, utils, registerNodeType}) {
     constructor(subject) {
       super(subject);
       this.setDefault({
-        angles: 5
+        angles: 5,
       });
     }
 
@@ -39,7 +39,7 @@ export default function install({use, utils, registerNodeType}) {
     const points = [];
     const pointsLength = angles * 2;
 
-    return function(outerRadius, innerRadius) {
+    return function (outerRadius, innerRadius) {
       const offsetX = outerRadius;
       const radAngle = -Math.PI / 2;
       const radAlpha = (Math.PI * 2) / angles;
