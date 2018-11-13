@@ -5,7 +5,7 @@ import ShapePlugin from './shape';
  * @param {*} ctx 绘制上下文,如:Context2D
  * @param {*} points 绘制点
  */
-function drawSmoothCurveLine(ctx, points) {
+function drawSmoothCurveLine(ctx, points, drawingContext) {
   /**
    * 获取 模拟贝塞尔曲线关键控制点
    * @param {*} i
@@ -17,6 +17,15 @@ function drawSmoothCurveLine(ctx, points) {
     let y0;
     let x1;
     let y1;
+
+    if (points[i].x === points[i + 1].x || points[i].y === points[i + 1].y) {
+      a = 0;
+      b = 0;
+      // drawingContext.lineWidth = 0;
+      // drawingContext.stroke(ctx);
+    } else {
+      // drawingContext.lineWidth = 20;
+    }
 
     if (i < 1) {
       x0 = points[0].x + (points[1].x - points[0].x) * a;
@@ -61,7 +70,7 @@ export default function install({use, utils, registerNodeType}) {
         points: null,
         close: false,
         smooth: false,
-        tolerance: 6
+        tolerance: 6,
       });
     }
 
@@ -107,10 +116,10 @@ export default function install({use, utils, registerNodeType}) {
       this.context.lineWidth = this.attr('lineWidth') + tolerance; // 点击范围为线条加上容差值，方便碰撞检测
       let res = false;
       if (
-        this.path &&
-        (this.context.isPointInStroke(this.path, offsetX, offsetY) ||
-          (this.attr('close') &&
-            this.context.isPointInPath(this.path, offsetX, offsetY))) // 如果是闭合曲线，判断是否点击到闭合曲线内部
+        this.path
+        && (this.context.isPointInStroke(this.path, offsetX, offsetY)
+          || (this.attr('close')
+            && this.context.isPointInPath(this.path, offsetX, offsetY))) // 如果是闭合曲线，判断是否点击到闭合曲线内部
       ) {
         res = true;
       }
@@ -131,8 +140,12 @@ export default function install({use, utils, registerNodeType}) {
 
         const smooth = this.attr('smooth');
         const path = new Path2D();
+
         if (smooth) {
-          drawSmoothCurveLine(path, this.points);
+          drawSmoothCurveLine(path, this.points, drawingContext);
+          // path.moveTo(200, 140);
+          // path.lineTo(0, 140);
+          // path.lineTo(0, 70);
         } else {
           this.points.forEach((point, i) => {
             if (i === 0) {

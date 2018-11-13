@@ -1,383 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #container {
+        width: 1200px;
+        height: 600px;
+        background: #aaa;
+      }
+    </style>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <style>
-    #container {
-      width: 1200px;
-      height: 600px;
-      background: #aaa;
-    }
-  </style>
-</head>
+  <body>
+    <div id="container">
+      <!-- <canvas width="1200" height="600"></canvas> -->
+    </div>
+    <script src="https://unpkg.com/spritejs/dist/spritejs.min.js"></script>
+    <!-- <script src="/js/spritejs.js"></script> -->
+    <script src="/js/sprite-extend-shapes.js"></script>
+    <script>
+      const {
+        Scene,
+        Layer,
+        Sprite,
+        Polygon,
+        Polyline,
+        Triangle,
+        Rect,
+        Star,
+        Arc,
+        Sector,
+        Circle,
+        Ring,
+        Ellipse,
+        EllipseSector,
+        Polycurve
+      } = spritejs;
 
-<body>
-  <div id="container">
-    <!-- <canvas width="1200" height="600"></canvas> -->
-  </div>
-  <script src="https://unpkg.com/spritejs/dist/spritejs.min.js"></script>
-  <!-- <script src="/js/spritejs.js"></script> -->
-  <script src="/js/sprite-extend-shapes.js"></script>
-  <script>
-    const {
-      Scene,
-      Layer,
-      Sprite,
-      Polygon,
-      Polyline,
-      Triangle,
-      Rect,
-      Star,
-      Arc,
-      Sector,
-      Circle,
-      Ring,
-      Ellipse,
-      EllipseSector,
-      Polycurve,
-    } = spritejs;
-
-    const scene = new Scene('#container', {
-      resolution: [1200, 600],
-    });
-    const layer = scene.layer();
-
-    const polyline = new Polyline();
-    polyline.attr({
-      pos: [50, 50],
-      color: {
-        vector: [0, 0, 150, 150],
-        colors: [
-          { offset: 0, color: 'red' },
-          { offset: 1, color: 'green' },
-        ],
-      },
-      lineWidth: 1,
-      points: [[0, 70], [50, 44], [100, 20], [150, 80], [200, 90]],
-      tolerance: 7,
-      bgcolor: '#eee',
-      // smooth: true
-    });
-    polyline.on('click', () => alert('click'));
-    polyline.on('mousemove', evt => console.log('move: ', evt));
-
-    layer.append(polyline);
-
-    const polyline2 = new Polyline();
-    polyline2.attr({
-      pos: [50, 160],
-      color: {
-        vector: [0, 0, 150, 150],
-        colors: [
-          { offset: 0, color: 'red' },
-          { offset: 1, color: 'blue' },
-        ],
-      },
-      lineWidth: 1,
-      points: [[0, 70], [50, 44], [100, 20], [150, 80], [200, 90]],
-      tolerance: 7,
-      bgcolor: '#eee',
-      smooth: true,
-      // close: true,
-    });
-    polyline2.on('click', () => alert('click2'));
-    polyline2.on('mousemove', evt => console.log('move: ', evt));
-    layer.append(polyline2);
-
-    const polygon = new Polygon();
-    polygon.attr({
-      pos: [400, 100],
-      fillColor: 'yellow',
-      points: [
-        [0, 0],
-        [100, 100],
-        [200, -50],
-      ],
-      bgcolor: '#eee',
-    });
-
-    polygon.on('mouseenter', (evt) => {
-      polygon.attr('color', {
-        vector: [0, 0, 150, 150],
-        colors: [
-          { offset: 0, color: 'red' },
-          { offset: 1, color: 'green' },
-        ],
+      const scene = new Scene('#container', {
+        resolution: [1200, 600]
       });
-      evt.stopDispatch();
-    });
-    polygon.on('mouseleave', (evt) => {
-      polygon.attr('color', null);
-      evt.stopDispatch();
-    });
-    layer.append(polygon);
+      const layer = scene.layer();
 
-    const triangle = new Triangle();
-    triangle.attr({
-      pos: [700, 100],
-      color: 'red',
-      sides: [80, 80],
-      angle: 60,
-      anchor: [0, 1],
-      fillColor: 'yellow',
-      bgcolor: '#eee',
-    });
+      const polyline = new Polyline();
+      polyline.attr({
+        pos: [50, 50],
+        color: {
+          vector: [0, 0, 150, 150],
+          colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}]
+        },
+        lineWidth: 1,
+        points: [[0, 70], [50, 44], [100, 20], [150, 80], [200, 90]],
+        tolerance: 7,
+        bgcolor: '#eee',
+        close: true
+        // smooth: true
+      });
+      polyline.on('click', () => alert('click'));
+      polyline.on('mousemove', evt => console.log('move: ', evt));
 
-    triangle.on('mouseenter', (evt) => {
-      triangle.attr('color', 'yellow');
-      evt.stopDispatch();
-    });
+      layer.append(polyline);
 
-    triangle.on('mouseleave', (evt) => {
-      triangle.attr('color', 'red');
-      evt.stopDispatch();
-    });
+      const polyline2 = new Polyline();
+      polyline2.attr({
+        pos: [50, 160],
+        color: {
+          vector: [0, 0, 150, 150],
+          colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'blue'}]
+        },
+        lineWidth: 1,
+        points: [
+          [-1, 140],
+          [0, 70],
+          [50, 44],
+          [100, 20],
+          [150, 80],
+          [200, 100],
+          [200, 141]
+        ],
+        tolerance: 7,
+        bgcolor: '#eee',
+        fillColor: 'red',
+        smooth: true,
+        close: true
+      });
+      polyline2.on('click', () => alert('click2'));
+      polyline2.on('mousemove', evt => console.log('move: ', evt));
+      layer.append(polyline2);
 
-    layer.append(triangle);
+      const polygon = new Polygon();
+      polygon.attr({
+        pos: [400, 100],
+        fillColor: 'yellow',
+        points: [
+          [0, 140],
+          [0, 70],
+          [50, 44],
+          [100, 20],
+          [150, 80],
+          [200, 100],
+          [200, 140]
+        ],
+        smooth: [1, 5]
+        // bgcolor: '#eee'
+      });
 
+      polygon.on('mouseenter', evt => {
+        polygon.attr('color', {
+          vector: [0, 0, 150, 150],
+          colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}]
+        });
+        evt.stopDispatch();
+      });
+      polygon.on('mouseleave', evt => {
+        polygon.attr('color', null);
+        evt.stopDispatch();
+      });
 
-    const rect = new Rect();
-    rect.attr({
-      pos: [1000, 100],
-      color: 'red',
-      size: [100, 100],
-      fillColor: 'yellow',
-      bgcolor: '#eee',
-    });
+      layer.append(polygon);
 
-    rect.on('mouseenter', (evt) => {
-      rect.attr('color', 'yellow');
-      evt.stopDispatch();
-    });
+      const triangle = new Triangle();
+      triangle.attr({
+        pos: [700, 100],
+        color: 'red',
+        sides: [80, 80],
+        angle: 60,
+        anchor: [0, 1],
+        fillColor: 'yellow',
+        bgcolor: '#eee'
+      });
 
-    rect.on('mouseleave', (evt) => {
-      rect.attr('color', 'red');
-      evt.stopDispatch();
-    });
+      triangle.on('mouseenter', evt => {
+        triangle.attr('color', 'yellow');
+        evt.stopDispatch();
+      });
 
-    layer.append(rect);
+      triangle.on('mouseleave', evt => {
+        triangle.attr('color', 'red');
+        evt.stopDispatch();
+      });
 
+      layer.append(triangle);
 
-    const star = new Star();
-    star.attr({
-      pos: [50, 400],
-      radius: 40,
-      innerRadius: 40,
-      color: '#000',
-      lineWidth: 4,
-      angles: 5,
-      bgcolor: '#eee',
-      fillColor: 'red',
-    });
+      const rect = new Rect();
+      rect.attr({
+        pos: [1000, 100],
+        color: 'red',
+        size: [100, 100],
+        fillColor: 'yellow',
+        bgcolor: '#eee'
+      });
 
-    star.on('mouseenter', (evt) => {
-      star.attr('fillColor', 'green');
-      evt.stopDispatch();
-    });
+      rect.on('mouseenter', evt => {
+        rect.attr('color', 'yellow');
+        evt.stopDispatch();
+      });
 
-    star.on('mouseleave', (evt) => {
-      star.attr('fillColor', 'red');
-      evt.stopDispatch();
-    });
+      rect.on('mouseleave', evt => {
+        rect.attr('color', 'red');
+        evt.stopDispatch();
+      });
 
+      layer.append(rect);
 
-    layer.append(star);
+      const star = new Star();
+      star.attr({
+        pos: [50, 400],
+        radius: 40,
+        innerRadius: 40,
+        color: '#000',
+        lineWidth: 4,
+        angles: 5,
+        bgcolor: '#eee',
+        fillColor: 'red'
+      });
 
-    // 画弧线
-    const arc = new Arc();
-    arc.attr({
-      pos: [420, 400],
-      center: [20, 0],
-      radius: 20,
-      lineWidth: 5,
-      startAngle: Math.PI * 0.8,
-      endAngle: Math.PI * 2.2,
-      bgcolor: 'green',
-    });
-    arc.on('click', () => alert('click arc'));
-    layer.append(arc);
+      star.on('mouseenter', evt => {
+        star.attr('fillColor', 'green');
+        evt.stopDispatch();
+      });
 
+      star.on('mouseleave', evt => {
+        star.attr('fillColor', 'red');
+        evt.stopDispatch();
+      });
 
-    const sector = new Sector();
-    sector.attr({
-      pos: [280, 400],
-      center: [0, 0],
-      startAngle: 0,
-      endAngle: Math.PI * 0.3,
-      radius: 90,
-      lineWidth: 1,
-      fillColor: 'orange',
-      bgcolor: '#eee',
-      color: 'red',
-    });
+      layer.append(star);
 
+      // 画弧线
+      const arc = new Arc();
+      arc.attr({
+        pos: [420, 400],
+        center: [20, 0],
+        radius: 20,
+        lineWidth: 5,
+        startAngle: Math.PI * 0.8,
+        endAngle: Math.PI * 2.2,
+        bgcolor: 'green'
+      });
+      arc.on('click', () => alert('click arc'));
+      layer.append(arc);
 
-    layer.append(sector);
+      const sector = new Sector();
+      sector.attr({
+        pos: [280, 400],
+        center: [0, 0],
+        startAngle: 0,
+        endAngle: Math.PI * 0.3,
+        radius: 90,
+        lineWidth: 1,
+        fillColor: 'orange',
+        bgcolor: '#eee',
+        color: 'red'
+      });
 
-    const sector2 = new Sector();
-    sector2.attr({
-      pos: [280, 400],
-      center: [0, 0],
-      startAngle: Math.PI * 0.3,
-      endAngle: Math.PI * 0.9,
-      radius: 90,
-      lineWidth: 1,
-      // bgcolor: 'green',
-      bgcolor: '#eee',
-      color: 'red',
-    });
-    layer.append(sector2);
+      layer.append(sector);
 
-    const sector3 = new Sector();
-    sector3.attr({
-      pos: [280, 400],
-      center: [0, 0],
-      startAngle: Math.PI * 0.9,
-      endAngle: Math.PI * 1.3,
-      radius: 90,
-      lineWidth: 1,
-      // bgcolor: 'green',
-      bgcolor: '#eee',
-      color: 'red',
-    });
-    layer.append(sector3);
+      const sector2 = new Sector();
+      sector2.attr({
+        pos: [280, 400],
+        center: [0, 0],
+        startAngle: Math.PI * 0.3,
+        endAngle: Math.PI * 0.9,
+        radius: 90,
+        lineWidth: 1,
+        // bgcolor: 'green',
+        bgcolor: '#eee',
+        color: 'red'
+      });
+      layer.append(sector2);
 
+      const sector3 = new Sector();
+      sector3.attr({
+        pos: [280, 400],
+        center: [0, 0],
+        startAngle: Math.PI * 0.9,
+        endAngle: Math.PI * 1.3,
+        radius: 90,
+        lineWidth: 1,
+        // bgcolor: 'green',
+        bgcolor: '#eee',
+        color: 'red'
+      });
+      layer.append(sector3);
 
-    const sector4 = new Sector();
-    sector4.attr({
-      pos: [280, 400],
-      center: [0, 0],
-      startAngle: Math.PI * 1.3,
-      endAngle: Math.PI * 1.6,
-      radius: 90,
-      lineWidth: 1,
-      // bgcolor: 'green',
-      bgcolor: '#eee',
-      color: 'red',
-    });
-    layer.append(sector4);
+      const sector4 = new Sector();
+      sector4.attr({
+        pos: [280, 400],
+        center: [0, 0],
+        startAngle: Math.PI * 1.3,
+        endAngle: Math.PI * 1.6,
+        radius: 90,
+        lineWidth: 1,
+        // bgcolor: 'green',
+        bgcolor: '#eee',
+        color: 'red'
+      });
+      layer.append(sector4);
 
-    const sector5 = new Sector();
-    sector5.attr({
-      pos: [280, 400],
-      startAngle: Math.PI * 1.6,
-      endAngle: Math.PI * 2,
-      radius: 80,
-      lineWidth: 1,
-      anchor: [-.5, 0],
-      // fillColor: 'yellow',
-      bgcolor: '#eee',
-      color: 'red',
-      lineWidth: 1,
-    });
+      const sector5 = new Sector();
+      sector5.attr({
+        pos: [280, 400],
+        startAngle: Math.PI * 1.6,
+        endAngle: Math.PI * 2,
+        radius: 80,
+        lineWidth: 1,
+        anchor: [-0.5, 0],
+        // fillColor: 'yellow',
+        bgcolor: '#eee',
+        color: 'red',
+        lineWidth: 1
+      });
 
+      sector5.on('click', evt => {
+        console.log('enter: ', evt);
+      });
 
-    sector5.on('click', (evt) => {
-      console.log('enter: ', evt);
-    });
+      sector5.on('mouseenter', evt => {
+        // sector5.attr('radiusX', 120);
+        // sector5.attr('radius', 120);
+        sector5.attr('fillColor', 'yellow');
+        evt.stopDispatch();
+      });
 
-    sector5.on('mouseenter', (evt) => {
-      // sector5.attr('radiusX', 120);
-      // sector5.attr('radius', 120);
-      sector5.attr('fillColor', 'yellow');
-      evt.stopDispatch();
-    });
+      sector5.on('mouseleave', evt => {
+        // sector5.attr('radius', 80);
+        sector5.attr('fillColor', null);
+        evt.stopDispatch();
+      });
 
-    sector5.on('mouseleave', (evt) => {
-      // sector5.attr('radius', 80);
-      sector5.attr('fillColor', null);
-      evt.stopDispatch();
-    });
+      layer.append(sector5);
 
+      const circle = new Circle();
+      circle.attr({
+        pos: [500, 400],
+        radius: 30,
+        lineWidth: 1,
+        color: 'red',
+        anchor: [-0.5, 0],
+        bgcolor: '#eee',
+        anticlockwise: true
+      });
 
-    layer.append(sector5);
+      circle.on('mousemove', evt => {
+        circle.attr('radius', 60);
+        evt.stopDispatch();
+      });
 
+      circle.on('mouseleave', evt => {
+        circle.attr('radius', 30);
+        evt.stopDispatch();
+      });
 
-    const circle = new Circle();
-    circle.attr({
-      pos: [500, 400],
-      radius: 30,
-      lineWidth: 1,
-      color: 'red',
-      anchor: [-.5, 0],
-      bgcolor: '#eee',
-      anticlockwise: true,
-    });
+      layer.append(circle);
 
-    circle.on('mousemove', (evt) => {
-      circle.attr('radius', 60);
-      evt.stopDispatch();
-    });
+      const ring4 = new Ring();
+      ring4.attr({
+        pos: [600, 400],
 
-    circle.on('mouseleave', (evt) => {
-      circle.attr('radius', 30);
-      evt.stopDispatch();
-    });
+        innerRadius: 15,
+        outerRadius: 50,
+        fillColor: 'green',
+        startAngle: Math.PI * 0.8,
+        endAngle: Math.PI * 1.4,
+        lineWidth: 0,
+        bgcolor: '#eee'
+      });
+      layer.append(ring4);
 
-    layer.append(circle);
+      const ring2 = new Ring();
+      ring2.attr({
+        pos: [600, 400],
+        // bgcolor: '#eee',
+        innerRadius: 15,
+        outerRadius: 40,
+        maxRadius: 50,
+        fillColor: 'blue',
+        startAngle: Math.PI * 0.8,
+        endAngle: Math.PI * 1.4,
+        lineWidth: 0
+      });
+      ring2.on('mouseenter', evt => {
+        ring2.attr('fillColor', 'yellow');
+        evt.stopDispatch();
+      });
 
-    const ring4 = new Ring();
-    ring4.attr({
-      pos: [600, 400],
+      ring2.on('mouseleave', evt => {
+        ring2.attr('fillColor', 'blue');
+        evt.stopDispatch();
+      });
+      layer.append(ring2);
 
-      innerRadius: 15,
-      outerRadius: 50,
-      fillColor: 'green',
-      startAngle: Math.PI * 0.8,
-      endAngle: Math.PI * 1.4,
-      lineWidth: 0,
-      bgcolor: '#eee',
-    });
-    layer.append(ring4);
+      const polycurve = new Polycurve();
+      polycurve.attr({
+        pos: [900, 500],
+        points: [[0, -10, 110, 50, -20, 40], [10, -10, 20, 50, 0, 0]],
+        lineWidth: 5,
+        fillColor: 'red'
+      });
 
-    const ring2 = new Ring();
-    ring2.attr({
-      pos: [600, 400],
-      // bgcolor: '#eee',
-      innerRadius: 15,
-      outerRadius: 40,
-      maxRadius: 50,
-      fillColor: 'blue',
-      startAngle: Math.PI * 0.8,
-      endAngle: Math.PI * 1.4,
-      lineWidth: 0,
-    });
-    ring2.on('mouseenter', (evt) => {
-      ring2.attr('fillColor', 'yellow');
-      evt.stopDispatch();
-    });
+      polycurve.on('mouseenter', () => {
+        polycurve.attr('fillColor', 'yellow');
+      });
 
-    ring2.on('mouseleave', (evt) => {
-      ring2.attr('fillColor', 'blue');
-      evt.stopDispatch();
-    });
-    layer.append(ring2);
+      polycurve.on('mouseleave', () => {
+        polycurve.attr('fillColor', 'red');
+      });
 
-    const polycurve = new Polycurve();
-    polycurve.attr({
-      pos: [900, 500],
-      points: [
-        [0, -10, 110, 50, -20, 40],
-        [10, -10, 20, 50, 0, 0],
-      ],
-      lineWidth: 5,
-      fillColor: 'red',
-    });
-
-    polycurve.on('mouseenter', () => {
-      polycurve.attr('fillColor', 'yellow');
-    });
-
-    polycurve.on('mouseleave', () => {
-      polycurve.attr('fillColor', 'red');
-    });
-
-    layer.append(polycurve);
-  </script>
-</body>
-
+      layer.append(polycurve);
+    </script>
+  </body>
 </html>
