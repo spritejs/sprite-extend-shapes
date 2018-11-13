@@ -223,7 +223,7 @@ export default function install({use, utils, registerNodeType}) {
         // drawingContext.beginPath();
         const path = new Path2D();
         let smooth = this.attr('smooth');
-        const points = JSON.parse(JSON.stringify(this.points));
+        const points = this.points.slice(0, this.points.length);
         if (smooth) {
           if (!smooth.length) {
             smooth = [0, points.length - 1];
@@ -245,10 +245,10 @@ export default function install({use, utils, registerNodeType}) {
           for (let i = 0; i < smoothStart; i++) {
             path.lineTo(points[i][0], points[i][1]);
           }
-          const smoothPoints = points.slice(smoothStart, smoothEnd);
+          const smoothPoints = points.slice(smoothStart, smoothEnd + 1);
           drawSmoothCurveLine(path, smoothPoints);
-          beforeSmoothPoints.push(...points.slice(smoothEnd + 1));
-          for (let i = smoothEnd; i < points.length; i++) {
+
+          for (let i = smoothEnd + 1; i < points.length; i++) {
             path.lineTo(points[i][0], points[i][1]);
           }
           let len = beforeSmoothPoints.length;
