@@ -198,7 +198,6 @@ export default function install({use, utils, registerNodeType}) {
 
         offsetX += width * anchorX;
         offsetY += height * anchorY;
-
         return (
           this.context.isPointInPath(this.path, offsetX, offsetY)
           || this.context.isPointInStroke(this.path, offsetX, offsetY)
@@ -208,7 +207,6 @@ export default function install({use, utils, registerNodeType}) {
 
     render(t, drawingContext) {
       super.render(t, drawingContext);
-
       if (this.points.length) {
         const bounds = this.lineBoundings;
         const lw = this.attr('lineWidth');
@@ -222,10 +220,8 @@ export default function install({use, utils, registerNodeType}) {
         drawingContext.lineWidth = this.attr('lineWidth');
         drawingContext.setLineDash(this.attr('lineDash'));
         drawingContext.lineDashOffset = this.attr('lineDashOffset');
-
         // drawingContext.beginPath();
         const path = new Path2D();
-
         let smooth = this.attr('smooth');
         const points = JSON.parse(JSON.stringify(this.points));
         if (smooth) {
@@ -233,7 +229,6 @@ export default function install({use, utils, registerNodeType}) {
             smooth = [0, points.length - 1];
           }
         }
-
         // 绘制光滑曲线（直线）
         if (!smooth) {
           points.forEach((point, i) => {
@@ -246,35 +241,24 @@ export default function install({use, utils, registerNodeType}) {
         } else {
           const smoothStart = smooth[0];
           const smoothEnd = smooth[1];
-
-          const beforeSmoothPoints = JSON.parse(
-            JSON.stringify(points.slice(0, smoothStart))
-          );
-
+          const beforeSmoothPoints = points.slice(0, smoothStart);
           for (let i = 0; i < smoothStart; i++) {
-            points[i] = points[smoothStart];
+            path.lineTo(points[i][0], points[i][1]);
           }
-
-          drawSmoothCurveLine(path, this.points);
-
+          const smoothPoints = points.slice(smoothStart, smoothEnd);
+          drawSmoothCurveLine(path, smoothPoints);
           beforeSmoothPoints.push(...points.slice(smoothEnd + 1));
-
           for (let i = smoothEnd; i < points.length; i++) {
             path.lineTo(points[i][0], points[i][1]);
           }
-
           let len = beforeSmoothPoints.length;
-
           while (len--) {
             path.lineTo(beforeSmoothPoints[len][0], beforeSmoothPoints[len][1]);
           }
         }
-
         path.closePath();
-
         drawingContext.fill(path);
         drawingContext.stroke(path);
-
         this.path = path;
       }
       return drawingContext;
