@@ -42,7 +42,7 @@ export function install(spritejs) {
   }, {});
 }
 
-export const shapes = [
+export const shapes = {
   Shape,
   Polyline,
   Polycurve,
@@ -57,4 +57,4 @@ export const shapes = [
   EllipseArc,
   Circle,
   Ring,
-];
+};
