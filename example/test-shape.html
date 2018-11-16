@@ -91,10 +91,33 @@
       polyline2.on('mousemove', evt => console.log('move: ', evt));
       layer.append(polyline2);
 
+      const polyline3 = new Polyline();
+      polyline3.attr({
+        pos: [400, 100],
+        color: {
+          vector: [0, 0, 150, 150],
+          colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'blue'}]
+        },
+        lineWidth: 1,
+        points: [
+          // [0, 140],
+          [0, 70],
+          [50, 60],
+          [100, 20],
+          [150, 80],
+          [200, 100]
+          // [200, 140]
+        ],
+        tolerance: 7,
+        bgcolor: '#eee',
+        smooth: true
+      });
+      layer.append(polyline3);
+
       const polygon = new Polygon();
       polygon.attr({
         pos: [400, 100],
-        fillColor: 'yellow',
+        fillColor: 'rgba(255, 255, 0, 0.5)',
         points: [
           [0, 140],
           [0, 70],
@@ -109,7 +132,7 @@
           [50, 130],
           [0, 140]
         ],
-        smooth: true
+        smooth: [1, 5]
         // bgcolor: '#eee'
       });
 
@@ -212,14 +235,14 @@
       const sector = new Sector();
       sector.attr({
         pos: [280, 400],
-        center: [0, 0],
+        // center: [0, 0],
         startAngle: 0,
         endAngle: Math.PI * 0.3,
         radius: 90,
-        lineWidth: 1,
+        lineWidth: 10,
         fillColor: 'orange',
         bgcolor: '#eee',
-        color: 'red'
+        color: '#fff'
       });
 
       layer.append(sector);
@@ -227,57 +250,61 @@
       const sector2 = new Sector();
       sector2.attr({
         pos: [280, 400],
-        center: [0, 0],
+        // center: [0, 0],
         startAngle: Math.PI * 0.3,
         endAngle: Math.PI * 0.9,
         radius: 90,
-        lineWidth: 1,
+        lineWidth: 10,
         // bgcolor: 'green',
         bgcolor: '#eee',
-        color: 'red'
+        fillColor: 'orange',
+        color: '#fff'
       });
       layer.append(sector2);
 
       const sector3 = new Sector();
       sector3.attr({
         pos: [280, 400],
-        center: [0, 0],
+        // center: [0, 0],
         startAngle: Math.PI * 0.9,
         endAngle: Math.PI * 1.3,
         radius: 90,
-        lineWidth: 1,
+        lineWidth: 10,
         // bgcolor: 'green',
         bgcolor: '#eee',
-        color: 'red'
+        fillColor: 'orange',
+        color: '#fff'
       });
       layer.append(sector3);
 
       const sector4 = new Sector();
       sector4.attr({
         pos: [280, 400],
-        center: [0, 0],
+        // center: [0, 0],
         startAngle: Math.PI * 1.3,
         endAngle: Math.PI * 1.6,
         radius: 90,
-        lineWidth: 1,
+        lineWidth: 10,
         // bgcolor: 'green',
         bgcolor: '#eee',
-        color: 'red'
+        fillColor: 'orange',
+        color: '#fff'
       });
       layer.append(sector4);
 
       const sector5 = new Sector();
       sector5.attr({
         pos: [280, 400],
-        startAngle: Math.PI * 1.6,
+        startAngle: Math.PI * 2,
         endAngle: Math.PI * 2,
         radius: 80,
         lineWidth: 1,
-        anchor: [-0.5, 0],
+        // anchor: [-0.5, 0],
         // fillColor: 'yellow',
         bgcolor: '#eee',
-        color: 'red',
-        lineWidth: 1
+        color: '#fff',
+        fillColor: 'orange',
+        lineWidth: 10
       });
 
       sector5.on('click', evt => {

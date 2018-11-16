@@ -21,10 +21,6 @@ function drawSmoothCurveLine(ctx, points, drawingContext) {
     if (points[i].x === points[i + 1].x || points[i].y === points[i + 1].y) {
       a = 0;
       b = 0;
-      // drawingContext.lineWidth = 0;
-      // drawingContext.stroke(ctx);
-    } else {
-      // drawingContext.lineWidth = 20;
     }
 
     if (i < 1) {

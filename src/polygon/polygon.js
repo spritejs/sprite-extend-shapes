@@ -5,7 +5,7 @@ import ShapePlugin from '../shape';
  * @param {*} ctx 绘制上下文,如:Context2D
  * @param {*} points 绘制点
  */
-function drawSmoothCurveLine(ctx, points, drawingContext) {
+function drawSmoothCurveLine(ctx, points, smoothStart) {
   /**
    * 获取 模拟贝塞尔曲线关键控制点
    * @param {*} i
@@ -46,8 +46,12 @@ function drawSmoothCurveLine(ctx, points, drawingContext) {
   points = points.map(([x, y]) => ({x, y}));
 
   points.forEach((point, i) => {
-    if (i === 0) {
+    if (i === 0 && smoothStart === 0) {
+      // 从第0个点开始绘制曲线
       ctx.moveTo(point.x, point.y);
+    } else if (i === 0 && smoothStart !== 0) {
+      // 不是从第一个开始曲线
+      ctx.lineTo(point.x, point.y);
     } else {
       const [A, B] = getCtrlPoint(i - 1);
       ctx.bezierCurveTo(A.x, A.y, B.x, B.y, point.x, point.y);
@@ -239,22 +243,22 @@ export default function install({use, utils, registerNodeType}) {
             }
           });
         } else {
-          // const smoothStart = smooth[0];
-          // const smoothEnd = smooth[1];
-          // // const beforeSmoothPoints = points.slice(0, smoothStart);
-          // for (let i = 0; i < smoothStart; i++) {
-          //   if (i === 0) {
-          //     path.moveTo(...points[0]);
-          //   } else {
-          //     path.lineTo(...points[i]);
-          //   }
-          // }
-          // const smoothPoints = points.slice(smoothStart, smoothEnd + 1);
-          drawSmoothCurveLine(path, points);
+          const smoothStart = smooth[0];
+          const smoothEnd = smooth[1];
+          // const beforeSmoothPoints = points.slice(0, smoothStart);
+          for (let i = 0; i < smoothStart; i++) {
+            if (i === 0) {
+              path.moveTo(...points[0]);
+            } else {
+              path.lineTo(...points[i]);
+            }
+          }
+          const smoothPoints = points.slice(smoothStart, smoothEnd + 1);
+          drawSmoothCurveLine(path, smoothPoints, smoothStart);
 
-          // for (let i = smoothEnd + 1; i < points.length; i++) {
-          //   path.lineTo(points[i][0], points[i][1]);
-          // }
+          for (let i = smoothEnd + 1; i < points.length; i++) {
+            path.lineTo(points[i][0], points[i][1]);
+          }
         }
         path.closePath();
         drawingContext.fill(path);

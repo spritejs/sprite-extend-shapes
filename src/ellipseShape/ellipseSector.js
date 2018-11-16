@@ -14,7 +14,7 @@ export default function install({use, utils, registerNodeType}) {
         startAngle: 0,
         endAngle: 0,
         lineWidth: 1,
-        anticlockwise: false
+        anticlockwise: false,
       });
     }
 
@@ -140,9 +140,9 @@ export default function install({use, utils, registerNodeType}) {
         offsetY += height * anchorY;
 
         return (
-          this.path &&
-          (this.context.isPointInPath(this.path, offsetX, offsetY) ||
-            this.context.isPointInStroke(this.path, offsetX, offsetY))
+          this.path
+          && (this.context.isPointInPath(this.path, offsetX, offsetY)
+            || this.context.isPointInStroke(this.path, offsetX, offsetY))
         );
       }
     }
@@ -161,6 +161,9 @@ export default function install({use, utils, registerNodeType}) {
 
       ctx.translate(this.radiuses[0], this.radiuses[1]);
 
+      const startAngle = this.startAngle;
+      const endAngle = this.endAngle;
+
       ctx.miterLimit = 3;
       ctx.lineWidth = this.attr('lineWidth');
       ctx.strokeStyle = findColor(ctx, this, 'color');
@@ -176,8 +179,8 @@ export default function install({use, utils, registerNodeType}) {
         rx,
         ry,
         0,
-        this.startAngle,
-        this.endAngle,
+        startAngle,
+        endAngle,
         this.attr('anticlockwise')
       );
       path.closePath();
