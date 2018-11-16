@@ -228,10 +228,8 @@ export default function install({use, utils, registerNodeType}) {
         const path = new Path2D();
         let smooth = this.attr('smooth');
         const points = this.points.slice(0, this.points.length);
-        if (smooth) {
-          if (!smooth.length) {
-            smooth = [0, points.length - 1];
-          }
+        if (smooth && !smooth.length) {
+          smooth = [0, points.length - 1];
         }
         // 绘制光滑曲线（直线）
         if (!smooth) {
@@ -243,20 +241,30 @@ export default function install({use, utils, registerNodeType}) {
             }
           });
         } else {
-          const smoothStart = smooth[0];
-          const smoothEnd = smooth[1];
-          // const beforeSmoothPoints = points.slice(0, smoothStart);
-          for (let i = 0; i < smoothStart; i++) {
-            if (i === 0) {
-              path.moveTo(...points[0]);
-            } else {
-              path.lineTo(...points[i]);
-            }
+          if (Object.prototype.toString.call(smooth[0]) !== '[object Array]') { // 如果不是多维数组，转成多维
+            smooth[0] = smooth;
           }
-          const smoothPoints = points.slice(smoothStart, smoothEnd + 1);
-          drawSmoothCurveLine(path, smoothPoints, smoothStart);
-
-          for (let i = smoothEnd + 1; i < points.length; i++) {
+          const startPos = points[0];
+          const endPos = points[points.length - 1];
+          if (startPos[0] !== endPos[0] || startPos[1] !== endPos[1]) {
+            points.push(points[0]);
+          }
+          let subIndex = 0;
+          smooth.forEach((arr, iind) => {
+            const smoothStart = arr[0];
+            const smoothEnd = arr[1];
+            for (let i = subIndex; i < smoothStart; i++) {
+              if (i === 0) { // 如果是所有线条的起始点
+                path.moveTo(...points[0]);
+              } else { // 如果是转换点
+                path.lineTo(...points[i]);
+              }
+            }
+            const smoothPoints = points.slice(smoothStart, smoothEnd + 1);
+            drawSmoothCurveLine(path, smoothPoints, smoothStart);
+            subIndex = smoothEnd;
+          });
+          for (let i = subIndex; i < points.length - 1; i++) { // 如果绘图未绘制到最后一个点
             path.lineTo(points[i][0], points[i][1]);
           }
         }
