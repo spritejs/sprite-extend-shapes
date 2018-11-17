@@ -242,7 +242,7 @@ export default function install({use, utils, registerNodeType}) {
           });
         } else {
           if (Object.prototype.toString.call(smooth[0]) !== '[object Array]') { // 如果不是多维数组，转成多维
-            smooth[0] = smooth;
+            smooth = [smooth];
           }
           const startPos = points[0];
           const endPos = points[points.length - 1];
