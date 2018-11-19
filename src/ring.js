@@ -4,8 +4,6 @@ export default function install({use, utils, registerNodeType}) {
   const {attr, flow, findColor} = utils;
   const {Shape} = use(ShapePlugin, null, false);
 
-  // const Shape = BaseSprite
-
   class RingAttr extends Shape.Attr {
     constructor(subject) {
       super(subject);
@@ -16,7 +14,7 @@ export default function install({use, utils, registerNodeType}) {
         endAngle: 360,
         center: [0, 0],
         lineWidth: 1,
-        maxRadius: 0 // 当需要绘制多个环且环的半径不一致,为了统一圆心,所设属性
+        maxRadius: 0, // 当需要绘制多个环且环的半径不一致,为了统一圆心,所设属性
       });
     }
 
@@ -197,30 +195,6 @@ export default function install({use, utils, registerNodeType}) {
         lineBoundings[3] / 2 - y + lw
       );
 
-      // ctx.translate(maxRadius - x + lw, maxRadius - y + lw); // 将绘制图形 移动到 lineBounds ,以免图形消失
-
-      // 下方代码为 Path2D 模拟画扇形（暂时不用）
-      // const r = outerRadius;
-      // const r0 = innerRadius;
-      // const unitX = Math.cos(startAngle);
-      // const unitY = Math.sin(startAngle);
-
-      // const path = new Path2D();
-
-      // path.moveTo(unitX * r0 + x, unitY * r0 + y);
-      // path.lineTo(unitX * r + x, unitY * r + y);
-      // path.arc(x, y, r, startAngle, endAngle, false);
-      // path.lineTo(Math.cos(endAngle) * r0 + x, Math.sin(endAngle) * r0 + y);
-
-      // if (r0 !== 0) {
-      //   path.arc(x, y, r0, endAngle, startAngle, true);
-      // }
-
-      // // this.path = path;
-      // ctx.fill(path);
-
-      // this.path = path;
-
       ctx.beginPath();
       ctx.arc(x, y, outerRadius, startAngle, endAngle, false);
       if (endAngle - startAngle === Math.PI * 2) {
@@ -229,11 +203,11 @@ export default function install({use, utils, registerNodeType}) {
       ctx.arc(x, y, innerRadius, endAngle, startAngle, true);
       ctx.closePath();
 
+      ctx.fill();
+
       if (lw > 0) {
         ctx.stroke();
       }
-
-      ctx.fill();
       return ctx;
     }
   }

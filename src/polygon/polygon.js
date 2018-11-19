@@ -196,7 +196,7 @@ export default function install({use, utils, registerNodeType}) {
 
     pointCollision(evt) {
       if (super.pointCollision(evt)) {
-        let {offsetX, offsetY} = evt;
+        let {offsetX = 0, offsetY = 0} = evt;
         const [anchorX, anchorY] = this.attr('anchor');
         const [width, height] = this.contentSize;
 
@@ -241,7 +241,8 @@ export default function install({use, utils, registerNodeType}) {
             }
           });
         } else {
-          if (Object.prototype.toString.call(smooth[0]) !== '[object Array]') { // 如果不是多维数组，转成多维
+          if (Object.prototype.toString.call(smooth[0]) !== '[object Array]') {
+            // 如果不是多维数组，转成多维
             smooth = [smooth];
           }
           const startPos = points[0];
@@ -254,9 +255,11 @@ export default function install({use, utils, registerNodeType}) {
             const smoothStart = arr[0];
             const smoothEnd = arr[1];
             for (let i = subIndex; i < smoothStart; i++) {
-              if (i === 0) { // 如果是所有线条的起始点
+              if (i === 0) {
+                // 如果是所有线条的起始点
                 path.moveTo(...points[0]);
-              } else { // 如果是转换点
+              } else {
+                // 如果是转换点
                 path.lineTo(...points[i]);
               }
             }
@@ -264,7 +267,8 @@ export default function install({use, utils, registerNodeType}) {
             drawSmoothCurveLine(path, smoothPoints, smoothStart);
             subIndex = smoothEnd;
           });
-          for (let i = subIndex; i < points.length - 1; i++) { // 如果绘图未绘制到最后一个点
+          for (let i = subIndex; i < points.length - 1; i++) {
+            // 如果绘图未绘制到最后一个点
             path.lineTo(points[i][0], points[i][1]);
           }
         }
