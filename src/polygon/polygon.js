@@ -202,7 +202,8 @@ export default function install({use, utils, registerNodeType}) {
 
         offsetX += width * anchorX;
         offsetY += height * anchorY;
-        return (this.path
+        return (
+          this.path
           && (this.context.isPointInPath(this.path, offsetX, offsetY)
             || this.context.isPointInStroke(this.path, offsetX, offsetY))
         );
@@ -272,6 +273,7 @@ export default function install({use, utils, registerNodeType}) {
             path.lineTo(points[i][0], points[i][1]);
           }
         }
+
         path.closePath();
         drawingContext.fill(path);
         drawingContext.stroke(path);
