@@ -44,19 +44,19 @@
     } = spritejs;
 
     const scene = new Scene('#container', {
-      resolution: [ 1200, 600 ],
+      resolution: [1200, 600],
     });
     const layer = scene.layer();
 
     const polyline = new Polyline();
     polyline.attr({
-      pos: [ 50, 50 ],
+      pos: [50, 50],
       color: {
-        vector: [ 0, 0, 150, 150 ],
-        colors: [ { offset: 0, color: 'red' }, { offset: 1, color: 'green' } ],
+        vector: [0, 0, 150, 150],
+        colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}],
       },
       lineWidth: 1,
-      points: [ [ 0, 70 ], [ 50, 44 ], [ 100, 20 ], [ 150, 80 ], [ 200, 90 ] ],
+      points: [[0, 70], [50, 44], [100, 20], [150, 80], [200, 90]],
       tolerance: 7,
       bgcolor: '#eee',
       close: true,
@@ -69,20 +69,20 @@
 
     const polyline2 = new Polyline();
     polyline2.attr({
-      pos: [ 50, 160 ],
+      pos: [50, 160],
       color: {
-        vector: [ 0, 0, 150, 150 ],
-        colors: [ { offset: 0, color: 'red' }, { offset: 1, color: 'blue' } ],
+        vector: [0, 0, 150, 150],
+        colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'blue'}],
       },
       lineWidth: 1,
       points: [
-        [ -1, 140 ],
-        [ 0, 70 ],
-        [ 50, 44 ],
-        [ 100, 20 ],
-        [ 150, 80 ],
-        [ 200, 100 ],
-        [ 200, 141 ],
+        [-1, 140],
+        [0, 70],
+        [50, 44],
+        [100, 20],
+        [150, 80],
+        [200, 100],
+        [200, 141],
       ],
       tolerance: 7,
       bgcolor: '#eee',
@@ -96,18 +96,18 @@
 
     const polyline3 = new Polyline();
     polyline3.attr({
-      pos: [ 400, 100 ],
+      pos: [400, 100],
       color: {
-        vector: [ 0, 0, 150, 150 ],
-        colors: [ { offset: 0, color: 'red' }, { offset: 1, color: 'blue' } ],
+        vector: [0, 0, 150, 150],
+        colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'blue'}],
       },
       lineWidth: 1,
       points: [
-        [ 0, 70 ],
-        [ 50, 60 ],
-        [ 100, 20 ],
-        [ 150, 80 ],
-        [ 200, 100 ],
+        [0, 70],
+        [50, 60],
+        [100, 20],
+        [150, 80],
+        [200, 100],
         // [200, 140]
       ],
       tolerance: 7,
@@ -118,29 +118,29 @@
 
     const polygon = new Polygon();
     polygon.attr({
-      pos: [ 400, 100 ],
-      anchor: [ 0.5, 0.5 ],
+      pos: [400, 100],
+      anchor: [0.5, 0.5],
       fillColor: 'rgba(255, 255, 0, 0.5)',
       points: [
-        [ 0, 140 ],
-        [ 0, 70 ],
-        [ 50, 60 ],
-        [ 100, 20 ],
-        [ 150, 80 ],
-        [ 200, 100 ],
-        [ 200, 140 ],
-        [ 150, 110 ],
-        [ 100, 90 ],
-        [ 50, 130 ],
+        [0, 140],
+        [0, 70],
+        [50, 60],
+        [100, 20],
+        [150, 80],
+        [200, 100],
+        [200, 140],
+        [150, 110],
+        [100, 90],
+        [50, 130],
       ],
-      smooth: [ 1, 5 ],
+      smooth: [1, 5],
       // bgcolor: '#eee'
     });
 
     polygon.on('mouseenter', (evt) => {
       polygon.attr('color', {
-        vector: [ 0, 0, 150, 150 ],
-        colors: [ { offset: 0, color: 'red' }, { offset: 1, color: 'green' } ],
+        vector: [0, 0, 150, 150],
+        colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}],
       });
       evt.stopDispatch();
     });
@@ -153,11 +153,11 @@
 
     const triangle = new Triangle();
     triangle.attr({
-      pos: [ 700, 100 ],
+      pos: [700, 100],
       color: 'red',
-      sides: [ 80, 80 ],
+      sides: [80, 80],
       angle: 60,
-      anchor: [ 0, 1 ],
+      anchor: [0, 1],
       fillColor: 'yellow',
       bgcolor: '#eee',
     });
@@ -176,7 +176,7 @@
 
     const rect = new Rect();
     rect.attr({
-      pos: [ 1000, 100 ],
+      pos: [1000, 100],
       color: 'red',
       angle: 60,
       // size: [100, 100],
@@ -200,7 +200,7 @@
 
     const star = new Star();
     star.attr({
-      pos: [ 50, 400 ],
+      pos: [50, 400],
       radius: 40,
       innerRadius: 40,
       color: '#000',
@@ -225,8 +225,8 @@
     // 画弧线
     const arc = new Arc();
     arc.attr({
-      pos: [ 420, 400 ],
-      center: [ 20, 0 ],
+      pos: [420, 400],
+      center: [20, 0],
       radius: 20,
       lineWidth: 5,
       startAngle: Math.PI * 0.8,
@@ -238,7 +238,7 @@
 
     const sector = new Sector();
     sector.attr({
-      pos: [ 280, 400 ],
+      pos: [280, 400],
       // center: [0, 0],
       startAngle: 0,
       endAngle: Math.PI * 0.3,
@@ -253,7 +253,7 @@
 
     const sector2 = new Sector();
     sector2.attr({
-      pos: [ 280, 400 ],
+      pos: [280, 400],
       // center: [0, 0],
       startAngle: Math.PI * 0.3,
       endAngle: Math.PI * 0.9,
@@ -268,7 +268,7 @@
 
     const sector3 = new Sector();
     sector3.attr({
-      pos: [ 280, 400 ],
+      pos: [280, 400],
       // center: [0, 0],
       startAngle: Math.PI * 0.9,
       endAngle: Math.PI * 1.3,
@@ -283,7 +283,7 @@
 
     const sector4 = new Sector();
     sector4.attr({
-      pos: [ 280, 400 ],
+      pos: [280, 400],
       // center: [0, 0],
       startAngle: Math.PI * 1.3,
       endAngle: Math.PI * 1.6,
@@ -298,7 +298,7 @@
 
     const sector5 = new Sector();
     sector5.attr({
-      pos: [ 280, 400 ],
+      pos: [280, 400],
       startAngle: Math.PI * 2,
       endAngle: Math.PI * 2,
       radius: 80,
@@ -332,11 +332,11 @@
 
     const circle = new Circle();
     circle.attr({
-      pos: [ 500, 400 ],
+      pos: [500, 400],
       radius: 30,
       lineWidth: 1,
       color: 'red',
-      anchor: [ -0.5, 0 ],
+      anchor: [-0.5, 0],
       bgcolor: '#eee',
       anticlockwise: true,
     });
@@ -355,7 +355,7 @@
 
     const ring4 = new Ring();
     ring4.attr({
-      pos: [ 600, 400 ],
+      pos: [600, 400],
       innerRadius: 15,
       outerRadius: 50,
       fillColor: 'green',
@@ -368,7 +368,7 @@
 
     const ring2 = new Ring();
     ring2.attr({
-      pos: [ 600, 400 ],
+      pos: [600, 400],
       // bgcolor: '#eee',
       innerRadius: 15,
       outerRadius: 40,
@@ -391,8 +391,8 @@
 
     const polycurve = new Polycurve();
     polycurve.attr({
-      pos: [ 900, 500 ],
-      points: [ [ 0, -10, 110, 50, -20, 40 ], [ 10, -10, 20, 50, 0, 0 ] ],
+      pos: [900, 500],
+      points: [[0, -10, 110, 50, -20, 40], [10, -10, 20, 50, 0, 0]],
       lineWidth: 5,
       fillColor: 'red',
     });
