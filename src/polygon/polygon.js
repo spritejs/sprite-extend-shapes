@@ -149,6 +149,7 @@ export default function install({use, utils, registerNodeType}) {
     get lineBoundings() {
       const bounds = [0, 0, 0, 0];
       const points = this.points;
+
       points.forEach(([x, y]) => {
         bounds[0] = Math.min(x, bounds[0]);
         bounds[1] = Math.min(y, bounds[1]);
@@ -163,14 +164,8 @@ export default function install({use, utils, registerNodeType}) {
       const bounds = this.lineBoundings;
       const lw = this.attr('lineWidth');
       let [width, height] = this.attrSize;
-
-      if (width === '') {
-        width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
-      }
-      if (height === '') {
-        height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
-      }
-
+      width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
+      height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
       return [width, height].map(Math.ceil);
     }
 
