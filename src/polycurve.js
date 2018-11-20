@@ -44,8 +44,9 @@ export default function install({use, utils, registerNodeType}) {
       if (super.pointCollision(evt)) {
         const {offsetX, offsetY} = evt;
         return (
-          this.context.isPointInPath(this.path, offsetX, offsetY)
-          || this.context.isPointInStroke(this.path, offsetX, offsetY)
+          this.path
+          && (this.context.isPointInPath(this.path, offsetX, offsetY)
+            || this.context.isPointInStroke(this.path, offsetX, offsetY))
         );
       }
     }

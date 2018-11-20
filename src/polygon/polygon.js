@@ -202,9 +202,9 @@ export default function install({use, utils, registerNodeType}) {
 
         offsetX += width * anchorX;
         offsetY += height * anchorY;
-        return (
-          this.context.isPointInPath(this.path, offsetX, offsetY)
-          || this.context.isPointInStroke(this.path, offsetX, offsetY)
+        return (this.path
+          && (this.context.isPointInPath(this.path, offsetX, offsetY)
+            || this.context.isPointInStroke(this.path, offsetX, offsetY))
         );
       }
     }
