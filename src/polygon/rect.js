@@ -34,12 +34,29 @@ export default function install({use, utils, registerNodeType}) {
 
     get points() {
       const [s1, s2] = this.attr('sides') || this.attr('size');
-      const angle = (Math.PI / 180) * this.attr('angle');
+      const oAngle = this.attr('angle');
+      let cosAngle = 0;
+      let sinAngle = 1;
+      if (oAngle === 90) {
+        // 90默认不计算
+      } else {
+        const angle = Math.PI * this.attr('angle') / 180;
+        cosAngle = Math.cos(angle);
+        sinAngle = Math.sin(angle);
+      }
       const p0 = [0, 0];
       const p1 = [s1, 0];
-      const p2 = [s1 + s2 * Math.cos(angle), s2 * Math.sin(angle)];
-      const p3 = [s2 * Math.cos(angle), s2 * Math.sin(angle)];
+      const p2 = [s1 + s2 * cosAngle, s2 * sinAngle];
+      const p3 = [s2 * cosAngle, s2 * sinAngle];
       return [p0, p1, p2, p3];
+
+      // const [s1, s2] = this.attr('sides') || this.attr('size');
+      // const angle = (Math.PI / 180) * this.attr('angle');
+      // const p0 = [0, 0];
+      // const p1 = [s1, 0];
+      // const p2 = [s1 + s2 * Math.cos(angle), s2 * Math.sin(angle)];
+      // const p3 = [s2 * Math.cos(angle), s2 * Math.sin(angle)];
+      // return [p0, p1, p2, p3];
     }
   }
 
