@@ -8,7 +8,7 @@ export default function install({use, utils, registerNodeType}) {
     constructor(subject) {
       super(subject);
       this.setDefault({
-        angle: '90',
+        angle: 90,
         sides: null,
         size: null,
       });
@@ -38,7 +38,7 @@ export default function install({use, utils, registerNodeType}) {
       let cosAngle = 0;
       let sinAngle = 1;
       if (oAngle === 90) {
-        // 90默认不计算
+        // 90默认不处理
       } else {
         const angle = Math.PI * this.attr('angle') / 180;
         cosAngle = Math.cos(angle);
