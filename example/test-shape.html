@@ -41,6 +41,7 @@
       Ellipse,
       EllipseSector,
       Polycurve,
+      Wave,
     } = spritejs;
 
     const scene = new Scene('#container', {
@@ -395,7 +396,7 @@
     const polycurve = new Polycurve();
     polycurve.attr({
       pos: [900, 500],
-      points: [[0, -10, 110, 50, -20, 40], [10, -10, 20, 50, 0, 0]],
+      points: [[-90, 0, 0, 180, 90, 0], [90, 0, 45, -20, 0, 0], [0, 0, -45, 20, -90, 0]],
       lineWidth: 5,
       fillColor: 'red',
     });
@@ -409,6 +410,25 @@
     });
 
     layer.append(polycurve);
+
+
+    const wave = new  Wave();
+    wave.attr({
+      pos: [900, 200],
+      points: [[-90, 0, 0, 180, 90, 0], [90, 0, 45, -20, 0, 0], [0, 0, -45, 20, -90, 0]],
+      lineWidth: 0,
+      fillColor: 'red'
+    });
+
+    wave.on('mouseenter', () => {
+      wave.attr('fillColor', 'yellow');
+    });
+
+    wave.on('mouseleave', () => {
+      wave.attr('fillColor', 'red');
+    });
+
+    layer.append(wave);
   </script>
 </body>
 

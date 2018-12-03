@@ -2,6 +2,7 @@ import Shape from './shape';
 import Polyline from './polyline';
 
 import Polycurve from './polycurve';
+import Wave from './wave';
 
 import Polygon from './polygon/polygon';
 import Triangle from './polygon/triangle';
@@ -26,6 +27,7 @@ export function install(spritejs) {
     Shape,
     Polyline,
     Polycurve,
+    Wave,
     Polygon,
     Triangle,
     Rect,
@@ -46,6 +48,7 @@ export const shapes = {
   Shape,
   Polyline,
   Polycurve,
+  Wave,
   Polygon,
   Triangle,
   Rect,
