@@ -161,6 +161,7 @@
       color: 'red',
       sides: [80, 80],
       angle: 60,
+      lineWidth: 1,
       anchor: [0, 1],
       fillColor: 'yellow',
       bgcolor: '#eee',
@@ -183,6 +184,7 @@
       pos: [1000, 100],
       color: 'red',
       angle: 60,
+      lineWidth: 1,
       // size: [100, 100],
       width: 100,
       height: 100,
@@ -414,18 +416,13 @@
 
     const wave = new  Wave();
     wave.attr({
-      pos: [900, 200],
-      points: [[-90, 0, 0, 180, 90, 0], [90, 0, 45, -20, 0, 0], [0, 0, -45, 20, -90, 0]],
-      lineWidth: 0,
-      fillColor: 'red'
-    });
-
-    wave.on('mouseenter', () => {
-      wave.attr('fillColor', 'yellow');
-    });
-
-    wave.on('mouseleave', () => {
-      wave.attr('fillColor', 'red');
+      pos: [800, 240],
+      radius: 80,
+      offset: 20,
+      lineWidth: 10,
+      color: '#5ad2b8',
+      fillColor: '#5bcbe2',
+      percent: 0.4
     });
 
     layer.append(wave);

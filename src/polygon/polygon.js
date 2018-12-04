@@ -220,7 +220,7 @@ export default function install({use, utils, registerNodeType}) {
         drawingContext.lineWidth = this.attr('lineWidth');
         drawingContext.setLineDash(this.attr('lineDash'));
         drawingContext.lineDashOffset = this.attr('lineDashOffset');
-        // drawingContext.beginPath();
+        drawingContext.beginPath();
         const path = new Path2D();
         let smooth = this.attr('smooth');
         const points = this.points.slice(0, this.points.length);
@@ -270,6 +270,7 @@ export default function install({use, utils, registerNodeType}) {
         }
 
         path.closePath();
+        drawingContext.closePath();
         drawingContext.fill(path);
         drawingContext.stroke(path);
         this.path = path;
