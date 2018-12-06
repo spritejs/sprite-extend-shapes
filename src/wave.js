@@ -14,9 +14,10 @@ export default function install({use, utils, registerNodeType}) {
       this.setDefault({
         radius: 50,
         offset: 10,
-        percent: 0.5,
-        waveTime: 2000,
+        percent: 0,
+        waveTime: 4000,
         amplitude: 0,
+        speed: 0,
       });
     }
 
@@ -54,6 +55,13 @@ export default function install({use, utils, registerNodeType}) {
       this.clearFlow();
       this.set('amplitude', val);
     }
+
+    @attr
+    set speed(val) {
+      this.clearCache();
+      this.clearFlow();
+      this.set('speed', val);
+    }
   }
 
   class Wave extends Shape {
@@ -69,131 +77,70 @@ export default function install({use, utils, registerNodeType}) {
 
     render(t, ctx) {
       super.render(t, ctx);
-
       const lw = this.attr('lineWidth');
+      const strokeStyle = findColor(ctx, this, 'color');
+      const fillStyle = findColor(ctx, this, 'fillColor');
       const radius = this.attr('radius');
       const offset = this.attr('offset');
       const percent = this.attr('percent');
       const AMPLITUDE = this.attr('amplitude') || radius / 10;
-      const amplitude = (radius / 4) * sin(percent * Math.PI) + AMPLITUDE; // 振幅
+      const [cx, cy] = [0, 0];
 
       let startAngle = 0;
-      let endAngle = 0;
-
       if (percent <= 0.5) {
         startAngle = 0.25 - percent / 2;
-        endAngle = startAngle + percent;
       } else if (percent < 1) {
         startAngle = 0 - (percent - 0.5) / 2;
       } else {
         startAngle = 0;
       }
-      endAngle = startAngle + percent;
       startAngle *= Math.PI * 2;
-      endAngle *= Math.PI * 2;
+      const sinVal = percent >= 1 ? -1 : sin(startAngle / 2);
+      const y = round(radius * sinVal);
 
-      const halfSinStartAngle = sin(startAngle / 2);
-      const halfCosStartAngle = cos(startAngle / 2);
+      // 三角函数公式：y=Asin（wx+φ）+h
+      const A = ((radius / 20) * sin(percent * Math.PI) + AMPLITUDE) / 2; // 振幅;
+      const W = (Math.PI * 2) / 200;
+      const H = cy + y;
+      const Q = this.attr('speed');
 
-      let [cx, cy] = [0, 0];
-      let startTime = Date.now();
-      let clockwise = 1;
-      const time = this.attr('waveTime') || 2000;
+      ctx.save();
 
-      const step = () => {
-        ctx.fillStyle = this.attr('fillColor');
+      // 清除绘制区域
+      ctx.clearRect(
+        cx - radius - offset - lw,
+        cy - radius - offset - lw,
+        (radius + offset + lw) * 2,
+        (radius + offset + lw) * 2
+      );
 
-        ctx.beginPath();
+      // 外界圆
+      ctx.beginPath();
+      ctx.strokeStyle = strokeStyle;
+      ctx.lineWidth = lw;
+      ctx.arc(cx, cy, radius + offset, 0, Math.PI * 2, false);
+      ctx.stroke();
 
-        if (percent < 1) {
-          const T = Math.min(1.0, (Date.now() - startTime) / time);
-          // 找到平面的中心点，然后在中心点左右两侧分别画贝塞尔曲线模拟 正弦波
-          const [x, y] = [cx, cy + round(radius * halfSinStartAngle)];
-          let cp1;
-          let cp2;
-          let cp3;
-          let cp4;
-          if (clockwise) {
-            cp1 = [cx - radius * halfCosStartAngle, y];
-            cp2 = [
-              cx - (radius * halfCosStartAngle) / 2,
-              y + (1 - 2 * T) * amplitude,
-            ];
-            cp3 = [
-              cx + (radius * halfCosStartAngle) / 2,
-              y + (2 * T - 1) * amplitude,
-            ];
-            cp4 = [cx + radius * halfCosStartAngle, y];
-          } else {
-            cp1 = [cx - radius * halfCosStartAngle, y];
-            cp2 = [
-              cx - (radius * halfCosStartAngle) / 2,
-              y + (2 * T - 1) * amplitude,
-            ];
-            cp3 = [
-              cx + (radius * halfCosStartAngle) / 2,
-              y + (1 - 2 * T) * amplitude,
-            ];
-            cp4 = [cx + radius * halfCosStartAngle, y];
-          }
+      // 内接圆设为剪辑区域
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2, false);
+      ctx.clip();
 
-          ctx.clearRect(
-            cx - radius - offset - lw,
-            cy - radius - offset - lw,
-            (radius + offset + lw) * 2,
-            (radius + offset + lw) * 2
-          );
-          ctx.bezierCurveTo(cp1[0], cp1[1], cp2[0], cp2[1], x, y);
-          ctx.bezierCurveTo(x, y, cp3[0], cp3[1], cp4[0], cp4[1]);
-
-          if (T === 1) {
-            startTime = Date.now();
-            clockwise = !clockwise;
-          }
-        }
-
-        // 绘制圆弧
-        ctx.arc(
-          cx,
-          cy,
-          radius,
-          0 - (endAngle - Math.PI) / 2,
-          (endAngle - Math.PI) / 2 + Math.PI,
-          0
-        );
-        ctx.closePath();
-        ctx.fill();
-        ctx.save();
-
-        ctx.beginPath();
-        ctx.strokeStyle = '#ccc';
-        ctx.strokeStyle = findColor(ctx, this, 'color');
-        ctx.lineJoin = this.attr('lineJoin');
-        ctx.lineCap = this.attr('lineCap');
-        ctx.lineWidth = lw;
-        ctx.arc(cx, cy, radius + offset, 0, Math.PI * 2, 0);
-        ctx.stroke();
-        ctx.closePath();
-
-        if (this.hasDrawed) {
-          requestAnimationFrame(step);
-        } else {
-          return Promise.resolve();
-        }
-      };
-
-      const wave = () => {
-        [cx, cy] = this.attr('pos');
-        this.hasDrawed = true;
-        requestAnimationFrame(step);
-      };
-
-      const promise = step();
-      if (promise && promise.then) {
-        promise.then(wave);
-      } else {
-        wave();
+      // 绘制正弦曲线
+      ctx.beginPath();
+      for (let x = cx - radius; x <= cx + radius; x++) {
+        const y = A * Math.sin(W * x + Q) + H;
+        ctx.lineTo(x, y);
       }
+      // 向下形成闭合区域
+      ctx.lineTo(cx + radius, cy + radius);
+      ctx.lineTo(cx - radius, cy + radius);
+      ctx.lineTo(cx - radius, cy);
+      ctx.fillStyle = fillStyle;
+      ctx.fill();
+      ctx.closePath();
+
+      ctx.restore();
 
       return ctx;
     }

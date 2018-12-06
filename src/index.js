@@ -18,9 +18,9 @@ import Circle from './ellipseShape/circle';
 import Ring from './ring';
 
 // auto use
-if (typeof window !== 'undefined' && window.spritejs) {
-  window.spritejs.use(install);
-}
+// if (typeof window !== 'undefined' && window.spritejs) {
+  // window.spritejs.use(install);
+// }
 
 export function install(spritejs) {
   return [

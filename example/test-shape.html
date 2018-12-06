@@ -20,14 +20,15 @@
     <!-- <canvas width="1200" height="600"></canvas> -->
   </div>
 
-  <script src="https://unpkg.com/spritejs/dist/spritejs.min.js"></script>
+  <!-- <script src="https://unpkg.com/spritejs/dist/spritejs.min.js"></script> -->
+  <script src="https://unpkg.com/sprite-vue@0.18.0/dist/sprite-vue.js"></script>
 
   <!-- <script src="/js/spritejs.js"></script> -->
   <script src="/js/sprite-extend-shapes.js"></script>
   <script>
+    spritevue.spritejs.use(spriteShapes.install)
+
     const {
-      Scene,
-      Layer,
       Sprite,
       Polygon,
       Polyline,
@@ -42,10 +43,15 @@
       EllipseSector,
       Polycurve,
       Wave,
-    } = spritejs;
+    } = spritevue.spritejs;
+
+    const { Scene, Layer} = spritevue.spritejs
+
+    console.log(spritevue.spritejs)
 
     const scene = new Scene('#container', {
       resolution: [1200, 600],
+      displayRatio: 'auto'
     });
     const layer = scene.layer();
 
@@ -418,11 +424,12 @@
     wave.attr({
       pos: [800, 240],
       radius: 80,
-      offset: 20,
-      lineWidth: 10,
-      color: '#5ad2b8',
-      fillColor: '#5bcbe2',
-      percent: 0.4
+      offset: 10,
+      lineWidth: 5,
+      color: '#158bca',
+      fillColor: '#158bca',
+      percent: 0.4,
+      speed: 1
     });
 
     layer.append(wave);
