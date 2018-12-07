@@ -4,18 +4,6 @@ export default function install({use, utils, registerNodeType}) {
   const {attr, findColor} = utils;
   const {Shape} = use(ShapePlugin, null, false);
 
-  const getDist = (p1, p2) => {
-    const [x1, y1] = p1;
-    const [x2, y2] = p2;
-    return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
-  };
-
-  const getRotationAngle = (point, center) => {
-    const [px, py] = point;
-    const [cx, cy] = center;
-    return Math.atan2(1, 0) - Math.atan2(cx - px, cy - py);
-  };
-
   class ArcAttr extends Shape.Attr {
     constructor(subject) {
       super(subject);
@@ -33,7 +21,6 @@ export default function install({use, utils, registerNodeType}) {
     // 圆弧的圆心
     @attr
     set center(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('center', val);
     }
@@ -41,7 +28,6 @@ export default function install({use, utils, registerNodeType}) {
     // 圆弧起始点
     @attr
     set startPoint(point) {
-      this.clearCache();
       this.clearFlow();
       this.set('startPoint', point);
     }
@@ -49,28 +35,24 @@ export default function install({use, utils, registerNodeType}) {
     // 旋转角度
     @attr
     set angle(angle) {
-      this.clearCache();
       this.clearFlow();
       this.set('angle', angle);
     }
 
     @attr
     set radius(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('radius', val);
     }
 
     @attr
     set startAngle(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('startAngle', val);
     }
 
     @attr
     set endAngle(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('endAngle', val);
     }
@@ -78,7 +60,6 @@ export default function install({use, utils, registerNodeType}) {
     // 旋转方向
     @attr
     set anticlockwise(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('anticlockwise', val);
     }

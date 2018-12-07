@@ -15,14 +15,12 @@ export default function install({use, utils, registerNodeType}) {
 
     @attr
     set points(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('points', val);
     }
 
     @attr
     set startPoint(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('startPoint', val);
     }

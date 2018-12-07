@@ -1,8 +1,5 @@
 import ShapePlugin from './shape';
-
-const cos = angle => Number(Math.cos(angle).toFixed(15));
-const sin = angle => Number(Math.sin(angle).toFixed(15));
-const round = v => Math.round(v);
+import {sin, round} from './util';
 
 export default function install({use, utils, registerNodeType}) {
   const {attr, findColor} = utils;
@@ -15,7 +12,6 @@ export default function install({use, utils, registerNodeType}) {
         radius: 50,
         offset: 10,
         percent: 0,
-        waveTime: 4000,
         amplitude: 0,
         speed: 0,
       });
@@ -23,42 +19,30 @@ export default function install({use, utils, registerNodeType}) {
 
     @attr
     set radius(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('radius', val);
     }
 
     @attr
     set offset(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('offset', val);
     }
 
     @attr
     set percent(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('percent', val);
     }
 
     @attr
-    set waveTime(val) {
-      this.clearCache();
-      this.clearFlow();
-      this.set('waveTime', val);
-    }
-
-    @attr
     set amplitude(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('amplitude', val);
     }
 
     @attr
     set speed(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('speed', val);
     }
@@ -114,7 +98,7 @@ export default function install({use, utils, registerNodeType}) {
         (radius + offset + lw) * 2
       );
 
-      // 外界圆
+      // 外接圆
       ctx.beginPath();
       ctx.strokeStyle = strokeStyle;
       ctx.lineWidth = lw;
@@ -129,8 +113,8 @@ export default function install({use, utils, registerNodeType}) {
       // 绘制正弦曲线
       ctx.beginPath();
       for (let x = cx - radius; x <= cx + radius; x++) {
-        const y = A * Math.sin(W * x + Q) + H;
-        ctx.lineTo(x, y);
+        const _y = A * Math.sin(W * x + Q) + H;
+        ctx.lineTo(x, _y);
       }
       // 向下形成闭合区域
       ctx.lineTo(cx + radius, cy + radius);

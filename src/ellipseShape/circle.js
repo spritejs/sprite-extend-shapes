@@ -14,7 +14,6 @@ export default function install({use, utils, registerNodeType}) {
 
     @attr
     set radius(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('radius', val);
     }

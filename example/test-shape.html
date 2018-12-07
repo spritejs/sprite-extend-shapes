@@ -144,10 +144,9 @@
         [50, 130],
       ],
       smooth: [1, 5],
-      // bgcolor: '#eee'
     });
 
-    polygon.on('mouseenter', (evt) => {
+    polygon.on('mousemove', (evt) => {
       polygon.attr('color', {
         vector: [0, 0, 150, 150],
         colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}],
@@ -160,6 +159,7 @@
     });
 
     layer.append(polygon);
+
 
     const triangle = new Triangle();
     triangle.attr({
@@ -237,7 +237,7 @@
     // 画弧线
     const arc = new Arc();
     arc.attr({
-      pos: [420, 400],
+      pos: [520, 400],
       center: [20, 0],
       radius: 20,
       lineWidth: 5,
@@ -429,10 +429,19 @@
       color: '#158bca',
       fillColor: '#158bca',
       percent: 0.4,
-      speed: 1
+      speed: 0
     });
 
     layer.append(wave);
+
+    let speed = 0
+    const step = () => {
+      speed += 0.1
+      wave.attr('speed', speed)
+      requestAnimationFrame(step)
+    }
+
+    step()
   </script>
 </body>
 

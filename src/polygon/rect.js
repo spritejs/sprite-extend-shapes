@@ -16,14 +16,12 @@ export default function install({use, utils, registerNodeType}) {
 
     @attr
     set angle(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('angle', val);
     }
 
     @attr
     set sides(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('sides', val);
     }
