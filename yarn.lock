@@ -708,6 +708,13 @@ aws4@^1.8.0:
   version "1.8.0"
   resolved "http://r.cnpmjs.org/aws4/download/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
 
+axios@^0.16.2:
+  version "0.16.2"
+  resolved "https://registry.npmjs.org/axios/-/axios-0.16.2.tgz#ba4f92f17167dfbab40983785454b9ac149c3c6d"
+  dependencies:
+    follow-redirects "^1.2.3"
+    is-buffer "^1.1.5"
+
 babel-cli@^6.26.0:
   version "6.26.0"
   resolved "http://r.cnpmjs.org/babel-cli/download/babel-cli-6.26.0.tgz#502ab54874d7db88ad00b887a06383ce03d002f1"
@@ -1361,6 +1368,10 @@ bonjour@^3.5.0:
     multicast-dns "^6.0.1"
     multicast-dns-service-types "^1.1.0"
 
+boolbase@^1.0.0, boolbase@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
+
 boxen@^1.2.1:
   version "1.3.0"
   resolved "http://r.cnpmjs.org/boxen/download/boxen-1.3.0.tgz#55c6c39a8ba58d9c61ad22cd877532deb665a20b"
@@ -1589,12 +1600,16 @@ caniuse-lite@^1.0.30000844:
   version "1.0.30000877"
   resolved "http://r.cnpmjs.org/caniuse-lite/download/caniuse-lite-1.0.30000877.tgz#f189673b86ecc06436520e3e391de6a13ca923b4"
 
-canvas@^2.0.0-alpha.12:
-  version "2.0.0-alpha.13"
-  resolved "http://r.cnpmjs.org/canvas/download/canvas-2.0.0-alpha.13.tgz#c670de1ab6a33efab9ce5f63663672cc2be70c9f"
+canvas-5-polyfill@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.npmjs.org/canvas-5-polyfill/-/canvas-5-polyfill-0.1.5.tgz#2bc0a2c6b6da5fcd7f42aebc9566a1354c78ea14"
+
+canvas@^2.0.0-alpha.16:
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/canvas/-/canvas-2.2.0.tgz#d86ed3a61527de855a8f0d3d7b926f72267c956a"
   dependencies:
-    nan "^2.9.2"
-    node-pre-gyp "^0.9.0"
+    nan "^2.11.1"
+    node-pre-gyp "^0.11.0"
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
@@ -1803,9 +1818,9 @@ color-name@^1.0.0:
   version "1.1.3"
   resolved "http://r.cnpmjs.org/color-name/download/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
 
-color-string@^1.5.2:
+color-string@^1.5.3:
   version "1.5.3"
-  resolved "http://r.cnpmjs.org/color-string/download/color-string-1.5.3.tgz#c9bbc5f01b58b5492f3d6857459cb6590ce204cc"
+  resolved "https://registry.npmjs.org/color-string/-/color-string-1.5.3.tgz#c9bbc5f01b58b5492f3d6857459cb6590ce204cc"
   dependencies:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
@@ -2070,6 +2085,19 @@ css-line-break@^1.0.1:
   dependencies:
     base64-arraybuffer "^0.1.5"
 
+css-select@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/css-select/-/css-select-2.0.2.tgz#ab4386cec9e1f668855564b17c3733b43b2a5ede"
+  dependencies:
+    boolbase "^1.0.0"
+    css-what "^2.1.2"
+    domutils "^1.7.0"
+    nth-check "^1.0.2"
+
+css-what@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.npmjs.org/css-what/-/css-what-2.1.2.tgz#c0876d9d0480927d7d4920dcd72af3595649554d"
+
 currently-unhandled@^0.4.1:
   version "0.4.1"
   resolved "http://r.cnpmjs.org/currently-unhandled/download/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"
@@ -2116,7 +2144,7 @@ debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.6, debug@^2.6.
   dependencies:
     ms "2.0.0"
 
-debug@^3.0.1, debug@^3.1.0:
+debug@=3.1.0, debug@^3.0.1, debug@^3.1.0:
   version "3.1.0"
   resolved "http://r.cnpmjs.org/debug/download/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
@@ -2310,7 +2338,7 @@ domhandler@^2.3.0:
   dependencies:
     domelementtype "1"
 
-domutils@^1.5.1:
+domutils@^1.5.1, domutils@^1.7.0:
   version "1.7.0"
   resolved "http://r.cnpmjs.org/domutils/download/domutils-1.7.0.tgz#56ea341e834e06e6748af7a1cb25da67ea9f8c2a"
   dependencies:
@@ -2799,12 +2827,6 @@ extsprintf@^1.2.0:
   version "1.4.0"
   resolved "http://r.cnpmjs.org/extsprintf/download/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
 
-fast-animation-frame@^0.3.3:
-  version "0.3.3"
-  resolved "http://r.cnpmjs.org/fast-animation-frame/download/fast-animation-frame-0.3.3.tgz#09dca23584d61165d949a6b6334719c272f459ba"
-  dependencies:
-    babel-runtime "^6.26.0"
-
 fast-deep-equal@^1.0.0:
   version "1.1.0"
   resolved "http://r.cnpmjs.org/fast-deep-equal/download/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
@@ -2949,6 +2971,12 @@ follow-redirects@^1.0.0:
   resolved "http://r.cnpmjs.org/follow-redirects/download/follow-redirects-1.5.5.tgz#3c143ca599a2e22e62876687d68b23d55bad788b"
   dependencies:
     debug "^3.1.0"
+
+follow-redirects@^1.2.3:
+  version "1.5.10"
+  resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
+  dependencies:
+    debug "=3.1.0"
 
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
@@ -4488,6 +4516,10 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "http://r.cnpmjs.org/mute-stream/download/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
+nan@^2.11.1:
+  version "2.11.1"
+  resolved "https://registry.npmjs.org/nan/-/nan-2.11.1.tgz#90e22bccb8ca57ea4cd37cc83d3819b52eea6766"
+
 nan@^2.9.2:
   version "2.10.0"
   resolved "http://r.cnpmjs.org/nan/download/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
@@ -4512,7 +4544,7 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "http://r.cnpmjs.org/natural-compare/download/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
 
-needle@^2.2.0, needle@^2.2.1:
+needle@^2.2.1:
   version "2.2.2"
   resolved "http://r.cnpmjs.org/needle/download/needle-2.2.2.tgz#1120ca4c41f2fcc6976fd28a8968afe239929418"
   dependencies:
@@ -4583,17 +4615,17 @@ node-pre-gyp@^0.10.0:
     semver "^5.3.0"
     tar "^4"
 
-node-pre-gyp@^0.9.0:
-  version "0.9.1"
-  resolved "http://r.cnpmjs.org/node-pre-gyp/download/node-pre-gyp-0.9.1.tgz#f11c07516dd92f87199dbc7e1838eab7cd56c9e0"
+node-pre-gyp@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.npmjs.org/node-pre-gyp/-/node-pre-gyp-0.11.0.tgz#db1f33215272f692cd38f03238e3e9b47c5dd054"
   dependencies:
     detect-libc "^1.0.2"
     mkdirp "^0.5.1"
-    needle "^2.2.0"
+    needle "^2.2.1"
     nopt "^4.0.1"
     npm-packlist "^1.1.6"
     npmlog "^4.0.2"
-    rc "^1.1.7"
+    rc "^1.2.7"
     rimraf "^2.6.1"
     semver "^5.3.0"
     tar "^4"
@@ -4645,6 +4677,12 @@ npmlog@^4.0.2:
     console-control-strings "~1.1.0"
     gauge "~2.7.3"
     set-blocking "~2.0.0"
+
+nth-check@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/nth-check/-/nth-check-1.0.2.tgz#b2bd295c37e3dd58a3bf0700376663ba4d9cf05c"
+  dependencies:
+    boolbase "~1.0.0"
 
 number-is-nan@^1.0.0:
   version "1.0.1"
@@ -5280,7 +5318,7 @@ raw-body@2.3.2:
     iconv-lite "0.4.19"
     unpipe "1.0.0"
 
-rc@^1.0.1, rc@^1.1.6, rc@^1.1.7, rc@^1.2.7:
+rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
   version "1.2.8"
   resolved "http://r.cnpmjs.org/rc/download/rc-1.2.8.tgz#cd924bf5200a075b83c188cd6b9e211b7fc0d3ed"
   dependencies:
@@ -5906,46 +5944,62 @@ sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "http://r.cnpmjs.org/sprintf-js/download/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
 
-sprite-animator@^1.10.3:
-  version "1.10.3"
-  resolved "http://r.cnpmjs.org/sprite-animator/download/sprite-animator-1.10.3.tgz#7ffaa8404fdb9ad9640990ceff9384a2688d3174"
+sprite-animator@^1.11.3:
+  version "1.11.3"
+  resolved "https://registry.npmjs.org/sprite-animator/-/sprite-animator-1.11.3.tgz#1537bf23b28061226cf151fe1739fc42505c962c"
   dependencies:
     babel-runtime "^6.26.0"
     bezier-easing "^2.0.3"
-    sprite-timeline "^1.9.2"
+    sprite-timeline "^1.10.2"
 
-sprite-core@2.9.3:
-  version "2.9.3"
-  resolved "http://r.cnpmjs.org/sprite-core/download/sprite-core-2.9.3.tgz#18afbdba9a1644ca8c020a3cfa9665022ec4bfc2"
+sprite-core@^2.26.7:
+  version "2.26.7"
+  resolved "https://registry.npmjs.org/sprite-core/-/sprite-core-2.26.7.tgz#e1fdd19a46c078d6cf73ea7c797fd218c74fb428"
   dependencies:
     babel-decorators-runtime "^0.2.0"
     babel-runtime "^6.26.0"
+    color-string "^1.5.3"
     css-line-break "^1.0.1"
-    fast-animation-frame "^0.3.3"
-    sprite-animator "^1.10.3"
-    sprite-math "^1.0.4"
-    sprite-utils "^1.11.1"
-    svg-path-to-canvas "^1.9.5"
+    css-select "^2.0.2"
+    sprite-animator "^1.11.3"
+    sprite-flex-layout "^1.0.7"
+    sprite-math "^1.0.5"
+    svg-path-to-canvas "^1.9.6"
 
-sprite-math@^1.0.4:
-  version "1.0.4"
-  resolved "http://r.cnpmjs.org/sprite-math/download/sprite-math-1.0.4.tgz#f2ddc98b911d78f6b99828f5cede6166a75058f7"
-  dependencies:
-    babel-runtime "^6.26.0"
-
-sprite-timeline@^1.9.2:
-  version "1.9.2"
-  resolved "http://r.cnpmjs.org/sprite-timeline/download/sprite-timeline-1.9.2.tgz#f6388c1ad430bca79c8ae29bbe301ce85dd49f49"
-  dependencies:
-    babel-runtime "^6.26.0"
-
-sprite-utils@^1.11.1:
-  version "1.11.1"
-  resolved "http://r.cnpmjs.org/sprite-utils/download/sprite-utils-1.11.1.tgz#8181fbe86c29deb1d347ba6088fb9c920753f641"
+sprite-draggable@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.npmjs.org/sprite-draggable/-/sprite-draggable-0.0.3.tgz#87a5bd90d0b890bcfbede952df5c1dfb0aeb613d"
   dependencies:
     babel-decorators-runtime "^0.2.0"
     babel-runtime "^6.26.0"
-    color-string "^1.5.2"
+    sprite-math "^1.0.5"
+
+sprite-flex-layout@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.npmjs.org/sprite-flex-layout/-/sprite-flex-layout-1.0.7.tgz#8de6081a9891ca8f08841251cabf49358dcd8daf"
+  dependencies:
+    babel-runtime "^6.26.0"
+
+sprite-math@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/sprite-math/-/sprite-math-1.0.5.tgz#03dcb8b61b0ba98c55134974487a10f4605339cd"
+  dependencies:
+    babel-runtime "^6.26.0"
+
+sprite-timeline@^1.10.2:
+  version "1.10.2"
+  resolved "https://registry.npmjs.org/sprite-timeline/-/sprite-timeline-1.10.2.tgz#20fb012b002623fe8ef5f3f16e5a5d1364c079d0"
+  dependencies:
+    babel-runtime "^6.26.0"
+
+spritejs@^2.17.1:
+  version "2.24.6"
+  resolved "https://registry.npmjs.org/spritejs/-/spritejs-2.24.6.tgz#9598905d7e6002b479305d56a6d70e6aadbb0579"
+  dependencies:
+    axios "^0.16.2"
+    babel-decorators-runtime "^0.2.0"
+    babel-runtime "^6.26.0"
+    sprite-core "^2.26.7"
 
 sshpk@^1.7.0:
   version "1.14.2"
@@ -6108,13 +6162,13 @@ supports-color@^5.0.0, supports-color@^5.1.0, supports-color@^5.3.0, supports-co
   dependencies:
     has-flag "^3.0.0"
 
-svg-path-to-canvas@^1.9.5:
-  version "1.9.5"
-  resolved "http://r.cnpmjs.org/svg-path-to-canvas/download/svg-path-to-canvas-1.9.5.tgz#f93919809a3b17d4745ccbe53e7a2907ec980c36"
+svg-path-to-canvas@^1.9.6:
+  version "1.9.6"
+  resolved "https://registry.npmjs.org/svg-path-to-canvas/-/svg-path-to-canvas-1.9.6.tgz#cec83b38d3596b67c67cf65703b3fdbefdecc04a"
   dependencies:
     babel-runtime "^6.26.0"
     point-at-length "^1.1.0"
-    sprite-math "^1.0.4"
+    sprite-math "^1.0.5"
 
 symbol-observable@1.0.1:
   version "1.0.1"
