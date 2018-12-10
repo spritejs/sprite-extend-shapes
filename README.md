@@ -1,6 +1,6 @@
 # sprite-extend-shapes
 
-[test-online](https://spritejs.github.io/sprite-extend-shapes/)
+[Test-Online](https://spritejs.github.io/sprite-extend-shapes/)
 
 ## 项目说明
 
