@@ -35,7 +35,7 @@ const routeMap = {
 
 class App extends PureComponent {
   handleLinkClick = key => {
-    window.history.pushState(null, '', '/#/' + key);
+    window.history.pushState(null, '', '/sprite-extend-shapes/#/' + key);
     this.forceUpdate();
   };
 
