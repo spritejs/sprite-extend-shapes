@@ -22,7 +22,7 @@ import Ring from './ring';
   // window.spritejs.use(install);
 // }
 
-export function install(spritejs) {
+function install(spritejs) {
   return [
     Shape,
     Polyline,
@@ -44,7 +44,8 @@ export function install(spritejs) {
   }, {});
 }
 
-export const shapes = {
+export {
+  install,
   Shape,
   Polyline,
   Polycurve,

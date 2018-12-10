@@ -1,0 +1,116 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header {
+  height: 60px;
+  padding: 15px;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgb(28, 32, 34);
+  border-bottom: 1px solid rgb(18, 21, 22);
+}
+
+.container {
+  flex: 1;
+  position: relative;
+}
+
+aside,
+main {
+  height: 100%;
+}
+
+aside {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+  background-color: rgb(36, 40, 42);
+  border-right: 1px solid rgb(18, 21, 22);
+}
+
+.menu {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-top: 30px;
+  overflow: auto;
+}
+
+.menu li {
+  padding: 5px 15px;
+  color: #2175bc;
+  cursor: pointer;
+}
+
+.menu li.is-active {
+  background-color: #2175bc;
+  color: #fff !important;
+}
+
+.link {
+  display: block;
+  cursor: pointer;
+}
+
+main {
+  width: 100%;
+  padding-left: 200px;
+}
+
+.playground {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  height: 100%;
+  background-color: #1c2022;
+}
+
+.playgroundCode,
+.playgroundPreview {
+  width: 50%;
+  padding: 15px;
+  flex: 1;
+}
+
+.playgroundCode .CodeMirror {
+  height: 100%;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0px;
+  background-color: #1c2022;
+}
+
+.playgroundPreview div {
+  min-height: 400px;
+  height: 100%;
+  background: #fff;
+  border-radius: 4px;
+}

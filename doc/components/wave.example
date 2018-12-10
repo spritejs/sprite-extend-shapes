@@ -1,0 +1,24 @@
+const { Scene, Layer, Wave} = spritevue.spritejs
+const scene = new Scene('.playgroundPreview div', {
+  displayRatio: 'auto'
+});
+const layer = scene.layer();
+const wave = new Wave();
+wave.attr({
+  pos: [200, 240],
+  radius: 80,
+  offset: 10,
+  lineWidth: 5,
+  color: '#158bca',
+  fillColor: '#158bca',
+  percent: 0.4,
+  speed: 0
+});
+layer.append(wave);
+let speed = 0;
+const step = () => {
+  speed += 0.1;
+  wave.attr('speed', speed);
+  requestAnimationFrame(step);
+};
+step();
