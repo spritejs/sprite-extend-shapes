@@ -21,7 +21,7 @@ module.exports = function (env = {}) {
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename,
-      publicPath: '/my-app/src/sprite-extend/',
+      publicPath: '/js/',
       library: ['spriteShapes'],
       libraryTarget: 'umd',
     },
@@ -51,7 +51,7 @@ module.exports = function (env = {}) {
     // lets you precisely control what bundle information gets displayed
 
     devServer: {
-      contentBase: path.join(__dirname, 'my-app'),
+      contentBase: path.join(__dirname, 'example'),
       compress: true,
       port: 9090,
       // ...
