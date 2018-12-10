@@ -1,0 +1,33 @@
+const { Scene, Layer, Polyline} = spritevue.spritejs
+const scene = new Scene('.playgroundPreview div', {
+  displayRatio: 'auto'
+});
+const layer = scene.layer();
+
+// 修改下方代码
+const polyline = new Polyline();
+polyline.attr({
+  pos: [50, 160],
+  color: {
+    vector: [0, 0, 150, 150],
+    colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'blue'}],
+  },
+  lineWidth: 1,
+  points: [
+    [-1, 140],
+    [0, 70],
+    [50, 44],
+    [100, 20],
+    [150, 80],
+    [200, 100],
+    [200, 141],
+  ],
+  tolerance: 7,
+  bgcolor: '#eee',
+  fillColor: 'red',
+  smooth: true,
+  close: true,
+});
+polyline.on('click', () => alert('click2'));
+polyline.on('mousemove', evt => console.log('move: ', evt));
+layer.append(polyline);

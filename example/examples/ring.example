@@ -1,0 +1,29 @@
+const { Scene, Layer, Ring} = spritevue.spritejs
+const scene = new Scene('.playgroundPreview div', {
+  displayRatio: 'auto'
+});
+const layer = scene.layer();
+
+// 修改下方代码
+const ring = new Ring();
+ring.attr({
+  pos: [100, 400],
+  // bgcolor: '#eee',
+  innerRadius: 15,
+  outerRadius: 40,
+  maxRadius: 50,
+  fillColor: 'blue',
+  startAngle: Math.PI * 0.8,
+  endAngle: Math.PI * 1.4,
+  lineWidth: 0,
+});
+ring.on('mouseenter', (evt) => {
+  ring.attr('fillColor', 'yellow');
+  evt.stopDispatch();
+});
+
+ring.on('mouseleave', (evt) => {
+  ring.attr('fillColor', 'blue');
+  evt.stopDispatch();
+});
+layer.append(ring);

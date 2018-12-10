@@ -11,15 +11,13 @@ body {
 }
 
 #root {
-  height: 100vh;
   overflow: hidden;
 }
 
 #root > div {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 header {
@@ -34,11 +32,13 @@ header {
 .container {
   flex: 1;
   position: relative;
+  overflow: hidden;
 }
 
 aside,
 main {
   height: 100%;
+  overflow: hidden;
 }
 
 aside {
@@ -48,6 +48,7 @@ aside {
   width: 200px;
   background-color: rgb(36, 40, 42);
   border-right: 1px solid rgb(18, 21, 22);
+  overflow: auto;
 }
 
 .menu {
@@ -59,19 +60,22 @@ aside {
   list-style: none;
   padding: 0;
   margin: 0;
-  padding-top: 30px;
+  padding-top: 15px;
+  font-size: 14px;
   overflow: auto;
 }
 
 .menu li {
-  padding: 5px 15px;
-  color: #2175bc;
+  padding: 10px 15px;
+  color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
+  transition: all ease .3s;
 }
 
 .menu li.is-active {
-  background-color: #2175bc;
-  color: #fff !important;
+  border-right: 2px solid #2175bc;
+  background-color: rgba(97, 218, 251, 0.098);
+  color: rgb(227, 230, 232);
 }
 
 .link {
@@ -99,12 +103,37 @@ main {
   flex: 1;
 }
 
-.playgroundCode .CodeMirror {
+.playgroundCode {
+  overflow: auto;
   height: 100%;
-  font-weight: normal;
+}
+
+.react-codemirror2 {
+  height: 100%;
+}
+
+.CodeMirror {
   font-size: 14px;
-  line-height: 21px;
-  letter-spacing: 0px;
+  line-height: 1.5;
+  font-family: monospace;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.CodeMirror-scroll {
+  overflow: auto;
+  height: 100%;
+  position: relative;
+  outline: none;
+  background-color: #1c2022;
+}
+
+.CodeMirror-gutters {
+  height: 100% !important;
+}
+
+.CodeMirror-gutter {
   background-color: #1c2022;
 }
 

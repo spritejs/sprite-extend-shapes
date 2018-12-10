@@ -17,7 +17,8 @@ module.exports = {
       spritejs: 'spritevue.spritejs',
       react: 'React',
       'react-dom': 'ReactDOM',
-      'react-dom/server': 'ReactDOMServer'
+      'react-dom/server': 'ReactDOMServer',
+      // codemirror: 'CodeMirror'
     }
   ],
   module: {

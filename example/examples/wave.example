@@ -3,6 +3,8 @@ const scene = new Scene('.playgroundPreview div', {
   displayRatio: 'auto'
 });
 const layer = scene.layer();
+
+// 修改下方代码
 const wave = new Wave();
 wave.attr({
   pos: [200, 240],
