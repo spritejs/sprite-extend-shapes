@@ -5,7 +5,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
-      template: path.resolve(__dirname, '../doc/index.html')
+      template: path.resolve(__dirname, '../example/index.html')
     })
   ],
   resolve: {
@@ -14,7 +14,10 @@ module.exports = {
   externals: [
     {
       'sprite-vue': 'spritevue',
-      spritejs: 'spritevue.spritejs'
+      spritejs: 'spritevue.spritejs',
+      react: 'React',
+      'react-dom': 'ReactDOM',
+      'react-dom/server': 'ReactDOMServer'
     }
   ],
   module: {

@@ -4,9 +4,9 @@ const common = require('./webpack.config.doc.common');
 
 module.exports = merge(common, {
   mode: 'production',
-  entry: path.resolve(__dirname, '../doc/'),
+  entry: path.resolve(__dirname, '../example/'),
   output: {
-    path: path.join(__dirname, '../website'),
+    path: path.join(__dirname, '../doc'),
     filename: 'bundle.js',
     publicPath: './'
   },
