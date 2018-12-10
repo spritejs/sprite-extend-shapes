@@ -6,7 +6,7 @@ module.exports = merge(common, {
   mode: 'production',
   entry: path.resolve(__dirname, '../example/'),
   output: {
-    path: path.join(__dirname, '../doc'),
+    path: path.join(__dirname, '../docs'),
     filename: 'bundle.js',
     publicPath: './'
   },

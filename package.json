@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --mode=development --config ./build/webpack.config.doc.dev.js",
-    "build:doc": "rimraf doc && webpack --mode=production --config ./build/webpack.config.doc.prod.js",
+    "build:docs": "rimraf docs && webpack --mode=production --config ./build/webpack.config.doc.prod.js",
     "build": "babel src -d lib && webpack --env.production",
     "standalone": "babel src -d lib && webpack --env.standalone",
     "start": "webpack-dev-server --watch-poll",
