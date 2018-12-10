@@ -21,7 +21,6 @@ export default function install({use, utils, registerNodeType}) {
     // 内圆半径
     @attr
     set innerRadius(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('innerRadius', val);
     }
@@ -29,35 +28,30 @@ export default function install({use, utils, registerNodeType}) {
     // 外圆半径
     @attr
     set outerRadius(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('outerRadius', val);
     }
 
     @attr
     set maxRadius(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('maxRadius', val);
     }
 
     @attr
     set startAngle(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('startAngle', val);
     }
 
     @attr
     set endAngle(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('endAngle', val);
     }
 
     @attr
     set center(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('center', val);
     }

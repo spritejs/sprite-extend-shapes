@@ -1,0 +1,43 @@
+const { Scene, Layer, Polygon} = spritevue.spritejs
+const scene = new Scene('.playgroundPreview div', {
+  displayRatio: 'auto'
+});
+const layer = scene.layer();
+
+// 修改下方代码
+const polygon = new Polygon();
+polygon.attr({
+  pos: [200, 100],
+  anchor: [0.5, 0.5],
+  fillColor: {
+    vector: [0, 0, 150, 150],
+    colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}],
+  },
+  points: [
+    [0, 140],
+    [0, 70],
+    [50, 60],
+    [100, 20],
+    [150, 80],
+    [200, 100],
+    [200, 140],
+    [150, 110],
+    [100, 90],
+    [50, 130],
+  ],
+  smooth: [1, 5],
+});
+
+polygon.on('mousemove', (evt) => {
+  polygon.attr('color', {
+    vector: [0, 0, 150, 150],
+    colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}],
+  });
+  evt.stopDispatch();
+});
+polygon.on('mouseleave', (evt) => {
+  polygon.attr('color', null);
+  evt.stopDispatch();
+});
+
+layer.append(polygon);

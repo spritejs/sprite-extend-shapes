@@ -21,7 +21,6 @@ export default function install({use, utils, registerNodeType}) {
     // 短轴半径
     @attr
     set radiusX(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('radiusX', val);
     }
@@ -29,21 +28,18 @@ export default function install({use, utils, registerNodeType}) {
     // 长轴半径
     @attr
     set radiusY(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('radiusY', val);
     }
 
     @attr
     set startAngle(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('startAngle', val);
     }
 
     @attr
     set endAngle(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('endAngle', val);
     }
@@ -51,33 +47,28 @@ export default function install({use, utils, registerNodeType}) {
     @attr
     set color(val) {
       val = parseColorString(val);
-      this.clearCache();
       this.set('color', val);
     }
 
     @attr
     set lineWidth(val) {
-      this.clearCache();
       this.set('lineWidth', val);
     }
 
     @attr
     set fillColor(val) {
       val = parseColorString(val);
-      this.clearCache();
       this.set('fillColor', val);
     }
 
     @attr
     set anticlockwise(val) {
-      this.clearCache();
       this.set('anticlockwise', val);
     }
 
     @attr
     set center(val) {
       this.clearFlow();
-      this.clearCache();
       this.set('center', val);
     }
   }

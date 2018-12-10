@@ -14,7 +14,6 @@ export default function install({use, utils, registerNodeType}) {
 
     @attr
     set angles(num) {
-      this.clearCache();
       this.clearFlow();
       this.set('angles', num);
     }
@@ -22,14 +21,12 @@ export default function install({use, utils, registerNodeType}) {
     @attr
     set radius(val) {
       // 圆半径
-      this.clearCache();
       this.clearFlow();
       this.set('radius', val);
     }
 
     @attr
     set innerRadius(val) {
-      this.clearCache();
       this.clearFlow();
       this.set('innerRadius', val);
     }

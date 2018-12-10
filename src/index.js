@@ -2,6 +2,7 @@ import Shape from './shape';
 import Polyline from './polyline';
 
 import Polycurve from './polycurve';
+import Wave from './wave';
 
 import Polygon from './polygon/polygon';
 import Triangle from './polygon/triangle';
@@ -17,15 +18,16 @@ import Circle from './ellipseShape/circle';
 import Ring from './ring';
 
 // auto use
-if (typeof window !== 'undefined' && window.spritejs) {
-  window.spritejs.use(install);
-}
+// if (typeof window !== 'undefined' && window.spritejs) {
+  // window.spritejs.use(install);
+// }
 
-export function install(spritejs) {
+function install(spritejs) {
   return [
     Shape,
     Polyline,
     Polycurve,
+    Wave,
     Polygon,
     Triangle,
     Rect,
@@ -42,10 +44,12 @@ export function install(spritejs) {
   }, {});
 }
 
-export const shapes = {
+export {
+  install,
   Shape,
   Polyline,
   Polycurve,
+  Wave,
   Polygon,
   Triangle,
   Rect,

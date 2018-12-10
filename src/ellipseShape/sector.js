@@ -11,7 +11,6 @@ export default function install({use, utils, registerNodeType}) {
 
   Sector.defineAttributes({
     radius(attr, val) {
-      attr.clearCache();
       attr.clearFlow();
       attr.set('radius', val);
     },
