@@ -1,3 +1,4 @@
+import {draggable} from 'sprite-draggable';
 export default function install({BaseSprite, utils}) {
   const {attr, parseColorString} = utils;
 
@@ -50,6 +51,10 @@ export default function install({BaseSprite, utils}) {
 
   class Shape extends BaseSprite {
     static Attr = ShapeAttr;
+
+    draggable(option) {
+      draggable(this, option);
+    }
   }
 
   return {Shape};
