@@ -1,6 +1,6 @@
 {
   "name": "sprite-extend-shapes",
-  "version": "0.1.43",
+  "version": "0.1.45",
   "description": "",
   "main": "lib/index.js",
   "directories": {
@@ -77,6 +77,6 @@
   "dependencies": {
     "babel-decorators-runtime": "^0.2.0",
     "babel-runtime": "^6.26.0",
-    "sprite-draggable": "0.0.8"
+    "sprite-draggable": "0.0.9"
   }
 }

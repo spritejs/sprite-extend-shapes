@@ -8126,9 +8126,9 @@ sprite-core@^2.26.7:
     sprite-math "^1.0.5"
     svg-path-to-canvas "^1.9.6"
 
-sprite-draggable@0.0.8:
-  version "0.0.8"
-  resolved "https://registry.npmjs.org/sprite-draggable/-/sprite-draggable-0.0.8.tgz#55dc3c857f65ecbe8cf3ed93be43ede972292ba7"
+sprite-draggable@0.0.9:
+  version "0.0.9"
+  resolved "https://registry.npmjs.org/sprite-draggable/-/sprite-draggable-0.0.9.tgz#c2f4b9c96baee19f0f05a455cd361fd7d66e8cb8"
   dependencies:
     babel-decorators-runtime "^0.2.0"
     babel-runtime "^6.26.0"
