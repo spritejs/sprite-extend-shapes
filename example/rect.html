@@ -40,24 +40,28 @@
 
     const rect = new Rect();
     const rect1 = new Rect();
-    rect1.draggable();
+
     rect1.on('dblclick', () => {
-      rect1.draggable({ destroy: true });
+      console.log('abc');
+      rect1.attr('draggable', { destroy: true });
     });
     rect.on('dblclick', () => {
-      rect.draggable();
+      rect.attr('draggable', true);
     });
+
     rect.attr({
       pos: [ 100, 100 ],
       width: 50,
       height: 50,
       fillColor: 'red',
+      draggable: true
     });
     rect1.attr({
       pos: [ 200, 100 ],
       width: 50,
       height: 50,
       fillColor: 'blue',
+      draggable: true
     });
     layer.append(rect);
     layer.append(rect1);

@@ -1,6 +1,6 @@
-import {draggable} from 'sprite-draggable';
-export default function install({BaseSprite, utils}) {
-  const {attr, parseColorString} = utils;
+import { draggable } from 'sprite-draggable';
+export default function install({ BaseSprite, utils }) {
+  const { attr, parseColorString } = utils;
 
   class ShapeAttr extends BaseSprite.Attr {
     constructor(subject) {
@@ -11,7 +11,7 @@ export default function install({BaseSprite, utils}) {
         lineWidth: 0,
         lineCap: 'round',
         lineJoin: 'round',
-        lineDash: [0, 0],
+        lineDash: [ 0, 0 ],
         lineDashOffset: 0,
         enableCache: false
       });
@@ -47,15 +47,17 @@ export default function install({BaseSprite, utils}) {
       val = parseColorString(val);
       this.set('fillColor', val);
     }
+
+    @attr
+    set draggable(val) {
+      this.set('draggable', val);
+      draggable(this.subject, val);
+    }
   }
 
   class Shape extends BaseSprite {
     static Attr = ShapeAttr;
-
-    draggable(option) {
-      draggable(this, option);
-    }
   }
 
-  return {Shape};
+  return { Shape };
 }
