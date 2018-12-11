@@ -5,7 +5,6 @@ const scene = new Scene('.playgroundPreview div', {
 const layer = scene.layer();
 
 // 修改下方代码
-console.log(Circle);
 const circle = new Circle();
 circle.draggable({dragRect:[0,0,1000,1000]});
 circle.attr({
