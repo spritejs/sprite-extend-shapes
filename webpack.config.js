@@ -2,15 +2,15 @@ const path = require('path');
 const fs = require('fs');
 
 let babelConf;
-if(fs.existsSync('./.babelrc')) {
+if (fs.existsSync('./.babelrc')) {
   // use babel
   babelConf = JSON.parse(fs.readFileSync('.babelrc'));
 }
 
-module.exports = function (env = {}) {
+module.exports = function(env = {}) {
   const externals = {};
   let filename = 'sprite-extend-shapes.standalone.js';
-  if(!env.standalone) {
+  if (!env.standalone) {
     externals['sprite-core'] = 'spritejs';
     filename = 'sprite-extend-shapes.js';
   }
@@ -21,9 +21,9 @@ module.exports = function (env = {}) {
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename,
-      publicPath: '/my-app/src/sprite-extend/',
+      publicPath: '/js/',
       library: ['spriteShapes'],
-      libraryTarget: 'umd',
+      libraryTarget: 'umd'
     },
     // resolve: {
     //   aliasFields: ['wxapp'],
@@ -36,10 +36,10 @@ module.exports = function (env = {}) {
           exclude: /(node_modules|bower_components)/,
           use: {
             loader: 'babel-loader',
-            options: babelConf,
-          },
-        },
-      ],
+            options: babelConf
+          }
+        }
+      ]
 
       /* Advanced module configuration (click to show) */
     },
@@ -51,17 +51,16 @@ module.exports = function (env = {}) {
     // lets you precisely control what bundle information gets displayed
 
     devServer: {
-      contentBase: path.join(__dirname, 'my-app'),
+      contentBase: path.join(__dirname, 'example'),
       compress: true,
-      port: 9090,
+      port: 9090
       // ...
     },
 
     plugins: [
       // ...
-    ],
+    ]
     // list of additional plugins
-
 
     /* Advanced configuration (click to show) */
   };

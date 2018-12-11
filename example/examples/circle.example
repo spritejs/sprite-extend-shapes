@@ -5,6 +5,7 @@ const scene = new Scene('.playgroundPreview div', {
 const layer = scene.layer();
 
 // 修改下方代码
+console.log(Circle);
 const circle = new Circle();
 circle.attr({
   pos: [100, 400],

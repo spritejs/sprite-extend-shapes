@@ -13,7 +13,7 @@ export default function install({use, utils, registerNodeType}) {
     radius(attr, val) {
       attr.clearFlow();
       attr.set('radius', val);
-    },
+    }
   });
 
   registerNodeType('sector', Sector, false);

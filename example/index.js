@@ -33,19 +33,19 @@ const routeMap = {
   Wave
 };
 
+const isProd = process.env.NODE_ENV !== 'development';
+
 class App extends PureComponent {
   handleLinkClick = key => {
-    window.history.pushState(null, '', '/sprite-extend-shapes/#/' + key);
+    const prefix = isProd ? '/sprite-extend-shapes/#/' : '/#/';
+    window.history.pushState(null, '', prefix + key);
     this.forceUpdate();
   };
 
   componentDidMount() {
     window.addEventListener(
       'popstate',
-      e => {
-        document
-          .querySelector('.playgroundPreview')
-          .removeChild(document.querySelector('.playgroundPreview canvas'));
+      () => {
         this.forceUpdate();
       },
       false
