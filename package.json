@@ -77,6 +77,6 @@
   "dependencies": {
     "babel-decorators-runtime": "^0.2.0",
     "babel-runtime": "^6.26.0",
-    "sprite-draggable": "0.0.9"
+    "sprite-draggable": "0.0.12"
   }
 }

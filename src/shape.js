@@ -1,4 +1,4 @@
-import { draggable } from 'sprite-draggable';
+import { draggable, droppable } from 'sprite-draggable';
 export default function install({ BaseSprite, utils }) {
   const { attr, parseColorString } = utils;
 
@@ -52,6 +52,12 @@ export default function install({ BaseSprite, utils }) {
     set draggable(val) {
       this.set('draggable', val);
       draggable(this.subject, val);
+    }
+
+    @attr
+    set droppable(val) {
+      this.set('droppable', val);
+      droppable(this.subject, val);
     }
   }
 
