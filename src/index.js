@@ -22,7 +22,7 @@ if (typeof window !== 'undefined' && window.spritejs) {
   window.spritejs.use(install);
 }
 
-function install(spritejs) {
+export function install(spritejs) {
   return [
     Shape,
     Polyline,
@@ -38,15 +38,13 @@ function install(spritejs) {
     EllipseSector,
     EllipseArc,
     Circle,
-    Ring,
+    Ring
   ].reduce((pkg, Node) => {
     return Object.assign(pkg, spritejs.use(Node, null, false));
   }, {});
 }
 
-export {
-  install,
-  Shape,
+export const shapes = {
   Polyline,
   Polycurve,
   Wave,
@@ -60,5 +58,5 @@ export {
   EllipseSector,
   EllipseArc,
   Circle,
-  Ring,
+  Ring
 };

@@ -1,18 +1,28 @@
 const path = require('path');
 const fs = require('fs');
 
-let babelConf;
-if (fs.existsSync('./.babelrc')) {
-  // use babel
-  babelConf = JSON.parse(fs.readFileSync('.babelrc'));
-}
+// let babelConf;
+// if (fs.existsSync('./.babelrc')) {
+//   // use babel
+//   babelConf = JSON.parse(fs.readFileSync('.babelrc'));
+// }
 
 module.exports = function(env = {}) {
+  let babelConf;
+  const babelRC = env.esnext ? './.es6.babelrc' : './.babelrc';
+
+  if (fs.existsSync(babelRC)) {
+    babelConf = JSON.parse(fs.readFileSync(babelRC));
+    babelConf.babelrc = false;
+  }
+
   const externals = {};
   let filename = 'sprite-extend-shapes.standalone.js';
   if (!env.standalone) {
     externals['sprite-core'] = 'spritejs';
-    filename = 'sprite-extend-shapes.js';
+    filename = env.esnext
+      ? 'sprite-extend-shapes.es6.js'
+      : 'sprite-extend-shapes.js';
   }
 
   return {
