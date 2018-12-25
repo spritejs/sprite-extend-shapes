@@ -9,7 +9,7 @@ export default function install({use, utils, registerNodeType}) {
       super(subject);
       this.setDefault({
         points: [],
-        startPoint: [0, 0],
+        startPoint: [0, 0]
       });
     }
 
@@ -41,10 +41,11 @@ export default function install({use, utils, registerNodeType}) {
     pointCollision(evt) {
       if (super.pointCollision(evt)) {
         const {offsetX, offsetY} = evt;
+
         return (
-          this.path
-          && (this.context.isPointInPath(this.path, offsetX, offsetY)
-            || this.context.isPointInStroke(this.path, offsetX, offsetY))
+          this.path &&
+          (this.context.isPointInPath(this.path, offsetX, offsetY) ||
+            this.context.isPointInStroke(this.path, offsetX, offsetY))
         );
       }
     }

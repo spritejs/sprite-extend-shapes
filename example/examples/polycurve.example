@@ -17,12 +17,4 @@ polycurve.attr({
   fillColor: 'red',
 });
 
-polycurve.on('mouseenter', () => {
-  polycurve.attr('fillColor', 'yellow');
-});
-
-polycurve.on('mouseleave', () => {
-  polycurve.attr('fillColor', 'red');
-});
-
 layer.append(polycurve);
