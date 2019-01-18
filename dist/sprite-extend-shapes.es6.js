@@ -1166,6 +1166,7 @@ function install({ use, utils, registerNodeType }) {
     pointCollision(evt) {
       if (super.pointCollision(evt)) {
         const { offsetX, offsetY } = evt;
+
         return this.path && (this.context.isPointInPath(this.path, offsetX, offsetY) || this.context.isPointInStroke(this.path, offsetX, offsetY));
       }
     }
@@ -2046,6 +2047,8 @@ function install({ use, utils, registerNodeType }) {
 
       ctx.miterLimit = 3;
       ctx.lineWidth = this.attr('lineWidth');
+      ctx.setLineDash(this.attr('lineDash'));
+      ctx.lineDashOffset = this.attr('lineDashOffset');
       ctx.strokeStyle = findColor(ctx, this, 'color');
       ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
