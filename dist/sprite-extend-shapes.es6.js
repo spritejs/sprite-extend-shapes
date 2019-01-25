@@ -275,7 +275,7 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 /* 6 */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.6.3' };
+var core = module.exports = { version: '2.5.7' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -672,7 +672,7 @@ var store = global[SHARED] || (global[SHARED] = {});
 })('versions', []).push({
   version: core.version,
   mode: __webpack_require__(33) ? 'pure' : 'global',
-  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
+  copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
 });
 
 
@@ -1692,8 +1692,7 @@ function install({ use, utils, registerNodeType }) {
     return function (outerRadius, innerRadius) {
       const offsetX = outerRadius;
       const radAngle = -Math.PI / 2;
-      const radAlpha = Math.PI * 2 / angles;
-
+      const radAlpha = Math.PI / angles;
       for (let i = 1; i <= pointsLength; i++) {
         const rad = radAlpha * i + radAngle;
         const len = i % 2 ? innerRadius : outerRadius;
@@ -1702,7 +1701,6 @@ function install({ use, utils, registerNodeType }) {
 
         points.push([xPos, yPos]);
       }
-
       return points;
     };
   }
@@ -2044,6 +2042,8 @@ function install({ use, utils, registerNodeType }) {
 
       ctx.miterLimit = 3;
       ctx.lineWidth = this.attr('lineWidth');
+      ctx.setLineDash(this.attr('lineDash'));
+      ctx.lineDashOffset = this.attr('lineDashOffset');
       ctx.strokeStyle = findColor(ctx, this, 'color');
       ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
