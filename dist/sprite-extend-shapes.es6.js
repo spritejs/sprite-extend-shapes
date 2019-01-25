@@ -275,7 +275,7 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 /* 6 */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.5.7' };
+var core = module.exports = { version: '2.6.3' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -672,7 +672,7 @@ var store = global[SHARED] || (global[SHARED] = {});
 })('versions', []).push({
   version: core.version,
   mode: __webpack_require__(33) ? 'pure' : 'global',
-  copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
+  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
 });
 
 
@@ -1009,9 +1009,6 @@ function install({ use, utils, registerNodeType }) {
 
         if (smooth) {
           Object(_util__WEBPACK_IMPORTED_MODULE_2__["drawSmoothCurveLine"])(path, this.points, drawingContext);
-          // path.moveTo(200, 140);
-          // path.lineTo(0, 140);
-          // path.lineTo(0, 70);
         } else {
           this.points.forEach((point, i) => {
             if (i === 0) {
@@ -1166,6 +1163,7 @@ function install({ use, utils, registerNodeType }) {
     pointCollision(evt) {
       if (super.pointCollision(evt)) {
         const { offsetX, offsetY } = evt;
+
         return this.path && (this.context.isPointInPath(this.path, offsetX, offsetY) || this.context.isPointInStroke(this.path, offsetX, offsetY));
       }
     }
@@ -2372,12 +2370,15 @@ function install({ use, utils, registerNodeType }) {
 
       const lw = this.attr('lineWidth');
 
-      const isCircle = this.endAngle - this.startAngle >= Math.PI * 2;
-      const startAngle = isCircle ? 0 : this.startAngle;
-      let endAngle = isCircle ? Math.PI * 2 : this.endAngle;
-      if (endAngle > Math.PI * 2) {
-        endAngle = Math.PI * 2;
-      }
+      // 对是否为圆形的判断是没有必要的。
+      // const isCircle = this.endAngle - this.startAngle >= Math.PI * 2;
+      // const startAngle = isCircle ? 0 : this.startAngle;
+      // let endAngle = isCircle ? Math.PI * 2 : this.endAngle;
+      // if (endAngle > Math.PI * 2) {
+      //   endAngle = Math.PI * 2;
+      // }
+      const startAngle = this.startAngle;
+      const endAngle = this.endAngle;
 
       ctx.miterLimit = 0;
       ctx.lineWidth = lw;
@@ -2409,6 +2410,7 @@ function install({ use, utils, registerNodeType }) {
       if (lw > 0) {
         ctx.stroke();
       }
+
       return ctx;
     }
   }, _class3.Attr = RingAttr, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'contentSize', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'contentSize'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'originalRect', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'originalRect'), _class2.prototype)), _class2);

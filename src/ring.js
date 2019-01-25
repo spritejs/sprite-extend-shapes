@@ -14,7 +14,7 @@ export default function install({use, utils, registerNodeType}) {
         endAngle: 360,
         center: [0, 0],
         lineWidth: 1,
-        maxRadius: 0, // 当需要绘制多个环且环的半径不一致,为了统一圆心,所设属性
+        maxRadius: 0 // 当需要绘制多个环且环的半径不一致,为了统一圆心,所设属性
       });
     }
 
@@ -162,12 +162,15 @@ export default function install({use, utils, registerNodeType}) {
 
       const lw = this.attr('lineWidth');
 
-      const isCircle = this.endAngle - this.startAngle >= Math.PI * 2;
-      const startAngle = isCircle ? 0 : this.startAngle;
-      let endAngle = isCircle ? Math.PI * 2 : this.endAngle;
-      if (endAngle > Math.PI * 2) {
-        endAngle = Math.PI * 2;
-      }
+      // 对是否为圆形的判断是没有必要的。
+      // const isCircle = this.endAngle - this.startAngle >= Math.PI * 2;
+      // const startAngle = isCircle ? 0 : this.startAngle;
+      // let endAngle = isCircle ? Math.PI * 2 : this.endAngle;
+      // if (endAngle > Math.PI * 2) {
+      //   endAngle = Math.PI * 2;
+      // }
+      const startAngle = this.startAngle;
+      const endAngle = this.endAngle;
 
       ctx.miterLimit = 0;
       ctx.lineWidth = lw;
@@ -202,6 +205,7 @@ export default function install({use, utils, registerNodeType}) {
       if (lw > 0) {
         ctx.stroke();
       }
+
       return ctx;
     }
   }
