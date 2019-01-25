@@ -2350,14 +2350,21 @@ function install({ use, utils, registerNodeType }) {
 
         offset = r - offset; // 如果未设置maxRadius，偏移量应当０
         const r0 = this.attr('innerRadius');
-        const startAngle = this.attr('startAngle') - Math.PI * 2;
-        const endAngle = this.attr('endAngle') - Math.PI * 2;
+
+        const TAU = Math.PI * 2;
+        let startAngle = this.attr('startAngle');
+        if (startAngle > TAU) {
+          startAngle %= TAU;
+        } else {
+          startAngle = (startAngle + Math.ceil(Math.abs(startAngle) / TAU) * TAU) % TAU;
+        }
+        let endAngle = this.attr('endAngle') - this.attr('startAngle') + startAngle;
 
         const d = Math.sqrt((offsetX - r) ** 2 + (offsetY - r) ** 2);
         let angle = Math.atan2(offsetY - r, offsetX - r);
 
-        if (angle < 0) {
-          angle = Math.PI * 2 + angle;
+        if (angle < 0 || endAngle > TAU) {
+          angle += TAU;
         }
 
         return d >= r0 && d <= r - offset && angle >= startAngle && angle <= endAngle;
