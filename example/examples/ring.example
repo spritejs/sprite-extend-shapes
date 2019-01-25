@@ -13,8 +13,8 @@ ring.attr({
   outerRadius: 40,
   maxRadius: 50,
   fillColor: 'blue',
-  startAngle: Math.PI * 0.8,
-  endAngle: Math.PI * 1.4,
+  startAngle: Math.PI * 1.8,
+  endAngle: Math.PI * 3.0,
   lineWidth: 0,
 });
 ring.on('mouseenter', (evt) => {

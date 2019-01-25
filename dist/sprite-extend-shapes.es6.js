@@ -2354,7 +2354,8 @@ function install({ use, utils, registerNodeType }) {
         const endAngle = this.attr('endAngle');
 
         const d = Math.sqrt((offsetX - r) ** 2 + (offsetY - r) ** 2);
-        let angle = Math.atan2(offsetY - r, offsetX - r);
+        let angle = Math.atan2(offsetY - r, offsetX - r) + (endAngle > Math.PI * 2 ? startAngle : 0); // 当 endAngle > 1周时，需要加上 startAngle
+
         if (angle < 0) {
           angle = Math.PI * 2 + angle;
         }
