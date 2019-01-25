@@ -1009,9 +1009,6 @@ function install({ use, utils, registerNodeType }) {
 
         if (smooth) {
           Object(_util__WEBPACK_IMPORTED_MODULE_2__["drawSmoothCurveLine"])(path, this.points, drawingContext);
-          // path.moveTo(200, 140);
-          // path.lineTo(0, 140);
-          // path.lineTo(0, 70);
         } else {
           this.points.forEach((point, i) => {
             if (i === 0) {
@@ -1695,8 +1692,7 @@ function install({ use, utils, registerNodeType }) {
     return function (outerRadius, innerRadius) {
       const offsetX = outerRadius;
       const radAngle = -Math.PI / 2;
-      const radAlpha = Math.PI * 2 / angles;
-
+      const radAlpha = Math.PI / angles;
       for (let i = 1; i <= pointsLength; i++) {
         const rad = radAlpha * i + radAngle;
         const len = i % 2 ? innerRadius : outerRadius;
@@ -1705,7 +1701,6 @@ function install({ use, utils, registerNodeType }) {
 
         points.push([xPos, yPos]);
       }
-
       return points;
     };
   }
@@ -2375,12 +2370,15 @@ function install({ use, utils, registerNodeType }) {
 
       const lw = this.attr('lineWidth');
 
-      const isCircle = this.endAngle - this.startAngle >= Math.PI * 2;
-      const startAngle = isCircle ? 0 : this.startAngle;
-      let endAngle = isCircle ? Math.PI * 2 : this.endAngle;
-      if (endAngle > Math.PI * 2) {
-        endAngle = Math.PI * 2;
-      }
+      // 对是否为圆形的判断是没有必要的。
+      // const isCircle = this.endAngle - this.startAngle >= Math.PI * 2;
+      // const startAngle = isCircle ? 0 : this.startAngle;
+      // let endAngle = isCircle ? Math.PI * 2 : this.endAngle;
+      // if (endAngle > Math.PI * 2) {
+      //   endAngle = Math.PI * 2;
+      // }
+      const startAngle = this.startAngle;
+      const endAngle = this.endAngle;
 
       ctx.miterLimit = 0;
       ctx.lineWidth = lw;
@@ -2412,6 +2410,7 @@ function install({ use, utils, registerNodeType }) {
       if (lw > 0) {
         ctx.stroke();
       }
+
       return ctx;
     }
   }, _class3.Attr = RingAttr, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'contentSize', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'contentSize'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'originalRect', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'originalRect'), _class2.prototype)), _class2);

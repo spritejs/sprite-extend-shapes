@@ -6,7 +6,6 @@ const layer = scene.layer();
 
 // 修改下方代码
 const circle = new Circle();
-circle.draggable({dragRect:[0,0,1000,1000]});
 circle.attr({
   pos: [100, 400],
   radius: 30,
@@ -15,6 +14,7 @@ circle.attr({
   anchor: [-0.5, 0],
   bgcolor: '#eee',
   anticlockwise: true,
+  draggable: true // 设置可拖动
 });
 
 circle.on('mousemove', (evt) => {
