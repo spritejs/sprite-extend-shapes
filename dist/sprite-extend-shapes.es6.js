@@ -275,7 +275,7 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 /* 6 */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.5.7' };
+var core = module.exports = { version: '2.6.3' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -672,7 +672,7 @@ var store = global[SHARED] || (global[SHARED] = {});
 })('versions', []).push({
   version: core.version,
   mode: __webpack_require__(33) ? 'pure' : 'global',
-  copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
+  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
 });
 
 
@@ -2350,11 +2350,11 @@ function install({ use, utils, registerNodeType }) {
 
         offset = r - offset; // 如果未设置maxRadius，偏移量应当０
         const r0 = this.attr('innerRadius');
-        const startAngle = this.attr('startAngle');
-        const endAngle = this.attr('endAngle');
+        const startAngle = this.attr('startAngle') - Math.PI * 2;
+        const endAngle = this.attr('endAngle') - Math.PI * 2;
 
         const d = Math.sqrt((offsetX - r) ** 2 + (offsetY - r) ** 2);
-        let angle = Math.atan2(offsetY - r, offsetX - r) + (endAngle > Math.PI * 2 ? startAngle : 0); // 当 endAngle > 1周时，需要加上 startAngle
+        let angle = Math.atan2(offsetY - r, offsetX - r);
 
         if (angle < 0) {
           angle = Math.PI * 2 + angle;
