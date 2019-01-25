@@ -23,6 +23,8 @@
   <script>
     spritevue.spritejs.use(spriteShapes.install);
 
+
+
     const {
       Sprite,
       Polygon,
@@ -47,6 +49,12 @@
       displayRatio: 'auto'
     });
     const layer = scene.layer();
+
+    let points = [ [ 60.86761704288983, 32.58359213500126 ], [ 61.55367074350507, 72.36067977499789 ], [ 23.935414596786792, 59.41640786499874 ], [ 0, 27.63932022500211 ], [ 38.04226065180614, 16 ], [ 76.08452130361229, 27.639320225002095 ], [ 52.149106706825506, 59.41640786499873 ], [ 14.530850560107229, 72.3606797749979 ], [ 15.216904260722458, 32.58359213500127 ], [ 38.04226065180613, 0 ] ];
+    let pg = new Polygon()
+    pg.attr({ "points": points, pos: [ 0, 0 ], fillColor: '#0ff' });
+    layer.append(pg);
+
 
     const polyline = new Polyline();
     polyline.attr({
@@ -210,14 +218,15 @@
     star.attr({
       pos: [ 50, 400 ],
       radius: 40,
-      innerRadius: 40,
+      innerRadius: 24,
       color: '#000',
       lineWidth: 4,
       angles: 5,
       bgcolor: '#eee',
-      fillColor: 'red'
+      fillColor: 'red',
+      //anchor: [ 0.5, 0.5 ]
     });
-
+    console.log(star.points)
     star.on('mouseenter', evt => {
       star.attr('fillColor', 'green');
       evt.stopDispatch();

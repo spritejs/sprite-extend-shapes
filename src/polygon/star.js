@@ -1,8 +1,8 @@
 import PolygonPlugin from './polygon';
 
-export default function install({use, utils, registerNodeType}) {
-  const {attr} = utils;
-  const {Polygon} = use(PolygonPlugin, null, false);
+export default function install({ use, utils, registerNodeType }) {
+  const { attr } = utils;
+  const { Polygon } = use(PolygonPlugin, null, false);
 
   class PolygonAttr extends Polygon.Attr {
     constructor(subject) {
@@ -39,17 +39,15 @@ export default function install({use, utils, registerNodeType}) {
     return function (outerRadius, innerRadius) {
       const offsetX = outerRadius;
       const radAngle = -Math.PI / 2;
-      const radAlpha = (Math.PI * 2) / angles;
-
+      const radAlpha = Math.PI / angles;
       for (let i = 1; i <= pointsLength; i++) {
         const rad = radAlpha * i + radAngle;
         const len = i % 2 ? innerRadius : outerRadius;
         const xPos = offsetX + Math.cos(rad) * len;
         const yPos = Math.sin(rad) * len;
 
-        points.push([xPos, yPos]);
+        points.push([ xPos, yPos ]);
       }
-
       return points;
     };
   }
@@ -65,5 +63,5 @@ export default function install({use, utils, registerNodeType}) {
   }
 
   registerNodeType('star', Star, false);
-  return {Star};
+  return { Star };
 }
