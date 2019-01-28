@@ -310,7 +310,7 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 /* 6 */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.5.7' };
+var core = module.exports = { version: '2.6.3' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -707,7 +707,7 @@ var store = global[SHARED] || (global[SHARED] = {});
 })('versions', []).push({
   version: core.version,
   mode: __webpack_require__(33) ? 'pure' : 'global',
-  copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
+  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
 });
 
 
@@ -2236,9 +2236,6 @@ function install(_ref) {
 
           if (smooth) {
             (0, _util.drawSmoothCurveLine)(path, this.points, drawingContext);
-            // path.moveTo(200, 140);
-            // path.lineTo(0, 140);
-            // path.lineTo(0, 70);
           } else {
             this.points.forEach(function (point, i) {
               if (i === 0) {
@@ -2855,6 +2852,7 @@ function install(_ref) {
         if ((0, _get3.default)(Polycurve.prototype.__proto__ || (0, _getPrototypeOf2.default)(Polycurve.prototype), 'pointCollision', this).call(this, evt)) {
           var offsetX = evt.offsetX,
               offsetY = evt.offsetY;
+
 
           return this.path && (this.context.isPointInPath(this.path, offsetX, offsetY) || this.context.isPointInStroke(this.path, offsetX, offsetY));
         }
@@ -3735,8 +3733,7 @@ function install(_ref) {
     return function (outerRadius, innerRadius) {
       var offsetX = outerRadius;
       var radAngle = -Math.PI / 2;
-      var radAlpha = Math.PI * 2 / angles;
-
+      var radAlpha = Math.PI / angles;
       for (var i = 1; i <= pointsLength; i++) {
         var rad = radAlpha * i + radAngle;
         var len = i % 2 ? innerRadius : outerRadius;
@@ -3745,7 +3742,6 @@ function install(_ref) {
 
         points.push([xPos, yPos]);
       }
-
       return points;
     };
   }
@@ -4266,6 +4262,8 @@ function install(_ref) {
 
         ctx.miterLimit = 3;
         ctx.lineWidth = this.attr('lineWidth');
+        ctx.setLineDash(this.attr('lineDash'));
+        ctx.lineDashOffset = this.attr('lineDashOffset');
         ctx.strokeStyle = findColor(ctx, this, 'color');
         ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
@@ -4818,13 +4816,21 @@ function install(_ref) {
 
           offset = r - offset; // 如果未设置maxRadius，偏移量应当０
           var r0 = this.attr('innerRadius');
+
+          var TAU = Math.PI * 2;
           var startAngle = this.attr('startAngle');
-          var endAngle = this.attr('endAngle');
+          if (startAngle > TAU) {
+            startAngle %= TAU;
+          } else {
+            startAngle = (startAngle + Math.ceil(Math.abs(startAngle) / TAU) * TAU) % TAU;
+          }
+          var endAngle = this.attr('endAngle') - this.attr('startAngle') + startAngle;
 
           var d = Math.sqrt(Math.pow(offsetX - r, 2) + Math.pow(offsetY - r, 2));
           var angle = Math.atan2(offsetY - r, offsetX - r);
-          if (angle < 0) {
-            angle = Math.PI * 2 + angle;
+
+          if (angle < 0 || endAngle > TAU) {
+            angle += TAU;
           }
 
           return d >= r0 && d <= r - offset && angle >= startAngle && angle <= endAngle;
@@ -4839,12 +4845,15 @@ function install(_ref) {
 
         var lw = this.attr('lineWidth');
 
-        var isCircle = this.endAngle - this.startAngle >= Math.PI * 2;
-        var startAngle = isCircle ? 0 : this.startAngle;
-        var endAngle = isCircle ? Math.PI * 2 : this.endAngle;
-        if (endAngle > Math.PI * 2) {
-          endAngle = Math.PI * 2;
-        }
+        // 对是否为圆形的判断是没有必要的。
+        // const isCircle = this.endAngle - this.startAngle >= Math.PI * 2;
+        // const startAngle = isCircle ? 0 : this.startAngle;
+        // let endAngle = isCircle ? Math.PI * 2 : this.endAngle;
+        // if (endAngle > Math.PI * 2) {
+        //   endAngle = Math.PI * 2;
+        // }
+        var startAngle = this.startAngle;
+        var endAngle = this.endAngle;
 
         ctx.miterLimit = 0;
         ctx.lineWidth = lw;
@@ -4880,6 +4889,7 @@ function install(_ref) {
         if (lw > 0) {
           ctx.stroke();
         }
+
         return ctx;
       }
     }, {

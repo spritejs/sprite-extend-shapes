@@ -3,7 +3,6 @@
   "version": "0.1.56",
   "description": "",
   "main": "lib/index.js",
-  "module": "dist/sprite-extend-shapes.es6.js",
   "directories": {
     "example": "examples",
     "lib": "lib",
