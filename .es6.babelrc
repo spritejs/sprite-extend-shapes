@@ -1,8 +1,0 @@
-{
-  "presets": [],
-  "plugins": [
-    "transform-runtime",
-    "transform-decorators-runtime",
-    "transform-class-properties"
-  ]
-}

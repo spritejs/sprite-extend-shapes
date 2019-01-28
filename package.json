@@ -1,18 +1,15 @@
 {
   "name": "sprite-extend-shapes",
-  "version": "0.1.54",
+  "version": "0.1.55",
   "description": "",
   "main": "lib/index.js",
-  "module": "dist/sprite-extend-shapes.es6.js",
   "directories": {
     "example": "examples",
     "lib": "lib",
     "test": "test"
   },
   "scripts": {
-    "build": "npm run build:es6 && npm run build:prod",
-    "build:prod": "babel src -d lib && webpack --env.production",
-    "build:es6": "babel src -d lib && webpack --env.esnext",
+    "build": "babel src -d lib && webpack --env.production",
     "standalone": "babel src -d lib && webpack --env.standalone",
     "start": "webpack-dev-server --watch-poll",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.doc.dev.js",
