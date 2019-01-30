@@ -184,6 +184,8 @@ export default function install({use, utils, registerNodeType}) {
 
       ctx.miterLimit = 0;
       ctx.lineWidth = lw;
+      ctx.lineCap = this.attr('lineCap');
+      ctx.lineJoin = this.attr('lineJoin');
       ctx.setLineDash(this.attr('lineDash'));
       ctx.lineDashOffset = this.attr('lineDashOffset');
       ctx.strokeStyle = findColor(ctx, this, 'color');
