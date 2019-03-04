@@ -1291,13 +1291,22 @@ function install({ use, utils, registerNodeType }) {
   let Wave = (_class2 = (_temp = _class3 = class Wave extends Shape {
 
     get isVirtual() {
-      return true;
+      return false;
     }
 
     get lineBoundings() {
-      const len = this.attr('lineWidth') + this.attr('radius') + this.attr('offset');
+      const lw = this.attr('lineWidth');
 
-      return [0, 0, 2 * len, 2 * len];
+      if (this.attr('shape')) {
+        const svgpath = new svg_path_to_canvas__WEBPACK_IMPORTED_MODULE_1___default.a(this.attr('shape'));
+
+        svgpath.scale(this.attr('shapeScale')).lineWidth(lw).trim();
+
+        return [-lw, -lw, ...svgpath.size.map(v => v += lw)];
+      }
+
+      const len = lw + this.attr('radius') + this.attr('offset');
+      return [lw, lw, 2 * len, 2 * len];
     }
 
     get contentSize() {
@@ -1313,6 +1322,13 @@ function install({ use, utils, registerNodeType }) {
       }
 
       return [width, height].map(Math.ceil);
+    }
+
+    get originalRect() {
+      const lineBoundings = this.lineBoundings;
+      const [x, y, w, h] = super.originalRect;
+      const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
+      return rect;
     }
 
     render(t, ctx) {
@@ -1357,7 +1373,9 @@ function install({ use, utils, registerNodeType }) {
         ctx.beginPath();
         ctx.arc(cx, cy + 0, Math.min(horizontalLength, verticalLength), 0, Math.PI * 2, false);
       } else {
-        svgpath.save().beginPath().strokeStyle(this.attr('shapeColor')).fillStyle(this.attr('shapeFillColor')).scale(this.attr('shapeScale')).lineWidth(lw).to(ctx).fill().stroke();
+        ctx.translate(lw, lw);
+
+        svgpath.save().beginPath().strokeStyle(this.attr('shapeColor')).fillStyle(this.attr('shapeFillColor')).scale(this.attr('shapeScale')).lineWidth(lw).trim().to(ctx).fill().stroke();
 
         [cx, cy] = svgpath.center;
         [horizontalLength, verticalLength] = svgpath.size.map(v => v / 2);
@@ -1415,7 +1433,7 @@ function install({ use, utils, registerNodeType }) {
 
       ctx.restore();
     }
-  }, _class3.Attr = WaveAttr, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'lineBoundings', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'lineBoundings'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'contentSize', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'contentSize'), _class2.prototype)), _class2);
+  }, _class3.Attr = WaveAttr, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'lineBoundings', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'lineBoundings'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'contentSize', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'contentSize'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'originalRect', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'originalRect'), _class2.prototype)), _class2);
 
 
   registerNodeType('wave', Wave, false);

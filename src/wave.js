@@ -76,15 +76,26 @@ export default function install({use, utils, registerNodeType}) {
     static Attr = WaveAttr;
 
     get isVirtual() {
-      return true;
+      return false;
     }
 
     @flow
     get lineBoundings() {
-      const len =
-        this.attr('lineWidth') + this.attr('radius') + this.attr('offset');
+      const lw = this.attr('lineWidth');
 
-      return [0, 0, 2 * len, 2 * len];
+      if (this.attr('shape')) {
+        const svgpath = new SvgPath(this.attr('shape'));
+
+        svgpath
+          .scale(this.attr('shapeScale'))
+          .lineWidth(lw)
+          .trim();
+
+        return [-lw, -lw, ...svgpath.size.map(v => (v += lw))];
+      }
+
+      const len = lw + this.attr('radius') + this.attr('offset');
+      return [lw, lw, 2 * len, 2 * len];
     }
 
     @flow
@@ -101,6 +112,14 @@ export default function install({use, utils, registerNodeType}) {
       }
 
       return [width, height].map(Math.ceil);
+    }
+
+    @flow
+    get originalRect() {
+      const lineBoundings = this.lineBoundings;
+      const [x, y, w, h] = super.originalRect;
+      const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
+      return rect;
     }
 
     render(t, ctx) {
@@ -159,6 +178,8 @@ export default function install({use, utils, registerNodeType}) {
           false
         );
       } else {
+        ctx.translate(lw, lw);
+
         svgpath
           .save()
           .beginPath()
@@ -166,6 +187,7 @@ export default function install({use, utils, registerNodeType}) {
           .fillStyle(this.attr('shapeFillColor'))
           .scale(this.attr('shapeScale'))
           .lineWidth(lw)
+          .trim()
           .to(ctx)
           .fill()
           .stroke();

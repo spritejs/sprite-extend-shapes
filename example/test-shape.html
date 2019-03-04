@@ -8,7 +8,7 @@
     <style>
       #container {
         width: 1200px;
-        height: 800px;
+        height: 1000px;
         background: #aaa;
       }
     </style>
@@ -42,7 +42,7 @@
       const {Scene, Layer} = spritevue.spritejs;
 
       const scene = new Scene('#container', {
-        resolution: [1200, 800],
+        resolution: [1200, 1000],
         displayRatio: 'auto'
       });
       const layer = scene.layer();
@@ -454,10 +454,11 @@
 
       const wave = new Wave();
       wave.attr({
-        pos: [600, 240],
+        pos: [10, 540],
         radius: 80,
         offset: 10,
-        lineWidth: 1,
+        lineWidth: 10,
+        bgcolor: 'red',
         color: '#158bca',
         fillColor: '#158bca',
         percent: [0.6, 0.5, 0.4],
@@ -482,15 +483,18 @@
 
       const wave2 = new Wave();
       wave2.attr({
-        pos: [600, 240],
+        pos: [450, 540],
         radius: 80,
         offset: 10,
-        lineWidth: 1,
+        lineWidth: 5,
         color: '#158bca',
         fillColor: '#158bca',
+        bgcolor: 'red',
+
         percent: 0.6,
         amplitude: 20,
-        shapeScale: 5,
+        shapeScale: 10,
+        trim: true,
         shape:
           'M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2 c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z',
         speed: 0
@@ -508,10 +512,12 @@
 
       const wave3 = new Wave();
       wave3.attr({
-        pos: [800, 240],
+        pos: [900, 600],
         radius: 80,
         offset: 10,
-        lineWidth: 1,
+        lineWidth: 10,
+        bgcolor: 'red',
+
         wavesColor: '#158bca',
         outlineColor: '#158bca',
         percent: 0.6,
