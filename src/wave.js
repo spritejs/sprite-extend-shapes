@@ -147,7 +147,9 @@ export default function install({use, utils, registerNodeType}) {
       } else {
         svgpath = new SvgPath(shape);
         [cx, cy] = svgpath.center;
-        [horizontalLength, verticalLength] = svgpath.size.map(v => v / 2);
+        [horizontalLength, verticalLength] = svgpath.size.map(
+          v => (v + lw) / 2
+        );
       }
 
       if (showOutline && !svgpath) {
@@ -193,7 +195,9 @@ export default function install({use, utils, registerNodeType}) {
           .stroke();
 
         [cx, cy] = svgpath.center;
-        [horizontalLength, verticalLength] = svgpath.size.map(v => v / 2);
+        [horizontalLength, verticalLength] = svgpath.size.map(
+          v => (v + lw * 2) / 2
+        );
       }
 
       ctx.clip();
@@ -212,17 +216,30 @@ export default function install({use, utils, registerNodeType}) {
       }
 
       percent.map((percent, i) => {
-        let startAngle = 0;
-        if (percent <= 0.5) {
-          startAngle = 0.25 - percent / 2;
-        } else if (percent < 1) {
-          startAngle = 0 - (percent - 0.5) / 2;
+        percent = percent > 1 ? 1 : percent;
+
+        let y = 0;
+
+        if (this.attr('shape')) {
+          // 使用 svgPath
+          if (percent <= 0.5) {
+            y = (0.5 - percent) * verticalLength * 2;
+          } else {
+            y = -(percent - 0.5) * verticalLength * 2;
+          }
         } else {
-          startAngle = 0;
+          let startAngle = 0;
+          if (percent <= 0.5) {
+            startAngle = 0.25 - percent / 2;
+          } else if (percent < 1) {
+            startAngle = 0 - (percent - 0.5) / 2;
+          } else {
+            startAngle = 0;
+          }
+          startAngle *= Math.PI * 2;
+          const sinVal = percent >= 1 ? -1 : sin(startAngle / 2);
+          y = round(radius * sinVal);
         }
-        startAngle *= Math.PI * 2;
-        const sinVal = percent >= 1 ? -1 : sin(startAngle / 2);
-        const y = round(radius * sinVal);
 
         const A =
           ((radius / 20) * sin(percent * Math.PI) + i * 10 + AMPLITUDE) / 2; // 振幅;

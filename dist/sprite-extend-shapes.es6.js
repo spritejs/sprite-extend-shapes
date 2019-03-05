@@ -1356,7 +1356,7 @@ function install({ use, utils, registerNodeType }) {
       } else {
         svgpath = new svg_path_to_canvas__WEBPACK_IMPORTED_MODULE_1___default.a(shape);
         [cx, cy] = svgpath.center;
-        [horizontalLength, verticalLength] = svgpath.size.map(v => v / 2);
+        [horizontalLength, verticalLength] = svgpath.size.map(v => (v + lw) / 2);
       }
 
       if (showOutline && !svgpath) {
@@ -1378,7 +1378,7 @@ function install({ use, utils, registerNodeType }) {
         svgpath.save().beginPath().strokeStyle(this.attr('shapeColor')).fillStyle(this.attr('shapeFillColor')).scale(this.attr('shapeScale')).lineWidth(lw).trim().to(ctx).fill().stroke();
 
         [cx, cy] = svgpath.center;
-        [horizontalLength, verticalLength] = svgpath.size.map(v => v / 2);
+        [horizontalLength, verticalLength] = svgpath.size.map(v => (v + lw * 2) / 2);
       }
 
       ctx.clip();
@@ -1397,17 +1397,30 @@ function install({ use, utils, registerNodeType }) {
       }
 
       percent.map((percent, i) => {
-        let startAngle = 0;
-        if (percent <= 0.5) {
-          startAngle = 0.25 - percent / 2;
-        } else if (percent < 1) {
-          startAngle = 0 - (percent - 0.5) / 2;
+        percent = percent > 1 ? 1 : percent;
+
+        let y = 0;
+
+        if (this.attr('shape')) {
+          // 使用 svgPath
+          if (percent <= 0.5) {
+            y = (0.5 - percent) * verticalLength * 2;
+          } else {
+            y = -(percent - 0.5) * verticalLength * 2;
+          }
         } else {
-          startAngle = 0;
+          let startAngle = 0;
+          if (percent <= 0.5) {
+            startAngle = 0.25 - percent / 2;
+          } else if (percent < 1) {
+            startAngle = 0 - (percent - 0.5) / 2;
+          } else {
+            startAngle = 0;
+          }
+          startAngle *= Math.PI * 2;
+          const sinVal = percent >= 1 ? -1 : Object(_util__WEBPACK_IMPORTED_MODULE_3__["sin"])(startAngle / 2);
+          y = Object(_util__WEBPACK_IMPORTED_MODULE_3__["round"])(radius * sinVal);
         }
-        startAngle *= Math.PI * 2;
-        const sinVal = percent >= 1 ? -1 : Object(_util__WEBPACK_IMPORTED_MODULE_3__["sin"])(startAngle / 2);
-        const y = Object(_util__WEBPACK_IMPORTED_MODULE_3__["round"])(radius * sinVal);
 
         const A = (radius / 20 * Object(_util__WEBPACK_IMPORTED_MODULE_3__["sin"])(percent * Math.PI) + i * 10 + AMPLITUDE) / 2; // 振幅;
         const W = Math.PI * 2 / 200;
