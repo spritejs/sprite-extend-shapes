@@ -52,7 +52,7 @@ export default function install({use, utils, registerNodeType}) {
 
     render(t, ctx) {
       super.render(t, ctx);
-      // const startPoint = this.attr('startPoint');
+      const startPoint = this.attr('startPoint');
       const points = this.points;
 
       ctx.fillStyle = this.attr('fillColor');
@@ -64,7 +64,7 @@ export default function install({use, utils, registerNodeType}) {
       ctx.lineDashOffset = this.attr('lineDashOffset');
 
       const path = new Path2D();
-      // path.moveTo(...startPoint);
+      path.moveTo(...startPoint);
 
       /* eslint-disable arrow-parens */
       points.forEach(point => {
