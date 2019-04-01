@@ -1,6 +1,6 @@
 {
   "name": "sprite-extend-shapes",
-  "version": "0.1.62",
+  "version": "0.1.63",
   "description": "",
   "main": "lib/index.js",
   "directories": {
@@ -79,7 +79,7 @@
     ]
   },
   "dependencies": {
-    "sprite-draggable": "0.1.14",
+    "sprite-draggable": "0.1.15",
     "svg-path-to-canvas": "^1.11.1"
   }
 }

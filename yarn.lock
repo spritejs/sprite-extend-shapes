@@ -8126,12 +8126,10 @@ sprite-core@^2.26.7:
     sprite-math "^1.0.5"
     svg-path-to-canvas "^1.9.6"
 
-sprite-draggable@0.0.13:
-  version "0.0.13"
-  resolved "https://registry.npmjs.org/sprite-draggable/-/sprite-draggable-0.0.13.tgz#9f05a4d71b057f24997d2c7170c7760eed4489c4"
+sprite-draggable@0.1.15:
+  version "0.1.15"
+  resolved "https://registry.npmjs.org/sprite-draggable/-/sprite-draggable-0.1.15.tgz#a04850d938c211061aa0ce78d3407af6a79d0d04"
   dependencies:
-    babel-decorators-runtime "^0.2.0"
-    babel-runtime "^6.26.0"
     sprite-math "^1.0.5"
 
 sprite-flex-layout@^1.0.7:
@@ -8367,6 +8365,14 @@ supports-color@^5.5.0:
   resolved "https://registry.npmjs.org/supports-color/-/supports-color-5.5.0.tgz#e2e69a44ac8772f78a1ec0b35b689df6530efc8f"
   dependencies:
     has-flag "^3.0.0"
+
+svg-path-to-canvas@^1.11.1:
+  version "1.11.1"
+  resolved "https://registry.npmjs.org/svg-path-to-canvas/-/svg-path-to-canvas-1.11.1.tgz#2b25a66e4a73b057eefbd147e7bca8e170e358b9"
+  dependencies:
+    babel-runtime "^6.26.0"
+    point-at-length "^1.1.0"
+    sprite-math "^1.0.5"
 
 svg-path-to-canvas@^1.9.6:
   version "1.9.6"
