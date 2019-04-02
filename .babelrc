@@ -1,8 +1,9 @@
 {
-  "presets": ["react", "env"],
+  "presets": ["env"],
   "plugins": [
     "transform-runtime",
     "transform-decorators-runtime",
-    "transform-class-properties"
+    "transform-class-properties",
+    "inline-package-json"
   ]
 }

@@ -10,7 +10,7 @@ export default function install({use, utils, registerNodeType}) {
       super(subject);
       this.setDefault({
         points: [],
-        smooth: null,
+        smooth: null
       });
     }
 
@@ -47,12 +47,15 @@ export default function install({use, utils, registerNodeType}) {
     static Attr = PolygonAttr;
 
     get lineBoundings() {
+      const lw = this.attr('lineWidth');
+
       const bounds = [0, 0, 0, 0];
       const points = this.points;
 
       points.forEach(([x, y]) => {
         bounds[0] = Math.min(x, bounds[0]);
         bounds[1] = Math.min(y, bounds[1]);
+
         bounds[2] = Math.max(x, bounds[2]);
         bounds[3] = Math.max(y, bounds[3]);
       });
@@ -64,26 +67,29 @@ export default function install({use, utils, registerNodeType}) {
       const bounds = this.lineBoundings;
       const lw = this.attr('lineWidth');
       let [width, height] = this.attrSize;
-      width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
-      height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
+      width = bounds[2] - Math.min(0, bounds[0]) + lw;
+      height = bounds[3] - Math.min(0, bounds[1]) + lw;
       return [width, height].map(Math.ceil);
     }
 
-    @flow
-    get originalRect() {
-      const bounds = this.lineBoundings;
-      const lw = this.attr('lineWidth');
-      const [width, height] = this.offsetSize;
-      const [anchorX, anchorY] = this.attr('anchor');
+    // @flow
+    // get originalRect() {
+    //   // const bounds = this.lineBoundings;
+    //   // const lw = this.attr('lineWidth');
+    //   // const [width, height] = this.offsetSize;
+    //   // const [anchorX, anchorY] = this.attr('anchor');
+    //   // const rect = [0, 0, width, height];
+    //   // const offsetX = Math.min(0, bounds[0]);
+    //   // const offsetY = Math.min(0, bounds[1]);
+    //   // rect[0] = offsetX - lw - anchorX * (width + offsetX - 2 * lw);
+    //   // rect[1] = offsetY - lw - anchorY * (height + offsetY - 2 * lw);
+    //   // return rect;
+    //   const lineBoundings = this.lineBoundings;
+    //   const [x, y, w, h] = super.originalRect;
+    //   const rect = [x, y, w, h];
 
-      const rect = [0, 0, width, height];
-      const offsetX = Math.min(0, bounds[0]);
-      const offsetY = Math.min(0, bounds[1]);
-
-      rect[0] = offsetX - lw - anchorX * (width + offsetX - 2 * lw);
-      rect[1] = offsetY - lw - anchorY * (height + offsetY - 2 * lw);
-      return rect;
-    }
+    //   return rect;
+    // }
 
     get points() {
       return this.attr('points');
@@ -98,9 +104,9 @@ export default function install({use, utils, registerNodeType}) {
         offsetX += width * anchorX;
         offsetY += height * anchorY;
         return (
-          this.path
-          && (this.context.isPointInPath(this.path, offsetX, offsetY)
-            || this.context.isPointInStroke(this.path, offsetX, offsetY))
+          this.path &&
+          (this.context.isPointInPath(this.path, offsetX, offsetY) ||
+            this.context.isPointInStroke(this.path, offsetX, offsetY))
         );
       }
     }
@@ -111,8 +117,8 @@ export default function install({use, utils, registerNodeType}) {
         const bounds = this.lineBoundings;
         const lw = this.attr('lineWidth');
         drawingContext.translate(
-          -Math.min(0, bounds[0]) + lw,
-          -Math.min(0, bounds[1]) + lw
+          -Math.min(0, bounds[0]) + lw / 2,
+          -Math.min(0, bounds[1]) + lw / 2
         );
         drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
         drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');

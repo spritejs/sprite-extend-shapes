@@ -27,17 +27,21 @@ export default function install({use, utils, registerNodeType}) {
       const radiusY = this.attr('radiusY');
       const x = 0;
       const y = 0;
-      const rotate = (this.attr('rotate') / 180) * Math.PI;
-      const startAngle = (this.attr('startAngle') / 180) * Math.PI;
-      const endAngle = (this.attr('endAngle') / 180) * Math.PI;
+      const rotate = this.attr('rotate');
+      const startAngle = this.attr('startAngle');
+      const endAngle = this.attr('endAngle');
       const anticlockwise = this.attr('anticlockwise');
 
-      drawingContext.lineWidth = this.attr('lineWidth');
+      const lw = this.attr('lineWidth');
+      drawingContext.lineWidth = lw;
       drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
       drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
 
       if (drawingContext.ellipse) {
         drawingContext.beginPath();
+
+        drawingContext.translate(radiusX + lw / 2, radiusY + lw / 2);
+
         drawingContext.ellipse(
           x,
           y,

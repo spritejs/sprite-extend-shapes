@@ -33,6 +33,7 @@ module.exports = function(env = {}) {
       filename,
       publicPath: '/js/',
       library: ['spriteShapes'],
+      libraryExport: 'default',
       libraryTarget: 'umd'
     },
     // resolve: {

@@ -17,34 +17,12 @@ import EllipseArc from './ellipseShape/ellipseArc';
 import Circle from './ellipseShape/circle';
 import Ring from './ring';
 
-// auto use
-if (typeof window !== 'undefined' && window.spritejs) {
-  window.spritejs.use(install);
-}
+const version = require('../package.json').version;
 
-export function install(spritejs) {
-  return [
-    Shape,
-    Polyline,
-    Polycurve,
-    Wave,
-    Polygon,
-    Triangle,
-    Rect,
-    Star,
-    Arc,
-    Sector,
-    Ellipse,
-    EllipseSector,
-    EllipseArc,
-    Circle,
-    Ring
-  ].reduce((pkg, Node) => {
-    return Object.assign(pkg, spritejs.use(Node, null, false));
-  }, {});
-}
-
-export const shapes = {
+export const Shapes = {
+  version,
+  install,
+  Shape,
   Polyline,
   Polycurve,
   Wave,
@@ -60,3 +38,41 @@ export const shapes = {
   Circle,
   Ring
 };
+
+function install(spritejs) {
+  return Object.keys(Shapes).reduce((pkg, key) => {
+    if (key === 'version' || key === 'install') {
+      return pkg;
+    }
+
+    return Object.assign(pkg, spritejs.use(Shapes[key], null, false));
+  }, {});
+}
+
+// auto use
+// 移除是为了实现按需加载
+// if (typeof window !== 'undefined' && window.spritejs) {
+//   window.spritejs.use(Shapes);
+// }
+
+export {
+  version,
+  install,
+  Shape,
+  Polyline,
+  Polycurve,
+  Wave,
+  Polygon,
+  Triangle,
+  Rect,
+  Star,
+  Arc,
+  Sector,
+  Ellipse,
+  EllipseSector,
+  EllipseArc,
+  Circle,
+  Ring
+};
+
+export default Shapes;

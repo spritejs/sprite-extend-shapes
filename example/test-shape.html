@@ -17,10 +17,10 @@
   <body>
     <div id="container"></div>
 
-    <script src="https://unpkg.com/sprite-vue@0.18.1/dist/sprite-vue.js"></script>
+    <script src="https://unpkg.com/spritejs/dist/spritejs.min.js"></script>
     <script src="/js/sprite-extend-shapes.js"></script>
     <script>
-      spritevue.spritejs.use(spriteShapes.install);
+      spritejs.use(spriteShapes.install);
 
       const {
         Sprite,
@@ -37,9 +37,9 @@
         EllipseSector,
         Polycurve,
         Wave
-      } = spritevue.spritejs;
+      } = spritejs;
 
-      const {Scene, Layer} = spritevue.spritejs;
+      const {Scene, Layer} = spritejs;
 
       const scene = new Scene('#container', {
         resolution: [1200, 1000],
@@ -249,14 +249,27 @@
       // 画弧线
       const arc = new Arc();
       arc.attr({
-        pos: [520, 400],
-        center: [20, 0],
-        radius: 20,
+        pos: [100, 40],
+
+        radius: 50,
+        startAngle: Math.PI * 0.75,
+        endAngle: Math.PI * 2.75,
         lineWidth: 5,
-        startAngle: Math.PI * 0.8,
-        endAngle: Math.PI * 2.2,
+        color: 'red',
+        startAngle: Math.PI * 0,
+        endAngle: Math.PI * 2,
         bgcolor: 'green'
       });
+      arc.on('mousemove', evt => {
+        arc.attr('color', 'yellow');
+        evt.stopDispatch();
+      });
+
+      arc.on('mouseleave', evt => {
+        arc.attr('color', 'red');
+        evt.stopDispatch();
+      });
+
       arc.on('click', () => alert('click arc'));
       layer.append(arc);
 
@@ -428,13 +441,29 @@
 
       const polycurve = new Polycurve();
       polycurve.attr({
-        pos: [300, 100],
+        pos: [720, 120],
+        startPoint: [20, 20],
         points: [
-          [221, 158, 221, 189.2639320225002, 165.8680339887499, 189.2639320225002],
-         [165.8680339887499, 189.2639320225002, 110.73606797749979, 189.2639320225002, 110.73606797749979, 378.5278640450004]
+          [
+            221,
+            158,
+            221,
+            189.2639320225002,
+            165.8680339887499,
+            189.2639320225002
+          ],
+          [
+            165.8680339887499,
+            189.2639320225002,
+            110.73606797749979,
+            189.2639320225002,
+            110.73606797749979,
+            378.5278640450004
+          ]
         ],
-        lineWidth: 1,
-        color:'#f00'
+        lineWidth: 10,
+        bgcolor: '#eee',
+        color: '#f00'
         //fillColor: 'green'
       });
 
@@ -447,14 +476,14 @@
       });
 
       polycurve.on('mouseleave', () => {
-        polycurve.attr('fillColor', 'red');
+        polycurve.attr('fillColor', 'blue');
       });
 
       layer.append(polycurve);
 
       const wave = new Wave();
       wave.attr({
-        pos: [10, 540],
+        pos: [10, 600],
         radius: 80,
         offset: 10,
         lineWidth: 10,
@@ -466,6 +495,7 @@
         amplitude: 20,
         shapeColor: '#58b8fe',
         shapeFillColor: '#e5f7ff',
+        shapeScale: 0.5,
         shape:
           'M367.855,428.202c-3.674-1.385-7.452-1.966-11.146-1.794c0.659-2.922,0.844-5.85,0.58-8.719 c-0.937-10.407-7.663-19.864-18.063-23.834c-10.697-4.043-22.298-1.168-29.902,6.403c3.015,0.026,6.074,0.594,9.035,1.728 c13.626,5.151,20.465,20.379,15.32,34.004c-1.905,5.02-5.177,9.115-9.22,12.05c-6.951,4.992-16.19,6.536-24.777,3.271 c-13.625-5.137-20.471-20.371-15.32-34.004c0.673-1.768,1.523-3.423,2.526-4.992h-0.014c0,0,0,0,0,0.014 c4.386-6.853,8.145-14.279,11.146-22.187c23.294-61.505-7.689-130.278-69.215-153.579c-61.532-23.293-130.279,7.69-153.579,69.202 c-6.371,16.785-8.679,34.097-7.426,50.901c0.026,0.554,0.079,1.121,0.132,1.688c4.973,57.107,41.767,109.148,98.945,130.793 c58.162,22.008,121.303,6.529,162.839-34.465c7.103-6.893,17.826-9.444,27.679-5.719c11.858,4.491,18.565,16.6,16.719,28.643 c4.438-3.126,8.033-7.564,10.117-13.045C389.751,449.992,382.411,433.709,367.855,428.202z',
         speed: 0
@@ -483,7 +513,7 @@
 
       const wave2 = new Wave();
       wave2.attr({
-        pos: [450, 540],
+        pos: [450, 600],
         radius: 80,
         offset: 10,
         lineWidth: 5,
@@ -493,7 +523,7 @@
 
         percent: 0.6,
         amplitude: 20,
-        shapeScale: 10,
+        shapeScale: 5,
         trim: true,
         shape:
           'M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2 c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z',
@@ -513,7 +543,7 @@
       const wave3 = new Wave();
       wave3.attr({
         pos: [900, 600],
-        radius: 80,
+        radius: 60,
         offset: 10,
         lineWidth: 10,
         bgcolor: 'red',

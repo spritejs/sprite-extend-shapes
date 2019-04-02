@@ -70,6 +70,7 @@ export default function install({use, utils, registerNodeType}) {
 
     render(t, drawingContext) {
       super.render(t, drawingContext);
+
       if (this.points) {
         drawingContext.fillStyle = this.attr('fillColor');
         drawingContext.strokeStyle = findColor(drawingContext, this, 'color');

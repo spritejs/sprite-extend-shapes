@@ -1,28 +1,18 @@
 import ShapePlugin from './shape';
 
 export default function install({use, utils, registerNodeType}) {
-  const {attr, findColor} = utils;
+  const {attr, flow, findColor} = utils;
   const {Shape} = use(ShapePlugin, null, false);
 
   class ArcAttr extends Shape.Attr {
     constructor(subject) {
       super(subject);
       this.setDefault({
-        center: [0, 0],
-        startPoint: [0, 0],
-        angel: 0,
         radius: 0,
         startAngle: 0,
         endAngle: Math.PI * 2,
-        anticlockwise: false,
+        anticlockwise: false
       });
-    }
-
-    // 圆弧的圆心
-    @attr
-    set center(val) {
-      this.clearFlow();
-      this.set('center', val);
     }
 
     // 圆弧起始点
@@ -69,7 +59,47 @@ export default function install({use, utils, registerNodeType}) {
     static Attr = ArcAttr;
 
     get isVirtual() {
-      return true;
+      return false;
+    }
+
+    @flow
+    get lineBoundings() {
+      const lw = this.attr('lineWidth');
+
+      const r = this.attr('radius');
+      return [0, 0, 2 * r, 2 * r];
+    }
+
+    @flow
+    get contentSize() {
+      const bounds = this.lineBoundings;
+      const lw = this.attr('lineWidth');
+      let [width, height] = [...this.attrSize];
+
+      if (width === '') {
+        width = bounds[2] - Math.min(0, bounds[0]) + lw * 1;
+      }
+      if (height === '') {
+        height = bounds[3] - Math.min(0, bounds[1]) + lw * 1;
+      }
+
+      return [width, height].map(Math.ceil);
+    }
+
+    @flow
+    get originalRect() {
+      const lineBoundings = this.lineBoundings;
+      const lw = this.attr('lineWidth');
+
+      const [x, y, w, h] = super.originalRect;
+      const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
+      return rect;
+    }
+
+    get center() {
+      const lw = this.attr('lineWidth');
+      const r = this.attr('radius');
+      return [r + 0.5 * lw, r + 0.5 * lw];
     }
 
     get startAngle() {
@@ -80,37 +110,42 @@ export default function install({use, utils, registerNodeType}) {
       return this.attr('endAngle');
     }
 
-    render(t, ctx) {
-      if (this.attr('center')) {
-        const [cx, cy] = this.attr('center');
+    pointCollision(evt) {
+      if (super.pointCollision(evt)) {
+        let {offsetX, offsetY} = evt;
+        const [anchorX, anchorY] = this.attr('anchor');
+        const [width, height] = this.contentSize;
 
-        const startAngle = this.startAngle;
-        const endAngle = this.endAngle;
-        const radius = this.attr('radius');
-
-        // const [sx, sy] = this.attr('startPoint');
-        // const radius = getDist([cx, cy], [sx, sy]);
-        const anticlockwise = this.attr('anticlockwise');
-        // const angle = this.attr('angle');
-        // const startAngle = getRotationAngle([cx, cy], [sx, sy]);
-        // const endAngle = anticlockwise
-        //   ? startAngle - angle
-        //   : startAngle + angle;
-
-        ctx.lineCap = this.attr('lineCap');
-        ctx.lineJoin = this.attr('lineJoin');
-        ctx.lineWidth = this.attr('lineWidth');
-        ctx.strokeStyle = findColor(ctx, this, 'color');
-        ctx.setLineDash(this.attr('lineDash'));
-        ctx.lineDashOffset = this.attr('lineDashOffset');
-
-        const path = new Path2D();
-        path.arc(cx, cy, radius, startAngle, endAngle, anticlockwise);
-        ctx.stroke(path);
-        this.path = path;
-      } else {
-        console.error('center must be given when drawing an arc!');
+        offsetX += width * anchorX;
+        offsetY += height * anchorY;
+        return (
+          this.path && this.context.isPointInStroke(this.path, offsetX, offsetY)
+        );
       }
+    }
+
+    render(t, ctx) {
+      super.render(t, ctx);
+
+      const [cx, cy] = this.center;
+
+      const startAngle = this.startAngle;
+      const endAngle = this.endAngle;
+      const radius = this.attr('radius');
+      const anticlockwise = this.attr('anticlockwise');
+
+      ctx.beginPath();
+      ctx.lineCap = this.attr('lineCap');
+      ctx.lineJoin = this.attr('lineJoin');
+      ctx.lineWidth = this.attr('lineWidth');
+      ctx.strokeStyle = findColor(ctx, this, 'color');
+      ctx.setLineDash(this.attr('lineDash'));
+      ctx.lineDashOffset = this.attr('lineDashOffset');
+
+      const path = new Path2D();
+      path.arc(cx, cy, radius, startAngle, endAngle, anticlockwise);
+      ctx.stroke(path);
+      this.path = path;
       return ctx;
     }
   }

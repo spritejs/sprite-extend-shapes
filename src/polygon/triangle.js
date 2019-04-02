@@ -9,7 +9,7 @@ export default function install({use, utils, registerNodeType}) {
       const angle = (Math.PI / 180) * this.attr('angle');
       const p0 = [0, 0];
       const p1 = [s1, 0];
-      const p2 = [s2 * Math.cos(angle), s2 * Math.sin(angle)];
+      const p2 = [(s2 + 0) * Math.cos(angle), (s2 + 0) * Math.sin(angle)];
       return [p0, p1, p2];
     }
   }

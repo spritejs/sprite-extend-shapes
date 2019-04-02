@@ -1,8 +1,8 @@
 import ShapePlugin from '../shape';
 
-export default function install({ use, utils, registerNodeType }) {
-  const { attr, flow, parseColorString, findColor } = utils;
-  const { Shape } = use(ShapePlugin, null, false);
+export default function install({use, utils, registerNodeType}) {
+  const {attr, flow, parseColorString, findColor} = utils;
+  const {Shape} = use(ShapePlugin, null, false);
 
   class EllipseSectorAttr extends Shape.Attr {
     constructor(subject) {
@@ -10,11 +10,10 @@ export default function install({ use, utils, registerNodeType }) {
       this.setDefault({
         radiusX: 10,
         radiusY: 20,
-        center: [ 0, 0 ],
         startAngle: 0,
         endAngle: 0,
         lineWidth: 1,
-        anticlockwise: false,
+        anticlockwise: false
       });
     }
 
@@ -77,7 +76,7 @@ export default function install({ use, utils, registerNodeType }) {
     static Attr = EllipseSectorAttr;
 
     get radiuses() {
-      return [ this.attr('radiusX'), this.attr('radiusY') ];
+      return [this.attr('radiusX'), this.attr('radiusY')];
     }
 
     get startAngle() {
@@ -89,68 +88,62 @@ export default function install({ use, utils, registerNodeType }) {
     }
 
     get center() {
-      return this.attr('center');
+      const lw = this.attr('lineWidth');
+      return this.radiuses.map(v => v + lw / 2);
     }
 
     get lineBoundings() {
-      return [ 0, 0, 2 * this.radiuses[ 0 ], 2 * this.radiuses[ 1 ] ];
+      const lw = this.attr('lineWidth');
+      return [0, 0, 2 * this.radiuses[0], 2 * this.radiuses[1]];
     }
 
     @flow
     get contentSize() {
       const bounds = this.lineBoundings;
       const lw = this.attr('lineWidth');
-      let [ width, height ] = [ ...this.attrSize ];
+      let [width, height] = [...this.attrSize];
 
       if (width === '') {
-        width = bounds[ 2 ] - Math.min(0, bounds[ 0 ]) + 2 * lw;
+        width = bounds[2] - Math.min(0, bounds[0]) + lw;
       }
       if (height === '') {
-        height = bounds[ 3 ] - Math.min(0, bounds[ 1 ]) + 2 * lw;
+        height = bounds[3] - Math.min(0, bounds[1]) + lw;
       }
 
-      return [ width, height ].map(Math.ceil);
+      return [width, height].map(Math.ceil);
     }
 
     @flow
     get originalRect() {
-      const radiuses = this.radiuses;
-      const [ x, y, w, h ] = super.originalRect;
-      const rect = [ x - radiuses[ 0 ], y - radiuses[ 1 ], w, h ];
+      const lineBoundings = this.lineBoundings;
+      const [x, y, w, h] = super.originalRect;
+      const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
       return rect;
     }
 
     pointCollision(evt) {
       if (super.pointCollision(evt)) {
-        let { offsetX, offsetY } = evt;
+        let {offsetX, offsetY} = evt;
         // FIXME: 如果事件是改变半径大小，会导致contentSize变化，如何避免？
-        const [ anchorX, anchorY ] = this.attr('anchor');
-        const [ width, height ] = this.contentSize;
+        const [anchorX, anchorY] = this.attr('anchor');
+        const [width, height] = this.contentSize;
 
         offsetX += width * anchorX;
         offsetY += height * anchorY;
 
         return (
-          this.path
-          && (this.context.isPointInPath(this.path, offsetX, offsetY)
-            || this.context.isPointInStroke(this.path, offsetX, offsetY))
+          this.path &&
+          (this.context.isPointInPath(this.path, offsetX, offsetY) ||
+            this.context.isPointInStroke(this.path, offsetX, offsetY))
         );
       }
     }
 
     render(t, ctx) {
-      let x;
-      let y;
-      const [ rx, ry ] = this.radiuses;
+      super.render(t, ctx);
 
-      if (this.center && this.center.length > 0) {
-        [ x, y ] = this.center;
-      } else {
-        x = rx;
-        y = ry;
-      }
-
-      ctx.translate(this.radiuses[ 0 ], this.radiuses[ 1 ]);
+      const [x, y] = this.center;
+      const [rx, ry] = this.radiuses;
 
       const startAngle = this.startAngle;
       const endAngle = this.endAngle;
@@ -188,5 +181,5 @@ export default function install({ use, utils, registerNodeType }) {
   }
 
   registerNodeType('ellipsesector', EllipseSector, false);
-  return { EllipseSector };
+  return {EllipseSector};
 }

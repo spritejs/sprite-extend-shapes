@@ -222,11 +222,7 @@ export default function install({use, utils, registerNodeType}) {
 
         if (this.attr('shape')) {
           // 使用 svgPath
-          if (percent <= 0.5) {
-            y = (0.5 - percent) * verticalLength * 2;
-          } else {
-            y = -(percent - 0.5) * verticalLength * 2;
-          }
+          y = -(percent - 0.5) * verticalLength * 2;
         } else {
           let startAngle = 0;
           if (percent <= 0.5) {
@@ -260,6 +256,7 @@ export default function install({use, utils, registerNodeType}) {
         ctx.lineTo(cx - horizontalLength, cy + verticalLength);
         ctx.lineTo(cx - horizontalLength, cy);
         ctx.fillStyle = colors[i] || colors[0];
+
         ctx.fill();
         ctx.closePath();
       });

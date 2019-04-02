@@ -11,8 +11,7 @@ export default function install({use, utils, registerNodeType}) {
         innerRaius: 10,
         outerRadius: 20,
         startAngle: 0,
-        endAngle: 360,
-        center: [0, 0],
+        endAngle: Math.PI * 2,
         lineWidth: 1,
         maxRadius: 0 // 当需要绘制多个环且环的半径不一致,为了统一圆心,所设属性
       });
@@ -101,17 +100,11 @@ export default function install({use, utils, registerNodeType}) {
 
     @flow
     get originalRect() {
-      const bounds = this.lineBoundings;
+      const lineBoundings = this.lineBoundings;
       const lw = this.attr('lineWidth');
-      const [width, height] = this.offsetSize;
-      const [anchorX, anchorY] = this.attr('anchor');
 
-      const rect = [0, 0, width, height];
-      const offsetX = Math.min(0, bounds[0]);
-      const offsetY = Math.min(0, bounds[1]);
-
-      rect[0] = offsetX - lw - anchorX * (width + offsetX - 2 * lw);
-      rect[1] = offsetY - lw - anchorY * (height + offsetY - 2 * lw);
+      const [x, y, w, h] = super.originalRect;
+      const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
 
       return rect;
     }
@@ -171,14 +164,6 @@ export default function install({use, utils, registerNodeType}) {
       );
 
       const lw = this.attr('lineWidth');
-
-      // 对是否为圆形的判断是没有必要的。
-      // const isCircle = this.endAngle - this.startAngle >= Math.PI * 2;
-      // const startAngle = isCircle ? 0 : this.startAngle;
-      // let endAngle = isCircle ? Math.PI * 2 : this.endAngle;
-      // if (endAngle > Math.PI * 2) {
-      //   endAngle = Math.PI * 2;
-      // }
       const startAngle = this.startAngle;
       const endAngle = this.endAngle;
 
@@ -191,7 +176,7 @@ export default function install({use, utils, registerNodeType}) {
       ctx.strokeStyle = findColor(ctx, this, 'color');
       ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
-      const [x, y] = this.attr('center');
+      const [x, y] = [0, 0];
       let maxRadius = this.attr('maxRadius');
 
       if (maxRadius <= 0) {

@@ -3,6 +3,7 @@
   "plugins": [
     "transform-runtime",
     "transform-decorators-runtime",
-    "transform-class-properties"
+    "transform-class-properties",
+    "inline-package-json"
   ]
 }
