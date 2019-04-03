@@ -110,49 +110,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shape__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Shape", function() { return _shape__WEBPACK_IMPORTED_MODULE_2__["default"]; });
 
-/* harmony import */ var _polyline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(49);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Polyline", function() { return _polyline__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+/* harmony import */ var _arc__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(49);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Arc", function() { return _arc__WEBPACK_IMPORTED_MODULE_3__["default"]; });
 
-/* harmony import */ var _polycurve__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(51);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Polycurve", function() { return _polycurve__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+/* harmony import */ var _polyline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(50);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Polyline", function() { return _polyline__WEBPACK_IMPORTED_MODULE_4__["default"]; });
 
-/* harmony import */ var _wave__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(52);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Wave", function() { return _wave__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+/* harmony import */ var _polycurve__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(52);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Polycurve", function() { return _polycurve__WEBPACK_IMPORTED_MODULE_5__["default"]; });
 
-/* harmony import */ var _polygon_polygon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(115);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Polygon", function() { return _polygon_polygon__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+/* harmony import */ var _wave__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(53);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Wave", function() { return _wave__WEBPACK_IMPORTED_MODULE_6__["default"]; });
 
-/* harmony import */ var _polygon_triangle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(116);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Triangle", function() { return _polygon_triangle__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+/* harmony import */ var _ring__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(116);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Ring", function() { return _ring__WEBPACK_IMPORTED_MODULE_7__["default"]; });
 
-/* harmony import */ var _polygon_rect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(117);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Rect", function() { return _polygon_rect__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+/* harmony import */ var _polygon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(117);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Polygon", function() { return _polygon__WEBPACK_IMPORTED_MODULE_8__["default"]; });
 
-/* harmony import */ var _polygon_star__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(118);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Star", function() { return _polygon_star__WEBPACK_IMPORTED_MODULE_9__["default"]; });
+/* harmony import */ var _triangle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(118);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Triangle", function() { return _triangle__WEBPACK_IMPORTED_MODULE_9__["default"]; });
 
-/* harmony import */ var _arc__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(119);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Arc", function() { return _arc__WEBPACK_IMPORTED_MODULE_10__["default"]; });
+/* harmony import */ var _rect__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(119);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Rect", function() { return _rect__WEBPACK_IMPORTED_MODULE_10__["default"]; });
 
-/* harmony import */ var _ellipseShape_sector__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(120);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Sector", function() { return _ellipseShape_sector__WEBPACK_IMPORTED_MODULE_11__["default"]; });
+/* harmony import */ var _star__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(120);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Star", function() { return _star__WEBPACK_IMPORTED_MODULE_11__["default"]; });
 
-/* harmony import */ var _ellipseShape_ellipse__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(122);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Ellipse", function() { return _ellipseShape_ellipse__WEBPACK_IMPORTED_MODULE_12__["default"]; });
+/* harmony import */ var _ellipseSector__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(121);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EllipseSector", function() { return _ellipseSector__WEBPACK_IMPORTED_MODULE_12__["default"]; });
 
-/* harmony import */ var _ellipseShape_ellipseSector__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(121);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EllipseSector", function() { return _ellipseShape_ellipseSector__WEBPACK_IMPORTED_MODULE_13__["default"]; });
+/* harmony import */ var _ellipseArc__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(122);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EllipseArc", function() { return _ellipseArc__WEBPACK_IMPORTED_MODULE_13__["default"]; });
 
-/* harmony import */ var _ellipseShape_ellipseArc__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(123);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EllipseArc", function() { return _ellipseShape_ellipseArc__WEBPACK_IMPORTED_MODULE_14__["default"]; });
+/* harmony import */ var _sector__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(123);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Sector", function() { return _sector__WEBPACK_IMPORTED_MODULE_14__["default"]; });
 
-/* harmony import */ var _ellipseShape_circle__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(124);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Circle", function() { return _ellipseShape_circle__WEBPACK_IMPORTED_MODULE_15__["default"]; });
+/* harmony import */ var _ellipse__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(124);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Ellipse", function() { return _ellipse__WEBPACK_IMPORTED_MODULE_15__["default"]; });
 
-/* harmony import */ var _ring__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(125);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Ring", function() { return _ring__WEBPACK_IMPORTED_MODULE_16__["default"]; });
-
-
+/* harmony import */ var _circle__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(125);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Circle", function() { return _circle__WEBPACK_IMPORTED_MODULE_16__["default"]; });
 
 
 
@@ -173,26 +171,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const version = '1.0.3';
+
+
+const version = '1.0.4';
 
 const Shapes = {
   version,
   install,
   Shape: _shape__WEBPACK_IMPORTED_MODULE_2__["default"],
-  Polyline: _polyline__WEBPACK_IMPORTED_MODULE_3__["default"],
-  Polycurve: _polycurve__WEBPACK_IMPORTED_MODULE_4__["default"],
-  Wave: _wave__WEBPACK_IMPORTED_MODULE_5__["default"],
-  Polygon: _polygon_polygon__WEBPACK_IMPORTED_MODULE_6__["default"],
-  Triangle: _polygon_triangle__WEBPACK_IMPORTED_MODULE_7__["default"],
-  Rect: _polygon_rect__WEBPACK_IMPORTED_MODULE_8__["default"],
-  Star: _polygon_star__WEBPACK_IMPORTED_MODULE_9__["default"],
-  Arc: _arc__WEBPACK_IMPORTED_MODULE_10__["default"],
-  Sector: _ellipseShape_sector__WEBPACK_IMPORTED_MODULE_11__["default"],
-  Ellipse: _ellipseShape_ellipse__WEBPACK_IMPORTED_MODULE_12__["default"],
-  EllipseSector: _ellipseShape_ellipseSector__WEBPACK_IMPORTED_MODULE_13__["default"],
-  EllipseArc: _ellipseShape_ellipseArc__WEBPACK_IMPORTED_MODULE_14__["default"],
-  Circle: _ellipseShape_circle__WEBPACK_IMPORTED_MODULE_15__["default"],
-  Ring: _ring__WEBPACK_IMPORTED_MODULE_16__["default"]
+  Polyline: _polyline__WEBPACK_IMPORTED_MODULE_4__["default"],
+  Polycurve: _polycurve__WEBPACK_IMPORTED_MODULE_5__["default"],
+  Wave: _wave__WEBPACK_IMPORTED_MODULE_6__["default"],
+  Polygon: _polygon__WEBPACK_IMPORTED_MODULE_8__["default"],
+  Triangle: _triangle__WEBPACK_IMPORTED_MODULE_9__["default"],
+  Rect: _rect__WEBPACK_IMPORTED_MODULE_10__["default"],
+  Star: _star__WEBPACK_IMPORTED_MODULE_11__["default"],
+  Arc: _arc__WEBPACK_IMPORTED_MODULE_3__["default"],
+  Sector: _sector__WEBPACK_IMPORTED_MODULE_14__["default"],
+  Ellipse: _ellipse__WEBPACK_IMPORTED_MODULE_15__["default"],
+  EllipseSector: _ellipseSector__WEBPACK_IMPORTED_MODULE_12__["default"],
+  EllipseArc: _ellipseArc__WEBPACK_IMPORTED_MODULE_13__["default"],
+  Circle: _circle__WEBPACK_IMPORTED_MODULE_16__["default"],
+  Ring: _ring__WEBPACK_IMPORTED_MODULE_7__["default"]
 };
 
 function install(spritejs) {
@@ -206,7 +206,6 @@ function install(spritejs) {
 }
 
 // auto use
-// 移除是为了实现按需加载
 // if (typeof window !== 'undefined' && window.spritejs) {
 //   window.spritejs.use(Shapes);
 // }
@@ -997,7 +996,169 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
 /* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _shape__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(50);
+
+
+const _applyDecoratedDescriptor = __webpack_require__(48);
+
+
+
+function install({ use, utils, registerNodeType }) {
+  var _desc, _value, _class, _desc2, _value2, _class2, _class3, _temp;
+
+  const { attr, flow, findColor } = utils;
+  const { Shape } = use(_shape__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
+
+  let ArcAttr = (_class = class ArcAttr extends Shape.Attr {
+    constructor(subject) {
+      super(subject);
+      this.setDefault({
+        radius: 0,
+        startAngle: 0,
+        endAngle: Math.PI * 2,
+        anticlockwise: false
+      });
+    }
+
+    // 圆弧起始点
+
+    set startPoint(point) {
+      this.clearFlow();
+      this.set('startPoint', point);
+    }
+
+    // 旋转角度
+
+    set angle(angle) {
+      this.clearFlow();
+      this.set('angle', angle);
+    }
+
+    set radius(val) {
+      this.clearFlow();
+      this.set('radius', val);
+    }
+
+    set startAngle(val) {
+      this.clearFlow();
+      this.set('startAngle', val);
+    }
+
+    set endAngle(val) {
+      this.clearFlow();
+      this.set('endAngle', val);
+    }
+
+    // 旋转方向
+
+    set anticlockwise(val) {
+      this.clearFlow();
+      this.set('anticlockwise', val);
+    }
+  }, (_applyDecoratedDescriptor(_class.prototype, 'startPoint', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'startPoint'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'angle', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'angle'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'radius', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'radius'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'startAngle', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'startAngle'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'endAngle', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'endAngle'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'anticlockwise', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'anticlockwise'), _class.prototype)), _class);
+  let Arc = (_class2 = (_temp = _class3 = class Arc extends Shape {
+
+    get isVirtual() {
+      return false;
+    }
+
+    get lineBoundings() {
+      const lw = this.attr('lineWidth');
+
+      const r = this.attr('radius');
+      return [0, 0, 2 * r, 2 * r];
+    }
+
+    get contentSize() {
+      const bounds = this.lineBoundings;
+      const lw = this.attr('lineWidth');
+      let [width, height] = [...this.attrSize];
+
+      if (width === '') {
+        width = bounds[2] - Math.min(0, bounds[0]) + lw * 1;
+      }
+      if (height === '') {
+        height = bounds[3] - Math.min(0, bounds[1]) + lw * 1;
+      }
+
+      return [width, height].map(Math.ceil);
+    }
+
+    get originalRect() {
+      const lineBoundings = this.lineBoundings;
+      const lw = this.attr('lineWidth');
+
+      const [x, y, w, h] = super.originalRect;
+      const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
+      return rect;
+    }
+
+    get center() {
+      const lw = this.attr('lineWidth');
+      const r = this.attr('radius');
+      return [r + 0.5 * lw, r + 0.5 * lw];
+    }
+
+    get startAngle() {
+      return this.attr('startAngle');
+    }
+
+    get endAngle() {
+      return this.attr('endAngle');
+    }
+
+    pointCollision(evt) {
+      if (super.pointCollision(evt)) {
+        let { offsetX, offsetY } = evt;
+        const [anchorX, anchorY] = this.attr('anchor');
+        const [width, height] = this.contentSize;
+
+        offsetX += width * anchorX;
+        offsetY += height * anchorY;
+        return this.path && this.context.isPointInStroke(this.path, offsetX, offsetY);
+      }
+    }
+
+    render(t, ctx) {
+      super.render(t, ctx);
+
+      const [cx, cy] = this.center;
+
+      const startAngle = this.startAngle;
+      const endAngle = this.endAngle;
+      const radius = this.attr('radius');
+      const anticlockwise = this.attr('anticlockwise');
+
+      ctx.beginPath();
+      ctx.lineCap = this.attr('lineCap');
+      ctx.lineJoin = this.attr('lineJoin');
+      ctx.lineWidth = this.attr('lineWidth');
+      ctx.strokeStyle = findColor(ctx, this, 'color');
+      ctx.setLineDash(this.attr('lineDash'));
+      ctx.lineDashOffset = this.attr('lineDashOffset');
+
+      const path = new Path2D();
+      path.arc(cx, cy, radius, startAngle, endAngle, anticlockwise);
+      ctx.stroke(path);
+      this.path = path;
+      return ctx;
+    }
+  }, _class3.Attr = ArcAttr, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'lineBoundings', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'lineBoundings'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'contentSize', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'contentSize'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'originalRect', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'originalRect'), _class2.prototype)), _class2);
+
+  registerNodeType('arc', Arc, false);
+  return { Arc };
+}
+
+/***/ }),
+/* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
+/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
+/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _shape__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(51);
 
 
 const _applyDecoratedDescriptor = __webpack_require__(48);
@@ -1108,7 +1269,7 @@ function install({ use, utils, registerNodeType }) {
 }
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1181,7 +1342,7 @@ function drawSmoothCurveLine(ctx, points, smoothStart) {
 }
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1341,7 +1502,7 @@ function install({ use, utils, registerNodeType }) {
 }
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1349,10 +1510,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
 /* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
 /* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var svg_path_to_canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(53);
+/* harmony import */ var svg_path_to_canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(54);
 /* harmony import */ var svg_path_to_canvas__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(svg_path_to_canvas__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _shape__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(43);
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(50);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(51);
 
 
 const _applyDecoratedDescriptor = __webpack_require__(48);
@@ -1588,7 +1749,7 @@ function install({ use, utils, registerNodeType }) {
 }
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1598,15 +1759,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toConsumableArray2 = __webpack_require__(54);
+var _toConsumableArray2 = __webpack_require__(55);
 
 var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 
-var _slicedToArray2 = __webpack_require__(76);
+var _slicedToArray2 = __webpack_require__(77);
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
-var _toArray2 = __webpack_require__(87);
+var _toArray2 = __webpack_require__(88);
 
 var _toArray3 = _interopRequireDefault(_toArray2);
 
@@ -1614,35 +1775,35 @@ var _assign = __webpack_require__(1);
 
 var _assign2 = _interopRequireDefault(_assign);
 
-var _classCallCheck2 = __webpack_require__(88);
+var _classCallCheck2 = __webpack_require__(89);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(89);
+var _createClass2 = __webpack_require__(90);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _symbol = __webpack_require__(93);
+var _symbol = __webpack_require__(94);
 
 var _symbol2 = _interopRequireDefault(_symbol);
 
-var _spriteMath = __webpack_require__(106);
+var _spriteMath = __webpack_require__(107);
 
-var _platform = __webpack_require__(109);
+var _platform = __webpack_require__(110);
 
-var _parseSvgPath = __webpack_require__(110);
+var _parseSvgPath = __webpack_require__(111);
 
 var _parseSvgPath2 = _interopRequireDefault(_parseSvgPath);
 
-var _absSvgPath = __webpack_require__(111);
+var _absSvgPath = __webpack_require__(112);
 
 var _absSvgPath2 = _interopRequireDefault(_absSvgPath);
 
-var _normalizeSvgPath = __webpack_require__(112);
+var _normalizeSvgPath = __webpack_require__(113);
 
 var _normalizeSvgPath2 = _interopRequireDefault(_normalizeSvgPath);
 
-var _isSvgPath = __webpack_require__(114);
+var _isSvgPath = __webpack_require__(115);
 
 var _isSvgPath2 = _interopRequireDefault(_isSvgPath);
 
@@ -1924,7 +2085,7 @@ var SvgPath = function () {
 exports.default = SvgPath;
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1932,7 +2093,7 @@ exports.default = SvgPath;
 
 exports.__esModule = true;
 
-var _from = __webpack_require__(55);
+var _from = __webpack_require__(56);
 
 var _from2 = _interopRequireDefault(_from);
 
@@ -1951,30 +2112,30 @@ exports.default = function (arr) {
 };
 
 /***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(56), __esModule: true };
-
-/***/ }),
 /* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(57);
-__webpack_require__(69);
-module.exports = __webpack_require__(6).Array.from;
-
+module.exports = { "default": __webpack_require__(57), __esModule: true };
 
 /***/ }),
 /* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(58);
+__webpack_require__(70);
+module.exports = __webpack_require__(6).Array.from;
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
-var $at = __webpack_require__(58)(true);
+var $at = __webpack_require__(59)(true);
 
 // 21.1.3.27 String.prototype[@@iterator]()
-__webpack_require__(59)(String, 'String', function (iterated) {
+__webpack_require__(60)(String, 'String', function (iterated) {
   this._t = String(iterated); // target
   this._i = 0;                // next index
 // 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -1990,7 +2151,7 @@ __webpack_require__(59)(String, 'String', function (iterated) {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var toInteger = __webpack_require__(29);
@@ -2013,20 +2174,20 @@ module.exports = function (TO_STRING) {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var LIBRARY = __webpack_require__(33);
 var $export = __webpack_require__(4);
-var redefine = __webpack_require__(60);
+var redefine = __webpack_require__(61);
 var hide = __webpack_require__(9);
-var Iterators = __webpack_require__(61);
-var $iterCreate = __webpack_require__(62);
-var setToStringTag = __webpack_require__(66);
-var getPrototypeOf = __webpack_require__(68);
-var ITERATOR = __webpack_require__(67)('iterator');
+var Iterators = __webpack_require__(62);
+var $iterCreate = __webpack_require__(63);
+var setToStringTag = __webpack_require__(67);
+var getPrototypeOf = __webpack_require__(69);
+var ITERATOR = __webpack_require__(68)('iterator');
 var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
 var FF_ITERATOR = '@@iterator';
 var KEYS = 'keys';
@@ -2089,32 +2250,32 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(9);
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports) {
 
 module.exports = {};
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var create = __webpack_require__(63);
+var create = __webpack_require__(64);
 var descriptor = __webpack_require__(18);
-var setToStringTag = __webpack_require__(66);
+var setToStringTag = __webpack_require__(67);
 var IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(9)(IteratorPrototype, __webpack_require__(67)('iterator'), function () { return this; });
+__webpack_require__(9)(IteratorPrototype, __webpack_require__(68)('iterator'), function () { return this; });
 
 module.exports = function (Constructor, NAME, next) {
   Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
@@ -2123,12 +2284,12 @@ module.exports = function (Constructor, NAME, next) {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 var anObject = __webpack_require__(11);
-var dPs = __webpack_require__(64);
+var dPs = __webpack_require__(65);
 var enumBugKeys = __webpack_require__(35);
 var IE_PROTO = __webpack_require__(31)('IE_PROTO');
 var Empty = function () { /* empty */ };
@@ -2143,7 +2304,7 @@ var createDict = function () {
   var gt = '>';
   var iframeDocument;
   iframe.style.display = 'none';
-  __webpack_require__(65).appendChild(iframe);
+  __webpack_require__(66).appendChild(iframe);
   iframe.src = 'javascript:'; // eslint-disable-line no-script-url
   // createDict = iframe.contentWindow.Object;
   // html.removeChild(iframe);
@@ -2170,7 +2331,7 @@ module.exports = Object.create || function create(O, Properties) {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP = __webpack_require__(10);
@@ -2189,7 +2350,7 @@ module.exports = __webpack_require__(14) ? Object.defineProperties : function de
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var document = __webpack_require__(5).document;
@@ -2197,12 +2358,12 @@ module.exports = document && document.documentElement;
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var def = __webpack_require__(10).f;
 var has = __webpack_require__(19);
-var TAG = __webpack_require__(67)('toStringTag');
+var TAG = __webpack_require__(68)('toStringTag');
 
 module.exports = function (it, tag, stat) {
   if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
@@ -2210,7 +2371,7 @@ module.exports = function (it, tag, stat) {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var store = __webpack_require__(32)('wks');
@@ -2227,7 +2388,7 @@ $exports.store = store;
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
@@ -2246,7 +2407,7 @@ module.exports = Object.getPrototypeOf || function (O) {
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2254,13 +2415,13 @@ module.exports = Object.getPrototypeOf || function (O) {
 var ctx = __webpack_require__(7);
 var $export = __webpack_require__(4);
 var toObject = __webpack_require__(38);
-var call = __webpack_require__(70);
-var isArrayIter = __webpack_require__(71);
+var call = __webpack_require__(71);
+var isArrayIter = __webpack_require__(72);
 var toLength = __webpack_require__(28);
-var createProperty = __webpack_require__(72);
-var getIterFn = __webpack_require__(73);
+var createProperty = __webpack_require__(73);
+var getIterFn = __webpack_require__(74);
 
-$export($export.S + $export.F * !__webpack_require__(75)(function (iter) { Array.from(iter); }), 'Array', {
+$export($export.S + $export.F * !__webpack_require__(76)(function (iter) { Array.from(iter); }), 'Array', {
   // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
   from: function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
     var O = toObject(arrayLike);
@@ -2290,7 +2451,7 @@ $export($export.S + $export.F * !__webpack_require__(75)(function (iter) { Array
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // call something on iterator step with safe closing on error
@@ -2308,12 +2469,12 @@ module.exports = function (iterator, fn, value, entries) {
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // check on default Array iterator
-var Iterators = __webpack_require__(61);
-var ITERATOR = __webpack_require__(67)('iterator');
+var Iterators = __webpack_require__(62);
+var ITERATOR = __webpack_require__(68)('iterator');
 var ArrayProto = Array.prototype;
 
 module.exports = function (it) {
@@ -2322,7 +2483,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2337,12 +2498,12 @@ module.exports = function (object, index, value) {
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var classof = __webpack_require__(74);
-var ITERATOR = __webpack_require__(67)('iterator');
-var Iterators = __webpack_require__(61);
+var classof = __webpack_require__(75);
+var ITERATOR = __webpack_require__(68)('iterator');
+var Iterators = __webpack_require__(62);
 module.exports = __webpack_require__(6).getIteratorMethod = function (it) {
   if (it != undefined) return it[ITERATOR]
     || it['@@iterator']
@@ -2351,12 +2512,12 @@ module.exports = __webpack_require__(6).getIteratorMethod = function (it) {
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
 var cof = __webpack_require__(25);
-var TAG = __webpack_require__(67)('toStringTag');
+var TAG = __webpack_require__(68)('toStringTag');
 // ES3 wrong here
 var ARG = cof(function () { return arguments; }()) == 'Arguments';
 
@@ -2380,10 +2541,10 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ITERATOR = __webpack_require__(67)('iterator');
+var ITERATOR = __webpack_require__(68)('iterator');
 var SAFE_CLOSING = false;
 
 try {
@@ -2408,7 +2569,7 @@ module.exports = function (exec, skipClosing) {
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2416,11 +2577,11 @@ module.exports = function (exec, skipClosing) {
 
 exports.__esModule = true;
 
-var _isIterable2 = __webpack_require__(77);
+var _isIterable2 = __webpack_require__(78);
 
 var _isIterable3 = _interopRequireDefault(_isIterable2);
 
-var _getIterator2 = __webpack_require__(84);
+var _getIterator2 = __webpack_require__(85);
 
 var _getIterator3 = _interopRequireDefault(_getIterator2);
 
@@ -2465,29 +2626,29 @@ exports.default = function () {
 }();
 
 /***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(78), __esModule: true };
-
-/***/ }),
 /* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(79);
-__webpack_require__(57);
-module.exports = __webpack_require__(83);
-
+module.exports = { "default": __webpack_require__(79), __esModule: true };
 
 /***/ }),
 /* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(80);
+__webpack_require__(58);
+module.exports = __webpack_require__(84);
+
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(81);
 var global = __webpack_require__(5);
 var hide = __webpack_require__(9);
-var Iterators = __webpack_require__(61);
-var TO_STRING_TAG = __webpack_require__(67)('toStringTag');
+var Iterators = __webpack_require__(62);
+var TO_STRING_TAG = __webpack_require__(68)('toStringTag');
 
 var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
   'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
@@ -2505,21 +2666,21 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var addToUnscopables = __webpack_require__(81);
-var step = __webpack_require__(82);
-var Iterators = __webpack_require__(61);
+var addToUnscopables = __webpack_require__(82);
+var step = __webpack_require__(83);
+var Iterators = __webpack_require__(62);
 var toIObject = __webpack_require__(23);
 
 // 22.1.3.4 Array.prototype.entries()
 // 22.1.3.13 Array.prototype.keys()
 // 22.1.3.29 Array.prototype.values()
 // 22.1.3.30 Array.prototype[@@iterator]()
-module.exports = __webpack_require__(59)(Array, 'Array', function (iterated, kind) {
+module.exports = __webpack_require__(60)(Array, 'Array', function (iterated, kind) {
   this._t = toIObject(iterated); // target
   this._i = 0;                   // next index
   this._k = kind;                // kind
@@ -2546,14 +2707,14 @@ addToUnscopables('entries');
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports) {
 
 module.exports = function () { /* empty */ };
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports) {
 
 module.exports = function (done, value) {
@@ -2562,12 +2723,12 @@ module.exports = function (done, value) {
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var classof = __webpack_require__(74);
-var ITERATOR = __webpack_require__(67)('iterator');
-var Iterators = __webpack_require__(61);
+var classof = __webpack_require__(75);
+var ITERATOR = __webpack_require__(68)('iterator');
+var Iterators = __webpack_require__(62);
 module.exports = __webpack_require__(6).isIterable = function (it) {
   var O = Object(it);
   return O[ITERATOR] !== undefined
@@ -2578,26 +2739,26 @@ module.exports = __webpack_require__(6).isIterable = function (it) {
 
 
 /***/ }),
-/* 84 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(85), __esModule: true };
-
-/***/ }),
 /* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(79);
-__webpack_require__(57);
-module.exports = __webpack_require__(86);
-
+module.exports = { "default": __webpack_require__(86), __esModule: true };
 
 /***/ }),
 /* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(80);
+__webpack_require__(58);
+module.exports = __webpack_require__(87);
+
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var anObject = __webpack_require__(11);
-var get = __webpack_require__(73);
+var get = __webpack_require__(74);
 module.exports = __webpack_require__(6).getIterator = function (it) {
   var iterFn = get(it);
   if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
@@ -2606,7 +2767,7 @@ module.exports = __webpack_require__(6).getIterator = function (it) {
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2614,7 +2775,7 @@ module.exports = __webpack_require__(6).getIterator = function (it) {
 
 exports.__esModule = true;
 
-var _from = __webpack_require__(55);
+var _from = __webpack_require__(56);
 
 var _from2 = _interopRequireDefault(_from);
 
@@ -2625,7 +2786,7 @@ exports.default = function (arr) {
 };
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2640,7 +2801,7 @@ exports.default = function (instance, Constructor) {
 };
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2648,7 +2809,7 @@ exports.default = function (instance, Constructor) {
 
 exports.__esModule = true;
 
-var _defineProperty = __webpack_require__(90);
+var _defineProperty = __webpack_require__(91);
 
 var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -2673,16 +2834,16 @@ exports.default = function () {
 }();
 
 /***/ }),
-/* 90 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(91), __esModule: true };
-
-/***/ }),
 /* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(92);
+module.exports = { "default": __webpack_require__(92), __esModule: true };
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(93);
 var $Object = __webpack_require__(6).Object;
 module.exports = function defineProperty(it, key, desc) {
   return $Object.defineProperty(it, key, desc);
@@ -2690,7 +2851,7 @@ module.exports = function defineProperty(it, key, desc) {
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(4);
@@ -2699,24 +2860,24 @@ $export($export.S + $export.F * !__webpack_require__(14), 'Object', { defineProp
 
 
 /***/ }),
-/* 93 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(94), __esModule: true };
-
-/***/ }),
 /* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(95);
-__webpack_require__(103);
+module.exports = { "default": __webpack_require__(95), __esModule: true };
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(96);
 __webpack_require__(104);
 __webpack_require__(105);
+__webpack_require__(106);
 module.exports = __webpack_require__(6).Symbol;
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2726,24 +2887,24 @@ var global = __webpack_require__(5);
 var has = __webpack_require__(19);
 var DESCRIPTORS = __webpack_require__(14);
 var $export = __webpack_require__(4);
-var redefine = __webpack_require__(60);
-var META = __webpack_require__(96).KEY;
+var redefine = __webpack_require__(61);
+var META = __webpack_require__(97).KEY;
 var $fails = __webpack_require__(15);
 var shared = __webpack_require__(32);
-var setToStringTag = __webpack_require__(66);
+var setToStringTag = __webpack_require__(67);
 var uid = __webpack_require__(34);
-var wks = __webpack_require__(67);
-var wksExt = __webpack_require__(97);
-var wksDefine = __webpack_require__(98);
-var enumKeys = __webpack_require__(99);
-var isArray = __webpack_require__(100);
+var wks = __webpack_require__(68);
+var wksExt = __webpack_require__(98);
+var wksDefine = __webpack_require__(99);
+var enumKeys = __webpack_require__(100);
+var isArray = __webpack_require__(101);
 var anObject = __webpack_require__(11);
 var isObject = __webpack_require__(12);
 var toIObject = __webpack_require__(23);
 var toPrimitive = __webpack_require__(17);
 var createDesc = __webpack_require__(18);
-var _create = __webpack_require__(63);
-var gOPNExt = __webpack_require__(101);
+var _create = __webpack_require__(64);
+var gOPNExt = __webpack_require__(102);
 var $GOPD = __webpack_require__(47);
 var $DP = __webpack_require__(10);
 var $keys = __webpack_require__(21);
@@ -2869,7 +3030,7 @@ if (!USE_NATIVE) {
 
   $GOPD.f = $getOwnPropertyDescriptor;
   $DP.f = $defineProperty;
-  __webpack_require__(102).f = gOPNExt.f = $getOwnPropertyNames;
+  __webpack_require__(103).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(37).f = $propertyIsEnumerable;
   __webpack_require__(36).f = $getOwnPropertySymbols;
 
@@ -2957,7 +3118,7 @@ setToStringTag(global.JSON, 'JSON', true);
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var META = __webpack_require__(34)('meta');
@@ -3016,20 +3177,20 @@ var meta = module.exports = {
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.f = __webpack_require__(67);
+exports.f = __webpack_require__(68);
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(5);
 var core = __webpack_require__(6);
 var LIBRARY = __webpack_require__(33);
-var wksExt = __webpack_require__(97);
+var wksExt = __webpack_require__(98);
 var defineProperty = __webpack_require__(10).f;
 module.exports = function (name) {
   var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
@@ -3038,7 +3199,7 @@ module.exports = function (name) {
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // all enumerable object keys, includes symbols
@@ -3059,7 +3220,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
@@ -3070,12 +3231,12 @@ module.exports = Array.isArray || function isArray(arg) {
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
 var toIObject = __webpack_require__(23);
-var gOPN = __webpack_require__(102).f;
+var gOPN = __webpack_require__(103).f;
 var toString = {}.toString;
 
 var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
@@ -3095,7 +3256,7 @@ module.exports.f = function getOwnPropertyNames(it) {
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
@@ -3108,27 +3269,27 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports) {
 
-
-
-/***/ }),
-/* 104 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(98)('asyncIterator');
 
 
 /***/ }),
 /* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(98)('observable');
+__webpack_require__(99)('asyncIterator');
 
 
 /***/ }),
 /* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(99)('observable');
+
+
+/***/ }),
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3139,11 +3300,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Vector = exports.Matrix = undefined;
 
-var _matrix = __webpack_require__(107);
+var _matrix = __webpack_require__(108);
 
 var _matrix2 = _interopRequireDefault(_matrix);
 
-var _vector = __webpack_require__(108);
+var _vector = __webpack_require__(109);
 
 var _vector2 = _interopRequireDefault(_vector);
 
@@ -3153,7 +3314,7 @@ exports.Matrix = _matrix2.default;
 exports.Vector = _vector2.default;
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3291,7 +3452,7 @@ Matrix.prototype.transformVector = function (px, py) {
 exports.default = Matrix;
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3301,15 +3462,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _slicedToArray2 = __webpack_require__(76);
+var _slicedToArray2 = __webpack_require__(77);
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
-var _classCallCheck2 = __webpack_require__(88);
+var _classCallCheck2 = __webpack_require__(89);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(89);
+var _createClass2 = __webpack_require__(90);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
@@ -3376,7 +3537,7 @@ var Vector = function () {
 exports.default = Vector;
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3440,7 +3601,7 @@ function isPointInStroke(_ref2, x, y, _ref3) {
 }
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3509,7 +3670,7 @@ function parseValues(args) {
 /* eslint-enable */
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3589,7 +3750,7 @@ function absolutize(path) {
 /* eslint-enable */
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3599,13 +3760,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _slicedToArray2 = __webpack_require__(76);
+var _slicedToArray2 = __webpack_require__(77);
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
 exports.default = normalize;
 
-var _a2c = __webpack_require__(113);
+var _a2c = __webpack_require__(114);
 
 var _a2c2 = _interopRequireDefault(_a2c);
 
@@ -3727,7 +3888,7 @@ function quadratic(x1, y1, cx, cy, x2, y2) {
 /* eslint-enable */
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3928,7 +4089,7 @@ function a2c(x1, y1, x2, y2, fa, fs, rx, ry, phi) {
 }
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3952,905 +4113,7 @@ function isPath(str) {
 }
 
 /***/ }),
-/* 115 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
-/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
-/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _shape__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(50);
-
-
-const _applyDecoratedDescriptor = __webpack_require__(48);
-
-
-
-
-function install({ use, utils, registerNodeType }) {
-  var _desc, _value, _class, _desc2, _value2, _class2, _class3, _temp;
-
-  const { attr, flow, parseColorString, findColor } = utils;
-  const { Shape } = use(_shape__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
-
-  let PolygonAttr = (_class = class PolygonAttr extends Shape.Attr {
-    constructor(subject) {
-      super(subject);
-      this.setDefault({
-        points: [],
-        smooth: null
-      });
-    }
-
-    set smooth(val) {
-      this.set('smooth', val);
-    }
-
-    set points(val) {
-      this.clearFlow();
-      this.set('points', val);
-    }
-
-    set color(val) {
-      val = parseColorString(val);
-      this.set('color', val);
-    }
-
-    set lineWidth(val) {
-      this.set('lineWidth', val);
-    }
-
-    set fillColor(val) {
-      val = parseColorString(val);
-      this.set('fillColor', val);
-    }
-  }, (_applyDecoratedDescriptor(_class.prototype, 'smooth', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'smooth'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'points', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'points'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'color', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'color'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'lineWidth', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'lineWidth'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'fillColor', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'fillColor'), _class.prototype)), _class);
-  let Polygon = (_class2 = (_temp = _class3 = class Polygon extends Shape {
-
-    get lineBoundings() {
-      const lw = this.attr('lineWidth');
-
-      const bounds = [0, 0, 0, 0];
-      const points = this.points;
-
-      points.forEach(([x, y]) => {
-        bounds[0] = Math.min(x, bounds[0]);
-        bounds[1] = Math.min(y, bounds[1]);
-
-        bounds[2] = Math.max(x, bounds[2]);
-        bounds[3] = Math.max(y, bounds[3]);
-      });
-      return bounds;
-    }
-
-    get contentSize() {
-      const bounds = this.lineBoundings;
-      const lw = this.attr('lineWidth');
-      let [width, height] = this.attrSize;
-      width = bounds[2] - Math.min(0, bounds[0]) + lw;
-      height = bounds[3] - Math.min(0, bounds[1]) + lw;
-      return [width, height].map(Math.ceil);
-    }
-
-    // @flow
-    // get originalRect() {
-    //   // const bounds = this.lineBoundings;
-    //   // const lw = this.attr('lineWidth');
-    //   // const [width, height] = this.offsetSize;
-    //   // const [anchorX, anchorY] = this.attr('anchor');
-    //   // const rect = [0, 0, width, height];
-    //   // const offsetX = Math.min(0, bounds[0]);
-    //   // const offsetY = Math.min(0, bounds[1]);
-    //   // rect[0] = offsetX - lw - anchorX * (width + offsetX - 2 * lw);
-    //   // rect[1] = offsetY - lw - anchorY * (height + offsetY - 2 * lw);
-    //   // return rect;
-    //   const lineBoundings = this.lineBoundings;
-    //   const [x, y, w, h] = super.originalRect;
-    //   const rect = [x, y, w, h];
-
-    //   return rect;
-    // }
-
-    get points() {
-      return this.attr('points');
-    }
-
-    pointCollision(evt) {
-      if (super.pointCollision(evt)) {
-        let { offsetX = 0, offsetY = 0 } = evt;
-        const [anchorX, anchorY] = this.attr('anchor');
-        const [width, height] = this.contentSize;
-
-        offsetX += width * anchorX;
-        offsetY += height * anchorY;
-        return this.path && (this.context.isPointInPath(this.path, offsetX, offsetY) || this.context.isPointInStroke(this.path, offsetX, offsetY));
-      }
-    }
-
-    render(t, drawingContext) {
-      super.render(t, drawingContext);
-      if (this.points.length) {
-        const bounds = this.lineBoundings;
-        const lw = this.attr('lineWidth');
-        drawingContext.translate(-Math.min(0, bounds[0]) + lw / 2, -Math.min(0, bounds[1]) + lw / 2);
-        drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
-        drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
-        drawingContext.miterLimit = 3;
-        drawingContext.lineWidth = this.attr('lineWidth');
-        drawingContext.setLineDash(this.attr('lineDash'));
-        drawingContext.lineDashOffset = this.attr('lineDashOffset');
-        drawingContext.beginPath();
-        const path = new Path2D();
-        let smooth = this.attr('smooth');
-        const points = this.points.slice(0, this.points.length);
-        if (smooth && !smooth.length) {
-          smooth = [0, points.length - 1];
-        }
-        // 绘制光滑曲线（直线）
-        if (!smooth) {
-          points.forEach((point, i) => {
-            if (i === 0) {
-              path.moveTo(...point);
-            } else {
-              path.lineTo(...point);
-            }
-          });
-        } else {
-          if (Object.prototype.toString.call(smooth[0]) !== '[object Array]') {
-            // 如果不是多维数组，转成多维
-            smooth = [smooth];
-          }
-          const startPos = points[0];
-          const endPos = points[points.length - 1];
-          if (startPos[0] !== endPos[0] || startPos[1] !== endPos[1]) {
-            points.push(points[0]);
-          }
-          let subIndex = 0;
-          smooth.forEach((arr, iind) => {
-            const smoothStart = arr[0];
-            const smoothEnd = arr[1];
-            for (let i = subIndex; i < smoothStart; i++) {
-              if (i === 0) {
-                // 如果是所有线条的起始点
-                path.moveTo(...points[0]);
-              } else {
-                // 如果是转换点
-                path.lineTo(...points[i]);
-              }
-            }
-            const smoothPoints = points.slice(smoothStart, smoothEnd + 1);
-            Object(_util__WEBPACK_IMPORTED_MODULE_2__["drawSmoothCurveLine"])(path, smoothPoints, smoothStart);
-            subIndex = smoothEnd;
-          });
-          for (let i = subIndex; i < points.length - 1; i++) {
-            // 如果绘图未绘制到最后一个点
-            path.lineTo(points[i][0], points[i][1]);
-          }
-        }
-
-        path.closePath();
-        drawingContext.closePath();
-        drawingContext.fill(path);
-        drawingContext.stroke(path);
-        this.path = path;
-      }
-      return drawingContext;
-    }
-  }, _class3.Attr = PolygonAttr, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'contentSize', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'contentSize'), _class2.prototype)), _class2);
-
-  registerNodeType('polygon', Polygon, false);
-  return { Polygon };
-}
-
-/***/ }),
 /* 116 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
-/* harmony import */ var _polygon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(115);
-
-
-function install({ use, utils, registerNodeType }) {
-  const { Polygon } = use(_polygon__WEBPACK_IMPORTED_MODULE_0__["default"], null, false);
-
-  let Triangle = class Triangle extends Polygon {
-    get points() {
-      const [s1, s2] = this.attr('sides');
-      const angle = Math.PI / 180 * this.attr('angle');
-      const p0 = [0, 0];
-      const p1 = [s1, 0];
-      const p2 = [(s2 + 0) * Math.cos(angle), (s2 + 0) * Math.sin(angle)];
-      return [p0, p1, p2];
-    }
-  };
-
-
-  registerNodeType('triangle', Triangle, false);
-  return { Triangle };
-}
-
-/***/ }),
-/* 117 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
-/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
-/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _polygon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(115);
-
-
-const _applyDecoratedDescriptor = __webpack_require__(48);
-
-
-
-function install({ use, utils, registerNodeType }) {
-  var _desc, _value, _class, _class2, _temp;
-
-  const { attr } = utils;
-  const { Polygon } = use(_polygon__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
-
-  let rectAttr = (_class = class rectAttr extends Polygon.Attr {
-    constructor(subject) {
-      super(subject);
-      this.setDefault({
-        angle: 90,
-        sides: null,
-        size: null
-      });
-    }
-
-    set angle(val) {
-      this.clearFlow();
-      this.set('angle', val);
-    }
-
-    set sides(val) {
-      this.clearFlow();
-      this.set('sides', val);
-    }
-  }, (_applyDecoratedDescriptor(_class.prototype, 'angle', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'angle'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'sides', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'sides'), _class.prototype)), _class);
-  let Rect = (_temp = _class2 = class Rect extends Polygon {
-
-    get points() {
-      const [s1, s2] = this.attr('sides') || this.attr('size');
-      const oAngle = this.attr('angle');
-      let cosAngle = 0;
-      let sinAngle = 1;
-      if (oAngle === 90) {
-        // 90默认不处理
-      } else {
-        const angle = Math.PI * this.attr('angle') / 180;
-        cosAngle = Math.cos(angle);
-        sinAngle = Math.sin(angle);
-      }
-      const p0 = [0, 0];
-      const p1 = [s1, 0];
-      const p2 = [s1 + s2 * cosAngle, s2 * sinAngle];
-      const p3 = [s2 * cosAngle, s2 * sinAngle];
-      return [p0, p1, p2, p3];
-
-      // const [s1, s2] = this.attr('sides') || this.attr('size');
-      // const angle = (Math.PI / 180) * this.attr('angle');
-      // const p0 = [0, 0];
-      // const p1 = [s1, 0];
-      // const p2 = [s1 + s2 * Math.cos(angle), s2 * Math.sin(angle)];
-      // const p3 = [s2 * Math.cos(angle), s2 * Math.sin(angle)];
-      // return [p0, p1, p2, p3];
-    }
-  }, _class2.Attr = rectAttr, _temp);
-
-
-  registerNodeType('rect', Rect, false);
-  return { Rect };
-}
-
-/***/ }),
-/* 118 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
-/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
-/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _polygon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(115);
-
-
-const _applyDecoratedDescriptor = __webpack_require__(48);
-
-
-
-function install({ use, utils, registerNodeType }) {
-  var _desc, _value, _class, _class2, _temp;
-
-  const { attr } = utils;
-  const { Polygon } = use(_polygon__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
-
-  let PolygonAttr = (_class = class PolygonAttr extends Polygon.Attr {
-    constructor(subject) {
-      super(subject);
-      this.setDefault({
-        angles: 5
-      });
-    }
-
-    set angles(num) {
-      this.clearFlow();
-      this.set('angles', num);
-    }
-
-    set radius(val) {
-      // 圆半径
-      this.clearFlow();
-      this.set('radius', val);
-    }
-
-    set innerRadius(val) {
-      this.clearFlow();
-      this.set('innerRadius', val);
-    }
-  }, (_applyDecoratedDescriptor(_class.prototype, 'angles', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'angles'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'radius', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'radius'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'innerRadius', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'innerRadius'), _class.prototype)), _class);
-
-
-  function getStarPolygonPoints(angles) {
-    const points = [];
-    const pointsLength = angles * 2;
-
-    return function (outerRadius, innerRadius) {
-      const offsetX = outerRadius;
-      const radAngle = -Math.PI / 2;
-      const radAlpha = Math.PI / angles;
-      for (let i = 1; i <= pointsLength; i++) {
-        const rad = radAlpha * i + radAngle;
-        const len = i % 2 ? innerRadius : outerRadius;
-        const xPos = offsetX + Math.cos(rad) * len;
-        const yPos = Math.sin(rad) * len;
-
-        points.push([xPos, yPos]);
-      }
-      return points;
-    };
-  }
-
-  let Star = (_temp = _class2 = class Star extends Polygon {
-
-    get points() {
-      const radius = this.attr('radius');
-      const innerRadius = this.attr('innerRadius') || 0.4 * radius;
-      return getStarPolygonPoints(this.attr('angles'))(radius, innerRadius);
-    }
-  }, _class2.Attr = PolygonAttr, _temp);
-
-
-  registerNodeType('star', Star, false);
-  return { Star };
-}
-
-/***/ }),
-/* 119 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
-/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
-/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _shape__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
-
-
-const _applyDecoratedDescriptor = __webpack_require__(48);
-
-
-
-function install({ use, utils, registerNodeType }) {
-  var _desc, _value, _class, _desc2, _value2, _class2, _class3, _temp;
-
-  const { attr, flow, findColor } = utils;
-  const { Shape } = use(_shape__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
-
-  let ArcAttr = (_class = class ArcAttr extends Shape.Attr {
-    constructor(subject) {
-      super(subject);
-      this.setDefault({
-        radius: 0,
-        startAngle: 0,
-        endAngle: Math.PI * 2,
-        anticlockwise: false
-      });
-    }
-
-    // 圆弧起始点
-
-    set startPoint(point) {
-      this.clearFlow();
-      this.set('startPoint', point);
-    }
-
-    // 旋转角度
-
-    set angle(angle) {
-      this.clearFlow();
-      this.set('angle', angle);
-    }
-
-    set radius(val) {
-      this.clearFlow();
-      this.set('radius', val);
-    }
-
-    set startAngle(val) {
-      this.clearFlow();
-      this.set('startAngle', val);
-    }
-
-    set endAngle(val) {
-      this.clearFlow();
-      this.set('endAngle', val);
-    }
-
-    // 旋转方向
-
-    set anticlockwise(val) {
-      this.clearFlow();
-      this.set('anticlockwise', val);
-    }
-  }, (_applyDecoratedDescriptor(_class.prototype, 'startPoint', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'startPoint'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'angle', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'angle'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'radius', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'radius'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'startAngle', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'startAngle'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'endAngle', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'endAngle'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'anticlockwise', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'anticlockwise'), _class.prototype)), _class);
-  let Arc = (_class2 = (_temp = _class3 = class Arc extends Shape {
-
-    get isVirtual() {
-      return false;
-    }
-
-    get lineBoundings() {
-      const lw = this.attr('lineWidth');
-
-      const r = this.attr('radius');
-      return [0, 0, 2 * r, 2 * r];
-    }
-
-    get contentSize() {
-      const bounds = this.lineBoundings;
-      const lw = this.attr('lineWidth');
-      let [width, height] = [...this.attrSize];
-
-      if (width === '') {
-        width = bounds[2] - Math.min(0, bounds[0]) + lw * 1;
-      }
-      if (height === '') {
-        height = bounds[3] - Math.min(0, bounds[1]) + lw * 1;
-      }
-
-      return [width, height].map(Math.ceil);
-    }
-
-    get originalRect() {
-      const lineBoundings = this.lineBoundings;
-      const lw = this.attr('lineWidth');
-
-      const [x, y, w, h] = super.originalRect;
-      const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
-      return rect;
-    }
-
-    get center() {
-      const lw = this.attr('lineWidth');
-      const r = this.attr('radius');
-      return [r + 0.5 * lw, r + 0.5 * lw];
-    }
-
-    get startAngle() {
-      return this.attr('startAngle');
-    }
-
-    get endAngle() {
-      return this.attr('endAngle');
-    }
-
-    pointCollision(evt) {
-      if (super.pointCollision(evt)) {
-        let { offsetX, offsetY } = evt;
-        const [anchorX, anchorY] = this.attr('anchor');
-        const [width, height] = this.contentSize;
-
-        offsetX += width * anchorX;
-        offsetY += height * anchorY;
-        return this.path && this.context.isPointInStroke(this.path, offsetX, offsetY);
-      }
-    }
-
-    render(t, ctx) {
-      super.render(t, ctx);
-
-      const [cx, cy] = this.center;
-
-      const startAngle = this.startAngle;
-      const endAngle = this.endAngle;
-      const radius = this.attr('radius');
-      const anticlockwise = this.attr('anticlockwise');
-
-      ctx.beginPath();
-      ctx.lineCap = this.attr('lineCap');
-      ctx.lineJoin = this.attr('lineJoin');
-      ctx.lineWidth = this.attr('lineWidth');
-      ctx.strokeStyle = findColor(ctx, this, 'color');
-      ctx.setLineDash(this.attr('lineDash'));
-      ctx.lineDashOffset = this.attr('lineDashOffset');
-
-      const path = new Path2D();
-      path.arc(cx, cy, radius, startAngle, endAngle, anticlockwise);
-      ctx.stroke(path);
-      this.path = path;
-      return ctx;
-    }
-  }, _class3.Attr = ArcAttr, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'lineBoundings', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'lineBoundings'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'contentSize', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'contentSize'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'originalRect', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'originalRect'), _class2.prototype)), _class2);
-
-  registerNodeType('arc', Arc, false);
-  return { Arc };
-}
-
-/***/ }),
-/* 120 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
-/* harmony import */ var _ellipseSector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(121);
-
-
-function install({ use, utils, registerNodeType }) {
-  const { EllipseSector } = use(_ellipseSector__WEBPACK_IMPORTED_MODULE_0__["default"], null, false);
-
-  let Sector = class Sector extends EllipseSector {
-    get radiuses() {
-      return [this.attr('radius'), this.attr('radius')];
-    }
-  };
-
-
-  Sector.defineAttributes({
-    radius(attr, val) {
-      attr.clearFlow();
-      attr.set('radius', val);
-    }
-  });
-
-  registerNodeType('sector', Sector, false);
-  return { Sector };
-}
-
-/***/ }),
-/* 121 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
-/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
-/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _shape__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
-
-
-const _applyDecoratedDescriptor = __webpack_require__(48);
-
-
-
-function install({ use, utils, registerNodeType }) {
-  var _desc, _value, _class, _desc2, _value2, _class2, _class3, _temp;
-
-  const { attr, flow, parseColorString, findColor } = utils;
-  const { Shape } = use(_shape__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
-
-  let EllipseSectorAttr = (_class = class EllipseSectorAttr extends Shape.Attr {
-    constructor(subject) {
-      super(subject);
-      this.setDefault({
-        radiusX: 10,
-        radiusY: 20,
-        startAngle: 0,
-        endAngle: 0,
-        lineWidth: 1,
-        anticlockwise: false
-      });
-    }
-
-    // 短轴半径
-
-    set radiusX(val) {
-      this.clearFlow();
-      this.set('radiusX', val);
-    }
-
-    // 长轴半径
-
-    set radiusY(val) {
-      this.clearFlow();
-      this.set('radiusY', val);
-    }
-
-    set startAngle(val) {
-      this.clearFlow();
-      this.set('startAngle', val);
-    }
-
-    set endAngle(val) {
-      this.clearFlow();
-      this.set('endAngle', val);
-    }
-
-    set color(val) {
-      val = parseColorString(val);
-      this.set('color', val);
-    }
-
-    set lineWidth(val) {
-      this.set('lineWidth', val);
-    }
-
-    set fillColor(val) {
-      val = parseColorString(val);
-      this.set('fillColor', val);
-    }
-
-    set anticlockwise(val) {
-      this.set('anticlockwise', val);
-    }
-
-    set center(val) {
-      this.clearFlow();
-      this.set('center', val);
-    }
-  }, (_applyDecoratedDescriptor(_class.prototype, 'radiusX', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'radiusX'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'radiusY', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'radiusY'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'startAngle', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'startAngle'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'endAngle', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'endAngle'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'color', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'color'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'lineWidth', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'lineWidth'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'fillColor', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'fillColor'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'anticlockwise', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'anticlockwise'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'center', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'center'), _class.prototype)), _class);
-  let EllipseSector = (_class2 = (_temp = _class3 = class EllipseSector extends Shape {
-
-    get radiuses() {
-      return [this.attr('radiusX'), this.attr('radiusY')];
-    }
-
-    get startAngle() {
-      return this.attr('startAngle');
-    }
-
-    get endAngle() {
-      return this.attr('endAngle');
-    }
-
-    get center() {
-      const lw = this.attr('lineWidth');
-      return this.radiuses.map(v => v + lw / 2);
-    }
-
-    get lineBoundings() {
-      const lw = this.attr('lineWidth');
-      return [0, 0, 2 * this.radiuses[0], 2 * this.radiuses[1]];
-    }
-
-    get contentSize() {
-      const bounds = this.lineBoundings;
-      const lw = this.attr('lineWidth');
-      let [width, height] = [...this.attrSize];
-
-      if (width === '') {
-        width = bounds[2] - Math.min(0, bounds[0]) + lw;
-      }
-      if (height === '') {
-        height = bounds[3] - Math.min(0, bounds[1]) + lw;
-      }
-
-      return [width, height].map(Math.ceil);
-    }
-
-    get originalRect() {
-      const lineBoundings = this.lineBoundings;
-      const [x, y, w, h] = super.originalRect;
-      const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
-      return rect;
-    }
-
-    pointCollision(evt) {
-      if (super.pointCollision(evt)) {
-        let { offsetX, offsetY } = evt;
-        // FIXME: 如果事件是改变半径大小，会导致contentSize变化，如何避免？
-        const [anchorX, anchorY] = this.attr('anchor');
-        const [width, height] = this.contentSize;
-
-        offsetX += width * anchorX;
-        offsetY += height * anchorY;
-
-        return this.path && (this.context.isPointInPath(this.path, offsetX, offsetY) || this.context.isPointInStroke(this.path, offsetX, offsetY));
-      }
-    }
-
-    render(t, ctx) {
-      super.render(t, ctx);
-
-      const [x, y] = this.center;
-      const [rx, ry] = this.radiuses;
-
-      const startAngle = this.startAngle;
-      const endAngle = this.endAngle;
-
-      ctx.miterLimit = 3;
-      ctx.lineWidth = this.attr('lineWidth');
-      ctx.setLineDash(this.attr('lineDash'));
-      ctx.lineDashOffset = this.attr('lineDashOffset');
-      ctx.strokeStyle = findColor(ctx, this, 'color');
-      ctx.fillStyle = findColor(ctx, this, 'fillColor');
-
-      const path = new Path2D();
-      if (this.endAngle - this.startAngle < Math.PI * 2) {
-        path.moveTo(x, y);
-      }
-      path.ellipse(x, y, rx, ry, 0, startAngle, endAngle, this.attr('anticlockwise'));
-      path.closePath();
-
-      ctx.fill(path);
-      ctx.stroke(path);
-
-      this.path = path;
-
-      return ctx;
-    }
-  }, _class3.Attr = EllipseSectorAttr, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'contentSize', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'contentSize'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'originalRect', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'originalRect'), _class2.prototype)), _class2);
-
-
-  registerNodeType('ellipsesector', EllipseSector, false);
-  return { EllipseSector };
-}
-
-/***/ }),
-/* 122 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
-/* harmony import */ var _ellipseSector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(121);
-
-
-function install({ use, utils, registerNodeType }) {
-  const { EllipseSector } = use(_ellipseSector__WEBPACK_IMPORTED_MODULE_0__["default"], null, false);
-  let Ellipse = class Ellipse extends EllipseSector {
-    get startAngle() {
-      return 0;
-    }
-
-    get endAngle() {
-      return 2 * Math.PI;
-    }
-  };
-
-
-  registerNodeType('ellipse', Ellipse, false);
-
-  return { Ellipse };
-}
-
-/***/ }),
-/* 123 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
-/* harmony import */ var _shape__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43);
-/* harmony import */ var _sector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(120);
-
-
-
-function install({ use, utils, registerNodeType }) {
-  var _class, _temp;
-
-  const { findColor } = utils;
-  const { Shape } = use(_shape__WEBPACK_IMPORTED_MODULE_0__["default"], null, false);
-  const { Sector } = use(_sector__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
-
-  let EllipseArcAttr = class EllipseArcAttr extends Sector.Attr {
-    /* eslint-disable no-useless-constructor */
-    constructor(subject) {
-      super(subject);
-    }
-  };
-  let EllipseArc = (_temp = _class = class EllipseArc extends Shape {
-
-    get isVirtual() {
-      return true;
-    }
-
-    render(t, drawingContext) {
-      super.render(t, drawingContext);
-
-      const radiusX = this.attr('radiusX');
-      const radiusY = this.attr('radiusY');
-      const x = 0;
-      const y = 0;
-      const rotate = this.attr('rotate');
-      const startAngle = this.attr('startAngle');
-      const endAngle = this.attr('endAngle');
-      const anticlockwise = this.attr('anticlockwise');
-
-      const lw = this.attr('lineWidth');
-      drawingContext.lineWidth = lw;
-      drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
-      drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
-
-      if (drawingContext.ellipse) {
-        drawingContext.beginPath();
-
-        drawingContext.translate(radiusX + lw / 2, radiusY + lw / 2);
-
-        drawingContext.ellipse(x, y, radiusX, radiusY, rotate, startAngle, endAngle, anticlockwise);
-        drawingContext.fill();
-        drawingContext.stroke();
-      } else {
-        throw new Error("Your browser does'n support canvas ellipse");
-      }
-
-      return drawingContext;
-    }
-  }, _class.Attr = EllipseArcAttr, _temp);
-
-  registerNodeType('ellipsearc', EllipseArc, false);
-  return { EllipseArc };
-}
-
-/***/ }),
-/* 124 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
-/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
-/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _ellipse__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(122);
-
-
-const _applyDecoratedDescriptor = __webpack_require__(48);
-
-
-
-function install({ use, utils, registerNodeType }) {
-  var _desc, _value, _class, _class2, _temp;
-
-  const { attr } = utils;
-  const { Ellipse } = use(_ellipse__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
-
-  let CircleAttr = (_class = class CircleAttr extends Ellipse.Attr {
-    constructor(subject) {
-      super(subject);
-      this.setDefault({
-        radius: 10
-      });
-    }
-
-    set radius(val) {
-      this.clearFlow();
-      this.set('radius', val);
-    }
-  }, (_applyDecoratedDescriptor(_class.prototype, 'radius', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'radius'), _class.prototype)), _class);
-  let Circle = (_temp = _class2 = class Circle extends Ellipse {
-
-    get radiuses() {
-      const radius = this.attr('radius');
-      return [radius, radius];
-    }
-  }, _class2.Attr = CircleAttr, _temp);
-
-
-  registerNodeType('circle', Circle, false);
-
-  return { Circle };
-}
-
-/***/ }),
-/* 125 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5053,6 +4316,742 @@ function install({ use, utils, registerNodeType }) {
 
   registerNodeType('ring', Ring);
   return { Ring };
+}
+
+/***/ }),
+/* 117 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
+/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
+/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _shape__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(51);
+
+
+const _applyDecoratedDescriptor = __webpack_require__(48);
+
+
+
+
+function install({ use, utils, registerNodeType }) {
+  var _desc, _value, _class, _desc2, _value2, _class2, _class3, _temp;
+
+  const { attr, flow, parseColorString, findColor } = utils;
+  const { Shape } = use(_shape__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
+
+  let PolygonAttr = (_class = class PolygonAttr extends Shape.Attr {
+    constructor(subject) {
+      super(subject);
+      this.setDefault({
+        points: [],
+        smooth: null
+      });
+    }
+
+    set smooth(val) {
+      this.set('smooth', val);
+    }
+
+    set points(val) {
+      this.clearFlow();
+      this.set('points', val);
+    }
+
+    set color(val) {
+      val = parseColorString(val);
+      this.set('color', val);
+    }
+
+    set lineWidth(val) {
+      this.set('lineWidth', val);
+    }
+
+    set fillColor(val) {
+      val = parseColorString(val);
+      this.set('fillColor', val);
+    }
+  }, (_applyDecoratedDescriptor(_class.prototype, 'smooth', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'smooth'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'points', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'points'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'color', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'color'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'lineWidth', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'lineWidth'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'fillColor', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'fillColor'), _class.prototype)), _class);
+  let Polygon = (_class2 = (_temp = _class3 = class Polygon extends Shape {
+
+    get lineBoundings() {
+      const lw = this.attr('lineWidth');
+
+      const bounds = [0, 0, 0, 0];
+      const points = this.points;
+
+      points.forEach(([x, y]) => {
+        bounds[0] = Math.min(x, bounds[0]);
+        bounds[1] = Math.min(y, bounds[1]);
+
+        bounds[2] = Math.max(x, bounds[2]);
+        bounds[3] = Math.max(y, bounds[3]);
+      });
+      return bounds;
+    }
+
+    get contentSize() {
+      const bounds = this.lineBoundings;
+      const lw = this.attr('lineWidth');
+      let [width, height] = this.attrSize;
+      width = bounds[2] - Math.min(0, bounds[0]) + lw;
+      height = bounds[3] - Math.min(0, bounds[1]) + lw;
+      return [width, height].map(Math.ceil);
+    }
+
+    // @flow
+    // get originalRect() {
+    //   // const bounds = this.lineBoundings;
+    //   // const lw = this.attr('lineWidth');
+    //   // const [width, height] = this.offsetSize;
+    //   // const [anchorX, anchorY] = this.attr('anchor');
+    //   // const rect = [0, 0, width, height];
+    //   // const offsetX = Math.min(0, bounds[0]);
+    //   // const offsetY = Math.min(0, bounds[1]);
+    //   // rect[0] = offsetX - lw - anchorX * (width + offsetX - 2 * lw);
+    //   // rect[1] = offsetY - lw - anchorY * (height + offsetY - 2 * lw);
+    //   // return rect;
+    //   const lineBoundings = this.lineBoundings;
+    //   const [x, y, w, h] = super.originalRect;
+    //   const rect = [x, y, w, h];
+
+    //   return rect;
+    // }
+
+    get points() {
+      return this.attr('points');
+    }
+
+    pointCollision(evt) {
+      if (super.pointCollision(evt)) {
+        let { offsetX = 0, offsetY = 0 } = evt;
+        const [anchorX, anchorY] = this.attr('anchor');
+        const [width, height] = this.contentSize;
+
+        offsetX += width * anchorX;
+        offsetY += height * anchorY;
+        return this.path && (this.context.isPointInPath(this.path, offsetX, offsetY) || this.context.isPointInStroke(this.path, offsetX, offsetY));
+      }
+    }
+
+    render(t, drawingContext) {
+      super.render(t, drawingContext);
+      if (this.points.length) {
+        const bounds = this.lineBoundings;
+        const lw = this.attr('lineWidth');
+        drawingContext.translate(-Math.min(0, bounds[0]) + lw / 2, -Math.min(0, bounds[1]) + lw / 2);
+        drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
+        drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
+        drawingContext.miterLimit = 3;
+        drawingContext.lineWidth = this.attr('lineWidth');
+        drawingContext.setLineDash(this.attr('lineDash'));
+        drawingContext.lineDashOffset = this.attr('lineDashOffset');
+        drawingContext.beginPath();
+        const path = new Path2D();
+        let smooth = this.attr('smooth');
+        const points = this.points.slice(0, this.points.length);
+        if (smooth && !smooth.length) {
+          smooth = [0, points.length - 1];
+        }
+        // 绘制光滑曲线（直线）
+        if (!smooth) {
+          points.forEach((point, i) => {
+            if (i === 0) {
+              path.moveTo(...point);
+            } else {
+              path.lineTo(...point);
+            }
+          });
+        } else {
+          if (Object.prototype.toString.call(smooth[0]) !== '[object Array]') {
+            // 如果不是多维数组，转成多维
+            smooth = [smooth];
+          }
+          const startPos = points[0];
+          const endPos = points[points.length - 1];
+          if (startPos[0] !== endPos[0] || startPos[1] !== endPos[1]) {
+            points.push(points[0]);
+          }
+          let subIndex = 0;
+          smooth.forEach((arr, iind) => {
+            const smoothStart = arr[0];
+            const smoothEnd = arr[1];
+            for (let i = subIndex; i < smoothStart; i++) {
+              if (i === 0) {
+                // 如果是所有线条的起始点
+                path.moveTo(...points[0]);
+              } else {
+                // 如果是转换点
+                path.lineTo(...points[i]);
+              }
+            }
+            const smoothPoints = points.slice(smoothStart, smoothEnd + 1);
+            Object(_util__WEBPACK_IMPORTED_MODULE_2__["drawSmoothCurveLine"])(path, smoothPoints, smoothStart);
+            subIndex = smoothEnd;
+          });
+          for (let i = subIndex; i < points.length - 1; i++) {
+            // 如果绘图未绘制到最后一个点
+            path.lineTo(points[i][0], points[i][1]);
+          }
+        }
+
+        path.closePath();
+        drawingContext.closePath();
+        drawingContext.fill(path);
+        drawingContext.stroke(path);
+        this.path = path;
+      }
+      return drawingContext;
+    }
+  }, _class3.Attr = PolygonAttr, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'contentSize', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'contentSize'), _class2.prototype)), _class2);
+
+  registerNodeType('polygon', Polygon, false);
+  return { Polygon };
+}
+
+/***/ }),
+/* 118 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
+/* harmony import */ var _polygon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(117);
+
+
+function install({ use, utils, registerNodeType }) {
+  const { Polygon } = use(_polygon__WEBPACK_IMPORTED_MODULE_0__["default"], null, false);
+
+  let Triangle = class Triangle extends Polygon {
+    get points() {
+      const [s1, s2] = this.attr('sides');
+      const angle = Math.PI / 180 * this.attr('angle');
+      const p0 = [0, 0];
+      const p1 = [s1, 0];
+      const p2 = [(s2 + 0) * Math.cos(angle), (s2 + 0) * Math.sin(angle)];
+      return [p0, p1, p2];
+    }
+  };
+
+
+  registerNodeType('triangle', Triangle, false);
+  return { Triangle };
+}
+
+/***/ }),
+/* 119 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
+/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
+/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _polygon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(117);
+
+
+const _applyDecoratedDescriptor = __webpack_require__(48);
+
+
+
+function install({ use, utils, registerNodeType }) {
+  var _desc, _value, _class, _class2, _temp;
+
+  const { attr } = utils;
+  const { Polygon } = use(_polygon__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
+
+  let rectAttr = (_class = class rectAttr extends Polygon.Attr {
+    constructor(subject) {
+      super(subject);
+      this.setDefault({
+        angle: 90,
+        sides: null,
+        size: null
+      });
+    }
+
+    set angle(val) {
+      this.clearFlow();
+      this.set('angle', val);
+    }
+
+    set sides(val) {
+      this.clearFlow();
+      this.set('sides', val);
+    }
+  }, (_applyDecoratedDescriptor(_class.prototype, 'angle', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'angle'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'sides', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'sides'), _class.prototype)), _class);
+  let Rect = (_temp = _class2 = class Rect extends Polygon {
+
+    get points() {
+      const [s1, s2] = this.attr('sides') || this.attr('size');
+      const oAngle = this.attr('angle');
+      let cosAngle = 0;
+      let sinAngle = 1;
+      if (oAngle === 90) {
+        // 90默认不处理
+      } else {
+        const angle = Math.PI * this.attr('angle') / 180;
+        cosAngle = Math.cos(angle);
+        sinAngle = Math.sin(angle);
+      }
+      const p0 = [0, 0];
+      const p1 = [s1, 0];
+      const p2 = [s1 + s2 * cosAngle, s2 * sinAngle];
+      const p3 = [s2 * cosAngle, s2 * sinAngle];
+      return [p0, p1, p2, p3];
+
+      // const [s1, s2] = this.attr('sides') || this.attr('size');
+      // const angle = (Math.PI / 180) * this.attr('angle');
+      // const p0 = [0, 0];
+      // const p1 = [s1, 0];
+      // const p2 = [s1 + s2 * Math.cos(angle), s2 * Math.sin(angle)];
+      // const p3 = [s2 * Math.cos(angle), s2 * Math.sin(angle)];
+      // return [p0, p1, p2, p3];
+    }
+  }, _class2.Attr = rectAttr, _temp);
+
+
+  registerNodeType('rect', Rect, false);
+  return { Rect };
+}
+
+/***/ }),
+/* 120 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
+/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
+/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _polygon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(117);
+
+
+const _applyDecoratedDescriptor = __webpack_require__(48);
+
+
+
+function install({ use, utils, registerNodeType }) {
+  var _desc, _value, _class, _class2, _temp;
+
+  const { attr } = utils;
+  const { Polygon } = use(_polygon__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
+
+  let PolygonAttr = (_class = class PolygonAttr extends Polygon.Attr {
+    constructor(subject) {
+      super(subject);
+      this.setDefault({
+        angles: 5
+      });
+    }
+
+    set angles(num) {
+      this.clearFlow();
+      this.set('angles', num);
+    }
+
+    set radius(val) {
+      // 圆半径
+      this.clearFlow();
+      this.set('radius', val);
+    }
+
+    set innerRadius(val) {
+      this.clearFlow();
+      this.set('innerRadius', val);
+    }
+  }, (_applyDecoratedDescriptor(_class.prototype, 'angles', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'angles'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'radius', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'radius'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'innerRadius', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'innerRadius'), _class.prototype)), _class);
+
+
+  function getStarPolygonPoints(angles) {
+    const points = [];
+    const pointsLength = angles * 2;
+
+    return function (outerRadius, innerRadius) {
+      const offsetX = outerRadius;
+      const radAngle = -Math.PI / 2;
+      const radAlpha = Math.PI / angles;
+      for (let i = 1; i <= pointsLength; i++) {
+        const rad = radAlpha * i + radAngle;
+        const len = i % 2 ? innerRadius : outerRadius;
+        const xPos = offsetX + Math.cos(rad) * len;
+        const yPos = Math.sin(rad) * len;
+
+        points.push([xPos, yPos]);
+      }
+      return points;
+    };
+  }
+
+  let Star = (_temp = _class2 = class Star extends Polygon {
+
+    get points() {
+      const radius = this.attr('radius');
+      const innerRadius = this.attr('innerRadius') || 0.4 * radius;
+      return getStarPolygonPoints(this.attr('angles'))(radius, innerRadius);
+    }
+  }, _class2.Attr = PolygonAttr, _temp);
+
+
+  registerNodeType('star', Star, false);
+  return { Star };
+}
+
+/***/ }),
+/* 121 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
+/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
+/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _shape__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
+
+
+const _applyDecoratedDescriptor = __webpack_require__(48);
+
+
+
+function install({ use, utils, registerNodeType }) {
+  var _desc, _value, _class, _desc2, _value2, _class2, _class3, _temp;
+
+  const { attr, flow, parseColorString, findColor } = utils;
+  const { Shape } = use(_shape__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
+
+  let EllipseSectorAttr = (_class = class EllipseSectorAttr extends Shape.Attr {
+    constructor(subject) {
+      super(subject);
+      this.setDefault({
+        radiusX: 10,
+        radiusY: 20,
+        startAngle: 0,
+        endAngle: 0,
+        lineWidth: 1,
+        anticlockwise: false
+      });
+    }
+
+    // 短轴半径
+
+    set radiusX(val) {
+      this.clearFlow();
+      this.set('radiusX', val);
+    }
+
+    // 长轴半径
+
+    set radiusY(val) {
+      this.clearFlow();
+      this.set('radiusY', val);
+    }
+
+    set startAngle(val) {
+      this.clearFlow();
+      this.set('startAngle', val);
+    }
+
+    set endAngle(val) {
+      this.clearFlow();
+      this.set('endAngle', val);
+    }
+
+    set color(val) {
+      val = parseColorString(val);
+      this.set('color', val);
+    }
+
+    set lineWidth(val) {
+      this.set('lineWidth', val);
+    }
+
+    set fillColor(val) {
+      val = parseColorString(val);
+      this.set('fillColor', val);
+    }
+
+    set anticlockwise(val) {
+      this.set('anticlockwise', val);
+    }
+
+    set center(val) {
+      this.clearFlow();
+      this.set('center', val);
+    }
+  }, (_applyDecoratedDescriptor(_class.prototype, 'radiusX', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'radiusX'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'radiusY', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'radiusY'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'startAngle', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'startAngle'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'endAngle', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'endAngle'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'color', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'color'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'lineWidth', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'lineWidth'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'fillColor', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'fillColor'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'anticlockwise', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'anticlockwise'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'center', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'center'), _class.prototype)), _class);
+  let EllipseSector = (_class2 = (_temp = _class3 = class EllipseSector extends Shape {
+
+    get radiuses() {
+      return [this.attr('radiusX'), this.attr('radiusY')];
+    }
+
+    get startAngle() {
+      return this.attr('startAngle');
+    }
+
+    get endAngle() {
+      return this.attr('endAngle');
+    }
+
+    get center() {
+      const lw = this.attr('lineWidth');
+      return this.radiuses.map(v => v + lw / 2);
+    }
+
+    get lineBoundings() {
+      const lw = this.attr('lineWidth');
+      return [0, 0, 2 * this.radiuses[0], 2 * this.radiuses[1]];
+    }
+
+    get contentSize() {
+      const bounds = this.lineBoundings;
+      const lw = this.attr('lineWidth');
+      let [width, height] = [...this.attrSize];
+
+      if (width === '') {
+        width = bounds[2] - Math.min(0, bounds[0]) + lw;
+      }
+      if (height === '') {
+        height = bounds[3] - Math.min(0, bounds[1]) + lw;
+      }
+
+      return [width, height].map(Math.ceil);
+    }
+
+    get originalRect() {
+      const lineBoundings = this.lineBoundings;
+      const [x, y, w, h] = super.originalRect;
+      const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
+      return rect;
+    }
+
+    pointCollision(evt) {
+      if (super.pointCollision(evt)) {
+        let { offsetX, offsetY } = evt;
+        // FIXME: 如果事件是改变半径大小，会导致contentSize变化，如何避免？
+        const [anchorX, anchorY] = this.attr('anchor');
+        const [width, height] = this.contentSize;
+
+        offsetX += width * anchorX;
+        offsetY += height * anchorY;
+
+        return this.path && (this.context.isPointInPath(this.path, offsetX, offsetY) || this.context.isPointInStroke(this.path, offsetX, offsetY));
+      }
+    }
+
+    render(t, ctx) {
+      super.render(t, ctx);
+
+      const [x, y] = this.center;
+      const [rx, ry] = this.radiuses;
+
+      const startAngle = this.startAngle;
+      const endAngle = this.endAngle;
+
+      ctx.miterLimit = 3;
+      ctx.lineWidth = this.attr('lineWidth');
+      ctx.setLineDash(this.attr('lineDash'));
+      ctx.lineDashOffset = this.attr('lineDashOffset');
+      ctx.strokeStyle = findColor(ctx, this, 'color');
+      ctx.fillStyle = findColor(ctx, this, 'fillColor');
+
+      const path = new Path2D();
+      if (this.endAngle - this.startAngle < Math.PI * 2) {
+        path.moveTo(x, y);
+      }
+      path.ellipse(x, y, rx, ry, 0, startAngle, endAngle, this.attr('anticlockwise'));
+      path.closePath();
+
+      ctx.fill(path);
+      ctx.stroke(path);
+
+      this.path = path;
+
+      return ctx;
+    }
+  }, _class3.Attr = EllipseSectorAttr, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'contentSize', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'contentSize'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'originalRect', [flow], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class2.prototype, 'originalRect'), _class2.prototype)), _class2);
+
+
+  registerNodeType('ellipsesector', EllipseSector, false);
+  return { EllipseSector };
+}
+
+/***/ }),
+/* 122 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
+/* harmony import */ var _shape__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43);
+/* harmony import */ var _sector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(123);
+
+
+
+function install({ use, utils, registerNodeType }) {
+  var _class, _temp;
+
+  const { findColor } = utils;
+  const { Shape } = use(_shape__WEBPACK_IMPORTED_MODULE_0__["default"], null, false);
+  const { Sector } = use(_sector__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
+
+  let EllipseArcAttr = class EllipseArcAttr extends Sector.Attr {
+    /* eslint-disable no-useless-constructor */
+    constructor(subject) {
+      super(subject);
+    }
+  };
+  let EllipseArc = (_temp = _class = class EllipseArc extends Shape {
+
+    get isVirtual() {
+      return true;
+    }
+
+    render(t, drawingContext) {
+      super.render(t, drawingContext);
+
+      const radiusX = this.attr('radiusX');
+      const radiusY = this.attr('radiusY');
+      const x = 0;
+      const y = 0;
+      const rotate = this.attr('rotate');
+      const startAngle = this.attr('startAngle');
+      const endAngle = this.attr('endAngle');
+      const anticlockwise = this.attr('anticlockwise');
+
+      const lw = this.attr('lineWidth');
+      drawingContext.lineWidth = lw;
+      drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
+      drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
+
+      if (drawingContext.ellipse) {
+        drawingContext.beginPath();
+
+        drawingContext.translate(radiusX + lw / 2, radiusY + lw / 2);
+
+        drawingContext.ellipse(x, y, radiusX, radiusY, rotate, startAngle, endAngle, anticlockwise);
+        drawingContext.fill();
+        drawingContext.stroke();
+      } else {
+        throw new Error("Your browser does'n support canvas ellipse");
+      }
+
+      return drawingContext;
+    }
+  }, _class.Attr = EllipseArcAttr, _temp);
+
+  registerNodeType('ellipsearc', EllipseArc, false);
+  return { EllipseArc };
+}
+
+/***/ }),
+/* 123 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
+/* harmony import */ var _ellipseSector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(121);
+
+
+function install({ use, utils, registerNodeType }) {
+  const { EllipseSector } = use(_ellipseSector__WEBPACK_IMPORTED_MODULE_0__["default"], null, false);
+
+  let Sector = class Sector extends EllipseSector {
+    get radiuses() {
+      return [this.attr('radius'), this.attr('radius')];
+    }
+  };
+
+
+  Sector.defineAttributes({
+    radius(attr, val) {
+      attr.clearFlow();
+      attr.set('radius', val);
+    }
+  });
+
+  registerNodeType('sector', Sector, false);
+  return { Sector };
+}
+
+/***/ }),
+/* 124 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
+/* harmony import */ var _ellipseSector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(121);
+
+
+function install({ use, utils, registerNodeType }) {
+  const { EllipseSector } = use(_ellipseSector__WEBPACK_IMPORTED_MODULE_0__["default"], null, false);
+  let Ellipse = class Ellipse extends EllipseSector {
+    get startAngle() {
+      return 0;
+    }
+
+    get endAngle() {
+      return 2 * Math.PI;
+    }
+  };
+
+
+  registerNodeType('ellipse', Ellipse, false);
+
+  return { Ellipse };
+}
+
+/***/ }),
+/* 125 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
+/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
+/* harmony import */ var babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ellipse__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(124);
+
+
+const _applyDecoratedDescriptor = __webpack_require__(48);
+
+
+
+function install({ use, utils, registerNodeType }) {
+  var _desc, _value, _class, _class2, _temp;
+
+  const { attr } = utils;
+  const { Ellipse } = use(_ellipse__WEBPACK_IMPORTED_MODULE_1__["default"], null, false);
+
+  let CircleAttr = (_class = class CircleAttr extends Ellipse.Attr {
+    constructor(subject) {
+      super(subject);
+      this.setDefault({
+        radius: 10
+      });
+    }
+
+    set radius(val) {
+      this.clearFlow();
+      this.set('radius', val);
+    }
+  }, (_applyDecoratedDescriptor(_class.prototype, 'radius', [attr], babel_runtime_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, 'radius'), _class.prototype)), _class);
+  let Circle = (_temp = _class2 = class Circle extends Ellipse {
+
+    get radiuses() {
+      const radius = this.attr('radius');
+      return [radius, radius];
+    }
+  }, _class2.Attr = CircleAttr, _temp);
+
+
+  registerNodeType('circle', Circle, false);
+
+  return { Circle };
 }
 
 /***/ })

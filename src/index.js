@@ -1,21 +1,21 @@
 import Shape from './shape';
-import Polyline from './polyline';
-
-import Polycurve from './polycurve';
-import Wave from './wave';
-
-import Polygon from './polygon/polygon';
-import Triangle from './polygon/triangle';
-import Rect from './polygon/rect';
-import Star from './polygon/star';
 
 import Arc from './arc';
-import Sector from './ellipseShape/sector';
-import Ellipse from './ellipseShape/ellipse';
-import EllipseSector from './ellipseShape/ellipseSector';
-import EllipseArc from './ellipseShape/ellipseArc';
-import Circle from './ellipseShape/circle';
+import Polyline from './polyline';
+import Polycurve from './polycurve';
+import Wave from './wave';
 import Ring from './ring';
+
+import Polygon from './polygon';
+import Triangle from './triangle';
+import Rect from './rect';
+import Star from './star';
+
+import EllipseSector from './ellipseSector';
+import EllipseArc from './ellipseArc';
+import Sector from './sector';
+import Ellipse from './ellipse';
+import Circle from './circle';
 
 const version = require('../package.json').version;
 
@@ -50,7 +50,6 @@ function install(spritejs) {
 }
 
 // auto use
-// 移除是为了实现按需加载
 // if (typeof window !== 'undefined' && window.spritejs) {
 //   window.spritejs.use(Shapes);
 // }

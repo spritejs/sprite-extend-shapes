@@ -1,5 +1,5 @@
-import ShapePlugin from '../shape';
-import {drawSmoothCurveLine} from '../util';
+import ShapePlugin from './shape';
+import {drawSmoothCurveLine} from './util';
 
 export default function install({use, utils, registerNodeType}) {
   const {attr, flow, parseColorString, findColor} = utils;

@@ -10,7 +10,7 @@ export default function install({use, utils, registerNodeType}) {
       this.setDefault({
         angle: 90,
         sides: null,
-        size: null,
+        size: null
       });
     }
 
@@ -38,7 +38,7 @@ export default function install({use, utils, registerNodeType}) {
       if (oAngle === 90) {
         // 90默认不处理
       } else {
-        const angle = Math.PI * this.attr('angle') / 180;
+        const angle = (Math.PI * this.attr('angle')) / 180;
         cosAngle = Math.cos(angle);
         sinAngle = Math.sin(angle);
       }

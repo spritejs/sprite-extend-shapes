@@ -1,4 +1,4 @@
-import ShapePlugin from '../shape';
+import ShapePlugin from './shape';
 
 export default function install({use, utils, registerNodeType}) {
   const {attr, flow, parseColorString, findColor} = utils;

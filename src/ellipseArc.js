@@ -1,4 +1,4 @@
-import ShapePlugin from '../shape';
+import ShapePlugin from './shape';
 import SectorPlugin from './sector';
 
 export default function install({use, utils, registerNodeType}) {
