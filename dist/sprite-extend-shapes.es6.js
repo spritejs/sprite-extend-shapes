@@ -173,7 +173,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const version = '1.0.4';
+const version = '1.0.5';
 
 const Shapes = {
   version,
@@ -1138,7 +1138,7 @@ function install({ use, utils, registerNodeType }) {
 
       const path = new Path2D();
       path.arc(cx, cy, radius, startAngle, endAngle, anticlockwise);
-      ctx.stroke(path);
+      endAngle > startAngle && ctx.stroke(path);
       this.path = path;
       return ctx;
     }
@@ -1809,6 +1809,7 @@ var _isSvgPath2 = _interopRequireDefault(_isSvgPath);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _initialPath = (0, _symbol2.default)('initialPath');
 var _path = (0, _symbol2.default)('path');
 var _bounds = (0, _symbol2.default)('bounds');
 var _savedPaths = (0, _symbol2.default)('savedPaths');
@@ -1823,10 +1824,8 @@ var SvgPath = function () {
       throw new Error('Not an SVG path!');
     }
 
-    var path = (0, _normalizeSvgPath2.default)((0, _absSvgPath2.default)((0, _parseSvgPath2.default)(d)));
-
-    this[_path] = path;
-
+    this[_initialPath] = (0, _absSvgPath2.default)((0, _parseSvgPath2.default)(d));
+    this[_path] = (0, _normalizeSvgPath2.default)(this[_initialPath]);
     this[_bounds] = null;
     this[_savedPaths] = [];
     this[_renderProps] = {};
@@ -1978,6 +1977,9 @@ var SvgPath = function () {
             context.bezierCurveTo.apply(context, (0, _toConsumableArray3.default)(args));
           }
         });
+        if (this.isClosed) {
+          context.closePath();
+        }
       }
       (0, _assign2.default)(context, renderProps);
       return {
@@ -2065,18 +2067,28 @@ var SvgPath = function () {
   }, {
     key: 'd',
     get: function get() {
-      return this[_path].map(function (p) {
+      var path = this[_path].map(function (p) {
         var _p = (0, _toArray3.default)(p),
             c = _p[0],
             points = _p.slice(1);
 
         return c + points.join();
       }).join('');
+      if (this.isClosed) {
+        path += 'Z';
+      }
+      return path;
     }
   }, {
     key: 'path',
     get: function get() {
       return this[_path];
+    }
+  }, {
+    key: 'isClosed',
+    get: function get() {
+      var part = this[_initialPath][this[_initialPath].length - 1];
+      return part && part[0] === 'Z';
     }
   }]);
   return SvgPath;
@@ -3590,14 +3602,16 @@ function isPointInStroke(_ref2, x, y, _ref3) {
       lineJoin = _ref3$lineJoin === undefined ? 'miter' : _ref3$lineJoin;
 
   if (!context) context = document.createElement('canvas').getContext('2d');
-  context.save();
-  context.lineWidth = lineWidth;
-  context.lineCap = lineCap;
-  context.lineJoin = lineJoin;
-  var path = new Path2D(d);
-  var ret = context.isPointInStroke(path, x, y);
-  context.restore();
-  return ret;
+  if (context.isPointInStroke) {
+    context.save();
+    context.lineWidth = lineWidth;
+    context.lineCap = lineCap;
+    context.lineJoin = lineJoin;
+    var path = new Path2D(d);
+    var ret = context.isPointInStroke(path, x, y);
+    context.restore();
+    return ret;
+  }
 }
 
 /***/ }),

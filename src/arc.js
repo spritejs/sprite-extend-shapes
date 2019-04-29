@@ -144,7 +144,7 @@ export default function install({use, utils, registerNodeType}) {
 
       const path = new Path2D();
       path.arc(cx, cy, radius, startAngle, endAngle, anticlockwise);
-      ctx.stroke(path);
+      endAngle > startAngle && ctx.stroke(path);
       this.path = path;
       return ctx;
     }

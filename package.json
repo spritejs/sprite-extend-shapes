@@ -1,6 +1,6 @@
 {
   "name": "sprite-extend-shapes",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "lib/index.js",
   "directories": {
@@ -14,7 +14,6 @@
     "build:es6": "babel src -d lib && webpack --env.esnext",
     "standalone": "babel src -d lib && webpack --env.standalone",
     "start": "webpack-dev-server --watch-poll",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.doc.dev.js",
     "prepublishOnly": "npm run build && node ./script/qcdn",
     "test": "nyc ava --serial && rimraf ./coverage && mkdir coverage && nyc report --reporter=html > ./coverage/lcov.info",
     "lint": "eslint ./ --fix"
