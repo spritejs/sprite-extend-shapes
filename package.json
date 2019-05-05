@@ -1,8 +1,9 @@
 {
   "name": "sprite-extend-shapes",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "lib/index.js",
+  "module": "",
   "directories": {
     "example": "examples",
     "lib": "lib",
@@ -21,26 +22,21 @@
   "author": "akira-cn",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-external-helpers": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/plugin-proposal-decorators": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/register": "^7.0.0",
     "ava": "^0.25.0",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-decorators-runtime": "^0.2.0",
-    "babel-eslint": "^8.2.5",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-inline-package-json": "^2.0.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-decorators-runtime": "^0.4.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-runtime": "^6.26.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
     "canvas": "^2.0.0-alpha.16",
     "canvas-5-polyfill": "^0.1.5",
     "colors": "^1.3.1",
-    "component-playground": "^3.2.1",
     "coveralls": "^3.0.2",
-    "cross-env": "^5.2.0",
     "css-loader": "^2.0.0",
     "eslint": "^5.0.1",
     "eslint-config-sprite": "^1.0.4",
@@ -48,13 +44,9 @@
     "hamming-distance": "^1.0.0",
     "html-webpack-plugin": "^3.2.0",
     "imghash": "^0.0.3",
-    "lerna": "^3.6.0",
     "nyc": "^12.0.2",
     "pixelmatch": "^4.0.2",
-    "raw-loader": "^0.5.1",
-    "react-ui-playground": "^2.0.1",
     "rimraf": "^2.6.2",
-    "spritejs": "^2.17.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.12.2",
     "webpack-bundle-analyzer": "^3.0.3",
@@ -68,9 +60,13 @@
       "**/test/*.test.js"
     ],
     "require": [
-      "babel-register"
+      "@babel/register"
     ],
-    "babel": "inherit"
+    "babel": {
+      "testOptions": {
+        "babelrc": true
+      }
+    }
   },
   "nyc": {
     "exclude": [
@@ -78,6 +74,7 @@
     ]
   },
   "dependencies": {
+    "@babel/runtime": "^7.2.0",
     "sprite-draggable": "0.1.15",
     "svg-path-to-canvas": "^1.11.1"
   }
