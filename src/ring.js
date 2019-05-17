@@ -88,12 +88,9 @@ export default function install({use, utils, registerNodeType}) {
       const lw = this.attr('lineWidth');
       let [width, height] = this.attrSize;
 
-      if (width === '') {
-        width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
-      }
-      if (height === '') {
-        height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
-      }
+      width = bounds[2] - Math.min(0, bounds[0]);
+
+      height = bounds[3] - Math.min(0, bounds[1]);
 
       return [width, height].map(Math.ceil);
     }
@@ -173,7 +170,7 @@ export default function install({use, utils, registerNodeType}) {
       ctx.lineJoin = this.attr('lineJoin');
       ctx.setLineDash(this.attr('lineDash'));
       ctx.lineDashOffset = this.attr('lineDashOffset');
-      ctx.strokeStyle = findColor(ctx, this, 'color');
+      ctx.strokeStyle = findColor(ctx, this, 'stokeColor');
       ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
       const [x, y] = [0, 0];
@@ -184,17 +181,14 @@ export default function install({use, utils, registerNodeType}) {
       }
 
       const lineBoundings = this.lineBoundings;
-      ctx.translate(
-        lineBoundings[2] / 2 - x + lw,
-        lineBoundings[3] / 2 - y + lw
-      );
+      ctx.translate(lineBoundings[2] / 2 - x, lineBoundings[3] / 2 - y);
 
       ctx.beginPath();
-      ctx.arc(x, y, outerRadius, startAngle, endAngle, false);
+      ctx.arc(x, y, outerRadius - lw / 2, startAngle, endAngle, false);
       if (endAngle - startAngle === Math.PI * 2) {
         ctx.moveTo(outerRadius + innerRadius, outerRadius);
       }
-      ctx.arc(x, y, innerRadius, endAngle, startAngle, true);
+      ctx.arc(x, y, innerRadius - lw / 2, endAngle, startAngle, true);
       ctx.closePath();
 
       ctx.fill();

@@ -33,8 +33,19 @@ export default function install({use, utils, registerNodeType}) {
       const anticlockwise = this.attr('anticlockwise');
 
       const lw = this.attr('lineWidth');
+
+      drawingContext.lineCap = this.attr('lineCap');
+      drawingContext.lineJoin = this.attr('lineJoin');
       drawingContext.lineWidth = lw;
       drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
+      drawingContext.setLineDash(this.attr('lineDash'));
+      drawingContext.lineDashOffset = this.attr('lineDashOffset');
+
+      drawingContext.strokeStyle = findColor(
+        drawingContext,
+        this,
+        'strokeColor'
+      );
       drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
 
       if (drawingContext.ellipse) {

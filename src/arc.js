@@ -64,8 +64,6 @@ export default function install({use, utils, registerNodeType}) {
 
     @flow
     get lineBoundings() {
-      const lw = this.attr('lineWidth');
-
       const r = this.attr('radius');
       return [0, 0, 2 * r, 2 * r];
     }
@@ -73,33 +71,17 @@ export default function install({use, utils, registerNodeType}) {
     @flow
     get contentSize() {
       const bounds = this.lineBoundings;
-      const lw = this.attr('lineWidth');
       let [width, height] = [...this.attrSize];
-
-      if (width === '') {
-        width = bounds[2] - Math.min(0, bounds[0]) + lw * 1;
-      }
-      if (height === '') {
-        height = bounds[3] - Math.min(0, bounds[1]) + lw * 1;
-      }
+      width = bounds[2] - Math.min(0, bounds[0]);
+      height = bounds[3] - Math.min(0, bounds[1]);
 
       return [width, height].map(Math.ceil);
-    }
-
-    @flow
-    get originalRect() {
-      const lineBoundings = this.lineBoundings;
-      const lw = this.attr('lineWidth');
-
-      const [x, y, w, h] = super.originalRect;
-      const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
-      return rect;
     }
 
     get center() {
       const lw = this.attr('lineWidth');
       const r = this.attr('radius');
-      return [r + 0.5 * lw, r + 0.5 * lw];
+      return [r, r];
     }
 
     get startAngle() {
@@ -135,15 +117,17 @@ export default function install({use, utils, registerNodeType}) {
       const anticlockwise = this.attr('anticlockwise');
 
       ctx.beginPath();
+
+      const lw = this.attr('lineWidth');
       ctx.lineCap = this.attr('lineCap');
       ctx.lineJoin = this.attr('lineJoin');
-      ctx.lineWidth = this.attr('lineWidth');
-      ctx.strokeStyle = findColor(ctx, this, 'color');
+      ctx.lineWidth = lw;
+      ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
       ctx.setLineDash(this.attr('lineDash'));
       ctx.lineDashOffset = this.attr('lineDashOffset');
 
       const path = new Path2D();
-      path.arc(cx, cy, radius, startAngle, endAngle, anticlockwise);
+      path.arc(cx, cy, radius - lw / 2, startAngle, endAngle, anticlockwise);
       endAngle > startAngle && ctx.stroke(path);
       this.path = path;
       return ctx;

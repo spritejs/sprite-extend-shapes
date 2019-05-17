@@ -89,11 +89,10 @@ export default function install({use, utils, registerNodeType}) {
 
     get center() {
       const lw = this.attr('lineWidth');
-      return this.radiuses.map(v => v + lw / 2);
+      return this.radiuses.map(v => v);
     }
 
     get lineBoundings() {
-      const lw = this.attr('lineWidth');
       return [0, 0, 2 * this.radiuses[0], 2 * this.radiuses[1]];
     }
 
@@ -102,24 +101,18 @@ export default function install({use, utils, registerNodeType}) {
       const bounds = this.lineBoundings;
       const lw = this.attr('lineWidth');
       let [width, height] = [...this.attrSize];
-
-      if (width === '') {
-        width = bounds[2] - Math.min(0, bounds[0]) + lw;
-      }
-      if (height === '') {
-        height = bounds[3] - Math.min(0, bounds[1]) + lw;
-      }
-
+      width = bounds[2] - Math.min(0, bounds[0]);
+      height = bounds[3] - Math.min(0, bounds[1]);
       return [width, height].map(Math.ceil);
     }
 
-    @flow
-    get originalRect() {
-      const lineBoundings = this.lineBoundings;
-      const [x, y, w, h] = super.originalRect;
-      const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
-      return rect;
-    }
+    // @flow
+    // get originalRect() {
+    //   const lineBoundings = this.lineBoundings;
+    //   const [x, y, w, h] = super.originalRect;
+    //   const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
+    //   return rect;
+    // }
 
     pointCollision(evt) {
       if (super.pointCollision(evt)) {
@@ -147,12 +140,16 @@ export default function install({use, utils, registerNodeType}) {
 
       const startAngle = this.startAngle;
       const endAngle = this.endAngle;
-
+      const lw = this.attr('lineWidth');
       ctx.miterLimit = 3;
-      ctx.lineWidth = this.attr('lineWidth');
+      ctx.miterLimit = 3;
+      ctx.lineCap = this.attr('lineCap');
+      ctx.lineJoin = this.attr('lineJoin');
+      ctx.lineWidth = lw;
+      ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
       ctx.setLineDash(this.attr('lineDash'));
       ctx.lineDashOffset = this.attr('lineDashOffset');
-      ctx.strokeStyle = findColor(ctx, this, 'color');
+      ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
       ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
       const path = new Path2D();
@@ -162,8 +159,8 @@ export default function install({use, utils, registerNodeType}) {
       path.ellipse(
         x,
         y,
-        rx,
-        ry,
+        rx - lw / 2,
+        ry - lw / 2,
         0,
         startAngle,
         endAngle,

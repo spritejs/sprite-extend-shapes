@@ -261,8 +261,8 @@ function install({
           color: 'transparent',
           fillColor: 'transparent',
           lineWidth: 0,
-          lineCap: 'round',
-          lineJoin: 'round',
+          lineCap: 'butt',
+          lineJoin: 'miter',
           lineDash: [0, 0],
           lineDashOffset: 0,
           enableCache: false
@@ -502,7 +502,6 @@ function install({
         decorators: [flow],
         key: "lineBoundings",
         value: function lineBoundings() {
-          const lw = this.attr('lineWidth');
           const r = this.attr('radius');
           return [0, 0, 2 * r, 2 * r];
         }
@@ -512,31 +511,10 @@ function install({
         key: "contentSize",
         value: function contentSize() {
           const bounds = this.lineBoundings;
-          const lw = this.attr('lineWidth');
           let [width, height] = [...this.attrSize];
-
-          if (width === '') {
-            width = bounds[2] - Math.min(0, bounds[0]) + lw * 1;
-          }
-
-          if (height === '') {
-            height = bounds[3] - Math.min(0, bounds[1]) + lw * 1;
-          }
-
+          width = bounds[2] - Math.min(0, bounds[0]);
+          height = bounds[3] - Math.min(0, bounds[1]);
           return [width, height].map(Math.ceil);
-        }
-      }, {
-        kind: "get",
-        decorators: [flow],
-        key: "originalRect",
-        value: function originalRect() {
-          const lineBoundings = this.lineBoundings;
-          const lw = this.attr('lineWidth');
-
-          const [x, y, w, h] = _get(_getPrototypeOf(Arc.prototype), "originalRect", this);
-
-          const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
-          return rect;
         }
       }, {
         kind: "get",
@@ -544,7 +522,7 @@ function install({
         value: function center() {
           const lw = this.attr('lineWidth');
           const r = this.attr('radius');
-          return [r + 0.5 * lw, r + 0.5 * lw];
+          return [r, r];
         }
       }, {
         kind: "get",
@@ -586,14 +564,15 @@ function install({
           const radius = this.attr('radius');
           const anticlockwise = this.attr('anticlockwise');
           ctx.beginPath();
+          const lw = this.attr('lineWidth');
           ctx.lineCap = this.attr('lineCap');
           ctx.lineJoin = this.attr('lineJoin');
-          ctx.lineWidth = this.attr('lineWidth');
-          ctx.strokeStyle = findColor(ctx, this, 'color');
+          ctx.lineWidth = lw;
+          ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
           ctx.setLineDash(this.attr('lineDash'));
           ctx.lineDashOffset = this.attr('lineDashOffset');
           const path = new Path2D();
-          path.arc(cx, cy, radius, startAngle, endAngle, anticlockwise);
+          path.arc(cx, cy, radius - lw / 2, startAngle, endAngle, anticlockwise);
           endAngle > startAngle && ctx.stroke(path);
           this.path = path;
           return ctx;
@@ -751,13 +730,15 @@ function install({
       super.render(t, drawingContext);
 
       if (this.points) {
+        const lw = this.attr('lineWidth');
         drawingContext.fillStyle = this.attr('fillColor');
-        drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
+        drawingContext.strokeStyle = findColor(drawingContext, this, 'strokeColor');
         drawingContext.lineJoin = this.attr('lineJoin');
         drawingContext.lineCap = this.attr('lineCap');
-        drawingContext.lineWidth = this.attr('lineWidth');
+        drawingContext.lineWidth = lw;
         drawingContext.setLineDash(this.attr('lineDash'));
         drawingContext.lineDashOffset = this.attr('lineDashOffset');
+        drawingContext.translate(lw / 2, lw / 2);
         const smooth = this.attr('smooth');
         const path = new Path2D();
 
@@ -1088,13 +1069,13 @@ function install({
           const points = this.points;
           const startPoint = this.attr('startPoint');
           const lw = this.attr('lineWidth');
-          ctx.fillStyle = this.attr('fillColor');
-          ctx.strokeStyle = findColor(ctx, this, 'color');
-          ctx.lineJoin = this.attr('lineJoin');
           ctx.lineCap = this.attr('lineCap');
+          ctx.lineJoin = this.attr('lineJoin');
           ctx.lineWidth = lw;
           ctx.setLineDash(this.attr('lineDash'));
           ctx.lineDashOffset = this.attr('lineDashOffset');
+          ctx.fillStyle = this.attr('fillColor');
+          ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
           const path = new Path2D();
 
           if (startPoint && startPoint.length === 2) {
@@ -1362,7 +1343,7 @@ function install({
           _get(_getPrototypeOf(Wave.prototype), "render", this).call(this, t, ctx);
 
           const lw = this.attr('lineWidth');
-          const radius = this.attr('radius');
+          let radius = this.attr('radius');
           const offset = this.attr('offset');
           const shape = this.attr('shape');
           const showOutline = this.attr('showOutline');
@@ -4625,15 +4606,8 @@ function install({
           const bounds = this.lineBoundings;
           const lw = this.attr('lineWidth');
           let [width, height] = this.attrSize;
-
-          if (width === '') {
-            width = bounds[2] - Math.min(0, bounds[0]) + 2 * lw;
-          }
-
-          if (height === '') {
-            height = bounds[3] - Math.min(0, bounds[1]) + 2 * lw;
-          }
-
+          width = bounds[2] - Math.min(0, bounds[0]);
+          height = bounds[3] - Math.min(0, bounds[1]);
           return [width, height].map(Math.ceil);
         }
       }, {
@@ -4709,7 +4683,7 @@ function install({
           ctx.lineJoin = this.attr('lineJoin');
           ctx.setLineDash(this.attr('lineDash'));
           ctx.lineDashOffset = this.attr('lineDashOffset');
-          ctx.strokeStyle = findColor(ctx, this, 'color');
+          ctx.strokeStyle = findColor(ctx, this, 'stokeColor');
           ctx.fillStyle = findColor(ctx, this, 'fillColor');
           const [x, y] = [0, 0];
           let maxRadius = this.attr('maxRadius');
@@ -4719,15 +4693,15 @@ function install({
           }
 
           const lineBoundings = this.lineBoundings;
-          ctx.translate(lineBoundings[2] / 2 - x + lw, lineBoundings[3] / 2 - y + lw);
+          ctx.translate(lineBoundings[2] / 2 - x, lineBoundings[3] / 2 - y);
           ctx.beginPath();
-          ctx.arc(x, y, outerRadius, startAngle, endAngle, false);
+          ctx.arc(x, y, outerRadius - lw / 2, startAngle, endAngle, false);
 
           if (endAngle - startAngle === Math.PI * 2) {
             ctx.moveTo(outerRadius + innerRadius, outerRadius);
           }
 
-          ctx.arc(x, y, innerRadius, endAngle, startAngle, true);
+          ctx.arc(x, y, innerRadius - lw / 2, endAngle, startAngle, true);
           ctx.closePath();
           ctx.fill();
 
@@ -4891,9 +4865,8 @@ function install({
         kind: "get",
         key: "lineBoundings",
         value: function lineBoundings() {
-          const lw = this.attr('lineWidth');
           const bounds = [0, 0, 0, 0];
-          const points = this.points;
+          const points = this.attr('points');
           points.forEach(([x, y]) => {
             bounds[0] = Math.min(x, bounds[0]);
             bounds[1] = Math.min(y, bounds[1]);
@@ -4907,34 +4880,25 @@ function install({
         decorators: [flow],
         key: "contentSize",
         value: function contentSize() {
-          const bounds = this.lineBoundings;
           const lw = this.attr('lineWidth');
+          const bounds = this.lineBoundings;
           let [width, height] = this.attrSize;
-          width = bounds[2] - Math.min(0, bounds[0]) + lw;
-          height = bounds[3] - Math.min(0, bounds[1]) + lw;
+          width = bounds[2] - bounds[0] + lw;
+          height = bounds[3] - bounds[1] + lw;
           return [width, height].map(Math.ceil);
-        } // @flow
-        // get originalRect() {
-        //   // const bounds = this.lineBoundings;
-        //   // const lw = this.attr('lineWidth');
-        //   // const [width, height] = this.offsetSize;
-        //   // const [anchorX, anchorY] = this.attr('anchor');
-        //   // const rect = [0, 0, width, height];
-        //   // const offsetX = Math.min(0, bounds[0]);
-        //   // const offsetY = Math.min(0, bounds[1]);
-        //   // rect[0] = offsetX - lw - anchorX * (width + offsetX - 2 * lw);
-        //   // rect[1] = offsetY - lw - anchorY * (height + offsetY - 2 * lw);
-        //   // return rect;
-        //   const lineBoundings = this.lineBoundings;
-        //   const [x, y, w, h] = super.originalRect;
-        //   const rect = [x, y, w, h];
-        //   return rect;
-        // }
-
+        }
+      }, {
+        kind: "get",
+        key: "translate",
+        value: function translate() {
+          const lw = this.attr('lineWidth');
+          return [lw / 2, lw / 2];
+        }
       }, {
         kind: "get",
         key: "points",
         value: function points() {
+          const lw = this.attr('lineWidth');
           return this.attr('points');
         }
       }, {
@@ -4960,12 +4924,13 @@ function install({
           _get(_getPrototypeOf(Polygon.prototype), "render", this).call(this, t, drawingContext);
 
           if (this.points.length) {
-            const bounds = this.lineBoundings;
-            const lw = this.attr('lineWidth');
-            drawingContext.translate(-Math.min(0, bounds[0]) + lw / 2, -Math.min(0, bounds[1]) + lw / 2);
-            drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
+            const translate = this.translate;
+            drawingContext.translate(translate[0], translate[1]);
+            drawingContext.strokeStyle = findColor(drawingContext, this, 'strokeColor');
             drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
             drawingContext.miterLimit = 3;
+            drawingContext.lineCap = this.attr('lineCap');
+            drawingContext.lineJoin = this.attr('lineJoin');
             drawingContext.lineWidth = this.attr('lineWidth');
             drawingContext.setLineDash(this.attr('lineDash'));
             drawingContext.lineDashOffset = this.attr('lineDashOffset');
@@ -5064,12 +5029,20 @@ function install({
   } = use(_polygon__WEBPACK_IMPORTED_MODULE_0__["default"], null, false);
 
   class Triangle extends Polygon {
+    get contentSize() {
+      let [s1, s2] = this.attr('sides');
+      return [s1, s2];
+    }
+
     get points() {
-      const [s1, s2] = this.attr('sides');
+      let [s1, s2] = this.attr('sides');
+      const lw = this.attr('lineWidth');
+      s1 -= lw * 2;
+      s2 -= lw * 2;
       const angle = Math.PI / 180 * this.attr('angle');
       const p0 = [0, 0];
       const p1 = [s1, 0];
-      const p2 = [(s2 + 0) * Math.cos(angle), (s2 + 0) * Math.sin(angle)];
+      const p2 = [s2 * Math.cos(angle), s2 * Math.sin(angle)];
       return [p0, p1, p2];
     }
 
@@ -5089,8 +5062,6 @@ function install({
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
 /* harmony import */ var _polygon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(109);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _decorate(decorators, factory, superClass, mixins) { var api = _getDecoratorsApi(); if (mixins) { for (var i = 0; i < mixins.length; i++) { api = mixins[i](api); } } var r = factory(function initialize(O) { api.initializeInstanceElements(O, decorated.elements); }, superClass); var decorated = api.decorateClass(_coalesceClassElements(r.d.map(_createElementDescriptor)), decorators); api.initializeClassElements(r.F, decorated.elements); return api.runClassFinishers(r.F, decorated.finishers); }
 
 function _getDecoratorsApi() { _getDecoratorsApi = function () { return api; }; var api = { elementsDefinitionOrder: [["method"], ["field"]], initializeInstanceElements: function (O, elements) { ["method", "field"].forEach(function (kind) { elements.forEach(function (element) { if (element.kind === kind && element.placement === "own") { this.defineClassElement(O, element); } }, this); }, this); }, initializeClassElements: function (F, elements) { var proto = F.prototype; ["method", "field"].forEach(function (kind) { elements.forEach(function (element) { var placement = element.placement; if (element.kind === kind && (placement === "static" || placement === "prototype")) { var receiver = placement === "static" ? F : proto; this.defineClassElement(receiver, element); } }, this); }, this); }, defineClassElement: function (receiver, element) { var descriptor = element.descriptor; if (element.kind === "field") { var initializer = element.initializer; descriptor = { enumerable: descriptor.enumerable, writable: descriptor.writable, configurable: descriptor.configurable, value: initializer === void 0 ? void 0 : initializer.call(receiver) }; } Object.defineProperty(receiver, element.key, descriptor); }, decorateClass: function (elements, decorators) { var newElements = []; var finishers = []; var placements = { static: [], prototype: [], own: [] }; elements.forEach(function (element) { this.addElementPlacement(element, placements); }, this); elements.forEach(function (element) { if (!_hasDecorators(element)) return newElements.push(element); var elementFinishersExtras = this.decorateElement(element, placements); newElements.push(elementFinishersExtras.element); newElements.push.apply(newElements, elementFinishersExtras.extras); finishers.push.apply(finishers, elementFinishersExtras.finishers); }, this); if (!decorators) { return { elements: newElements, finishers: finishers }; } var result = this.decorateConstructor(newElements, decorators); finishers.push.apply(finishers, result.finishers); result.finishers = finishers; return result; }, addElementPlacement: function (element, placements, silent) { var keys = placements[element.placement]; if (!silent && keys.indexOf(element.key) !== -1) { throw new TypeError("Duplicated element (" + element.key + ")"); } keys.push(element.key); }, decorateElement: function (element, placements) { var extras = []; var finishers = []; for (var decorators = element.decorators, i = decorators.length - 1; i >= 0; i--) { var keys = placements[element.placement]; keys.splice(keys.indexOf(element.key), 1); var elementObject = this.fromElementDescriptor(element); var elementFinisherExtras = this.toElementFinisherExtras((0, decorators[i])(elementObject) || elementObject); element = elementFinisherExtras.element; this.addElementPlacement(element, placements); if (elementFinisherExtras.finisher) { finishers.push(elementFinisherExtras.finisher); } var newExtras = elementFinisherExtras.extras; if (newExtras) { for (var j = 0; j < newExtras.length; j++) { this.addElementPlacement(newExtras[j], placements); } extras.push.apply(extras, newExtras); } } return { element: element, finishers: finishers, extras: extras }; }, decorateConstructor: function (elements, decorators) { var finishers = []; for (var i = decorators.length - 1; i >= 0; i--) { var obj = this.fromClassDescriptor(elements); var elementsAndFinisher = this.toClassDescriptor((0, decorators[i])(obj) || obj); if (elementsAndFinisher.finisher !== undefined) { finishers.push(elementsAndFinisher.finisher); } if (elementsAndFinisher.elements !== undefined) { elements = elementsAndFinisher.elements; for (var j = 0; j < elements.length - 1; j++) { for (var k = j + 1; k < elements.length; k++) { if (elements[j].key === elements[k].key && elements[j].placement === elements[k].placement) { throw new TypeError("Duplicated element (" + elements[j].key + ")"); } } } } } return { elements: elements, finishers: finishers }; }, fromElementDescriptor: function (element) { var obj = { kind: element.kind, key: element.key, placement: element.placement, descriptor: element.descriptor }; var desc = { value: "Descriptor", configurable: true }; Object.defineProperty(obj, Symbol.toStringTag, desc); if (element.kind === "field") obj.initializer = element.initializer; return obj; }, toElementDescriptors: function (elementObjects) { if (elementObjects === undefined) return; return _toArray(elementObjects).map(function (elementObject) { var element = this.toElementDescriptor(elementObject); this.disallowProperty(elementObject, "finisher", "An element descriptor"); this.disallowProperty(elementObject, "extras", "An element descriptor"); return element; }, this); }, toElementDescriptor: function (elementObject) { var kind = String(elementObject.kind); if (kind !== "method" && kind !== "field") { throw new TypeError('An element descriptor\'s .kind property must be either "method" or' + ' "field", but a decorator created an element descriptor with' + ' .kind "' + kind + '"'); } var key = _toPropertyKey(elementObject.key); var placement = String(elementObject.placement); if (placement !== "static" && placement !== "prototype" && placement !== "own") { throw new TypeError('An element descriptor\'s .placement property must be one of "static",' + ' "prototype" or "own", but a decorator created an element descriptor' + ' with .placement "' + placement + '"'); } var descriptor = elementObject.descriptor; this.disallowProperty(elementObject, "elements", "An element descriptor"); var element = { kind: kind, key: key, placement: placement, descriptor: Object.assign({}, descriptor) }; if (kind !== "field") { this.disallowProperty(elementObject, "initializer", "A method descriptor"); } else { this.disallowProperty(descriptor, "get", "The property descriptor of a field descriptor"); this.disallowProperty(descriptor, "set", "The property descriptor of a field descriptor"); this.disallowProperty(descriptor, "value", "The property descriptor of a field descriptor"); element.initializer = elementObject.initializer; } return element; }, toElementFinisherExtras: function (elementObject) { var element = this.toElementDescriptor(elementObject); var finisher = _optionalCallableProperty(elementObject, "finisher"); var extras = this.toElementDescriptors(elementObject.extras); return { element: element, finisher: finisher, extras: extras }; }, fromClassDescriptor: function (elements) { var obj = { kind: "class", elements: elements.map(this.fromElementDescriptor, this) }; var desc = { value: "Descriptor", configurable: true }; Object.defineProperty(obj, Symbol.toStringTag, desc); return obj; }, toClassDescriptor: function (obj) { var kind = String(obj.kind); if (kind !== "class") { throw new TypeError('A class descriptor\'s .kind property must be "class", but a decorator' + ' created a class descriptor with .kind "' + kind + '"'); } this.disallowProperty(obj, "key", "A class descriptor"); this.disallowProperty(obj, "placement", "A class descriptor"); this.disallowProperty(obj, "descriptor", "A class descriptor"); this.disallowProperty(obj, "initializer", "A class descriptor"); this.disallowProperty(obj, "extras", "A class descriptor"); var finisher = _optionalCallableProperty(obj, "finisher"); var elements = this.toElementDescriptors(obj.elements); return { elements: elements, finisher: finisher }; }, runClassFinishers: function (constructor, finishers) { for (var i = 0; i < finishers.length; i++) { var newConstructor = (0, finishers[i])(constructor); if (newConstructor !== undefined) { if (typeof newConstructor !== "function") { throw new TypeError("Finishers must return a constructor."); } constructor = newConstructor; } } return constructor; }, disallowProperty: function (obj, name, objectType) { if (obj[name] !== undefined) { throw new TypeError(objectType + " can't have a ." + name + " property."); } } }; return api; }
@@ -5126,7 +5097,8 @@ function install({
   registerNodeType
 }) {
   const {
-    attr
+    attr,
+    flow
   } = utils;
   const {
     Polygon
@@ -5170,36 +5142,84 @@ function install({
     };
   }, Polygon.Attr);
 
-  class Rect extends Polygon {
-    get points() {
-      const [s1, s2] = this.attr('sides') || this.attr('size');
-      const oAngle = this.attr('angle');
-      let cosAngle = 0;
-      let sinAngle = 1;
+  let Rect = _decorate(null, function (_initialize2, _Polygon) {
+    class Rect extends _Polygon {
+      constructor(...args) {
+        super(...args);
 
-      if (oAngle === 90) {// 90默认不处理
-      } else {
-        const angle = Math.PI * this.attr('angle') / 180;
-        cosAngle = Math.cos(angle);
-        sinAngle = Math.sin(angle);
+        _initialize2(this);
       }
 
-      const p0 = [0, 0];
-      const p1 = [s1, 0];
-      const p2 = [s1 + s2 * cosAngle, s2 * sinAngle];
-      const p3 = [s2 * cosAngle, s2 * sinAngle];
-      return [p0, p1, p2, p3]; // const [s1, s2] = this.attr('sides') || this.attr('size');
-      // const angle = (Math.PI / 180) * this.attr('angle');
-      // const p0 = [0, 0];
-      // const p1 = [s1, 0];
-      // const p2 = [s1 + s2 * Math.cos(angle), s2 * Math.sin(angle)];
-      // const p3 = [s2 * Math.cos(angle), s2 * Math.sin(angle)];
-      // return [p0, p1, p2, p3];
     }
 
-  }
+    return {
+      F: Rect,
+      d: [{
+        kind: "field",
+        static: true,
+        key: "Attr",
 
-  _defineProperty(Rect, "Attr", rectAttr);
+        value() {
+          return rectAttr;
+        }
+
+      }, {
+        kind: "get",
+        key: "lineBoundings",
+        value: function lineBoundings() {
+          const lw = this.attr('lineWidth');
+          const bounds = [0, 0, 0, 0];
+          const points = this.points;
+          points.forEach(([x, y]) => {
+            x += lw;
+            y += lw;
+            bounds[0] = Math.min(x, bounds[0]);
+            bounds[1] = Math.min(y, bounds[1]);
+            bounds[2] = Math.max(x, bounds[2]);
+            bounds[3] = Math.max(y, bounds[3]);
+          });
+          return bounds;
+        }
+      }, {
+        kind: "get",
+        decorators: [flow],
+        key: "contentSize",
+        value: function contentSize() {
+          const lw = this.attr('lineWidth');
+          const bounds = this.lineBoundings;
+          let [width, height] = this.attrSize;
+          width = bounds[2] - bounds[0];
+          height = bounds[3] - bounds[1];
+          return [width, height].map(Math.ceil);
+        }
+      }, {
+        kind: "get",
+        key: "points",
+        value: function points() {
+          const lw = this.attr('lineWidth');
+          let [s1, s2] = this.attr('sides') || this.attr('size');
+          s1 -= lw * 1;
+          s2 -= lw * 1;
+          const oAngle = this.attr('angle');
+          let cosAngle = 0;
+          let sinAngle = 1;
+
+          if (oAngle === 90) {// 90默认不处理
+          } else {
+            const angle = Math.PI * this.attr('angle') / 180;
+            cosAngle = Math.cos(angle);
+            sinAngle = Math.sin(angle);
+          }
+
+          const p0 = [0, 0];
+          const p1 = [s1, 0];
+          const p2 = [s1 + s2 * cosAngle, s2 * sinAngle];
+          const p3 = [s2 * cosAngle, s2 * sinAngle];
+          return [p0, p1, p2, p3];
+        }
+      }]
+    };
+  }, Polygon);
 
   registerNodeType('rect', Rect, false);
   return {
@@ -5215,8 +5235,6 @@ function install({
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return install; });
 /* harmony import */ var _polygon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(109);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _decorate(decorators, factory, superClass, mixins) { var api = _getDecoratorsApi(); if (mixins) { for (var i = 0; i < mixins.length; i++) { api = mixins[i](api); } } var r = factory(function initialize(O) { api.initializeInstanceElements(O, decorated.elements); }, superClass); var decorated = api.decorateClass(_coalesceClassElements(r.d.map(_createElementDescriptor)), decorators); api.initializeClassElements(r.F, decorated.elements); return api.runClassFinishers(r.F, decorated.finishers); }
 
 function _getDecoratorsApi() { _getDecoratorsApi = function () { return api; }; var api = { elementsDefinitionOrder: [["method"], ["field"]], initializeInstanceElements: function (O, elements) { ["method", "field"].forEach(function (kind) { elements.forEach(function (element) { if (element.kind === kind && element.placement === "own") { this.defineClassElement(O, element); } }, this); }, this); }, initializeClassElements: function (F, elements) { var proto = F.prototype; ["method", "field"].forEach(function (kind) { elements.forEach(function (element) { var placement = element.placement; if (element.kind === kind && (placement === "static" || placement === "prototype")) { var receiver = placement === "static" ? F : proto; this.defineClassElement(receiver, element); } }, this); }, this); }, defineClassElement: function (receiver, element) { var descriptor = element.descriptor; if (element.kind === "field") { var initializer = element.initializer; descriptor = { enumerable: descriptor.enumerable, writable: descriptor.writable, configurable: descriptor.configurable, value: initializer === void 0 ? void 0 : initializer.call(receiver) }; } Object.defineProperty(receiver, element.key, descriptor); }, decorateClass: function (elements, decorators) { var newElements = []; var finishers = []; var placements = { static: [], prototype: [], own: [] }; elements.forEach(function (element) { this.addElementPlacement(element, placements); }, this); elements.forEach(function (element) { if (!_hasDecorators(element)) return newElements.push(element); var elementFinishersExtras = this.decorateElement(element, placements); newElements.push(elementFinishersExtras.element); newElements.push.apply(newElements, elementFinishersExtras.extras); finishers.push.apply(finishers, elementFinishersExtras.finishers); }, this); if (!decorators) { return { elements: newElements, finishers: finishers }; } var result = this.decorateConstructor(newElements, decorators); finishers.push.apply(finishers, result.finishers); result.finishers = finishers; return result; }, addElementPlacement: function (element, placements, silent) { var keys = placements[element.placement]; if (!silent && keys.indexOf(element.key) !== -1) { throw new TypeError("Duplicated element (" + element.key + ")"); } keys.push(element.key); }, decorateElement: function (element, placements) { var extras = []; var finishers = []; for (var decorators = element.decorators, i = decorators.length - 1; i >= 0; i--) { var keys = placements[element.placement]; keys.splice(keys.indexOf(element.key), 1); var elementObject = this.fromElementDescriptor(element); var elementFinisherExtras = this.toElementFinisherExtras((0, decorators[i])(elementObject) || elementObject); element = elementFinisherExtras.element; this.addElementPlacement(element, placements); if (elementFinisherExtras.finisher) { finishers.push(elementFinisherExtras.finisher); } var newExtras = elementFinisherExtras.extras; if (newExtras) { for (var j = 0; j < newExtras.length; j++) { this.addElementPlacement(newExtras[j], placements); } extras.push.apply(extras, newExtras); } } return { element: element, finishers: finishers, extras: extras }; }, decorateConstructor: function (elements, decorators) { var finishers = []; for (var i = decorators.length - 1; i >= 0; i--) { var obj = this.fromClassDescriptor(elements); var elementsAndFinisher = this.toClassDescriptor((0, decorators[i])(obj) || obj); if (elementsAndFinisher.finisher !== undefined) { finishers.push(elementsAndFinisher.finisher); } if (elementsAndFinisher.elements !== undefined) { elements = elementsAndFinisher.elements; for (var j = 0; j < elements.length - 1; j++) { for (var k = j + 1; k < elements.length; k++) { if (elements[j].key === elements[k].key && elements[j].placement === elements[k].placement) { throw new TypeError("Duplicated element (" + elements[j].key + ")"); } } } } } return { elements: elements, finishers: finishers }; }, fromElementDescriptor: function (element) { var obj = { kind: element.kind, key: element.key, placement: element.placement, descriptor: element.descriptor }; var desc = { value: "Descriptor", configurable: true }; Object.defineProperty(obj, Symbol.toStringTag, desc); if (element.kind === "field") obj.initializer = element.initializer; return obj; }, toElementDescriptors: function (elementObjects) { if (elementObjects === undefined) return; return _toArray(elementObjects).map(function (elementObject) { var element = this.toElementDescriptor(elementObject); this.disallowProperty(elementObject, "finisher", "An element descriptor"); this.disallowProperty(elementObject, "extras", "An element descriptor"); return element; }, this); }, toElementDescriptor: function (elementObject) { var kind = String(elementObject.kind); if (kind !== "method" && kind !== "field") { throw new TypeError('An element descriptor\'s .kind property must be either "method" or' + ' "field", but a decorator created an element descriptor with' + ' .kind "' + kind + '"'); } var key = _toPropertyKey(elementObject.key); var placement = String(elementObject.placement); if (placement !== "static" && placement !== "prototype" && placement !== "own") { throw new TypeError('An element descriptor\'s .placement property must be one of "static",' + ' "prototype" or "own", but a decorator created an element descriptor' + ' with .placement "' + placement + '"'); } var descriptor = elementObject.descriptor; this.disallowProperty(elementObject, "elements", "An element descriptor"); var element = { kind: kind, key: key, placement: placement, descriptor: Object.assign({}, descriptor) }; if (kind !== "field") { this.disallowProperty(elementObject, "initializer", "A method descriptor"); } else { this.disallowProperty(descriptor, "get", "The property descriptor of a field descriptor"); this.disallowProperty(descriptor, "set", "The property descriptor of a field descriptor"); this.disallowProperty(descriptor, "value", "The property descriptor of a field descriptor"); element.initializer = elementObject.initializer; } return element; }, toElementFinisherExtras: function (elementObject) { var element = this.toElementDescriptor(elementObject); var finisher = _optionalCallableProperty(elementObject, "finisher"); var extras = this.toElementDescriptors(elementObject.extras); return { element: element, finisher: finisher, extras: extras }; }, fromClassDescriptor: function (elements) { var obj = { kind: "class", elements: elements.map(this.fromElementDescriptor, this) }; var desc = { value: "Descriptor", configurable: true }; Object.defineProperty(obj, Symbol.toStringTag, desc); return obj; }, toClassDescriptor: function (obj) { var kind = String(obj.kind); if (kind !== "class") { throw new TypeError('A class descriptor\'s .kind property must be "class", but a decorator' + ' created a class descriptor with .kind "' + kind + '"'); } this.disallowProperty(obj, "key", "A class descriptor"); this.disallowProperty(obj, "placement", "A class descriptor"); this.disallowProperty(obj, "descriptor", "A class descriptor"); this.disallowProperty(obj, "initializer", "A class descriptor"); this.disallowProperty(obj, "extras", "A class descriptor"); var finisher = _optionalCallableProperty(obj, "finisher"); var elements = this.toElementDescriptors(obj.elements); return { elements: elements, finisher: finisher }; }, runClassFinishers: function (constructor, finishers) { for (var i = 0; i < finishers.length; i++) { var newConstructor = (0, finishers[i])(constructor); if (newConstructor !== undefined) { if (typeof newConstructor !== "function") { throw new TypeError("Finishers must return a constructor."); } constructor = newConstructor; } } return constructor; }, disallowProperty: function (obj, name, objectType) { if (obj[name] !== undefined) { throw new TypeError(objectType + " can't have a ." + name + " property."); } } }; return api; }
@@ -5246,13 +5264,32 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+
+function polygonPoints(outerRadius, innerRadius, number, lw) {
+  let center = outerRadius;
+  const radAngle = Math.PI / 2;
+  const radAlpha = Math.PI / number;
+  let points = [];
+
+  for (let i = 1; i <= number * 2; i++) {
+    let r = i % 2 ? outerRadius - lw : innerRadius;
+    let alpha = radAlpha * i + radAngle;
+    let x = center + r * Math.cos(alpha);
+    let y = center + r * Math.sin(alpha);
+    points.push([x, y]);
+  }
+
+  return points;
+}
+
 function install({
   use,
   utils,
   registerNodeType
 }) {
   const {
-    attr
+    attr,
+    flow
   } = utils;
   const {
     Polygon
@@ -5303,36 +5340,64 @@ function install({
     };
   }, Polygon.Attr);
 
-  function getStarPolygonPoints(angles) {
-    const points = [];
-    const pointsLength = angles * 2;
-    return function (outerRadius, innerRadius) {
-      const offsetX = outerRadius;
-      const radAngle = -Math.PI / 2;
-      const radAlpha = Math.PI / angles;
+  let Star = _decorate(null, function (_initialize2, _Polygon) {
+    class Star extends _Polygon {
+      constructor(...args) {
+        super(...args);
 
-      for (let i = 1; i <= pointsLength; i++) {
-        const rad = radAlpha * i + radAngle;
-        const len = i % 2 ? innerRadius : outerRadius;
-        const xPos = offsetX + Math.cos(rad) * len;
-        const yPos = Math.sin(rad) * len;
-        points.push([xPos, yPos]);
+        _initialize2(this);
       }
 
-      return points;
-    };
-  }
-
-  class Star extends Polygon {
-    get points() {
-      const radius = this.attr('radius');
-      const innerRadius = this.attr('innerRadius') || 0.4 * radius;
-      return getStarPolygonPoints(this.attr('angles'))(radius, innerRadius);
     }
 
-  }
+    return {
+      F: Star,
+      d: [{
+        kind: "field",
+        static: true,
+        key: "Attr",
 
-  _defineProperty(Star, "Attr", PolygonAttr);
+        value() {
+          return PolygonAttr;
+        }
+
+      }, {
+        kind: "get",
+        key: "lineBoundings",
+        value: function lineBoundings() {
+          const radius = this.attr('radius');
+          return [0, 0, radius * 2, radius * 2];
+        }
+      }, {
+        kind: "get",
+        decorators: [flow],
+        key: "contentSize",
+        value: function contentSize() {
+          const lw = this.attr('lineWidth');
+          const bounds = this.lineBoundings;
+          let [width, height] = this.attrSize;
+          width = bounds[2] - bounds[0];
+          height = bounds[3] - bounds[1];
+          return [width, height].map(Math.ceil);
+        }
+      }, {
+        kind: "get",
+        key: "translate",
+        value: function translate() {
+          return [0, 0];
+        }
+      }, {
+        kind: "get",
+        key: "points",
+        value: function points() {
+          const radius = this.attr('radius');
+          const lw = this.attr('lineWidth');
+          const innerRadius = this.attr('innerRadius') || 0.5 * radius;
+          return polygonPoints(radius, innerRadius, this.attr('angles'), lw);
+        }
+      }]
+    };
+  }, Polygon);
 
   registerNodeType('star', Star, false);
   return {
@@ -5539,13 +5604,12 @@ function install({
         key: "center",
         value: function center() {
           const lw = this.attr('lineWidth');
-          return this.radiuses.map(v => v + lw / 2);
+          return this.radiuses.map(v => v);
         }
       }, {
         kind: "get",
         key: "lineBoundings",
         value: function lineBoundings() {
-          const lw = this.attr('lineWidth');
           return [0, 0, 2 * this.radiuses[0], 2 * this.radiuses[1]];
         }
       }, {
@@ -5556,29 +5620,17 @@ function install({
           const bounds = this.lineBoundings;
           const lw = this.attr('lineWidth');
           let [width, height] = [...this.attrSize];
-
-          if (width === '') {
-            width = bounds[2] - Math.min(0, bounds[0]) + lw;
-          }
-
-          if (height === '') {
-            height = bounds[3] - Math.min(0, bounds[1]) + lw;
-          }
-
+          width = bounds[2] - Math.min(0, bounds[0]);
+          height = bounds[3] - Math.min(0, bounds[1]);
           return [width, height].map(Math.ceil);
-        }
-      }, {
-        kind: "get",
-        decorators: [flow],
-        key: "originalRect",
-        value: function originalRect() {
-          const lineBoundings = this.lineBoundings;
+        } // @flow
+        // get originalRect() {
+        //   const lineBoundings = this.lineBoundings;
+        //   const [x, y, w, h] = super.originalRect;
+        //   const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
+        //   return rect;
+        // }
 
-          const [x, y, w, h] = _get(_getPrototypeOf(EllipseSector.prototype), "originalRect", this);
-
-          const rect = [x - lineBoundings[0] / 2, y - lineBoundings[1] / 2, w, h];
-          return rect;
-        }
       }, {
         kind: "method",
         key: "pointCollision",
@@ -5606,11 +5658,16 @@ function install({
           const [rx, ry] = this.radiuses;
           const startAngle = this.startAngle;
           const endAngle = this.endAngle;
+          const lw = this.attr('lineWidth');
           ctx.miterLimit = 3;
-          ctx.lineWidth = this.attr('lineWidth');
+          ctx.miterLimit = 3;
+          ctx.lineCap = this.attr('lineCap');
+          ctx.lineJoin = this.attr('lineJoin');
+          ctx.lineWidth = lw;
+          ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
           ctx.setLineDash(this.attr('lineDash'));
           ctx.lineDashOffset = this.attr('lineDashOffset');
-          ctx.strokeStyle = findColor(ctx, this, 'color');
+          ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
           ctx.fillStyle = findColor(ctx, this, 'fillColor');
           const path = new Path2D();
 
@@ -5618,7 +5675,7 @@ function install({
             path.moveTo(x, y);
           }
 
-          path.ellipse(x, y, rx, ry, 0, startAngle, endAngle, this.attr('anticlockwise'));
+          path.ellipse(x, y, rx - lw / 2, ry - lw / 2, 0, startAngle, endAngle, this.attr('anticlockwise'));
           path.closePath();
           ctx.fill(path);
           ctx.stroke(path);
@@ -5687,8 +5744,13 @@ function install({
       const endAngle = this.attr('endAngle');
       const anticlockwise = this.attr('anticlockwise');
       const lw = this.attr('lineWidth');
+      drawingContext.lineCap = this.attr('lineCap');
+      drawingContext.lineJoin = this.attr('lineJoin');
       drawingContext.lineWidth = lw;
       drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
+      drawingContext.setLineDash(this.attr('lineDash'));
+      drawingContext.lineDashOffset = this.attr('lineDashOffset');
+      drawingContext.strokeStyle = findColor(drawingContext, this, 'strokeColor');
       drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
 
       if (drawingContext.ellipse) {
@@ -5886,7 +5948,7 @@ function install({
 /* 118 */
 /***/ (function(module) {
 
-module.exports = {"name":"sprite-extend-shapes","version":"1.0.6","description":"","main":"lib/index.js","module":"","directories":{"example":"examples","lib":"lib","test":"test"},"scripts":{"build":"npm run build:es6 && npm run build:prod","build:prod":"babel src -d lib && webpack --env.production","build:es6":"babel src -d lib && webpack --env.esnext","standalone":"babel src -d lib && webpack --env.standalone","start":"webpack-dev-server --watch-poll","prepublishOnly":"npm run build && node ./script/qcdn","test":"nyc ava --serial && rimraf ./coverage && mkdir coverage && nyc report --reporter=html > ./coverage/lcov.info","lint":"eslint ./ --fix"},"author":"akira-cn","license":"MIT","devDependencies":{"@babel/cli":"^7.2.0","@babel/core":"^7.2.0","@babel/plugin-external-helpers":"^7.2.0","@babel/plugin-proposal-class-properties":"^7.2.1","@babel/plugin-proposal-decorators":"^7.2.0","@babel/plugin-transform-runtime":"^7.2.0","@babel/preset-env":"^7.2.0","@babel/register":"^7.0.0","ava":"^0.25.0","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","canvas":"^2.0.0-alpha.16","canvas-5-polyfill":"^0.1.5","colors":"^1.3.1","coveralls":"^3.0.2","css-loader":"^2.0.0","eslint":"^5.0.1","eslint-config-sprite":"^1.0.4","eslint-plugin-html":"^4.0.5","hamming-distance":"^1.0.0","html-webpack-plugin":"^3.2.0","imghash":"^0.0.3","nyc":"^12.0.2","pixelmatch":"^4.0.2","rimraf":"^2.6.2","style-loader":"^0.23.1","webpack":"^4.12.2","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.0.8","webpack-dev-server":"^3.1.4","webpack-hot-middleware":"^2.24.3","webpack-merge":"^4.1.5"},"ava":{"files":["**/test/*.test.js"],"require":["@babel/register"],"babel":{"testOptions":{"babelrc":true}}},"nyc":{"exclude":["**/test/**/*.js"]},"dependencies":{"@babel/runtime":"^7.2.0","sprite-draggable":"0.1.15","svg-path-to-canvas":"^1.11.1"}};
+module.exports = {"name":"sprite-extend-shapes","version":"1.0.7","description":"","main":"lib/index.js","module":"","directories":{"example":"examples","lib":"lib","test":"test"},"scripts":{"build":"npm run build:es6 && npm run build:prod","build:prod":"babel src -d lib && webpack --env.production","build:es6":"babel src -d lib && webpack --env.esnext","standalone":"babel src -d lib && webpack --env.standalone","start":"webpack-dev-server --watch-poll","prepublishOnly":"npm run build && node ./script/qcdn","test":"nyc ava --serial && rimraf ./coverage && mkdir coverage && nyc report --reporter=html > ./coverage/lcov.info","lint":"eslint ./ --fix"},"author":"akira-cn","license":"MIT","devDependencies":{"@babel/cli":"^7.2.0","@babel/core":"^7.2.0","@babel/plugin-external-helpers":"^7.2.0","@babel/plugin-proposal-class-properties":"^7.2.1","@babel/plugin-proposal-decorators":"^7.2.0","@babel/plugin-transform-runtime":"^7.2.0","@babel/preset-env":"^7.2.0","@babel/register":"^7.0.0","ava":"^0.25.0","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","canvas":"^2.0.0-alpha.16","canvas-5-polyfill":"^0.1.5","colors":"^1.3.1","coveralls":"^3.0.2","css-loader":"^2.0.0","eslint":"^5.0.1","eslint-config-sprite":"^1.0.4","eslint-plugin-html":"^4.0.5","hamming-distance":"^1.0.0","html-webpack-plugin":"^3.2.0","imghash":"^0.0.3","nyc":"^12.0.2","pixelmatch":"^4.0.2","rimraf":"^2.6.2","style-loader":"^0.23.1","webpack":"^4.12.2","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.0.8","webpack-dev-server":"^3.1.4","webpack-hot-middleware":"^2.24.3","webpack-merge":"^4.1.5"},"ava":{"files":["**/test/*.test.js"],"require":["@babel/register"],"babel":{"testOptions":{"babelrc":true}}},"nyc":{"exclude":["**/test/**/*.js"]},"dependencies":{"@babel/runtime":"^7.2.0","sprite-draggable":"0.1.15","svg-path-to-canvas":"^1.11.1"}};
 
 /***/ })
 /******/ ])["default"];

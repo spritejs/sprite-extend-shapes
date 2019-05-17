@@ -125,7 +125,7 @@ export default function install({use, utils, registerNodeType}) {
     render(t, ctx) {
       super.render(t, ctx);
       const lw = this.attr('lineWidth');
-      const radius = this.attr('radius');
+      let radius = this.attr('radius');
       const offset = this.attr('offset');
       const shape = this.attr('shape');
       const showOutline = this.attr('showOutline');

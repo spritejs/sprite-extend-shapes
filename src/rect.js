@@ -1,7 +1,7 @@
 import PolygonPlugin from './polygon';
 
 export default function install({use, utils, registerNodeType}) {
-  const {attr} = utils;
+  const {attr, flow} = utils;
   const {Polygon} = use(PolygonPlugin, null, false);
 
   class rectAttr extends Polygon.Attr {
@@ -30,8 +30,38 @@ export default function install({use, utils, registerNodeType}) {
   class Rect extends Polygon {
     static Attr = rectAttr;
 
+    get lineBoundings() {
+      const lw = this.attr('lineWidth');
+      const bounds = [0, 0, 0, 0];
+      const points = this.points;
+
+      points.forEach(([x, y]) => {
+        x += lw;
+        y += lw;
+        bounds[0] = Math.min(x, bounds[0]);
+        bounds[1] = Math.min(y, bounds[1]);
+        bounds[2] = Math.max(x, bounds[2]);
+        bounds[3] = Math.max(y, bounds[3]);
+      });
+      return bounds;
+    }
+
+    @flow
+    get contentSize() {
+      const lw = this.attr('lineWidth');
+      const bounds = this.lineBoundings;
+      let [width, height] = this.attrSize;
+      width = bounds[2] - bounds[0];
+      height = bounds[3] - bounds[1];
+
+      return [width, height].map(Math.ceil);
+    }
+
     get points() {
-      const [s1, s2] = this.attr('sides') || this.attr('size');
+      const lw = this.attr('lineWidth');
+      let [s1, s2] = this.attr('sides') || this.attr('size');
+      s1 -= lw * 1;
+      s2 -= lw * 1;
       const oAngle = this.attr('angle');
       let cosAngle = 0;
       let sinAngle = 1;
@@ -47,14 +77,6 @@ export default function install({use, utils, registerNodeType}) {
       const p2 = [s1 + s2 * cosAngle, s2 * sinAngle];
       const p3 = [s2 * cosAngle, s2 * sinAngle];
       return [p0, p1, p2, p3];
-
-      // const [s1, s2] = this.attr('sides') || this.attr('size');
-      // const angle = (Math.PI / 180) * this.attr('angle');
-      // const p0 = [0, 0];
-      // const p1 = [s1, 0];
-      // const p2 = [s1 + s2 * Math.cos(angle), s2 * Math.sin(angle)];
-      // const p3 = [s2 * Math.cos(angle), s2 * Math.sin(angle)];
-      // return [p0, p1, p2, p3];
     }
   }
 

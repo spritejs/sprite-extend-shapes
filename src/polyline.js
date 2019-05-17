@@ -72,13 +72,20 @@ export default function install({use, utils, registerNodeType}) {
       super.render(t, drawingContext);
 
       if (this.points) {
+        const lw = this.attr('lineWidth');
         drawingContext.fillStyle = this.attr('fillColor');
-        drawingContext.strokeStyle = findColor(drawingContext, this, 'color');
+        drawingContext.strokeStyle = findColor(
+          drawingContext,
+          this,
+          'strokeColor'
+        );
         drawingContext.lineJoin = this.attr('lineJoin');
         drawingContext.lineCap = this.attr('lineCap');
-        drawingContext.lineWidth = this.attr('lineWidth');
+        drawingContext.lineWidth = lw;
         drawingContext.setLineDash(this.attr('lineDash'));
         drawingContext.lineDashOffset = this.attr('lineDashOffset');
+
+        drawingContext.translate(lw / 2, lw / 2);
 
         const smooth = this.attr('smooth');
         const path = new Path2D();

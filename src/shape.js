@@ -9,8 +9,8 @@ export default function install({BaseSprite, utils}) {
         color: 'transparent',
         fillColor: 'transparent',
         lineWidth: 0,
-        lineCap: 'round',
-        lineJoin: 'round',
+        lineCap: 'butt',
+        lineJoin: 'miter',
         lineDash: [0, 0],
         lineDashOffset: 0,
         enableCache: false

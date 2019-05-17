@@ -118,13 +118,13 @@ export default function install({use, utils, registerNodeType}) {
       const startPoint = this.attr('startPoint');
       const lw = this.attr('lineWidth');
 
-      ctx.fillStyle = this.attr('fillColor');
-      ctx.strokeStyle = findColor(ctx, this, 'color');
-      ctx.lineJoin = this.attr('lineJoin');
       ctx.lineCap = this.attr('lineCap');
+      ctx.lineJoin = this.attr('lineJoin');
       ctx.lineWidth = lw;
       ctx.setLineDash(this.attr('lineDash'));
       ctx.lineDashOffset = this.attr('lineDashOffset');
+      ctx.fillStyle = this.attr('fillColor');
+      ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
 
       const path = new Path2D();
 
