@@ -16,7 +16,7 @@ ellipseArc.attr({
   radiusX: 30,
   endAngle: Math.PI * 2,
   radiusY: 80,
-  color: 'red',
+  strokeColor: 'red',
   bgcolor: '#eee',
   lineWidth: 5
 });

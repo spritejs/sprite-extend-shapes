@@ -14,7 +14,7 @@ const layer = scene.layer();
 const polyline = new Polyline();
 polyline.attr({
   pos: [10, 10],
-  color: {
+  strokeColor: {
     vector: [0, 0, 150, 150],
     colors: [{offset: 0, color: 'red'}, {offset: 1, color: 'green'}]
   },

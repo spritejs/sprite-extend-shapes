@@ -24,12 +24,12 @@ ring.attr({
 });
 
 ring.on('mousemove', evt => {
-  ring.attr('color', 'yellow');
+  ring.attr('strokeColor', 'yellow');
   evt.stopDispatch();
 });
 
 ring.on('mouseleave', evt => {
-  ring.attr('color', 'red');
+  ring.attr('strokeColor', 'red');
   evt.stopDispatch();
 });
 

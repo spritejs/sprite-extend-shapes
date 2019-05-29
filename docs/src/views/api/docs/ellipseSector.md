@@ -19,16 +19,16 @@ ellipseSector.attr({
   bgcolor: '#eee',
   endAngle: Math.PI * 1.3,
   lineWidth: 1,
-  color: 'red'
+  strokeColor: 'red'
 });
 
 ellipseSector.on('mousemove', evt => {
-  ellipseSector.attr('color', 'yellow');
+  ellipseSector.attr('strokeColor', 'yellow');
   evt.stopDispatch();
 });
 
 ellipseSector.on('mouseleave', evt => {
-  ellipseSector.attr('color', 'red');
+  ellipseSector.attr('strokeColor', 'red');
   evt.stopDispatch();
 });
 

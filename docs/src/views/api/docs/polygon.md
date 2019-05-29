@@ -14,7 +14,7 @@ const layer = scene.layer();
 let pg = new Polygon();
 
 pg.attr({
-  color: 'red',
+  strokeColor: 'red',
   fillColor: 'yellow',
   lineWidth: 2,
   points: [[10, 10], [100, 100], [200, 50]],
@@ -22,12 +22,12 @@ pg.attr({
 });
 
 pg.on('mousemove', evt => {
-  pg.attr('color', 'blue');
+  pg.attr('strokeColor', 'blue');
   evt.stopDispatch();
 });
 
 pg.on('mouseleave', evt => {
-  pg.attr('color', 'red');
+  pg.attr('strokeColor', 'red');
   evt.stopDispatch();
 });
 

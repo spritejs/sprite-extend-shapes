@@ -29,6 +29,8 @@ function renderPolygonShapes() {
     evt.stopDispatch();
   });
 
+  window.rect = rect;
+
   group.appendChild(rect);
 
   const triangle = new Triangle();

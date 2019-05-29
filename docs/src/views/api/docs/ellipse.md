@@ -21,12 +21,12 @@ ellipse.attr({
 });
 
 ellipse.on('mousemove', evt => {
-  ellipse.attr('color', 'yellow');
+  ellipse.attr('strokeColor', 'yellow');
   evt.stopDispatch();
 });
 
 ellipse.on('mouseleave', evt => {
-  ellipse.attr('color', 'red');
+  ellipse.attr('strokeColor', 'red');
   evt.stopDispatch();
 });
 

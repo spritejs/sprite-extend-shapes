@@ -14,7 +14,7 @@ const layer = scene.layer();
 const triangle = new Triangle();
 triangle.attr({
   pos: [70, 10],
-  color: 'red',
+  strokeColor: 'red',
   sides: [80, 80],
   angle: 60,
   lineWidth: 1,
@@ -23,12 +23,12 @@ triangle.attr({
 });
 
 triangle.on('mouseenter', evt => {
-  triangle.attr('color', 'yellow');
+  triangle.attr('strokeColor', 'yellow');
   evt.stopDispatch();
 });
 
 triangle.on('mouseleave', evt => {
-  triangle.attr('color', 'red');
+  triangle.attr('strokeColor', 'red');
   evt.stopDispatch();
 });
 

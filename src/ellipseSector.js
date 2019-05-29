@@ -44,12 +44,6 @@ export default function install({use, utils, registerNodeType}) {
     }
 
     @attr
-    set color(val) {
-      val = parseColorString(val);
-      this.set('color', val);
-    }
-
-    @attr
     set lineWidth(val) {
       this.set('lineWidth', val);
     }

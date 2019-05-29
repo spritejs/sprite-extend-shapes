@@ -15,17 +15,17 @@ const circle = new Circle();
 circle.attr({
   radius: 30,
   lineWidth: 5,
-  color: 'red',
+  strokeColor: 'red',
   bgcolor: '#eee'
 });
 
 circle.on('mousemove', evt => {
-  circle.attr('color', 'yellow');
+  circle.attr('strokeColor', 'yellow');
   evt.stopDispatch();
 });
 
 circle.on('mouseleave', evt => {
-  circle.attr('color', 'red');
+  circle.attr('strokeColor', 'red');
   evt.stopDispatch();
 });
 

@@ -27,7 +27,7 @@ polycurve.attr({
     ]
   ],
   lineWidth: 1,
-  color: '#f00',
+  strokeColor: '#f00',
   bgcolor: '#eee',
   fillColor: 'green'
 });

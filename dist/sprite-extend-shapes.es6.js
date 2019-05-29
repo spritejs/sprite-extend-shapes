@@ -326,6 +326,14 @@ function install({
           val = parseColorString(val);
           this.set('fillColor', val);
         }
+      }, {
+        kind: "set",
+        decorators: [attr],
+        key: "strokeColor",
+        value: function strokeColor(val) {
+          val = parseColorString(val);
+          this.set('strokeColor', val);
+        }
       }]
     };
   }, BaseSprite.Attr);
@@ -2083,7 +2091,7 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 /* 19 */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.6.5' };
+var core = module.exports = { version: '2.6.9' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -3019,6 +3027,7 @@ $export($export.S + $export.F, 'Object', { assign: __webpack_require__(77) });
 "use strict";
 
 // 19.1.2.1 Object.assign(target, source, ...)
+var DESCRIPTORS = __webpack_require__(27);
 var getKeys = __webpack_require__(38);
 var gOPS = __webpack_require__(78);
 var pIE = __webpack_require__(79);
@@ -3048,7 +3057,10 @@ module.exports = !$assign || __webpack_require__(28)(function () {
     var length = keys.length;
     var j = 0;
     var key;
-    while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
+    while (length > j) {
+      key = keys[j++];
+      if (!DESCRIPTORS || isEnum.call(S, key)) T[key] = S[key];
+    }
   } return T;
 } : $assign;
 
@@ -3182,12 +3194,14 @@ var enumKeys = __webpack_require__(91);
 var isArray = __webpack_require__(92);
 var anObject = __webpack_require__(24);
 var isObject = __webpack_require__(25);
+var toObject = __webpack_require__(54);
 var toIObject = __webpack_require__(40);
 var toPrimitive = __webpack_require__(30);
 var createDesc = __webpack_require__(31);
 var _create = __webpack_require__(36);
 var gOPNExt = __webpack_require__(93);
 var $GOPD = __webpack_require__(95);
+var $GOPS = __webpack_require__(78);
 var $DP = __webpack_require__(23);
 var $keys = __webpack_require__(38);
 var gOPD = $GOPD.f;
@@ -3204,7 +3218,7 @@ var SymbolRegistry = shared('symbol-registry');
 var AllSymbols = shared('symbols');
 var OPSymbols = shared('op-symbols');
 var ObjectProto = Object[PROTOTYPE];
-var USE_NATIVE = typeof $Symbol == 'function';
+var USE_NATIVE = typeof $Symbol == 'function' && !!$GOPS.f;
 var QObject = global.QObject;
 // Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
 var setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
@@ -3314,7 +3328,7 @@ if (!USE_NATIVE) {
   $DP.f = $defineProperty;
   __webpack_require__(94).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(79).f = $propertyIsEnumerable;
-  __webpack_require__(78).f = $getOwnPropertySymbols;
+  $GOPS.f = $getOwnPropertySymbols;
 
   if (DESCRIPTORS && !__webpack_require__(16)) {
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
@@ -3363,6 +3377,16 @@ $export($export.S + $export.F * !USE_NATIVE, 'Object', {
   getOwnPropertyNames: $getOwnPropertyNames,
   // 19.1.2.8 Object.getOwnPropertySymbols(O)
   getOwnPropertySymbols: $getOwnPropertySymbols
+});
+
+// Chrome 38 and 39 `Object.getOwnPropertySymbols` fails on primitives
+// https://bugs.chromium.org/p/v8/issues/detail?id=3443
+var FAILS_ON_PRIMITIVES = $fails(function () { $GOPS.f(1); });
+
+$export($export.S + $export.F * FAILS_ON_PRIMITIVES, 'Object', {
+  getOwnPropertySymbols: function getOwnPropertySymbols(it) {
+    return $GOPS.f(toObject(it));
+  }
 });
 
 // 24.3.2 JSON.stringify(value [, replacer [, space]])
@@ -4683,7 +4707,7 @@ function install({
           ctx.lineJoin = this.attr('lineJoin');
           ctx.setLineDash(this.attr('lineDash'));
           ctx.lineDashOffset = this.attr('lineDashOffset');
-          ctx.strokeStyle = findColor(ctx, this, 'stokeColor');
+          ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
           ctx.fillStyle = findColor(ctx, this, 'fillColor');
           const [x, y] = [0, 0];
           let maxRadius = this.attr('maxRadius');
@@ -4812,14 +4836,6 @@ function install({
         value: function points(val) {
           this.clearFlow();
           this.set('points', val);
-        }
-      }, {
-        kind: "set",
-        decorators: [attr],
-        key: "color",
-        value: function color(val) {
-          val = parseColorString(val);
-          this.set('color', val);
         }
       }, {
         kind: "set",
@@ -5521,14 +5537,6 @@ function install({
       }, {
         kind: "set",
         decorators: [attr],
-        key: "color",
-        value: function color(val) {
-          val = parseColorString(val);
-          this.set('color', val);
-        }
-      }, {
-        kind: "set",
-        decorators: [attr],
         key: "lineWidth",
         value: function lineWidth(val) {
           this.set('lineWidth', val);
@@ -5948,7 +5956,7 @@ function install({
 /* 118 */
 /***/ (function(module) {
 
-module.exports = {"name":"sprite-extend-shapes","version":"1.0.7","description":"","main":"lib/index.js","module":"","directories":{"example":"examples","lib":"lib","test":"test"},"scripts":{"build":"npm run build:es6 && npm run build:prod","build:prod":"babel src -d lib && webpack --env.production","build:es6":"babel src -d lib && webpack --env.esnext","standalone":"babel src -d lib && webpack --env.standalone","start":"webpack-dev-server --watch-poll","prepublishOnly":"npm run build && node ./script/qcdn","test":"nyc ava --serial && rimraf ./coverage && mkdir coverage && nyc report --reporter=html > ./coverage/lcov.info","lint":"eslint ./ --fix"},"author":"akira-cn","license":"MIT","devDependencies":{"@babel/cli":"^7.2.0","@babel/core":"^7.2.0","@babel/plugin-external-helpers":"^7.2.0","@babel/plugin-proposal-class-properties":"^7.2.1","@babel/plugin-proposal-decorators":"^7.2.0","@babel/plugin-transform-runtime":"^7.2.0","@babel/preset-env":"^7.2.0","@babel/register":"^7.0.0","ava":"^0.25.0","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","canvas":"^2.0.0-alpha.16","canvas-5-polyfill":"^0.1.5","colors":"^1.3.1","coveralls":"^3.0.2","css-loader":"^2.0.0","eslint":"^5.0.1","eslint-config-sprite":"^1.0.4","eslint-plugin-html":"^4.0.5","hamming-distance":"^1.0.0","html-webpack-plugin":"^3.2.0","imghash":"^0.0.3","nyc":"^12.0.2","pixelmatch":"^4.0.2","rimraf":"^2.6.2","style-loader":"^0.23.1","webpack":"^4.12.2","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.0.8","webpack-dev-server":"^3.1.4","webpack-hot-middleware":"^2.24.3","webpack-merge":"^4.1.5"},"ava":{"files":["**/test/*.test.js"],"require":["@babel/register"],"babel":{"testOptions":{"babelrc":true}}},"nyc":{"exclude":["**/test/**/*.js"]},"dependencies":{"@babel/runtime":"^7.2.0","sprite-draggable":"0.1.15","svg-path-to-canvas":"^1.11.1"}};
+module.exports = {"name":"sprite-extend-shapes","version":"1.0.9","description":"","main":"lib/index.js","module":"","directories":{"example":"examples","lib":"lib","test":"test"},"scripts":{"build":"npm run build:es6 && npm run build:prod","build:prod":"babel src -d lib && webpack --env.production","build:es6":"babel src -d lib && webpack --env.esnext","standalone":"babel src -d lib && webpack --env.standalone","start":"webpack-dev-server --watch-poll","prepublishOnly":"npm run build && node ./script/qcdn","test":"nyc ava --serial && rimraf ./coverage && mkdir coverage && nyc report --reporter=html > ./coverage/lcov.info","lint":"eslint ./ --fix"},"author":"akira-cn","license":"MIT","devDependencies":{"@babel/cli":"^7.2.0","@babel/core":"^7.2.0","@babel/plugin-external-helpers":"^7.2.0","@babel/plugin-proposal-class-properties":"^7.2.1","@babel/plugin-proposal-decorators":"^7.2.0","@babel/plugin-transform-runtime":"^7.2.0","@babel/preset-env":"^7.2.0","@babel/register":"^7.0.0","ava":"^0.25.0","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","canvas":"^2.0.0-alpha.16","canvas-5-polyfill":"^0.1.5","colors":"^1.3.1","coveralls":"^3.0.2","css-loader":"^2.0.0","eslint":"^5.0.1","eslint-config-sprite":"^1.0.4","eslint-plugin-html":"^4.0.5","hamming-distance":"^1.0.0","html-webpack-plugin":"^3.2.0","imghash":"^0.0.3","nyc":"^12.0.2","pixelmatch":"^4.0.2","rimraf":"^2.6.2","style-loader":"^0.23.1","webpack":"^4.12.2","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.0.8","webpack-dev-server":"^3.1.4","webpack-hot-middleware":"^2.24.3","webpack-merge":"^4.1.5"},"ava":{"files":["**/test/*.test.js"],"require":["@babel/register"],"babel":{"testOptions":{"babelrc":true}}},"nyc":{"exclude":["**/test/**/*.js"]},"dependencies":{"@babel/runtime":"^7.2.0","sprite-draggable":"0.1.15","svg-path-to-canvas":"^1.11.1"}};
 
 /***/ })
 /******/ ])["default"];

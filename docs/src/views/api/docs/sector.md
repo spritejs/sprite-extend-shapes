@@ -18,16 +18,16 @@ sector.attr({
   radius: 50,
   lineWidth: 5,
   bgcolor: '#eee',
-  color: 'red'
+  strokeColor: 'red'
 });
 
 sector.on('mousemove', evt => {
-  sector.attr('color', 'yellow');
+  sector.attr('strokeColor', 'yellow');
   evt.stopDispatch();
 });
 
 sector.on('mouseleave', evt => {
-  sector.attr('color', 'red');
+  sector.attr('strokeColor', 'red');
   evt.stopDispatch();
 });
 

@@ -18,17 +18,17 @@ arc.attr({
   endAngle: Math.PI * 2.75,
   lineWidth: 5,
 
-  color: 'red',
+  strokeColor: 'red',
   bgcolor: '#ccc'
 });
 
 arc.on('mousemove', evt => {
-  arc.attr('color', 'yellow');
+  arc.attr('strokeColor', 'yellow');
   evt.stopDispatch();
 });
 
 arc.on('mouseleave', evt => {
-  arc.attr('color', 'red');
+  arc.attr('strokeColor', 'red');
   evt.stopDispatch();
 });
 

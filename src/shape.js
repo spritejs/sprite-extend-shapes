@@ -48,6 +48,12 @@ export default function install({BaseSprite, utils}) {
       this.set('fillColor', val);
     }
 
+    @attr
+    set strokeColor(val) {
+      val = parseColorString(val);
+      this.set('strokeColor', val);
+    }
+
     // @attr
     // set draggable(val) {
     //   this.set('draggable', val);

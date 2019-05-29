@@ -170,7 +170,7 @@ export default function install({use, utils, registerNodeType}) {
       ctx.lineJoin = this.attr('lineJoin');
       ctx.setLineDash(this.attr('lineDash'));
       ctx.lineDashOffset = this.attr('lineDashOffset');
-      ctx.strokeStyle = findColor(ctx, this, 'stokeColor');
+      ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
       ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
       const [x, y] = [0, 0];

@@ -14,7 +14,7 @@ const layer = scene.layer();
 const rect = new Rect();
 rect.attr({
   pos: [10, 10],
-  color: 'red',
+  strokeColor: 'red',
   angle: 60,
   lineWidth: 1,
   // size: [100, 100],
@@ -25,12 +25,12 @@ rect.attr({
 });
 
 rect.on('mouseenter', evt => {
-  rect.attr('color', 'yellow');
+  rect.attr('strokeColor', 'yellow');
   evt.stopDispatch();
 });
 
 rect.on('mouseleave', evt => {
-  rect.attr('color', 'red');
+  rect.attr('strokeColor', 'red');
   evt.stopDispatch();
 });
 
