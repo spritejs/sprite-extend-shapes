@@ -6,7 +6,7 @@ export default function install({BaseSprite, utils}) {
     constructor(subject) {
       super(subject);
       this.setDefault({
-        color: 'transparent',
+        strokeColor: 'transparent',
         fillColor: 'transparent',
         lineWidth: 0,
         lineCap: 'butt',

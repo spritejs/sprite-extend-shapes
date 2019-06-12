@@ -1,17 +1,19 @@
 import PolygonPlugin from './polygon';
 
 function polygonPoints(outerRadius, innerRadius, number, lw) {
-  let center = outerRadius;
-  const radAngle = Math.PI / 2;
+  const radAngle = outerRadius > innerRadius ? Math.PI / 2 : -Math.PI / 2;
   const radAlpha = Math.PI / number;
   let points = [];
 
   for (let i = 1; i <= number * 2; i++) {
-    let r = i % 2 ? outerRadius - lw : innerRadius;
+    let r = i % 2 ? outerRadius : innerRadius;
     let alpha = radAlpha * i + radAngle;
-    let x = center + r * Math.cos(alpha);
-    let y = center + r * Math.sin(alpha);
-    points.push([x, y]);
+    let cos = Math.cos(alpha);
+    let sin = Math.sin(alpha);
+    let x = r * cos - (lw / 2) * cos;
+    let y = r * sin - (lw / 1.75) * sin;
+
+    points.push([x + outerRadius, y + outerRadius]);
   }
 
   return points;
@@ -54,7 +56,24 @@ export default function install({use, utils, registerNodeType}) {
 
     get lineBoundings() {
       const radius = this.attr('radius');
-      return [0, 0, radius * 2, radius * 2];
+      const points = this.points;
+      let lw = this.attr('lineWidth');
+
+      let minX = null,
+        minY = null,
+        maxX = null,
+        maxY = null;
+      let x, y;
+      for (let point of points) {
+        [x, y] = point;
+
+        minX = minX ? Math.min(minX, x) : x;
+        minY = minY ? Math.min(minY, y) : y;
+        maxX = maxX ? Math.max(maxX, x) : x;
+        maxY = maxY ? Math.max(maxY, y) : y;
+      }
+
+      return [0, 0, maxX + minX, maxY + minY];
     }
 
     @flow
@@ -72,10 +91,18 @@ export default function install({use, utils, registerNodeType}) {
     }
 
     get points() {
-      const radius = this.attr('radius');
-      const lw = this.attr('lineWidth');
-      const innerRadius = this.attr('innerRadius') || 0.5 * radius;
-      return polygonPoints(radius, innerRadius, this.attr('angles'), lw);
+      let radius = this.attr('radius');
+      let lw = this.attr('lineWidth');
+      let innerRadius = this.attr('innerRadius') || 0.5 * radius;
+      let angles = this.attr('angles');
+
+      if (radius <= innerRadius) {
+        // 绘制正多边形
+        innerRadius = radius;
+        angles /= 2;
+      }
+
+      return polygonPoints(radius, innerRadius, angles, lw);
     }
   }
 

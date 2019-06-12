@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: ivory;
+      }
+      #canvas {
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    Radius:&nbsp <input type="text" id="radius" value="50" />
+    <button id="go">Draw</button>
+    <br />
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <script>
+      var canvas = document.getElementById('canvas');
+      var ctx = canvas.getContext('2d');
+      var cw = canvas.width;
+      var ch = canvas.height;
+
+      var x = 150;
+      var y = 150;
+      var sides = 8;
+      var startAngle = 0;
+      var anticlockwise = false;
+      const lw = 50;
+
+      document.getElementById('go').onclick = function() {
+        var radius = parseInt(document.getElementById('radius').value);
+        if (isNaN(radius)) {
+          alert('Radius must be a number');
+          return;
+        }
+        if (radius < 1) {
+          alert('Radius must be 1+');
+          return;
+        }
+        polygon(
+          ctx,
+          radius + lw / 2,
+          radius + lw / 2,
+          radius,
+          sides,
+          startAngle,
+          anticlockwise
+        );
+        ctx.stroke();
+      };
+
+      function polygon(ctx, x, y, radius, sides, startAngle, anticlockwise) {
+        if (sides < 3) return;
+
+        var a = (Math.PI * 2) / sides;
+
+        a = anticlockwise ? -a : a;
+
+        ctx.save();
+
+        ctx.translate(x, y);
+
+        ctx.rotate(startAngle);
+
+        ctx.beginPath();
+
+        ctx.moveTo(radius, 0);
+        for (var i = 1; i < sides; i++) {
+          ctx.lineTo(radius * Math.cos(a * i), radius * Math.sin(a * i));
+        }
+
+        ctx.closePath();
+
+        ctx.fillStyle = 'red';
+        ctx.strokeStyle = 'blue';
+
+        ctx.lineWidth = lw;
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+      }
+    </script>
+  </body>
+</html>

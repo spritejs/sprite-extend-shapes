@@ -9,14 +9,16 @@ function renderPolygonShapes() {
 
   const rect = new Rect();
   rect.attr({
+    boxSizing: 'border-box',
     pos: [10, 10],
     strokeColor: 'red',
+    border: [10, '#000'],
     lineCap: 'square',
-    width: 100,
-    height: 100,
-    lineWidth: 20,
-    fillColor: 'yellow',
-    bgcolor: 'blue'
+    width: 50,
+    height: 50,
+    lineWidth: 10,
+    fillColor: 'yellow'
+    // bgcolor: 'blue'
   });
 
   rect.on('mouseenter', evt => {
@@ -35,7 +37,7 @@ function renderPolygonShapes() {
 
   const triangle = new Triangle();
   triangle.attr({
-    pos: [10, 120],
+    pos: [10, 100],
     strokeColor: 'red',
     sides: [100, 100],
     angle: 90,
@@ -58,10 +60,12 @@ function renderPolygonShapes() {
 
   const star = new Star();
   star.attr({
-    pos: [10, 230],
+    pos: [10, 210],
     radius: 50,
+    innerRadius: 50,
     strokeColor: 'red',
-    lineWidth: 5,
+    border: [2, 'red'],
+    lineWidth: 30,
     angles: 5,
     bgcolor: 'blue',
     fillColor: 'yellow'
@@ -73,7 +77,7 @@ function renderPolygonShapes() {
   });
 
   star.on('mouseleave', evt => {
-    star.attr('fillColor', 'red');
+    star.attr('fillColor', 'yellow');
     evt.stopDispatch();
   });
 
@@ -132,7 +136,7 @@ function renderPolygonShapes() {
     fillColor: '#0ff',
     strokeColor: 'red',
     bgcolor: '#eee',
-    lineWidth: 10
+    lineWidth: 0
   });
   group.appendChild(pg);
 }

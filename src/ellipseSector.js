@@ -134,7 +134,12 @@ export default function install({use, utils, registerNodeType}) {
 
       const startAngle = this.startAngle;
       const endAngle = this.endAngle;
-      const lw = this.attr('lineWidth');
+      let lw = this.attr('lineWidth');
+
+      if (lw > Math.max(rx, ry)) {
+        lw = Math.max(rx, ry);
+      }
+
       ctx.miterLimit = 3;
       ctx.miterLimit = 3;
       ctx.lineCap = this.attr('lineCap');
@@ -163,7 +168,7 @@ export default function install({use, utils, registerNodeType}) {
       path.closePath();
 
       ctx.fill(path);
-      ctx.stroke(path);
+      lw > 0 && ctx.stroke(path);
 
       this.path = path;
 

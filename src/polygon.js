@@ -78,9 +78,11 @@ export default function install({use, utils, registerNodeType}) {
         let {offsetX = 0, offsetY = 0} = evt;
         const [anchorX, anchorY] = this.attr('anchor');
         const [width, height] = this.contentSize;
+        const [tx, ty] = this.translate;
 
-        offsetX += width * anchorX;
-        offsetY += height * anchorY;
+        offsetX += width * anchorX - tx;
+        offsetY += height * anchorY - ty;
+
         return (
           this.path &&
           (this.context.isPointInPath(this.path, offsetX, offsetY) ||
@@ -92,7 +94,10 @@ export default function install({use, utils, registerNodeType}) {
     render(t, drawingContext) {
       super.render(t, drawingContext);
       if (this.points.length) {
+        const points = this.points.slice(0, this.points.length);
         const translate = this.translate;
+
+        const lw = this.attr('lineWidth');
         drawingContext.translate(translate[0], translate[1]);
 
         drawingContext.strokeStyle = findColor(
@@ -102,16 +107,15 @@ export default function install({use, utils, registerNodeType}) {
         );
         drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
         drawingContext.miterLimit = 3;
+        drawingContext.lineWidth = lw;
         drawingContext.lineCap = this.attr('lineCap');
         drawingContext.lineJoin = this.attr('lineJoin');
-        drawingContext.lineWidth = this.attr('lineWidth');
         drawingContext.setLineDash(this.attr('lineDash'));
         drawingContext.lineDashOffset = this.attr('lineDashOffset');
 
         drawingContext.beginPath();
         const path = new Path2D();
         let smooth = this.attr('smooth');
-        const points = this.points.slice(0, this.points.length);
 
         if (smooth && !smooth.length) {
           smooth = [0, points.length - 1];
@@ -161,7 +165,8 @@ export default function install({use, utils, registerNodeType}) {
         path.closePath();
         drawingContext.closePath();
         drawingContext.fill(path);
-        drawingContext.stroke(path);
+        lw > 0 && drawingContext.stroke(path);
+
         this.path = path;
       }
       return drawingContext;

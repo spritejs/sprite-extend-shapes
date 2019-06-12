@@ -7,6 +7,28 @@ function renderEllipseShapes() {
   });
   layer.append(group);
 
+  const ellipse = new Ellipse();
+  ellipse.attr({
+    pos: [10, 100],
+    radiusX: 40,
+    radiusY: 50,
+    lineWidth: 60,
+    fillColor: 'blue',
+    strokeColor: 'red',
+    lineCap: 'round',
+    bgcolor: '#eee'
+  });
+  ellipse.on('mousemove', evt => {
+    ellipse.attr('strokeColor', 'yellow');
+    evt.stopDispatch();
+  });
+  ellipse.on('mouseleave', evt => {
+    ellipse.attr('strokeColor', 'red');
+    evt.stopDispatch();
+  });
+  ellipse.on('click', () => alert('click ellipse'));
+  group.appendChild(ellipse);
+
   const arc = new Arc();
   arc.attr({
     pos: [10, 220],

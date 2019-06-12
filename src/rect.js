@@ -31,19 +31,8 @@ export default function install({use, utils, registerNodeType}) {
     static Attr = rectAttr;
 
     get lineBoundings() {
-      const lw = this.attr('lineWidth');
-      const bounds = [0, 0, 0, 0];
-      const points = this.points;
-
-      points.forEach(([x, y]) => {
-        x += lw;
-        y += lw;
-        bounds[0] = Math.min(x, bounds[0]);
-        bounds[1] = Math.min(y, bounds[1]);
-        bounds[2] = Math.max(x, bounds[2]);
-        bounds[3] = Math.max(y, bounds[3]);
-      });
-      return bounds;
+      let [s1, s2] = this.attr('sides') || this.attr('size');
+      return [0, 0, s1, s2];
     }
 
     @flow
@@ -60,6 +49,7 @@ export default function install({use, utils, registerNodeType}) {
     get points() {
       const lw = this.attr('lineWidth');
       let [s1, s2] = this.attr('sides') || this.attr('size');
+
       s1 -= lw * 1;
       s2 -= lw * 1;
       const oAngle = this.attr('angle');

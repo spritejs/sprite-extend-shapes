@@ -258,7 +258,7 @@ function install({
         _initialize(this);
 
         this.setDefault({
-          color: 'transparent',
+          strokeColor: 'transparent',
           fillColor: 'transparent',
           lineWidth: 0,
           lineCap: 'butt',
@@ -4928,8 +4928,9 @@ function install({
             } = evt;
             const [anchorX, anchorY] = this.attr('anchor');
             const [width, height] = this.contentSize;
-            offsetX += width * anchorX;
-            offsetY += height * anchorY;
+            const [tx, ty] = this.translate;
+            offsetX += width * anchorX - tx;
+            offsetY += height * anchorY - ty;
             return this.path && (this.context.isPointInPath(this.path, offsetX, offsetY) || this.context.isPointInStroke(this.path, offsetX, offsetY));
           }
         }
@@ -4940,20 +4941,21 @@ function install({
           _get(_getPrototypeOf(Polygon.prototype), "render", this).call(this, t, drawingContext);
 
           if (this.points.length) {
+            const points = this.points.slice(0, this.points.length);
             const translate = this.translate;
+            const lw = this.attr('lineWidth');
             drawingContext.translate(translate[0], translate[1]);
             drawingContext.strokeStyle = findColor(drawingContext, this, 'strokeColor');
             drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
             drawingContext.miterLimit = 3;
+            drawingContext.lineWidth = lw;
             drawingContext.lineCap = this.attr('lineCap');
             drawingContext.lineJoin = this.attr('lineJoin');
-            drawingContext.lineWidth = this.attr('lineWidth');
             drawingContext.setLineDash(this.attr('lineDash'));
             drawingContext.lineDashOffset = this.attr('lineDashOffset');
             drawingContext.beginPath();
             const path = new Path2D();
             let smooth = this.attr('smooth');
-            const points = this.points.slice(0, this.points.length);
 
             if (smooth && !smooth.length) {
               smooth = [0, points.length - 1];
@@ -5010,7 +5012,7 @@ function install({
             path.closePath();
             drawingContext.closePath();
             drawingContext.fill(path);
-            drawingContext.stroke(path);
+            lw > 0 && drawingContext.stroke(path);
             this.path = path;
           }
 
@@ -5183,18 +5185,8 @@ function install({
         kind: "get",
         key: "lineBoundings",
         value: function lineBoundings() {
-          const lw = this.attr('lineWidth');
-          const bounds = [0, 0, 0, 0];
-          const points = this.points;
-          points.forEach(([x, y]) => {
-            x += lw;
-            y += lw;
-            bounds[0] = Math.min(x, bounds[0]);
-            bounds[1] = Math.min(y, bounds[1]);
-            bounds[2] = Math.max(x, bounds[2]);
-            bounds[3] = Math.max(y, bounds[3]);
-          });
-          return bounds;
+          let [s1, s2] = this.attr('sides') || this.attr('size');
+          return [0, 0, s1, s2];
         }
       }, {
         kind: "get",
@@ -5282,17 +5274,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function polygonPoints(outerRadius, innerRadius, number, lw) {
-  let center = outerRadius;
-  const radAngle = Math.PI / 2;
+  const radAngle = outerRadius > innerRadius ? Math.PI / 2 : -Math.PI / 2;
   const radAlpha = Math.PI / number;
   let points = [];
 
   for (let i = 1; i <= number * 2; i++) {
-    let r = i % 2 ? outerRadius - lw : innerRadius;
+    let r = i % 2 ? outerRadius : innerRadius;
     let alpha = radAlpha * i + radAngle;
-    let x = center + r * Math.cos(alpha);
-    let y = center + r * Math.sin(alpha);
-    points.push([x, y]);
+    let cos = Math.cos(alpha);
+    let sin = Math.sin(alpha);
+    let x = r * cos - lw / 2 * cos;
+    let y = r * sin - lw / 1.75 * sin;
+    points.push([x + outerRadius, y + outerRadius]);
   }
 
   return points;
@@ -5382,7 +5375,23 @@ function install({
         key: "lineBoundings",
         value: function lineBoundings() {
           const radius = this.attr('radius');
-          return [0, 0, radius * 2, radius * 2];
+          const points = this.points;
+          let lw = this.attr('lineWidth');
+          let minX = null,
+              minY = null,
+              maxX = null,
+              maxY = null;
+          let x, y;
+
+          for (let point of points) {
+            [x, y] = point;
+            minX = minX ? Math.min(minX, x) : x;
+            minY = minY ? Math.min(minY, y) : y;
+            maxX = maxX ? Math.max(maxX, x) : x;
+            maxY = maxY ? Math.max(maxY, y) : y;
+          }
+
+          return [0, 0, maxX + minX, maxY + minY];
         }
       }, {
         kind: "get",
@@ -5406,10 +5415,18 @@ function install({
         kind: "get",
         key: "points",
         value: function points() {
-          const radius = this.attr('radius');
-          const lw = this.attr('lineWidth');
-          const innerRadius = this.attr('innerRadius') || 0.5 * radius;
-          return polygonPoints(radius, innerRadius, this.attr('angles'), lw);
+          let radius = this.attr('radius');
+          let lw = this.attr('lineWidth');
+          let innerRadius = this.attr('innerRadius') || 0.5 * radius;
+          let angles = this.attr('angles');
+
+          if (radius <= innerRadius) {
+            // 绘制正多边形
+            innerRadius = radius;
+            angles /= 2;
+          }
+
+          return polygonPoints(radius, innerRadius, angles, lw);
         }
       }]
     };
@@ -5666,7 +5683,12 @@ function install({
           const [rx, ry] = this.radiuses;
           const startAngle = this.startAngle;
           const endAngle = this.endAngle;
-          const lw = this.attr('lineWidth');
+          let lw = this.attr('lineWidth');
+
+          if (lw > Math.max(rx, ry)) {
+            lw = Math.max(rx, ry);
+          }
+
           ctx.miterLimit = 3;
           ctx.miterLimit = 3;
           ctx.lineCap = this.attr('lineCap');
@@ -5686,7 +5708,7 @@ function install({
           path.ellipse(x, y, rx - lw / 2, ry - lw / 2, 0, startAngle, endAngle, this.attr('anticlockwise'));
           path.closePath();
           ctx.fill(path);
-          ctx.stroke(path);
+          lw > 0 && ctx.stroke(path);
           this.path = path;
           return ctx;
         }
@@ -5956,7 +5978,7 @@ function install({
 /* 118 */
 /***/ (function(module) {
 
-module.exports = {"name":"sprite-extend-shapes","version":"1.0.9","description":"","main":"lib/index.js","module":"","directories":{"example":"examples","lib":"lib","test":"test"},"scripts":{"build":"npm run build:es6 && npm run build:prod","build:prod":"babel src -d lib && webpack --env.production","build:es6":"babel src -d lib && webpack --env.esnext","standalone":"babel src -d lib && webpack --env.standalone","start":"webpack-dev-server --watch-poll","prepublishOnly":"npm run build && node ./script/qcdn","test":"nyc ava --serial && rimraf ./coverage && mkdir coverage && nyc report --reporter=html > ./coverage/lcov.info","lint":"eslint ./ --fix"},"author":"akira-cn","license":"MIT","devDependencies":{"@babel/cli":"^7.2.0","@babel/core":"^7.2.0","@babel/plugin-external-helpers":"^7.2.0","@babel/plugin-proposal-class-properties":"^7.2.1","@babel/plugin-proposal-decorators":"^7.2.0","@babel/plugin-transform-runtime":"^7.2.0","@babel/preset-env":"^7.2.0","@babel/register":"^7.0.0","ava":"^0.25.0","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","canvas":"^2.0.0-alpha.16","canvas-5-polyfill":"^0.1.5","colors":"^1.3.1","coveralls":"^3.0.2","css-loader":"^2.0.0","eslint":"^5.0.1","eslint-config-sprite":"^1.0.4","eslint-plugin-html":"^4.0.5","hamming-distance":"^1.0.0","html-webpack-plugin":"^3.2.0","imghash":"^0.0.3","nyc":"^12.0.2","pixelmatch":"^4.0.2","rimraf":"^2.6.2","style-loader":"^0.23.1","webpack":"^4.12.2","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.0.8","webpack-dev-server":"^3.1.4","webpack-hot-middleware":"^2.24.3","webpack-merge":"^4.1.5"},"ava":{"files":["**/test/*.test.js"],"require":["@babel/register"],"babel":{"testOptions":{"babelrc":true}}},"nyc":{"exclude":["**/test/**/*.js"]},"dependencies":{"@babel/runtime":"^7.2.0","sprite-draggable":"0.1.15","svg-path-to-canvas":"^1.11.1"}};
+module.exports = {"name":"sprite-extend-shapes","version":"1.0.12","description":"","main":"lib/index.js","module":"","directories":{"example":"examples","lib":"lib","test":"test"},"scripts":{"build":"npm run build:es6 && npm run build:prod","build:prod":"babel src -d lib && webpack --env.production","build:es6":"babel src -d lib && webpack --env.esnext","standalone":"babel src -d lib && webpack --env.standalone","start":"webpack-dev-server --watch-poll","prepublishOnly":"npm run build && node ./script/qcdn","test":"nyc ava --serial && rimraf ./coverage && mkdir coverage && nyc report --reporter=html > ./coverage/lcov.info","lint":"eslint ./ --fix"},"author":"akira-cn","license":"MIT","devDependencies":{"@babel/cli":"^7.2.0","@babel/core":"^7.2.0","@babel/plugin-external-helpers":"^7.2.0","@babel/plugin-proposal-class-properties":"^7.2.1","@babel/plugin-proposal-decorators":"^7.2.0","@babel/plugin-transform-runtime":"^7.2.0","@babel/preset-env":"^7.2.0","@babel/register":"^7.0.0","ava":"^0.25.0","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","canvas":"^2.0.0-alpha.16","canvas-5-polyfill":"^0.1.5","colors":"^1.3.1","coveralls":"^3.0.2","css-loader":"^2.0.0","eslint":"^5.0.1","eslint-config-sprite":"^1.0.4","eslint-plugin-html":"^4.0.5","hamming-distance":"^1.0.0","html-webpack-plugin":"^3.2.0","imghash":"^0.0.3","nyc":"^12.0.2","pixelmatch":"^4.0.2","rimraf":"^2.6.2","style-loader":"^0.23.1","webpack":"^4.12.2","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.0.8","webpack-dev-server":"^3.1.4","webpack-hot-middleware":"^2.24.3","webpack-merge":"^4.1.5"},"ava":{"files":["**/test/*.test.js"],"require":["@babel/register"],"babel":{"testOptions":{"babelrc":true}}},"nyc":{"exclude":["**/test/**/*.js"]},"dependencies":{"@babel/runtime":"^7.2.0","sprite-draggable":"0.1.15","svg-path-to-canvas":"^1.11.1"}};
 
 /***/ })
 /******/ ])["default"];
