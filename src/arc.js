@@ -1,4 +1,5 @@
 import ShapePlugin from './shape';
+import {angleOf} from './util';
 
 export default function install({use, utils, registerNodeType}) {
   const {attr, flow, findColor} = utils;
@@ -100,9 +101,34 @@ export default function install({use, utils, registerNodeType}) {
 
         offsetX += width * anchorX;
         offsetY += height * anchorY;
-        return (
-          this.path && this.context.isPointInStroke(this.path, offsetX, offsetY)
-        );
+
+        const lw = this.attr('lineWidth');
+        const radius = this.attr('radius') - lw / 2;
+        const [cx, cy] = this.center;
+
+        const dx = offsetX - cx;
+        const dy = offsetY - cy;
+
+        const dist = Math.sqrt(dx ** 2 + dy ** 2);
+        if(Math.abs(dist - radius) <= lw / 2) {
+          const PI2 = 2 * Math.PI;
+          let startAngle = this.attr('startAngle') % (2 * PI2);
+          let endAngle = this.attr('endAngle') % (2 * PI2);
+          if(startAngle < 0) startAngle += PI2;
+          if(endAngle < 0) endAngle += PI2;
+          const angle = angleOf([dx, dy]);
+          if(angle >= startAngle && angle <= endAngle) {
+            return true;
+          }
+          const lineCap = this.attr('lineCap');
+          if(lineCap !== 'butt') {
+            // 处理端点，目前把 square 当做 round 处理，待完善 
+            const pa = [radius * Math.cos(startAngle), radius * Math.sin(startAngle)];
+            const pb = [radius * Math.cos(endAngle), radius * Math.sin(endAngle)];
+            return Math.sqrt((dx - pa[0]) ** 2 + (dy - pa[1]) ** 2) <= lw / 2
+              || Math.sqrt((dx - pb[0]) ** 2 + (dy - pb[1]) ** 2) <= lw / 2;
+          }
+        }
       }
     }
 
@@ -126,10 +152,11 @@ export default function install({use, utils, registerNodeType}) {
       ctx.setLineDash(this.attr('lineDash'));
       ctx.lineDashOffset = this.attr('lineDashOffset');
 
-      const path = new Path2D();
-      path.arc(cx, cy, radius - lw / 2, startAngle, endAngle, anticlockwise);
-      endAngle > startAngle && ctx.stroke(path);
-      this.path = path;
+      if(endAngle > startAngle) {
+        ctx.arc(cx, cy, radius - lw / 2, startAngle, endAngle, anticlockwise);
+        ctx.stroke();
+      }
+
       return ctx;
     }
   }

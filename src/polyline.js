@@ -1,5 +1,8 @@
 import ShapePlugin from './shape';
-import {drawSmoothCurveLine} from './util';
+import SvgPath from 'svg-path-to-canvas';
+import {makeSmoothCurveLine} from './util';
+
+const reflow = true;
 
 export default function install({use, utils, registerNodeType}) {
   const {attr, findColor} = utils;
@@ -21,20 +24,23 @@ export default function install({use, utils, registerNodeType}) {
       this.set('tolerance', val);
     }
 
-    @attr
+    @attr({reflow})
     set points(val) {
       this.clearFlow();
       this.set('points', val);
+      this.subject.path = null;
     }
 
-    @attr
+    @attr({reflow})
     set smooth(val) {
       this.set('smooth', val);
+      this.subject.path = null;
     }
 
-    @attr
+    @attr({reflow})
     set close(val) {
       this.set('close', val);
+      this.subject.path = null;
     }
   }
 
@@ -54,17 +60,19 @@ export default function install({use, utils, registerNodeType}) {
       const {offsetX, offsetY} = evt;
       const cacheLineWidth = this.context.lineWidth; // 获取当前画布的lineWidth宽度
       const tolerance = this.attr('tolerance'); // 线条点击的容差像素值，默认6px
-      this.context.lineWidth = this.attr('lineWidth') + tolerance; // 点击范围为线条加上容差值，方便碰撞检测
       let res = false;
-      if (
-        this.path &&
-        (this.context.isPointInStroke(this.path, offsetX, offsetY) ||
-          (this.attr('close') &&
-            this.context.isPointInPath(this.path, offsetX, offsetY))) // 如果是闭合曲线，判断是否点击到闭合曲线内部
-      ) {
-        res = true;
+      const path = this.path;
+      if(path) {
+        const lineWidth = this.attr('lineWidth') + tolerance,
+          lineCap = this.attr('lineCap'),
+          lineJoin = this.attr('lineJoin');
+        
+        if(this.attr('close')) {
+          res = path.isPointInPath(offsetX, offsetY);
+        }
+
+        res |= path.isPointInStroke(offsetX, offsetY, {lineWidth, lineCap, lineJoin});
       }
-      this.context.lineWidth = cacheLineWidth; // 还原当前画布的lineWidth宽度
       return res;
     }
 
@@ -87,28 +95,34 @@ export default function install({use, utils, registerNodeType}) {
 
         drawingContext.translate(lw / 2, lw / 2);
 
-        const smooth = this.attr('smooth');
-        const path = new Path2D();
+        if(!this.path) {
+          const smooth = this.attr('smooth');
 
-        if (smooth) {
-          drawSmoothCurveLine(path, this.points, drawingContext);
-        } else {
-          this.points.forEach((point, i) => {
-            if (i === 0) {
-              path.moveTo(...point);
-            } else {
-              path.lineTo(...point);
-            }
-          });
+          let d = '';
+          if (smooth) {
+            d += makeSmoothCurveLine(this.points, 0);
+          } else {
+            this.points.forEach((point, i) => {
+              if (i === 0) {
+                d += `M${point.join(' ')}`;
+              } else {
+                d += `L${point.join(' ')}`;
+              }
+            });
+          }
+
+          if (this.attr('close')) {
+            d += 'Z';
+          }
+
+          this.path = new SvgPath(d);
         }
 
-        if (this.attr('close')) {
-          path.closePath();
+        if(this.path) {
+          this.path.beginPath().to(drawingContext);
+          drawingContext.fill();
+          drawingContext.stroke();
         }
-
-        drawingContext.fill(path);
-        drawingContext.stroke(path);
-        this.path = path;
       }
       return drawingContext;
     }

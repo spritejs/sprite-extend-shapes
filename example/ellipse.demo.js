@@ -41,7 +41,15 @@ function renderEllipseShapes() {
     lineWidth: 10,
     fillColor: 'orange',
     bgcolor: '#eee',
-    strokeColor: 'red'
+    strokeColor: 'blue'
+  });
+
+  sector.on('mousemove', (evt) => {
+    sector.attr('bgcolor', 'red');
+  });
+
+  sector.on('mouseleave', (evt) => {
+    sector.attr('bgcolor', '#eee');
   });
 
   group.appendChild(sector);

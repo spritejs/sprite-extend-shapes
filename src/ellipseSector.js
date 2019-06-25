@@ -1,4 +1,5 @@
 import ShapePlugin from './shape';
+import {angleOf} from './util';
 
 export default function install({use, utils, registerNodeType}) {
   const {attr, flow, parseColorString, findColor} = utils;
@@ -114,15 +115,23 @@ export default function install({use, utils, registerNodeType}) {
         // FIXME: 如果事件是改变半径大小，会导致contentSize变化，如何避免？
         const [anchorX, anchorY] = this.attr('anchor');
         const [width, height] = this.contentSize;
-
         offsetX += width * anchorX;
         offsetY += height * anchorY;
 
-        return (
-          this.path &&
-          (this.context.isPointInPath(this.path, offsetX, offsetY) ||
-            this.context.isPointInStroke(this.path, offsetX, offsetY))
-        );
+        const [x, y] = this.center;
+        let [rx, ry] = this.radiuses;
+        const dx = offsetX - x;
+        const dy = offsetY - y;
+        if(dx ** 2 / rx ** 2 + dy ** 2 / ry ** 2 <= 1.0) {
+          const PI2 = 2 * Math.PI;
+          let startAngle = this.attr('startAngle') % (2 * PI2);
+          let endAngle = this.attr('endAngle') % (2 * PI2);
+          if(startAngle < 0) startAngle += PI2;
+          if(endAngle < 0) endAngle += PI2;
+          const angle = angleOf([dx, dy]);
+          return angle >= startAngle && angle <= endAngle;
+        }
+        // TODO: 处理 lineCap?
       }
     }
 
@@ -146,11 +155,11 @@ export default function install({use, utils, registerNodeType}) {
       ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
       ctx.fillStyle = findColor(ctx, this, 'fillColor');
 
-      const path = new Path2D();
+      ctx.beginPath();
       if (this.endAngle - this.startAngle < Math.PI * 2) {
-        path.moveTo(x, y);
+        ctx.moveTo(x, y);
       }
-      path.ellipse(
+      ctx.ellipse(
         x,
         y,
         rx - lw / 2,
@@ -160,12 +169,10 @@ export default function install({use, utils, registerNodeType}) {
         endAngle,
         this.attr('anticlockwise')
       );
-      path.closePath();
+      ctx.closePath();
 
-      ctx.fill(path);
-      ctx.stroke(path);
-
-      this.path = path;
+      ctx.fill();
+      ctx.stroke();
 
       return ctx;
     }

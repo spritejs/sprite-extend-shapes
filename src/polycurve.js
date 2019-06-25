@@ -1,4 +1,7 @@
 import ShapePlugin from './shape';
+import SvgPath from 'svg-path-to-canvas';
+
+const reflow = true;
 
 export default function install({use, utils, registerNodeType}) {
   const {attr, findColor, flow} = utils;
@@ -13,16 +16,18 @@ export default function install({use, utils, registerNodeType}) {
       });
     }
 
-    @attr
+    @attr({reflow})
     set points(val) {
       this.clearFlow();
       this.set('points', val);
+      this.subject.updatePath();
     }
 
-    @attr
+    @attr({reflow})
     set startPoint(val) {
       this.clearFlow();
       this.set('startPoint', val);
+      this.subject.updatePath();
     }
   }
 
@@ -94,6 +99,22 @@ export default function install({use, utils, registerNodeType}) {
       return false;
     }
 
+    updatePath() {
+      const startPoint = this.attr('startPoint');
+      const points = this.points;
+      let d = '';
+
+      if (startPoint && startPoint.length === 2) {
+        d += `M${startPoint.join(' ')}`;
+      }
+      points.forEach(point => {
+        const [cp1x, cp1y, cp2x, cp2y, x, y] = point;
+        d += `C${[cp1x, cp1y, cp2x, cp2y, x, y].join(' ')}`;
+      });
+      const svgpath = new SvgPath(d);
+      this.path = svgpath;
+    }
+
     pointCollision(evt) {
       if (super.pointCollision(evt)) {
         let {offsetX, offsetY} = evt;
@@ -103,12 +124,16 @@ export default function install({use, utils, registerNodeType}) {
 
         offsetX += width * anchorX;
         offsetY += height * anchorY;
-
-        return (
-          this.path &&
-          (this.context.isPointInPath(this.path, offsetX, offsetY) ||
-            this.context.isPointInStroke(this.path, offsetX, offsetY))
-        );
+        
+        const path = this.path;
+        if(path) {
+          const lineWidth = this.attr('lineWidth'),
+            lineCap = this.attr('lineCap'),
+            lineJoin = this.attr('lineJoin');
+          return path.isPointInPath(offsetX, offsetY) ||
+            path.isPointInStroke(offsetX, offsetY, {lineWidth, lineCap, lineJoin});
+        }
+        return false;
       }
     }
 
@@ -126,23 +151,11 @@ export default function install({use, utils, registerNodeType}) {
       ctx.fillStyle = this.attr('fillColor');
       ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
 
-      const path = new Path2D();
-
-      if (startPoint && startPoint.length === 2) {
-        // ctx.translate(...startPoint.map(v => -v + lw));
-        path.moveTo(...startPoint);
+      if(this.path) {
+        this.path.beginPath().to(ctx);
+        ctx.fill();
+        ctx.stroke();
       }
-
-      /* eslint-disable arrow-parens */
-      points.forEach(point => {
-        const [cp1x, cp1y, cp2x, cp2y, x, y] = point;
-        path.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
-      });
-
-      ctx.fill(path);
-      ctx.stroke(path);
-
-      this.path = path;
 
       return ctx;
     }
