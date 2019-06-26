@@ -1,6 +1,6 @@
 import ShapePlugin from './shape';
 import SvgPath from 'svg-path-to-canvas';
-import {makeSmoothCurveLine} from './util';
+import {makeSmoothCurveLine, pointsEqual} from './util';
 
 export default function install({use, utils, registerNodeType}) {
   const {attr, flow, parseColorString, findColor} = utils;
@@ -73,7 +73,6 @@ export default function install({use, utils, registerNodeType}) {
     }
 
     get points() {
-      const lw = this.attr('lineWidth');
       return this.attr('points');
     }
 
@@ -116,7 +115,7 @@ export default function install({use, utils, registerNodeType}) {
         drawingContext.setLineDash(this.attr('lineDash'));
         drawingContext.lineDashOffset = this.attr('lineDashOffset');
 
-        if(!this.path) {
+        if(!this.path || !pointsEqual(this.path.points, this.points)) {
           let smooth = this.attr('smooth');
           const points = this.points.slice(0, this.points.length);
 
@@ -167,6 +166,7 @@ export default function install({use, utils, registerNodeType}) {
           }
           d += 'Z';
           this.path = new SvgPath(d);
+          this.path.points = [...this.points];
         }
         if(this.path) {
           this.path.beginPath().to(drawingContext);

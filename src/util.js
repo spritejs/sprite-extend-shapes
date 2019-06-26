@@ -126,3 +126,11 @@ export function angleOf(v1, v2 = [1, 0]) {
   if(ang < 0.0) ang += 2.0 * Math.PI;
   return ang;
 }
+
+export function pointsEqual(p1, p2) {
+  if(p1.length !== p2.length) return false;
+  for(let i = 0; i < p1.length; i++) {
+    if(p1[i][0] !== p2[i][0] || p1[i][1] !== p2[i][1]) return false;
+  }
+  return true;
+}

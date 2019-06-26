@@ -1,5 +1,6 @@
 import ShapePlugin from './shape';
 import SvgPath from 'svg-path-to-canvas';
+import {pointsEqual} from './util';
 
 export default function install({use, utils, registerNodeType}) {
   const {attr, findColor, flow} = utils;
@@ -110,6 +111,7 @@ export default function install({use, utils, registerNodeType}) {
       });
       const svgpath = new SvgPath(d);
       this.path = svgpath;
+      this.path.points = [...points];
     }
 
     pointCollision(evt) {
@@ -148,7 +150,7 @@ export default function install({use, utils, registerNodeType}) {
       ctx.fillStyle = this.attr('fillColor');
       ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
 
-      if(!this.path) this.updatePath();
+      if(!this.path || !pointsEqual(this.path.points, points)) this.updatePath();
       if(this.path) {
         this.path.beginPath().to(ctx);
         ctx.fill();

@@ -631,12 +631,11 @@ function install({
           drawingContext.lineDashOffset = this.attr('lineDashOffset');
           drawingContext.strokeStyle = findColor(drawingContext, this, 'strokeColor');
           drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
+          drawingContext.beginPath();
 
-          if (drawingContext.ellipse) {
-            drawingContext.beginPath(); // drawingContext.translate(radiusX + lw / 2, radiusY + lw / 2);
-
+          if (drawingContext.ellipse && radiusX > lw / 2 && radiusY > lw / 2) {
             drawingContext.ellipse(cx, cy, radiusX - lw / 2, radiusY - lw / 2, 0, startAngle, endAngle, anticlockwise);
-          } else if (radiusX === radiusY) {
+          } else if (radiusX === radiusY && radiusX > lw / 2) {
             drawingContext.arc(cx, cy, radiusX - lw / 2, startAngle, endAngle, anticlockwise);
           } else {
             throw new Error("Your browser does'n support canvas ellipse");
@@ -980,10 +979,10 @@ function install({
             ctx.moveTo(x, y);
           }
 
-          if (ctx.ellipse) {
+          if (ctx.ellipse && rx > lw / 2 && ry > lw / 2) {
             ctx.ellipse(x, y, rx - lw / 2, ry - lw / 2, 0, startAngle, endAngle, this.attr('anticlockwise'));
             ctx.closePath();
-          } else if (rx === ry) {
+          } else if (rx === ry && rx > lw / 2) {
             ctx.arc(x, y, rx - lw / 2, startAngle, endAngle, this.attr('anticlockwise'));
             ctx.closePath();
           } else {
@@ -1016,6 +1015,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSmoothCurveLine", function() { return makeSmoothCurveLine; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "drawSmoothCurveLine", function() { return drawSmoothCurveLine; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "angleOf", function() { return angleOf; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pointsEqual", function() { return pointsEqual; });
 const cos = angle => Number(Math.cos(angle).toFixed(15));
 const sin = angle => Number(Math.sin(angle).toFixed(15));
 const round = v => Math.round(v);
@@ -1158,6 +1158,15 @@ function angleOf(v1, v2 = [1, 0]) {
   let ang = Math.atan2(v1[1], v1[0]) - Math.atan2(v2[1], v2[0]);
   if (ang < 0.0) ang += 2.0 * Math.PI;
   return ang;
+}
+function pointsEqual(p1, p2) {
+  if (p1.length !== p2.length) return false;
+
+  for (let i = 0; i < p1.length; i++) {
+    if (p1[i][0] !== p2[i][0] || p1[i][1] !== p2[i][1]) return false;
+  }
+
+  return true;
 }
 
 /***/ }),
@@ -1331,7 +1340,7 @@ function install({
         drawingContext.lineDashOffset = this.attr('lineDashOffset');
         drawingContext.translate(lw / 2, lw / 2);
 
-        if (!this.path) {
+        if (!this.path || !Object(_util__WEBPACK_IMPORTED_MODULE_2__["pointsEqual"])(this.path.points, this.points)) {
           const smooth = this.attr('smooth');
           let d = '';
 
@@ -1352,6 +1361,7 @@ function install({
           }
 
           this.path = new svg_path_to_canvas__WEBPACK_IMPORTED_MODULE_1___default.a(d);
+          this.path.points = [...this.points];
         }
 
         if (this.path) {
@@ -4346,6 +4356,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shape__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var svg_path_to_canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
 /* harmony import */ var svg_path_to_canvas__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(svg_path_to_canvas__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
 function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
 
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
@@ -4379,6 +4390,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -4549,6 +4561,7 @@ function install({
           });
           const svgpath = new svg_path_to_canvas__WEBPACK_IMPORTED_MODULE_1___default.a(d);
           this.path = svgpath;
+          this.path.points = [...points];
         }
       }, {
         kind: "method",
@@ -4595,7 +4608,7 @@ function install({
           ctx.lineDashOffset = this.attr('lineDashOffset');
           ctx.fillStyle = this.attr('fillColor');
           ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
-          if (!this.path) this.updatePath();
+          if (!this.path || !Object(_util__WEBPACK_IMPORTED_MODULE_2__["pointsEqual"])(this.path.points, points)) this.updatePath();
 
           if (this.path) {
             this.path.beginPath().to(ctx);
@@ -5259,13 +5272,13 @@ function install({
           const lineBoundings = this.lineBoundings;
           ctx.translate(lineBoundings[2] / 2 - x, lineBoundings[3] / 2 - y);
           ctx.beginPath();
-          ctx.arc(x, y, outerRadius - lw / 2, startAngle, endAngle, false);
+          if (outerRadius > lw / 2) ctx.arc(x, y, outerRadius - lw / 2, startAngle, endAngle, false);
 
           if (endAngle - startAngle === Math.PI * 2) {
             ctx.moveTo(outerRadius + innerRadius, outerRadius);
           }
 
-          ctx.arc(x, y, innerRadius - lw / 2, endAngle, startAngle, true);
+          if (innerRadius > lw / 2) ctx.arc(x, y, innerRadius - lw / 2, endAngle, startAngle, true);
           ctx.closePath();
           ctx.fill();
 
@@ -5466,7 +5479,6 @@ function install({
         kind: "get",
         key: "points",
         value: function points() {
-          const lw = this.attr('lineWidth');
           return this.attr('points');
         }
       }, {
@@ -5514,7 +5526,7 @@ function install({
             drawingContext.setLineDash(this.attr('lineDash'));
             drawingContext.lineDashOffset = this.attr('lineDashOffset');
 
-            if (!this.path) {
+            if (!this.path || !Object(_util__WEBPACK_IMPORTED_MODULE_2__["pointsEqual"])(this.path.points, this.points)) {
               let smooth = this.attr('smooth');
               const points = this.points.slice(0, this.points.length);
 
@@ -5573,6 +5585,7 @@ function install({
 
               d += 'Z';
               this.path = new svg_path_to_canvas__WEBPACK_IMPORTED_MODULE_1___default.a(d);
+              this.path.points = [...this.points];
             }
 
             if (this.path) {
