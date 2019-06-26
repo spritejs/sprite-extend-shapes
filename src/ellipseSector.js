@@ -4,6 +4,7 @@ import {angleOf} from './util';
 export default function install({use, utils, registerNodeType}) {
   const {attr, flow, parseColorString, findColor} = utils;
   const {Shape} = use(ShapePlugin, null, false);
+  const reflow = true;
 
   class EllipseSectorAttr extends Shape.Attr {
     constructor(subject) {
@@ -19,32 +20,28 @@ export default function install({use, utils, registerNodeType}) {
     }
 
     // 短轴半径
-    @attr
+    @attr({reflow})
     set radiusX(val) {
-      this.clearFlow();
       this.set('radiusX', val);
     }
 
     // 长轴半径
-    @attr
+    @attr({reflow})
     set radiusY(val) {
-      this.clearFlow();
       this.set('radiusY', val);
     }
 
-    @attr
+    @attr({reflow})
     set startAngle(val) {
-      this.clearFlow();
       this.set('startAngle', val);
     }
 
-    @attr
+    @attr({reflow})
     set endAngle(val) {
-      this.clearFlow();
       this.set('endAngle', val);
     }
 
-    @attr
+    @attr({reflow})
     set lineWidth(val) {
       this.set('lineWidth', val);
     }
@@ -60,9 +57,8 @@ export default function install({use, utils, registerNodeType}) {
       this.set('anticlockwise', val);
     }
 
-    @attr
+    @attr({reflow})
     set center(val) {
-      this.clearFlow();
       this.set('center', val);
     }
   }
@@ -159,17 +155,32 @@ export default function install({use, utils, registerNodeType}) {
       if (this.endAngle - this.startAngle < Math.PI * 2) {
         ctx.moveTo(x, y);
       }
-      ctx.ellipse(
-        x,
-        y,
-        rx - lw / 2,
-        ry - lw / 2,
-        0,
-        startAngle,
-        endAngle,
-        this.attr('anticlockwise')
-      );
-      ctx.closePath();
+
+      if(ctx.ellipse) {
+        ctx.ellipse(
+          x,
+          y,
+          rx - lw / 2,
+          ry - lw / 2,
+          0,
+          startAngle,
+          endAngle,
+          this.attr('anticlockwise')
+        );
+        ctx.closePath();
+      } else if(rx === ry) {
+        ctx.arc(
+          x,
+          y,
+          rx - lw / 2,
+          startAngle,
+          endAngle,
+          this.attr('anticlockwise')
+        );
+        ctx.closePath();
+      } else {
+        throw new Error("Your browser does'n support canvas ellipse");
+      }
 
       ctx.fill();
       ctx.stroke();

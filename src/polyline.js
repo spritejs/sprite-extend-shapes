@@ -2,11 +2,10 @@ import ShapePlugin from './shape';
 import SvgPath from 'svg-path-to-canvas';
 import {makeSmoothCurveLine} from './util';
 
-const reflow = true;
-
 export default function install({use, utils, registerNodeType}) {
   const {attr, findColor} = utils;
   const {Shape} = use(ShapePlugin, null, false);
+  const reflow = true;
 
   class PolylineAttr extends Shape.Attr {
     constructor(subject) {
@@ -26,7 +25,6 @@ export default function install({use, utils, registerNodeType}) {
 
     @attr({reflow})
     set points(val) {
-      this.clearFlow();
       this.set('points', val);
       this.subject.path = null;
     }
@@ -37,7 +35,7 @@ export default function install({use, utils, registerNodeType}) {
       this.subject.path = null;
     }
 
-    @attr({reflow})
+    @attr
     set close(val) {
       this.set('close', val);
       this.subject.path = null;

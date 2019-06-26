@@ -1,11 +1,10 @@
 import ShapePlugin from './shape';
 import SvgPath from 'svg-path-to-canvas';
 
-const reflow = true;
-
 export default function install({use, utils, registerNodeType}) {
   const {attr, findColor, flow} = utils;
   const {Shape} = use(ShapePlugin, null, false);
+  const reflow = true;
 
   class PolycurveAttr extends Shape.Attr {
     constructor(subject) {
@@ -18,16 +17,14 @@ export default function install({use, utils, registerNodeType}) {
 
     @attr({reflow})
     set points(val) {
-      this.clearFlow();
       this.set('points', val);
-      this.subject.updatePath();
+      this.subject.path = null;
     }
 
     @attr({reflow})
     set startPoint(val) {
-      this.clearFlow();
       this.set('startPoint', val);
-      this.subject.updatePath();
+      this.subject.path = null;
     }
   }
 
@@ -151,6 +148,7 @@ export default function install({use, utils, registerNodeType}) {
       ctx.fillStyle = this.attr('fillColor');
       ctx.strokeStyle = findColor(ctx, this, 'strokeColor');
 
+      if(!this.path) this.updatePath();
       if(this.path) {
         this.path.beginPath().to(ctx);
         ctx.fill();

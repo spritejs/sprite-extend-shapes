@@ -3,6 +3,7 @@ import ShapePlugin from './shape';
 export default function install({use, utils, registerNodeType}) {
   const {attr, flow, findColor} = utils;
   const {Shape} = use(ShapePlugin, null, false);
+  const reflow = true;
 
   class RingAttr extends Shape.Attr {
     constructor(subject) {
@@ -18,40 +19,34 @@ export default function install({use, utils, registerNodeType}) {
     }
 
     // 内圆半径
-    @attr
+    @attr({reflow})
     set innerRadius(val) {
-      this.clearFlow();
       this.set('innerRadius', val);
     }
 
     // 外圆半径
-    @attr
+    @attr({reflow})
     set outerRadius(val) {
-      this.clearFlow();
       this.set('outerRadius', val);
     }
 
-    @attr
+    @attr({reflow})
     set maxRadius(val) {
-      this.clearFlow();
       this.set('maxRadius', val);
     }
 
-    @attr
+    @attr({reflow})
     set startAngle(val) {
-      this.clearFlow();
       this.set('startAngle', val);
     }
 
-    @attr
+    @attr({reflow})
     set endAngle(val) {
-      this.clearFlow();
       this.set('endAngle', val);
     }
 
-    @attr
+    @attr({reflow})
     set center(val) {
-      this.clearFlow();
       this.set('center', val);
     }
   }

@@ -20,6 +20,7 @@ function polygonPoints(outerRadius, innerRadius, number, lw) {
 export default function install({use, utils, registerNodeType}) {
   const {attr, flow} = utils;
   const {Polygon} = use(PolygonPlugin, null, false);
+  const reflow = true;
 
   class PolygonAttr extends Polygon.Attr {
     constructor(subject) {
@@ -29,22 +30,19 @@ export default function install({use, utils, registerNodeType}) {
       });
     }
 
-    @attr
+    @attr({reflow})
     set angles(num) {
-      this.clearFlow();
       this.set('angles', num);
     }
 
-    @attr
+    @attr({reflow})
     set radius(val) {
       // 圆半径
-      this.clearFlow();
       this.set('radius', val);
     }
 
-    @attr
+    @attr({reflow})
     set innerRadius(val) {
-      this.clearFlow();
       this.set('innerRadius', val);
     }
   }

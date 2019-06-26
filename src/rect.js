@@ -3,6 +3,7 @@ import PolygonPlugin from './polygon';
 export default function install({use, utils, registerNodeType}) {
   const {attr, flow} = utils;
   const {Polygon} = use(PolygonPlugin, null, false);
+  const reflow = true;
 
   class rectAttr extends Polygon.Attr {
     constructor(subject) {
@@ -14,15 +15,13 @@ export default function install({use, utils, registerNodeType}) {
       });
     }
 
-    @attr
+    @attr({reflow})
     set angle(val) {
-      this.clearFlow();
       this.set('angle', val);
     }
 
-    @attr
+    @attr({reflow})
     set sides(val) {
-      this.clearFlow();
       this.set('sides', val);
     }
   }

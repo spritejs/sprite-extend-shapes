@@ -5,6 +5,7 @@ import {sin, round, cos} from './util';
 export default function install({use, utils, registerNodeType}) {
   const {attr, findColor, flow} = utils;
   const {Shape} = use(ShapePlugin, null, false);
+  const reflow = true;
 
   class WaveAttr extends Shape.Attr {
     constructor(subject) {
@@ -29,45 +30,38 @@ export default function install({use, utils, registerNodeType}) {
       });
     }
 
-    @attr
+    @attr({reflow})
     set radius(val) {
-      this.clearFlow();
       this.set('radius', val);
     }
 
-    @attr
+    @attr({reflow})
     set offset(val) {
-      this.clearFlow();
       this.set('offset', val);
     }
 
-    @attr
+    @attr({reflow})
     set amplitude(val) {
-      this.clearFlow();
       this.set('amplitude', val);
     }
 
-    @attr
+    @attr({reflow})
     set speed(val) {
-      this.clearFlow();
       this.set('speed', val);
     }
 
-    @attr
+    @attr({reflow})
     set percent(val) {
-      this.clearFlow();
       this.set('percent', val);
     }
 
-    @attr
+    @attr({reflow})
     set wavesColor(val) {
-      this.clearFlow();
       this.set('wavesColor', val);
     }
 
-    @attr
+    @attr({reflow})
     set shape(val) {
-      this.clearFlow();
       this.set('shape', val);
     }
   }
