@@ -633,10 +633,10 @@ function install({
           drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
           drawingContext.beginPath();
 
-          if (drawingContext.ellipse && radiusX > lw / 2 && radiusY > lw / 2) {
-            drawingContext.ellipse(cx, cy, radiusX - lw / 2, radiusY - lw / 2, 0, startAngle, endAngle, anticlockwise);
-          } else if (radiusX === radiusY && radiusX > lw / 2) {
-            drawingContext.arc(cx, cy, radiusX - lw / 2, startAngle, endAngle, anticlockwise);
+          if (drawingContext.ellipse) {
+            drawingContext.ellipse(cx, cy, Math.max(0, radiusX - lw / 2), Math.max(0, radiusY - lw / 2), 0, startAngle, endAngle, anticlockwise);
+          } else if (radiusX === radiusY) {
+            drawingContext.arc(cx, cy, Math.max(0, radiusX - lw / 2), startAngle, endAngle, anticlockwise);
           } else {
             throw new Error("Your browser does'n support canvas ellipse");
           }
@@ -979,11 +979,11 @@ function install({
             ctx.moveTo(x, y);
           }
 
-          if (ctx.ellipse && rx > lw / 2 && ry > lw / 2) {
-            ctx.ellipse(x, y, rx - lw / 2, ry - lw / 2, 0, startAngle, endAngle, this.attr('anticlockwise'));
+          if (ctx.ellipse) {
+            ctx.ellipse(x, y, Math.max(0, rx - lw / 2), Math.max(0, ry - lw / 2), 0, startAngle, endAngle, this.attr('anticlockwise'));
             ctx.closePath();
-          } else if (rx === ry && rx > lw / 2) {
-            ctx.arc(x, y, rx - lw / 2, startAngle, endAngle, this.attr('anticlockwise'));
+          } else if (rx === ry) {
+            ctx.arc(x, y, Math.max(0, rx - lw / 2), startAngle, endAngle, this.attr('anticlockwise'));
             ctx.closePath();
           } else {
             throw new Error("Your browser does'n support canvas ellipse");
@@ -5272,13 +5272,13 @@ function install({
           const lineBoundings = this.lineBoundings;
           ctx.translate(lineBoundings[2] / 2 - x, lineBoundings[3] / 2 - y);
           ctx.beginPath();
-          if (outerRadius > lw / 2) ctx.arc(x, y, outerRadius - lw / 2, startAngle, endAngle, false);
+          ctx.arc(x, y, Math.max(0, outerRadius - lw / 2), startAngle, endAngle, false);
 
           if (endAngle - startAngle === Math.PI * 2) {
             ctx.moveTo(outerRadius + innerRadius, outerRadius);
           }
 
-          if (innerRadius > lw / 2) ctx.arc(x, y, innerRadius - lw / 2, endAngle, startAngle, true);
+          ctx.arc(x, y, Math.max(0, innerRadius - lw / 2), endAngle, startAngle, true);
           ctx.closePath();
           ctx.fill();
 
@@ -6145,7 +6145,7 @@ function install({
 /* 118 */
 /***/ (function(module) {
 
-module.exports = {"name":"@spritejs/shapes","version":"1.1.1","description":"","main":"lib/index.js","module":"","directories":{"example":"examples","lib":"lib","test":"test"},"scripts":{"build":"npm run build:es6 && npm run build:prod","build:prod":"babel src -d lib && webpack --env.production","build:es6":"babel src -d lib && webpack --env.esnext","standalone":"babel src -d lib && webpack --env.standalone","start":"webpack-dev-server --watch-poll","prepublishOnly":"npm run build && node ./script/qcdn","test":"nyc ava --serial && rimraf ./coverage && mkdir coverage && nyc report --reporter=html > ./coverage/lcov.info","lint":"eslint ./ --fix"},"author":"akira-cn","license":"MIT","devDependencies":{"@babel/cli":"^7.2.0","@babel/core":"^7.2.0","@babel/plugin-external-helpers":"^7.2.0","@babel/plugin-proposal-class-properties":"^7.2.1","@babel/plugin-proposal-decorators":"^7.2.0","@babel/plugin-transform-runtime":"^7.2.0","@babel/preset-env":"^7.2.0","@babel/register":"^7.0.0","ava":"^1.4.1","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","canvas":"^2.0.0-alpha.16","canvas-5-polyfill":"^0.1.5","colors":"^1.3.1","coveralls":"^3.0.2","css-loader":"^2.0.0","eslint":"^5.0.1","eslint-config-sprite":"^1.0.4","eslint-plugin-html":"^4.0.5","hamming-distance":"^1.0.0","html-webpack-plugin":"^3.2.0","imghash":"^0.0.3","nyc":"^12.0.2","pixelmatch":"^4.0.2","rimraf":"^2.6.2","spritejs":"^2.29.2","style-loader":"^0.23.1","webpack":"^4.35.0","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.3.5","webpack-dev-server":"^3.7.2","webpack-hot-middleware":"^2.24.3","webpack-merge":"^4.1.5"},"ava":{"files":["**/test/*.test.js"],"require":["@babel/register"],"babel":{"testOptions":{"babelrc":true}}},"nyc":{"exclude":["**/test/**/*.js"]},"dependencies":{"@babel/runtime":"^7.2.0","sprite-draggable":"0.1.15","svg-path-to-canvas":"^1.11.3"}};
+module.exports = {"name":"@spritejs/shapes","version":"1.1.2","description":"","main":"lib/index.js","module":"","directories":{"example":"examples","lib":"lib","test":"test"},"scripts":{"build":"npm run build:es6 && npm run build:prod","build:prod":"babel src -d lib && webpack --env.production","build:es6":"babel src -d lib && webpack --env.esnext","standalone":"babel src -d lib && webpack --env.standalone","start":"webpack-dev-server --watch-poll","prepublishOnly":"npm run build && node ./script/qcdn","test":"nyc ava --serial && rimraf ./coverage && mkdir coverage && nyc report --reporter=html > ./coverage/lcov.info","lint":"eslint ./ --fix"},"author":"akira-cn","license":"MIT","devDependencies":{"@babel/cli":"^7.2.0","@babel/core":"^7.2.0","@babel/plugin-external-helpers":"^7.2.0","@babel/plugin-proposal-class-properties":"^7.2.1","@babel/plugin-proposal-decorators":"^7.2.0","@babel/plugin-transform-runtime":"^7.2.0","@babel/preset-env":"^7.2.0","@babel/register":"^7.0.0","ava":"^1.4.1","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","canvas":"^2.0.0-alpha.16","canvas-5-polyfill":"^0.1.5","colors":"^1.3.1","coveralls":"^3.0.2","css-loader":"^2.0.0","eslint":"^5.0.1","eslint-config-sprite":"^1.0.4","eslint-plugin-html":"^4.0.5","hamming-distance":"^1.0.0","html-webpack-plugin":"^3.2.0","imghash":"^0.0.3","nyc":"^12.0.2","pixelmatch":"^4.0.2","rimraf":"^2.6.2","spritejs":"^2.29.2","style-loader":"^0.23.1","webpack":"^4.35.0","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.3.5","webpack-dev-server":"^3.7.2","webpack-hot-middleware":"^2.24.3","webpack-merge":"^4.1.5"},"ava":{"files":["**/test/*.test.js"],"require":["@babel/register"],"babel":{"testOptions":{"babelrc":true}}},"nyc":{"exclude":["**/test/**/*.js"]},"dependencies":{"@babel/runtime":"^7.2.0","sprite-draggable":"0.1.15","svg-path-to-canvas":"^1.11.3"}};
 
 /***/ })
 /******/ ])["default"];

@@ -179,11 +179,11 @@ export default function install({use, utils, registerNodeType}) {
       ctx.translate(lineBoundings[2] / 2 - x, lineBoundings[3] / 2 - y);
 
       ctx.beginPath();
-      if(outerRadius > lw / 2) ctx.arc(x, y, outerRadius - lw / 2, startAngle, endAngle, false);
+      ctx.arc(x, y, Math.max(0, outerRadius - lw / 2), startAngle, endAngle, false);
       if (endAngle - startAngle === Math.PI * 2) {
         ctx.moveTo(outerRadius + innerRadius, outerRadius);
       }
-      if(innerRadius > lw / 2) ctx.arc(x, y, innerRadius - lw / 2, endAngle, startAngle, true);
+      ctx.arc(x, y, Math.max(0, innerRadius - lw / 2), endAngle, startAngle, true);
       ctx.closePath();
 
       ctx.fill();

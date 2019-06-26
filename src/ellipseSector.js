@@ -156,23 +156,23 @@ export default function install({use, utils, registerNodeType}) {
         ctx.moveTo(x, y);
       }
 
-      if(ctx.ellipse && rx > lw / 2 && ry > lw / 2) {
+      if(ctx.ellipse) {
         ctx.ellipse(
           x,
           y,
-          rx - lw / 2,
-          ry - lw / 2,
+          Math.max(0, rx - lw / 2),
+          Math.max(0, ry - lw / 2),
           0,
           startAngle,
           endAngle,
           this.attr('anticlockwise')
         );
         ctx.closePath();
-      } else if(rx === ry && rx > lw / 2) {
+      } else if(rx === ry) {
         ctx.arc(
           x,
           y,
-          rx - lw / 2,
+          Math.max(0, rx - lw / 2),
           startAngle,
           endAngle,
           this.attr('anticlockwise')

@@ -103,22 +103,22 @@ export default function install({use, utils, registerNodeType}) {
       drawingContext.fillStyle = findColor(drawingContext, this, 'fillColor');
 
       drawingContext.beginPath();
-      if (drawingContext.ellipse && radiusX > lw / 2 && radiusY > lw / 2) {
+      if (drawingContext.ellipse) {
         drawingContext.ellipse(
           cx,
           cy,
-          radiusX - lw / 2,
-          radiusY - lw / 2,
+          Math.max(0, radiusX - lw / 2),
+          Math.max(0, radiusY - lw / 2),
           0,
           startAngle,
           endAngle,
           anticlockwise
         );
-      } else if(radiusX === radiusY && radiusX > lw / 2) {
+      } else if(radiusX === radiusY) {
         drawingContext.arc(
           cx,
           cy,
-          radiusX - lw / 2,
+          Math.max(0, radiusX - lw / 2),
           startAngle,
           endAngle,
           anticlockwise
