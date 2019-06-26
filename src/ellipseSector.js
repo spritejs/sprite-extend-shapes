@@ -156,7 +156,7 @@ export default function install({use, utils, registerNodeType}) {
         ctx.moveTo(x, y);
       }
 
-      if(ctx.ellipse) {
+      if(ctx.ellipse && rx > lw / 2 && ry > lw / 2) {
         ctx.ellipse(
           x,
           y,
@@ -168,7 +168,7 @@ export default function install({use, utils, registerNodeType}) {
           this.attr('anticlockwise')
         );
         ctx.closePath();
-      } else if(rx === ry) {
+      } else if(rx === ry && rx > lw / 2) {
         ctx.arc(
           x,
           y,

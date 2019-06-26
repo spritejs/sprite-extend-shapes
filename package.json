@@ -1,6 +1,6 @@
 {
-  "name": "sprite-extend-shapes",
-  "version": "1.1.0",
+  "name": "@spritejs/shapes",
+  "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
   "module": "",
