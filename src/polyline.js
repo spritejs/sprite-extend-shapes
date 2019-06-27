@@ -60,16 +60,20 @@ export default function install({use, utils, registerNodeType}) {
       const tolerance = this.attr('tolerance'); // 线条点击的容差像素值，默认6px
       let res = false;
       const path = this.path;
-      if(path) {
+      if (path) {
         const lineWidth = this.attr('lineWidth') + tolerance,
           lineCap = this.attr('lineCap'),
           lineJoin = this.attr('lineJoin');
-        
-        if(this.attr('close')) {
+
+        if (this.attr('close')) {
           res = path.isPointInPath(offsetX, offsetY);
         }
 
-        res |= path.isPointInStroke(offsetX, offsetY, {lineWidth, lineCap, lineJoin});
+        res |= path.isPointInStroke(offsetX, offsetY, {
+          lineWidth,
+          lineCap,
+          lineJoin
+        });
       }
       return res;
     }
@@ -91,9 +95,9 @@ export default function install({use, utils, registerNodeType}) {
         drawingContext.setLineDash(this.attr('lineDash'));
         drawingContext.lineDashOffset = this.attr('lineDashOffset');
 
-        drawingContext.translate(lw / 2, lw / 2);
+        // drawingContext.translate(lw / 2, lw / 2);
 
-        if(!this.path || !pointsEqual(this.path.points, this.points)) {
+        if (!this.path || !pointsEqual(this.path.points, this.points)) {
           const smooth = this.attr('smooth');
 
           let d = '';
@@ -117,7 +121,7 @@ export default function install({use, utils, registerNodeType}) {
           this.path.points = [...this.points];
         }
 
-        if(this.path) {
+        if (this.path) {
           this.path.beginPath().to(drawingContext);
           drawingContext.fill();
           drawingContext.stroke();
