@@ -44,11 +44,11 @@ function renderEllipseShapes() {
     strokeColor: 'blue'
   });
 
-  sector.on('mousemove', (evt) => {
+  sector.on('mousemove', evt => {
     sector.attr('bgcolor', 'red');
   });
 
-  sector.on('mouseleave', (evt) => {
+  sector.on('mouseleave', evt => {
     sector.attr('bgcolor', '#eee');
   });
 
@@ -132,4 +132,129 @@ function renderEllipseShapes() {
     evt.stopDispatch();
   });
   group.appendChild(ring3);
+
+  {
+    const ellipse = new EllipseSector();
+    ellipse.attr({
+      pos: [10, 680],
+      radiusX: 15,
+      radiusY: 40,
+      fillColor: 'red',
+      lineWidth: 1,
+      bgcolor: '#eee',
+
+      startAngle: Math.PI * 0.9,
+      endAngle: Math.PI * 2.1
+    });
+    ellipse.on('mouseenter', evt => {
+      ellipse.attr('fillColor', 'yellow');
+      evt.stopDispatch();
+    });
+
+    ellipse.on('mouseleave', evt => {
+      ellipse.attr('fillColor', 'blue');
+      evt.stopDispatch();
+    });
+    group.appendChild(ellipse);
+  }
+
+  {
+    const ellipse = new EllipseSector();
+    ellipse.attr({
+      pos: [50, 680],
+      radiusX: 15,
+      radiusY: 40,
+      fillColor: 'red',
+      lineWidth: 1,
+      bgcolor: '#eee',
+
+      startAngle: -Math.PI * 2.8,
+      endAngle: -Math.PI * 2.9
+    });
+    ellipse.on('mouseenter', evt => {
+      ellipse.attr('fillColor', 'yellow');
+      evt.stopDispatch();
+    });
+
+    ellipse.on('mouseleave', evt => {
+      ellipse.attr('fillColor', 'blue');
+      evt.stopDispatch();
+    });
+    group.appendChild(ellipse);
+  }
+
+  {
+    const ellipse = new EllipseSector();
+    ellipse.attr({
+      pos: [100, 680],
+      radiusX: 15,
+      radiusY: 40,
+      fillColor: 'red',
+      lineWidth: 1,
+      bgcolor: '#eee',
+
+      startAngle: -Math.PI * 0.8,
+      endAngle: Math.PI * 0.9
+    });
+    ellipse.on('mouseenter', evt => {
+      ellipse.attr('fillColor', 'yellow');
+      evt.stopDispatch();
+    });
+
+    ellipse.on('mouseleave', evt => {
+      ellipse.attr('fillColor', 'blue');
+      evt.stopDispatch();
+    });
+    group.appendChild(ellipse);
+  }
+
+  {
+    const ellipse = new EllipseSector();
+    ellipse.attr({
+      pos: [150, 680],
+      radiusX: 15,
+      radiusY: 40,
+      fillColor: 'red',
+      lineWidth: 1,
+      bgcolor: '#eee',
+
+      startAngle: Math.PI * 0.8,
+      endAngle: -Math.PI * 0.9
+    });
+    ellipse.on('mouseenter', evt => {
+      ellipse.attr('fillColor', 'yellow');
+      evt.stopDispatch();
+    });
+
+    ellipse.on('mouseleave', evt => {
+      ellipse.attr('fillColor', 'blue');
+      evt.stopDispatch();
+    });
+    group.appendChild(ellipse);
+  }
+
+  {
+    const ellipse = new EllipseSector();
+    ellipse.attr({
+      pos: [190, 680],
+      radiusX: 15,
+      radiusY: 40,
+      fillColor: 'red',
+      lineWidth: 1,
+      bgcolor: '#eee',
+
+      startAngle: Math.PI * 0.8,
+      endAngle: Math.PI * 1.9
+    });
+    ellipse.on('mouseenter', evt => {
+      ellipse.attr('fillColor', 'yellow');
+      evt.stopDispatch();
+    });
+
+    ellipse.on('mouseleave', evt => {
+      ellipse.attr('fillColor', 'blue');
+      evt.stopDispatch();
+    });
+    group.appendChild(ellipse);
+  }
 }

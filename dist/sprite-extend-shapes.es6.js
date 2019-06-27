@@ -942,11 +942,41 @@ function install({
 
             if (dx ** 2 / rx ** 2 + dy ** 2 / ry ** 2 <= 1.0) {
               const PI2 = 2 * Math.PI;
-              let startAngle = this.attr('startAngle') % (2 * PI2);
-              let endAngle = this.attr('endAngle') % (2 * PI2);
-              if (startAngle < 0) startAngle += PI2;
-              if (endAngle < 0) endAngle += PI2;
-              const angle = Object(_util__WEBPACK_IMPORTED_MODULE_1__["angleOf"])([dx, dy]);
+              let startAngle = this.startAngle;
+              let endAngle = this.endAngle;
+
+              if (endAngle - startAngle >= PI2) {
+                startAngle = 0;
+                endAngle = PI2;
+              } else {
+                if (startAngle >= 0 && endAngle >= 0) {
+                  let offsetAngle = endAngle - startAngle;
+                  startAngle %= PI2;
+                  endAngle = startAngle + offsetAngle;
+                } else {
+                  const nTPositive = angle => {
+                    // 使其落入 [0, PI2]区间
+                    const PI2 = 2 * Math.PI;
+                    let isNegative = angle < 0;
+                    let T = isNegative ? -Math.floor(angle / PI2) : Math.ceil(angle / PI2);
+                    return (angle + T * PI2) % PI2;
+                  };
+
+                  endAngle = nTPositive(endAngle) + (startAngle <= 0 && startAngle >= endAngle ? PI2 : endAngle > 0 ? PI2 : 0);
+                  startAngle = nTPositive(startAngle);
+                }
+              }
+
+              let angle = Object(_util__WEBPACK_IMPORTED_MODULE_1__["angleOf"])([dx, dy]);
+
+              if (endAngle > PI2) {
+                let m = endAngle - PI2;
+
+                if (0 <= angle && angle <= m) {
+                  angle += PI2;
+                }
+              }
+
               return angle >= startAngle && angle <= endAngle;
             } // TODO: 处理 lineCap?
 
@@ -2011,7 +2041,7 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 /* 20 */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.5.7' };
+var core = module.exports = { version: '2.6.9' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -2444,7 +2474,7 @@ var store = global[SHARED] || (global[SHARED] = {});
 })('versions', []).push({
   version: core.version,
   mode: __webpack_require__(17) ? 'pure' : 'global',
-  copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
+  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
 });
 
 
@@ -2947,6 +2977,7 @@ $export($export.S + $export.F, 'Object', { assign: __webpack_require__(78) });
 "use strict";
 
 // 19.1.2.1 Object.assign(target, source, ...)
+var DESCRIPTORS = __webpack_require__(28);
 var getKeys = __webpack_require__(39);
 var gOPS = __webpack_require__(79);
 var pIE = __webpack_require__(80);
@@ -2976,7 +3007,10 @@ module.exports = !$assign || __webpack_require__(29)(function () {
     var length = keys.length;
     var j = 0;
     var key;
-    while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
+    while (length > j) {
+      key = keys[j++];
+      if (!DESCRIPTORS || isEnum.call(S, key)) T[key] = S[key];
+    }
   } return T;
 } : $assign;
 
@@ -3110,12 +3144,14 @@ var enumKeys = __webpack_require__(92);
 var isArray = __webpack_require__(93);
 var anObject = __webpack_require__(25);
 var isObject = __webpack_require__(26);
+var toObject = __webpack_require__(55);
 var toIObject = __webpack_require__(41);
 var toPrimitive = __webpack_require__(31);
 var createDesc = __webpack_require__(32);
 var _create = __webpack_require__(37);
 var gOPNExt = __webpack_require__(94);
 var $GOPD = __webpack_require__(96);
+var $GOPS = __webpack_require__(79);
 var $DP = __webpack_require__(24);
 var $keys = __webpack_require__(39);
 var gOPD = $GOPD.f;
@@ -3132,7 +3168,7 @@ var SymbolRegistry = shared('symbol-registry');
 var AllSymbols = shared('symbols');
 var OPSymbols = shared('op-symbols');
 var ObjectProto = Object[PROTOTYPE];
-var USE_NATIVE = typeof $Symbol == 'function';
+var USE_NATIVE = typeof $Symbol == 'function' && !!$GOPS.f;
 var QObject = global.QObject;
 // Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
 var setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
@@ -3242,7 +3278,7 @@ if (!USE_NATIVE) {
   $DP.f = $defineProperty;
   __webpack_require__(95).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(80).f = $propertyIsEnumerable;
-  __webpack_require__(79).f = $getOwnPropertySymbols;
+  $GOPS.f = $getOwnPropertySymbols;
 
   if (DESCRIPTORS && !__webpack_require__(17)) {
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
@@ -3291,6 +3327,16 @@ $export($export.S + $export.F * !USE_NATIVE, 'Object', {
   getOwnPropertyNames: $getOwnPropertyNames,
   // 19.1.2.8 Object.getOwnPropertySymbols(O)
   getOwnPropertySymbols: $getOwnPropertySymbols
+});
+
+// Chrome 38 and 39 `Object.getOwnPropertySymbols` fails on primitives
+// https://bugs.chromium.org/p/v8/issues/detail?id=3443
+var FAILS_ON_PRIMITIVES = $fails(function () { $GOPS.f(1); });
+
+$export($export.S + $export.F * FAILS_ON_PRIMITIVES, 'Object', {
+  getOwnPropertySymbols: function getOwnPropertySymbols(it) {
+    return $GOPS.f(toObject(it));
+  }
 });
 
 // 24.3.2 JSON.stringify(value [, replacer [, space]])
@@ -6145,7 +6191,7 @@ function install({
 /* 118 */
 /***/ (function(module) {
 
-module.exports = {"name":"@spritejs/shapes","version":"1.1.2","description":"","main":"lib/index.js","module":"","directories":{"example":"examples","lib":"lib","test":"test"},"scripts":{"build":"npm run build:es6 && npm run build:prod","build:prod":"babel src -d lib && webpack --env.production","build:es6":"babel src -d lib && webpack --env.esnext","standalone":"babel src -d lib && webpack --env.standalone","start":"webpack-dev-server --watch-poll","prepublishOnly":"npm run build && node ./script/qcdn","test":"nyc ava --serial && rimraf ./coverage && mkdir coverage && nyc report --reporter=html > ./coverage/lcov.info","lint":"eslint ./ --fix"},"author":"akira-cn","license":"MIT","devDependencies":{"@babel/cli":"^7.2.0","@babel/core":"^7.2.0","@babel/plugin-external-helpers":"^7.2.0","@babel/plugin-proposal-class-properties":"^7.2.1","@babel/plugin-proposal-decorators":"^7.2.0","@babel/plugin-transform-runtime":"^7.2.0","@babel/preset-env":"^7.2.0","@babel/register":"^7.0.0","ava":"^1.4.1","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","canvas":"^2.0.0-alpha.16","canvas-5-polyfill":"^0.1.5","colors":"^1.3.1","coveralls":"^3.0.2","css-loader":"^2.0.0","eslint":"^5.0.1","eslint-config-sprite":"^1.0.4","eslint-plugin-html":"^4.0.5","hamming-distance":"^1.0.0","html-webpack-plugin":"^3.2.0","imghash":"^0.0.3","nyc":"^12.0.2","pixelmatch":"^4.0.2","rimraf":"^2.6.2","spritejs":"^2.29.2","style-loader":"^0.23.1","webpack":"^4.35.0","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.3.5","webpack-dev-server":"^3.7.2","webpack-hot-middleware":"^2.24.3","webpack-merge":"^4.1.5"},"ava":{"files":["**/test/*.test.js"],"require":["@babel/register"],"babel":{"testOptions":{"babelrc":true}}},"nyc":{"exclude":["**/test/**/*.js"]},"dependencies":{"@babel/runtime":"^7.2.0","sprite-draggable":"0.1.15","svg-path-to-canvas":"^1.11.3"}};
+module.exports = {"name":"@spritejs/shapes","version":"1.1.3","description":"","main":"lib/index.js","module":"","directories":{"example":"examples","lib":"lib","test":"test"},"scripts":{"build":"npm run build:es6 && npm run build:prod","build:prod":"babel src -d lib && webpack --env.production","build:es6":"babel src -d lib && webpack --env.esnext","standalone":"babel src -d lib && webpack --env.standalone","start":"webpack-dev-server --watch-poll","prepublishOnly":"npm run build && node ./script/qcdn","test":"nyc ava --serial && rimraf ./coverage && mkdir coverage && nyc report --reporter=html > ./coverage/lcov.info","lint":"eslint ./ --fix"},"author":"akira-cn","license":"MIT","devDependencies":{"@babel/cli":"^7.2.0","@babel/core":"^7.2.0","@babel/plugin-external-helpers":"^7.2.0","@babel/plugin-proposal-class-properties":"^7.2.1","@babel/plugin-proposal-decorators":"^7.2.0","@babel/plugin-transform-runtime":"^7.2.0","@babel/preset-env":"^7.2.0","@babel/register":"^7.0.0","ava":"^1.4.1","babel-eslint":"^10.0.1","babel-loader":"^8.0.5","canvas":"^2.0.0-alpha.16","canvas-5-polyfill":"^0.1.5","colors":"^1.3.1","coveralls":"^3.0.2","css-loader":"^2.0.0","eslint":"^5.0.1","eslint-config-sprite":"^1.0.4","eslint-plugin-html":"^4.0.5","hamming-distance":"^1.0.0","html-webpack-plugin":"^3.2.0","imghash":"^0.0.3","nyc":"^12.0.2","pixelmatch":"^4.0.2","rimraf":"^2.6.2","spritejs":"^2.29.2","style-loader":"^0.23.1","webpack":"^4.35.0","webpack-bundle-analyzer":"^3.0.3","webpack-cli":"^3.3.5","webpack-dev-server":"^3.7.2","webpack-hot-middleware":"^2.24.3","webpack-merge":"^4.1.5"},"ava":{"files":["**/test/*.test.js"],"require":["@babel/register"],"babel":{"testOptions":{"babelrc":true}}},"nyc":{"exclude":["**/test/**/*.js"]},"dependencies":{"@babel/runtime":"^7.2.0","sprite-draggable":"0.1.15","svg-path-to-canvas":"^1.11.3"}};
 
 /***/ })
 /******/ ])["default"];
