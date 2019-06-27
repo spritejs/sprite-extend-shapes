@@ -1,6 +1,6 @@
 {
   "name": "@spritejs/shapes",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "",
   "main": "lib/index.js",
   "module": "",
@@ -10,9 +10,10 @@
     "test": "test"
   },
   "scripts": {
-    "build": "npm run build:es6 && npm run build:prod",
+    "build": "npm run build:es6 && npm run build:prod && npm run build:nobrowser",
     "build:prod": "babel src -d lib && webpack --env.production",
     "build:es6": "babel src -d lib && webpack --env.esnext",
+    "build:nobrowser": "babel src -d lib && webpack --env.nobrowser",
     "standalone": "babel src -d lib && webpack --env.standalone",
     "start": "webpack-dev-server --watch-poll",
     "prepublishOnly": "npm run build && node ./script/qcdn",

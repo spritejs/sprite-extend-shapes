@@ -11,6 +11,8 @@ module.exports = function(env = {}) {
   let babelConf;
   const babelRC = env.esnext ? './.es6.babelrc' : './.babelrc';
 
+  const alias = {};
+
   if (fs.existsSync(babelRC)) {
     babelConf = JSON.parse(fs.readFileSync(babelRC));
     babelConf.babelrc = false;
@@ -25,6 +27,12 @@ module.exports = function(env = {}) {
       : 'sprite-extend-shapes.js';
   }
 
+  if(env.nobrowser) {
+    alias['svg-path-to-canvas'] = 'svg-path-to-canvas/dist/svg-path-to-canvas.nobrowser';
+    filename = 'sprite-extend-shapes.nobrowser.js'
+    env.production = true;
+  }
+
   return {
     mode: env.production ? 'production' : 'none',
     entry: './src/index',
@@ -36,9 +44,10 @@ module.exports = function(env = {}) {
       libraryExport: 'default',
       libraryTarget: 'umd'
     },
-    // resolve: {
-    //   aliasFields: ['wxapp'],
-    // },
+
+    resolve: {
+      alias,
+    },
 
     module: {
       rules: [
