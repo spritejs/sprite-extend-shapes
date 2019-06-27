@@ -118,13 +118,50 @@ export default function install({use, utils, registerNodeType}) {
         let [rx, ry] = this.radiuses;
         const dx = offsetX - x;
         const dy = offsetY - y;
-        if(dx ** 2 / rx ** 2 + dy ** 2 / ry ** 2 <= 1.0) {
+
+        if (dx ** 2 / rx ** 2 + dy ** 2 / ry ** 2 <= 1.0) {
           const PI2 = 2 * Math.PI;
-          let startAngle = this.attr('startAngle') % (2 * PI2);
-          let endAngle = this.attr('endAngle') % (2 * PI2);
-          if(startAngle < 0) startAngle += PI2;
-          if(endAngle < 0) endAngle += PI2;
-          const angle = angleOf([dx, dy]);
+          let startAngle = this.startAngle;
+          let endAngle = this.endAngle;
+
+          if (endAngle - startAngle >= PI2) {
+            startAngle = 0;
+            endAngle = PI2;
+          } else {
+            if (startAngle >= 0 && endAngle >= 0) {
+              let offsetAngle = endAngle - startAngle;
+              startAngle %= PI2;
+              endAngle = startAngle + offsetAngle;
+            } else {
+              const nTPositive = angle => {
+                // 使其落入 [0, PI2]区间
+                const PI2 = 2 * Math.PI;
+                let isNegative = angle < 0;
+                let T = isNegative
+                  ? -Math.floor(angle / PI2)
+                  : Math.ceil(angle / PI2);
+                return (angle + T * PI2) % PI2;
+              };
+
+              endAngle =
+                nTPositive(endAngle) +
+                (startAngle <= 0 && startAngle >= endAngle
+                  ? PI2
+                  : endAngle > 0
+                  ? PI2
+                  : 0);
+              startAngle = nTPositive(startAngle);
+            }
+          }
+
+          let angle = angleOf([dx, dy]);
+
+          if (endAngle > PI2) {
+            let m = endAngle - PI2;
+            if (0 <= angle && angle <= m) {
+              angle += PI2;
+            }
+          }
           return angle >= startAngle && angle <= endAngle;
         }
         // TODO: 处理 lineCap?
@@ -156,7 +193,7 @@ export default function install({use, utils, registerNodeType}) {
         ctx.moveTo(x, y);
       }
 
-      if(ctx.ellipse) {
+      if (ctx.ellipse) {
         ctx.ellipse(
           x,
           y,
@@ -168,7 +205,7 @@ export default function install({use, utils, registerNodeType}) {
           this.attr('anticlockwise')
         );
         ctx.closePath();
-      } else if(rx === ry) {
+      } else if (rx === ry) {
         ctx.arc(
           x,
           y,
