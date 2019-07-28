@@ -5,15 +5,14 @@
 ### 使用 npm 或 yarn 安装
 
 ```shell
-npm i sprite-extend-shapes
+npm i @spritejs/shapes
 ```
 
 ## 使用
 
 ```javascript
 import * as spritejs from 'spritejs';
-import Shapes from 'sprite-extend-shapes';
-
+import Shapes from '@spritejs/shapes'
 spritejs.use(Shapes);
 ```
 
@@ -21,7 +20,7 @@ spritejs.use(Shapes);
 
 ```javascript
 import * as spritejs from 'spritejs';
-import {Circle} from 'sprite-extend-shapes';
+import {Circle} from '@spritejs/shapes';
 
 spritejs.use(Circle);
 ```
