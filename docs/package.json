@@ -4,7 +4,7 @@
   "description": "The docs for sprite-extend-shapes",
   "scripts": {
     "dev": "cross-env DEV_MODE=doc webpack-dev-server --config ./build/webpack.conf.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.conf.prod.js"
+    "build": "rm -rf ./website/* && cross-env NODE_ENV=production webpack --config ./build/webpack.conf.prod.js"
   },
   "author": "qwt",
   "license": "MIT",
