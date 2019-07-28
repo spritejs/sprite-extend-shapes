@@ -1,9 +1,9 @@
 {
   "name": "@spritejs/shapes",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "",
-  "main": "lib/index.js",
-  "module": "",
+  "main": "dist/sprite-extend-shapes.js",
+  "module": "dist/sprite-extend-shapes.esm.js",
   "directories": {
     "example": "examples",
     "lib": "lib",

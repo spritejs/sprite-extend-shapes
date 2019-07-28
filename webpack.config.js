@@ -23,7 +23,7 @@ module.exports = function(env = {}) {
   if (!env.standalone) {
     externals['sprite-core'] = 'spritejs';
     filename = env.esnext
-      ? 'sprite-extend-shapes.es6.js'
+      ? 'sprite-extend-shapes.esm.js'
       : 'sprite-extend-shapes.js';
   }
 
@@ -42,7 +42,7 @@ module.exports = function(env = {}) {
       publicPath: '/js/',
       library: ['spriteShapes'],
       libraryExport: 'default',
-      libraryTarget: 'umd'
+      libraryTarget: env.esnext ? 'var' : 'umd',
     },
 
     resolve: {
