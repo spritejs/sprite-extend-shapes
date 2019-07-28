@@ -1,3 +1,4 @@
+const EsmWebpackPlugin = require('@purtuga/esm-webpack-plugin');
 const path = require('path');
 const fs = require('fs');
 
@@ -33,17 +34,24 @@ module.exports = function(env = {}) {
     env.production = true;
   }
 
+  const output = {
+    path: path.resolve(__dirname, 'dist'),
+    filename,
+    publicPath: '/js/',
+    library: 'spriteShapes',
+    libraryTarget: env.esnext ? 'var' : 'umd',
+  }
+
+  const plugins = [];
+  if(!env.esnext) output.libraryExport = 'default';
+  else {
+    plugins.push(new EsmWebpackPlugin());
+  }
+
   return {
     mode: env.production ? 'production' : 'none',
     entry: './src/index',
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename,
-      publicPath: '/js/',
-      library: ['spriteShapes'],
-      libraryExport: 'default',
-      libraryTarget: env.esnext ? 'var' : 'umd',
-    },
+    output,
 
     resolve: {
       alias,
@@ -77,9 +85,7 @@ module.exports = function(env = {}) {
       // ...
     },
 
-    plugins: [
-      // ...
-    ]
+    plugins,
     // list of additional plugins
 
     /* Advanced configuration (click to show) */
